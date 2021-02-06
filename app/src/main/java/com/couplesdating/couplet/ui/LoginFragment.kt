@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.couplesdating.couplet.databinding.FragmentLoginBinding
+import com.couplesdating.couplet.ui.viewModel.LoginViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
@@ -25,12 +26,5 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.userLiveData.observe(viewLifecycleOwner) { user ->
-            user?.let {
-                // already signed in
-            } ?: run {
-                // sign in or register
-            }
-        }
     }
 }
