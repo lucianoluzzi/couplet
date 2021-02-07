@@ -2,7 +2,7 @@ package com.couplesdating.couplet
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.couplesdating.couplet.ui.LoginFragment
+import com.couplesdating.couplet.ui.SocialLoginFragment
 import com.couplesdating.couplet.ui.viewModel.MainViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .add(
                 R.id.fragment_container_view,
-                LoginFragment()
+                SocialLoginFragment()
             ).commit()
     }
 }
