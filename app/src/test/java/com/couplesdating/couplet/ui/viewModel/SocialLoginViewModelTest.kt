@@ -12,12 +12,11 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import java.util.*
 
 @ExtendWith(InstantExecutorExtension::class, CoroutineScopeExtension::class)
-internal class MainViewModelTest {
+internal class SocialLoginViewModelTest {
     private val getCurrentUserUseCase = mock<GetCurrentUserUseCase>()
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: SocialLoginViewModel
 
     @Nested
     @DisplayName("Given useCase returns")
@@ -31,7 +30,7 @@ internal class MainViewModelTest {
             )
 
             whenever(getCurrentUserUseCase.getCurrentUser()).thenReturn(user)
-            viewModel = MainViewModel(getCurrentUserUseCase)
+            viewModel = SocialLoginViewModel(getCurrentUserUseCase)
 
             verify(getCurrentUserUseCase).getCurrentUser()
             assertThat(viewModel.userLiveData.value).isEqualTo(user)

@@ -2,6 +2,7 @@
 buildscript {
     ext.kotlin_version = "1.4.30"
     ext.koin_version = "2.2.2"
+    ext.nav_version = "2.3.3"
 
     repositories {
         google()
@@ -13,6 +14,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.koin:koin-gradle-plugin:$koin_version"
         classpath 'com.google.gms:google-services:4.3.5'
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

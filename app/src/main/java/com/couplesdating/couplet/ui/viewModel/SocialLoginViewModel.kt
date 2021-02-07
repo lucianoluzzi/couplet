@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.domain.useCase.GetCurrentUserUseCase
 
-class MainViewModel(
+class SocialLoginViewModel(
     getCurrentUserUseCase: GetCurrentUserUseCase
 ) : ViewModel() {
 
