@@ -4,4 +4,6 @@
 
     <string name="new_user_register">New user? <u>Sign up</u></string>
     <string name="forgot_your_password"><u>Forgot your password?</u></string>
+
+    <string name="empty_login_error">Required field</string>
 </resources>

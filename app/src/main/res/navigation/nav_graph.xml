@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.couplesdating.couplet.ui.LoginFragment"
+        android:name="com.couplesdating.couplet.ui.login.LoginFragment"
         android:label="LoginFragment" />
     <fragment
         android:id="@+id/registerFragment"
