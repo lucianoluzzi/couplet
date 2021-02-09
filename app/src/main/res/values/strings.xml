@@ -6,4 +6,5 @@
     <string name="forgot_your_password"><u>Forgot your password?</u></string>
 
     <string name="empty_login_error">Required field</string>
+    <string name="auth_login_error">Email or password incorrect</string>
 </resources>

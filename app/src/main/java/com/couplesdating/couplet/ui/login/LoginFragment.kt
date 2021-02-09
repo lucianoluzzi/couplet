@@ -46,6 +46,10 @@ class LoginFragment : Fragment() {
                 getString(R.string.empty_login_error)
             is LoginUIState.PasswordEmpty -> binding.passwordInputLayout.error =
                 getString(R.string.empty_login_error)
+            LoginUIState.AuthError -> binding.passwordInputLayout.error =
+                getString(R.string.auth_login_error)
+            LoginUIState.Loading -> TODO()
+            LoginUIState.Success -> TODO()
         }
     }
 
