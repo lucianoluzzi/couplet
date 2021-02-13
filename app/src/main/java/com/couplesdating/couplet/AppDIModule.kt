@@ -7,6 +7,7 @@ import com.couplesdating.couplet.domain.useCase.GetCurrentUserUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.SignInUseCase
 import com.couplesdating.couplet.domain.useCase.SignInUseCaseImpl
 import com.couplesdating.couplet.ui.login.LoginViewModel
+import com.couplesdating.couplet.ui.register.RegisterViewModel
 import com.couplesdating.couplet.ui.viewModel.SocialLoginViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -25,5 +26,8 @@ val appModule = module {
     }
     viewModel {
         LoginViewModel(get())
+    }
+    viewModel {
+        RegisterViewModel()
     }
 }

@@ -27,12 +27,14 @@
                 android:id="@+id/name_input_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:hint="Name"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:errorEnabled="true"
+                app:layout_constraintVertical_bias="0.25"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.25">
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/name"
@@ -41,58 +43,39 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/email_input_layout"
+                android:id="@+id/gender_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="Email"
+                android:hint="Gender"
+                app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/name_input_layout">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email"
+                <AutoCompleteTextView
+                    android:id="@+id/gender"
+                    android:inputType="none"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/password_input_layout"
+                android:id="@+id/other_gender_input_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:hint="Password"
-                app:endIconMode="password_toggle"
+                android:hint="Other"
                 app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/email_input_layout">
+                app:layout_constraintTop_toBottomOf="@id/gender_input_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/password"
+                    android:id="@+id/other_gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword" />
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/confirm_password_input_layout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Confirm password"
-                app:endIconMode="password_toggle"
-                app:errorEnabled="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/password_input_layout">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/confirm_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
-
 
             <Button
                 android:id="@+id/register"
@@ -101,7 +84,7 @@
                 android:text="Register"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/confirm_password_input_layout" />
+                app:layout_constraintTop_toBottomOf="@id/other_gender_input_layout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
