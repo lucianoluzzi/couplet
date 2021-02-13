@@ -36,5 +36,10 @@ class SocialLoginFragment : Fragment() {
             val gotoLogin = SocialLoginFragmentDirections.actionSocialLoginFragmentToLoginFragment()
             button.findNavController().navigate(gotoLogin)
         }
+        binding.register.setOnClickListener { button ->
+            val goToRegister =
+                SocialLoginFragmentDirections.actionSocialLoginFragmentToRegisterFragment()
+            button.findNavController().navigate(goToRegister)
+        }
     }
 }
