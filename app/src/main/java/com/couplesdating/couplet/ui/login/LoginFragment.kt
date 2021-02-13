@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentLoginBinding
-import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.ui.extensions.textValue
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -41,6 +41,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun handleUIState(uiState: LoginUIState) {
+        binding.loadingContainer.isVisible = false
         when (uiState) {
             is LoginUIState.EmailEmpty -> binding.emailInputLayout.error =
                 getString(R.string.empty_login_error)
@@ -48,7 +49,7 @@ class LoginFragment : Fragment() {
                 getString(R.string.empty_login_error)
             LoginUIState.AuthError -> binding.passwordInputLayout.error =
                 getString(R.string.auth_login_error)
-            LoginUIState.Loading -> TODO()
+            LoginUIState.Loading -> binding.loadingContainer.isVisible = true
             LoginUIState.Success -> TODO()
         }
     }
@@ -56,26 +57,5 @@ class LoginFragment : Fragment() {
     private fun clearErrors() {
         binding.emailInputLayout.error = null
         binding.passwordInputLayout.error = null
-    }
-
-    private fun getUser(): User? {
-        binding.emailInputLayout.error = null
-        binding.passwordInputLayout.error = null
-        val email = binding.email.text.toString()
-        val password = binding.password.text.toString()
-
-        if (email.isEmpty()) {
-            binding.emailInputLayout.error = getString(R.string.empty_login_error)
-            return null
-        }
-        if (password.isEmpty()) {
-            binding.passwordInputLayout.error = getString(R.string.empty_login_error)
-            return null
-        }
-
-        return User(
-            email = email,
-            password = password
-        )
     }
 }
