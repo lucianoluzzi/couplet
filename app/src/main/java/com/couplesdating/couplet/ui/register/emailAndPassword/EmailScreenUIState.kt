@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.ui.register
+package com.couplesdating.couplet.ui.register.emailAndPassword
 
 sealed class EmailScreenUIState {
     object EmailEmpty : EmailScreenUIState()

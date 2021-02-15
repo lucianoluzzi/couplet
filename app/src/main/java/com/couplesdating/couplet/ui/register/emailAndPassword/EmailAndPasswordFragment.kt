@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.ui.register
+package com.couplesdating.couplet.ui.register.emailAndPassword
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,11 +9,14 @@ import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentEmailPasswordBinding
 import com.couplesdating.couplet.ui.extensions.textValue
+import com.couplesdating.couplet.ui.register.RegisterViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class EmailAndPasswordFragment : Fragment() {
     private lateinit var binding: FragmentEmailPasswordBinding
-    private val viewModel: RegisterViewModel by sharedViewModel()
+    private val registerViewModel: RegisterViewModel by sharedViewModel()
+    private val viewModel: EmailAndPasswordViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,7 +27,7 @@ class EmailAndPasswordFragment : Fragment() {
         with(binding) {
             register.setOnClickListener {
                 clearFormErrors()
-                viewModel.setEmailAndPassword(
+                viewModel.validate(
                     email = email.textValue(),
                     password = password.textValue(),
                     confirmPassword = confirmPassword.textValue()
@@ -54,7 +57,13 @@ class EmailAndPasswordFragment : Fragment() {
                     getString(R.string.empty_login_error)
                 EmailScreenUIState.PasswordsDoesntMatch -> binding.confirmPasswordInputLayout.error =
                     getString(R.string.password_dont_match)
-                EmailScreenUIState.Success -> goToNameAndGender()
+                EmailScreenUIState.Success -> {
+                    registerViewModel.setEmailAndPassword(
+                        email = binding.email.textValue(),
+                        password = binding.password.textValue()
+                    )
+                    goToNameAndGender()
+                }
             }
         }
     }

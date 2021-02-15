@@ -10,9 +10,11 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentNameAndGenderBinding
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class NameAndGenderFragment : Fragment() {
     private lateinit var binding: FragmentNameAndGenderBinding
+    private val viewModel: RegisterViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
