@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/nameAndGenderFragment"
-        android:name="com.couplesdating.couplet.ui.register.NameAndGenderFragment"
+        android:name="com.couplesdating.couplet.ui.register.nameAndGender.NameAndGenderFragment"
         android:label="NameAndGenderFragment" >
         <action
             android:id="@+id/action_nameAndGenderFragment_to_photoFragment"

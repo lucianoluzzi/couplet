@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.ui.register
+package com.couplesdating.couplet.ui.register.nameAndGender
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentNameAndGenderBinding
+import com.couplesdating.couplet.ui.register.RegisterViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class NameAndGenderFragment : Fragment() {
