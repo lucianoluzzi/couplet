@@ -38,7 +38,7 @@ class SocialLoginFragment : Fragment() {
         }
         binding.register.setOnClickListener { button ->
             val goToRegister =
-                SocialLoginFragmentDirections.actionSocialLoginFragmentToRegisterFragment()
+                SocialLoginFragmentDirections.actionSocialLoginFragmentToEmailAndPasswordFragment()
             button.findNavController().navigate(goToRegister)
         }
     }

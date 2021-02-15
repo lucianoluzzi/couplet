@@ -11,15 +11,31 @@
             android:id="@+id/action_socialLoginFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_socialLoginFragment_to_registerFragment"
-            app:destination="@id/onboardingFragment" />
+            android:id="@+id/action_socialLoginFragment_to_emailAndPasswordFragment"
+            app:destination="@id/emailAndPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.couplesdating.couplet.ui.login.LoginFragment"
         android:label="LoginFragment" />
     <fragment
-        android:id="@+id/onboardingFragment"
-        android:name="com.couplesdating.couplet.ui.OnboardingFragment"
-        android:label="RegisterFragment" />
+        android:id="@+id/emailAndPasswordFragment"
+        android:name="com.couplesdating.couplet.ui.register.EmailAndPasswordFragment"
+        android:label="EmailAndPasswordFragment" >
+        <action
+            android:id="@+id/action_emailAndPasswordFragment_to_nameAndGenderFragment"
+            app:destination="@id/nameAndGenderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nameAndGenderFragment"
+        android:name="com.couplesdating.couplet.ui.register.NameAndGenderFragment"
+        android:label="NameAndGenderFragment" >
+        <action
+            android:id="@+id/action_nameAndGenderFragment_to_photoFragment"
+            app:destination="@id/photoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/photoFragment"
+        android:name="com.couplesdating.couplet.ui.register.PhotoFragment"
+        android:label="PhotoFragment" />
 </navigation>

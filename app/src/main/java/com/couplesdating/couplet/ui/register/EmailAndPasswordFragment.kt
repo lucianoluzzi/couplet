@@ -18,6 +18,10 @@ class EmailAndPasswordFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentEmailPasswordBinding.inflate(inflater, container, false)
+        binding.register.setOnClickListener {
+
+        }
+
         return binding.root
     }
 
