@@ -1,5 +1,5 @@
 package com.couplesdating.couplet.ui.extensions
 
-import com.google.android.material.textfield.TextInputEditText
+import android.widget.EditText
 
-fun TextInputEditText.textValue() = text.toString()
+fun EditText.textValue() = text.toString()
