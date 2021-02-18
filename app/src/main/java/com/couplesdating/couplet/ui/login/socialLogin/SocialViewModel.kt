@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.ui.viewModel
+package com.couplesdating.couplet.ui.login.socialLogin
 
 import androidx.lifecycle.ViewModel
 

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.couplesdating.couplet.databinding.FragmentSocialLoginBinding
-import com.couplesdating.couplet.ui.viewModel.SocialLoginViewModel
+import com.couplesdating.couplet.ui.login.socialLogin.SocialLoginViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SocialLoginFragment : Fragment() {

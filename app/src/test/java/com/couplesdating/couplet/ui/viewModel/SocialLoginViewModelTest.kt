@@ -4,6 +4,7 @@ import com.couplesdating.couplet.CoroutineScopeExtension
 import com.couplesdating.couplet.InstantExecutorExtension
 import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.domain.useCase.GetCurrentUserUseCase
+import com.couplesdating.couplet.ui.login.socialLogin.SocialLoginViewModel
 import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify

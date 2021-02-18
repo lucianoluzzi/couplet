@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.ui.login
+package com.couplesdating.couplet.ui.login.emailLogin
 
 sealed class LoginUIState {
     object EmailEmpty : LoginUIState()
