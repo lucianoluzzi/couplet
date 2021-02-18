@@ -1,11 +1,12 @@
 package com.couplesdating.couplet.domain.useCase
 
+import com.couplesdating.couplet.domain.model.Response
+
 interface RegisterUseCase {
-    fun register(
+    suspend fun register(
         email: String,
         password: String,
         name: String,
-        gender: String,
-        photo: String? = null
-    )
+        gender: String
+    ): Response
 }

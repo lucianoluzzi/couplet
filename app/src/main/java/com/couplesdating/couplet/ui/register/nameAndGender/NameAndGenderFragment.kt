@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentNameAndGenderBinding
 import com.couplesdating.couplet.ui.extensions.textValue
@@ -72,14 +71,17 @@ class NameAndGenderFragment : Fragment() {
                     getString(R.string.empty_login_error)
                 NameAndGenderUIState.OtherGenderEmpty -> binding.otherGenderInputLayout.error =
                     getString(R.string.empty_login_error)
-                NameAndGenderUIState.Success -> {
-                    goToPhotoFragment()
+                NameAndGenderUIState.Valid -> {
+                    register()
                 }
             }
         }
+        registerViewModel.userRegisterLiveData.observe(viewLifecycleOwner) {
+            // Follow registration
+        }
     }
 
-    private fun goToPhotoFragment() {
+    private fun register() {
         val inputGender = if (binding.otherGenderInputLayout.isVisible) {
             binding.otherGender.textValue()
         } else {
@@ -89,8 +91,6 @@ class NameAndGenderFragment : Fragment() {
             name = binding.name.textValue(),
             gender = inputGender
         )
-        val nameAndGenderAction =
-            NameAndGenderFragmentDirections.actionNameAndGenderFragmentToPhotoFragment()
-        findNavController().navigate(nameAndGenderAction)
+        registerViewModel.register()
     }
 }

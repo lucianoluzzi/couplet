@@ -20,7 +20,7 @@ class NameAndGenderViewModel : ViewModel() {
             gender.isNullOrBlank() -> _uiState.value = NameAndGenderUIState.GenderEmpty.asLiveDataEvent
             gender == "Other" && otherGender.isNullOrBlank() ->
                 _uiState.value = NameAndGenderUIState.OtherGenderEmpty.asLiveDataEvent
-            else -> _uiState.value = NameAndGenderUIState.Success.asLiveDataEvent
+            else -> _uiState.value = NameAndGenderUIState.Valid.asLiveDataEvent
         }
     }
 }

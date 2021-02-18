@@ -1,9 +1,13 @@
 package com.couplesdating.couplet.data
 
 import android.util.Log
+import com.couplesdating.couplet.data.extensions.register
 import com.couplesdating.couplet.data.extensions.signIn
+import com.couplesdating.couplet.data.extensions.updateUser
+import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.model.User
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 
 class UserRepositoryImpl(
     private val authenticator: FirebaseAuth
@@ -50,5 +54,28 @@ class UserRepositoryImpl(
         }
 
         return null
+    }
+
+    override suspend fun register(email: String, password: String): Response {
+        val authResult = authenticator.register(email, password)
+        return if (authResult.isSuccessful) {
+            Response.Success(authenticator.currentUser)
+        } else {
+            Response.Error()
+        }
+    }
+
+    override suspend fun updateProfile(userName: String, gender: String): Response {
+        authenticator.currentUser?.let { currentUser ->
+            val userProfileChangeRequest = userProfileChangeRequest {
+                this.displayName = displayName
+            }
+            val updateResult = currentUser.updateUser(userProfileChangeRequest)
+            if (updateResult.isSuccessful) {
+                return Response.Success(authenticator.currentUser)
+            }
+        }
+
+        return Response.Error()
     }
 }
