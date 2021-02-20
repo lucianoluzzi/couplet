@@ -17,11 +17,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.couplesdating.couplet.ui.login.emailLogin.LoginFragment"
-        android:label="LoginFragment" >
-        <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        android:label="LoginFragment" />
     <fragment
         android:id="@+id/emailAndPasswordFragment"
         android:name="com.couplesdating.couplet.ui.register.emailAndPassword.EmailAndPasswordFragment"
@@ -35,19 +31,11 @@
         android:name="com.couplesdating.couplet.ui.register.nameAndGender.NameAndGenderFragment"
         android:label="NameAndGenderFragment" >
         <action
-            android:id="@+id/action_nameAndGenderFragment_to_termsOfUsage"
-            app:destination="@id/termsOfUsage" />
+            android:id="@+id/action_nameAndGenderFragment_to_syncPartnerFragment"
+            app:destination="@id/syncPartnerFragment" />
     </fragment>
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.couplesdating.couplet.ui.home.HomeFragment"
-        android:label="HomeFragment" />
-    <fragment
-        android:id="@+id/termsOfUsage"
-        android:name="com.couplesdating.couplet.ui.register.termsOfUsage.TermsOfUsageFragment"
-        android:label="TermsOfUsage" >
-        <action
-            android:id="@+id/action_termsOfUsage_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        android:id="@+id/syncPartnerFragment"
+        android:name="com.couplesdating.couplet.ui.syncPartner.SyncPartnerFragment"
+        android:label="SyncPartnerFragment" />
 </navigation>

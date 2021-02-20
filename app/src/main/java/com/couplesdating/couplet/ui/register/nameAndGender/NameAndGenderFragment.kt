@@ -1,5 +1,7 @@
 package com.couplesdating.couplet.ui.register.nameAndGender
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +10,14 @@ import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentNameAndGenderBinding
 import com.couplesdating.couplet.ui.extensions.textValue
 import com.couplesdating.couplet.ui.register.RegisterViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
+
 
 class NameAndGenderFragment : Fragment() {
     private lateinit var binding: FragmentNameAndGenderBinding
@@ -51,6 +55,9 @@ class NameAndGenderFragment : Fragment() {
                     otherGender = otherGender.textValue()
                 )
             }
+            termsOfUsage.setOnClickListener {
+                goToTermsOfUsage()
+            }
         }
     }
 
@@ -58,6 +65,11 @@ class NameAndGenderFragment : Fragment() {
         binding.nameInputLayout.error = null
         binding.genderInputLayout.error = null
         binding.otherGenderInputLayout.error = null
+    }
+
+    private fun goToTermsOfUsage() {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"))
+        startActivity(browserIntent)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,7 +89,9 @@ class NameAndGenderFragment : Fragment() {
             }
         }
         registerViewModel.userRegisterLiveData.observe(viewLifecycleOwner) {
-            // Follow registration
+            if (it != null) {
+                goToSyncPartner()
+            }
         }
     }
 
@@ -92,5 +106,11 @@ class NameAndGenderFragment : Fragment() {
             gender = inputGender
         )
         registerViewModel.register()
+    }
+
+    private fun goToSyncPartner() {
+        val goToSyncPartner =
+            NameAndGenderFragmentDirections.actionNameAndGenderFragmentToSyncPartnerFragment()
+        findNavController().navigate(goToSyncPartner)
     }
 }

@@ -90,6 +90,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/other_gender_input_layout" />
 
+            <TextView
+                android:id="@+id/terms_of_usage"
+                app:layout_constraintTop_toBottomOf="@id/register"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:textAlignment="center"
+                android:text="@string/terms_of_usage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

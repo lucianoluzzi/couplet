@@ -8,7 +8,6 @@ import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
-import com.google.firebase.auth.ktx.userProfileChangeRequest
 
 class UserRepositoryImpl(
     private val authenticator: FirebaseAuth
@@ -58,11 +57,13 @@ class UserRepositoryImpl(
     }
 
     override suspend fun register(email: String, password: String): Response {
-        val authResult = authenticator.register(email, password)
+        val authResult = authenticator.register(
+            email = email, password = password
+        )
         return if (authResult.isSuccessful) {
             Response.Success(authenticator.currentUser)
         } else {
-            Response.Error()
+            Response.Error(authResult.exception?.message)
         }
     }
 
