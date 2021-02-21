@@ -9,13 +9,10 @@ import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentEmailPasswordBinding
 import com.couplesdating.couplet.ui.extensions.textValue
-import com.couplesdating.couplet.ui.register.RegisterViewModel
-import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class EmailAndPasswordFragment : Fragment() {
     private lateinit var binding: FragmentEmailPasswordBinding
-    private val registerViewModel: RegisterViewModel by sharedViewModel()
     private val viewModel: EmailAndPasswordViewModel by viewModel()
 
     override fun onCreateView(
@@ -48,7 +45,7 @@ class EmailAndPasswordFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.emailScreenUIState.observe(viewLifecycleOwner) { liveDataEvent ->
-            when (liveDataEvent.getContentIfNotHandled()) {
+            when (val registerResult = liveDataEvent.getContentIfNotHandled()) {
                 EmailScreenUIState.ConfirmPasswordEmpty -> binding.confirmPasswordInputLayout.error =
                     getString(R.string.empty_login_error)
                 EmailScreenUIState.EmailEmpty -> binding.emailInputLayout.error =
@@ -57,13 +54,9 @@ class EmailAndPasswordFragment : Fragment() {
                     getString(R.string.empty_login_error)
                 EmailScreenUIState.PasswordsDoesntMatch -> binding.confirmPasswordInputLayout.error =
                     getString(R.string.password_dont_match)
-                EmailScreenUIState.Success -> {
-                    registerViewModel.setEmailAndPassword(
-                        email = binding.email.textValue(),
-                        password = binding.password.textValue()
-                    )
-                    goToNameAndGender()
-                }
+                is EmailScreenUIState.RegistrationError -> binding.passwordInputLayout.error =
+                    registerResult.errorMessage
+                EmailScreenUIState.Success -> goToNameAndGender()
             }
         }
     }

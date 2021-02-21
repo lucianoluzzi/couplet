@@ -4,5 +4,6 @@ sealed class NameAndGenderUIState {
     object NameEmpty : NameAndGenderUIState()
     object GenderEmpty : NameAndGenderUIState()
     object OtherGenderEmpty : NameAndGenderUIState()
-    object Valid : NameAndGenderUIState()
+    object Success : NameAndGenderUIState()
+    data class UpdateError(val errorMessage: String) : NameAndGenderUIState()
 }

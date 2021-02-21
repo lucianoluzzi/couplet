@@ -14,14 +14,11 @@ import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentNameAndGenderBinding
 import com.couplesdating.couplet.ui.extensions.textValue
-import com.couplesdating.couplet.ui.register.RegisterViewModel
-import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class NameAndGenderFragment : Fragment() {
     private lateinit var binding: FragmentNameAndGenderBinding
-    private val registerViewModel: RegisterViewModel by sharedViewModel()
     private val viewModel: NameAndGenderViewModel by viewModel()
 
     override fun onCreateView(
@@ -49,7 +46,7 @@ class NameAndGenderFragment : Fragment() {
             }
             register.setOnClickListener {
                 clearErrors()
-                viewModel.validate(
+                viewModel.updateUser(
                     name = binding.name.textValue(),
                     gender = gender.textValue(),
                     otherGender = otherGender.textValue()
@@ -76,36 +73,18 @@ class NameAndGenderFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.uiState.observe(viewLifecycleOwner) {
-            when (it.getContentIfNotHandled()) {
+            when (val updateResponse = it.getContentIfNotHandled()) {
                 NameAndGenderUIState.NameEmpty -> binding.nameInputLayout.error =
                     getString(R.string.empty_login_error)
                 NameAndGenderUIState.GenderEmpty -> binding.genderInputLayout.error =
                     getString(R.string.empty_login_error)
                 NameAndGenderUIState.OtherGenderEmpty -> binding.otherGenderInputLayout.error =
                     getString(R.string.empty_login_error)
-                NameAndGenderUIState.Valid -> {
-                    register()
-                }
+                NameAndGenderUIState.Success -> goToSyncPartner()
+                is NameAndGenderUIState.UpdateError -> binding.nameInputLayout.error =
+                    updateResponse.errorMessage
             }
         }
-        registerViewModel.userRegisterLiveData.observe(viewLifecycleOwner) {
-            if (it != null) {
-                goToSyncPartner()
-            }
-        }
-    }
-
-    private fun register() {
-        val inputGender = if (binding.otherGenderInputLayout.isVisible) {
-            binding.otherGender.textValue()
-        } else {
-            binding.gender.textValue()
-        }
-        registerViewModel.setNameAndGender(
-            name = binding.name.textValue(),
-            gender = inputGender
-        )
-        registerViewModel.register()
     }
 
     private fun goToSyncPartner() {
