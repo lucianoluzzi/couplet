@@ -1,6 +1,7 @@
 package com.couplesdating.couplet.ui.register.emailAndPassword
 
 sealed class EmailScreenUIState {
+    object Loading : EmailScreenUIState()
     object EmailEmpty : EmailScreenUIState()
     object PasswordEmpty : EmailScreenUIState()
     object ConfirmPasswordEmpty : EmailScreenUIState()

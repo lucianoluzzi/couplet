@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 class EmailAndPasswordViewModel(
     private val userRepository: UserRepository
 ) : ViewModel() {
+
     private val _emailScreenUIState = MutableLiveData<LiveDataEvent<EmailScreenUIState>>()
     val emailScreenUIState: LiveData<LiveDataEvent<EmailScreenUIState>> = _emailScreenUIState
 
@@ -21,20 +22,21 @@ class EmailAndPasswordViewModel(
         password: String?,
         confirmPassword: String?
     ) {
+        setLiveDataValue(EmailScreenUIState.Loading)
         when {
-            email.isNullOrBlank() -> _emailScreenUIState.value =
-                EmailScreenUIState.EmailEmpty.asLiveDataEvent
-            password.isNullOrBlank() -> _emailScreenUIState.value =
-                EmailScreenUIState.PasswordEmpty.asLiveDataEvent
-            confirmPassword.isNullOrBlank() -> _emailScreenUIState.value =
-                EmailScreenUIState.ConfirmPasswordEmpty.asLiveDataEvent
-            password != confirmPassword -> _emailScreenUIState.value =
-                EmailScreenUIState.PasswordsDoesntMatch.asLiveDataEvent
+            email.isNullOrBlank() -> setLiveDataValue(EmailScreenUIState.EmailEmpty)
+            password.isNullOrBlank() -> setLiveDataValue(EmailScreenUIState.PasswordEmpty)
+            confirmPassword.isNullOrBlank() -> setLiveDataValue(EmailScreenUIState.ConfirmPasswordEmpty)
+            password != confirmPassword -> setLiveDataValue(EmailScreenUIState.PasswordsDoesntMatch)
             else -> register(
                 email = email,
                 password = password
             )
         }
+    }
+
+    private fun setLiveDataValue(uiState: EmailScreenUIState) {
+        _emailScreenUIState.value = uiState.asLiveDataEvent
     }
 
     private fun register(
@@ -46,12 +48,14 @@ class EmailAndPasswordViewModel(
                 email = email,
                 password = password
             )
-            _emailScreenUIState.value = if (registerResponse is Response.Error) {
-                EmailScreenUIState.RegistrationError(
-                    registerResponse.errorMessage ?: ""
-                ).asLiveDataEvent
+            if (registerResponse is Response.Error) {
+                setLiveDataValue(
+                    EmailScreenUIState.RegistrationError(
+                        registerResponse.errorMessage ?: ""
+                    )
+                )
             } else {
-                EmailScreenUIState.Success.asLiveDataEvent
+                setLiveDataValue(EmailScreenUIState.Success)
             }
         }
     }
