@@ -34,3 +34,11 @@ suspend fun FirebaseUser.updateUser(profileChangeRequest: UserProfileChangeReque
         }
     }
 }
+
+suspend fun FirebaseAuth.resetPassword(email: String): Task<Void> {
+    return suspendCancellableCoroutine { continuation ->
+        sendPasswordResetEmail(email).addOnCompleteListener { taskResult ->
+            continuation.resume(taskResult)
+        }
+    }
+}

@@ -9,4 +9,5 @@
     <string name="auth_login_error">Email or password incorrect</string>
     <string name="password_dont_match">Passwords does not match</string>
     <string name="terms_of_usage">When creating an account you agree to the <u>terms of usage</u></string>
+    <string name="password_reset">An email has been sent with your new password</string>
 </resources>

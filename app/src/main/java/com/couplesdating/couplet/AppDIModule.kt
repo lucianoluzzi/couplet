@@ -4,6 +4,7 @@ import com.couplesdating.couplet.data.UserRepository
 import com.couplesdating.couplet.data.UserRepositoryImpl
 import com.couplesdating.couplet.domain.useCase.*
 import com.couplesdating.couplet.ui.login.emailLogin.LoginViewModel
+import com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordViewModel
 import com.couplesdating.couplet.ui.login.socialLogin.SocialLoginViewModel
 import com.couplesdating.couplet.ui.register.emailAndPassword.EmailAndPasswordViewModel
 import com.couplesdating.couplet.ui.register.nameAndGender.NameAndGenderViewModel
@@ -23,6 +24,8 @@ val appModule = module {
 
     single<UpdateUserUseCase> { UpdateUserUseCaseImpl(get()) }
 
+    single<ResetPasswordUseCase> { ResetPasswordUseCaseImpl(get()) }
+
     viewModel {
         SocialLoginViewModel(get())
     }
@@ -34,5 +37,8 @@ val appModule = module {
     }
     viewModel {
         NameAndGenderViewModel(get())
+    }
+    viewModel {
+        ForgotPasswordViewModel(get())
     }
 }

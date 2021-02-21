@@ -40,6 +40,11 @@ class LoginFragment : Fragment() {
                 password = binding.password.textValue()
             )
         }
+        binding.forgotPassword.setOnClickListener {
+            val goToForgotPassword =
+                LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment()
+            findNavController().navigate(goToForgotPassword)
+        }
     }
 
     private fun clearErrors() {

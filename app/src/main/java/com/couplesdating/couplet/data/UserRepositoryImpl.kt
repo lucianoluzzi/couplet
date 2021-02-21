@@ -2,6 +2,7 @@ package com.couplesdating.couplet.data
 
 import android.util.Log
 import com.couplesdating.couplet.data.extensions.register
+import com.couplesdating.couplet.data.extensions.resetPassword
 import com.couplesdating.couplet.data.extensions.signIn
 import com.couplesdating.couplet.data.extensions.updateUser
 import com.couplesdating.couplet.domain.model.Response
@@ -61,7 +62,7 @@ class UserRepositoryImpl(
             email = email, password = password
         )
         return if (authResult.isSuccessful) {
-            Response.Success(authenticator.currentUser)
+            Response.Success
         } else {
             Response.Error(authResult.exception?.message)
         }
@@ -75,10 +76,19 @@ class UserRepositoryImpl(
 
             val updateResult = currentUser.updateUser(userProfileChangeRequest)
             if (updateResult.isSuccessful) {
-                return Response.Success(authenticator.currentUser)
+                return Response.Success
             }
         }
 
         return Response.Error()
+    }
+
+    override suspend fun resetPassword(email: String): Response {
+        val resetPasswordResult = authenticator.resetPassword(email)
+        return if (resetPasswordResult.isSuccessful) {
+            Response.Success
+        } else {
+            Response.Error(resetPasswordResult.exception?.message)
+        }
     }
 }
