@@ -26,8 +26,13 @@ val appModule = module {
 
     single<ResetPasswordUseCase> { ResetPasswordUseCaseImpl(get()) }
 
+    single<GoogleSignInUseCase> { GoogleSignInUseCaseImpl(get()) }
+
     viewModel {
-        SocialLoginViewModel(get())
+        SocialLoginViewModel(
+            get(),
+            get()
+        )
     }
     viewModel {
         LoginViewModel(get())

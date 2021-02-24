@@ -1,10 +1,8 @@
 package com.couplesdating.couplet.data.extensions
 
+import android.util.Log
 import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.auth.*
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
@@ -13,6 +11,15 @@ suspend fun FirebaseAuth.signIn(email: String, password: String): Task<AuthResul
         signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             continuation.resume(task)
         }
+    }
+}
+
+suspend fun FirebaseAuth.signIn(authCredential: AuthCredential): Task<AuthResult> {
+    return suspendCancellableCoroutine { cancellableContinuation ->
+        signInWithCredential(authCredential)
+            .addOnCompleteListener { task ->
+                cancellableContinuation.resume(task)
+            }
     }
 }
 

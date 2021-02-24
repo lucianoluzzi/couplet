@@ -7,6 +7,7 @@ import com.couplesdating.couplet.data.extensions.signIn
 import com.couplesdating.couplet.data.extensions.updateUser
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.model.User
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 
@@ -57,6 +58,15 @@ class UserRepositoryImpl(
         return null
     }
 
+    override suspend fun signIn(authCredential: AuthCredential, displayName: String?): Response {
+        val result = authenticator.signIn(authCredential)
+        return if (result.isSuccessful) {
+            Response.Success
+        } else {
+            Response.Error(result.exception?.message)
+        }
+    }
+
     override suspend fun register(email: String, password: String): Response {
         val authResult = authenticator.register(
             email = email, password = password
@@ -68,7 +78,7 @@ class UserRepositoryImpl(
         }
     }
 
-    override suspend fun updateProfile(userName: String, gender: String): Response {
+    override suspend fun updateProfile(userName: String, gender: String?): Response {
         authenticator.currentUser?.let { currentUser ->
             val userProfileChangeRequest = UserProfileChangeRequest.Builder()
                 .setDisplayName(userName)
