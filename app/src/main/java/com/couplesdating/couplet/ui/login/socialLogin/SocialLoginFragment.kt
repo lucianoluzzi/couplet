@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.couplesdating.couplet.R
@@ -19,6 +21,30 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class SocialLoginFragment : Fragment() {
     private val viewModel: SocialLoginViewModel by viewModel()
     private lateinit var binding: FragmentSocialLoginBinding
+
+    private lateinit var googleSignInResult: ActivityResultLauncher<Intent>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        googleSignInResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
+
+                val task = GoogleSignIn.getSignedInAccountFromIntent(activityResult.data)
+                try {
+                    val account = task.getResult(ApiException::class.java)
+                    account?.let {
+                        val idToken = it.idToken
+                        val displayName = it.displayName
+
+                        if (idToken != null && displayName != null) {
+                            firebaseAuthWithGoogle(idToken, displayName)
+                        }
+                    }
+                } catch (e: ApiException) {
+                    Log.w("LoginFragment", "Google sign in failed", e)
+                }
+            }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,36 +90,11 @@ class SocialLoginFragment : Fragment() {
 
         val googleSignInClient = GoogleSignIn.getClient(requireContext(), googleSignInOptions)
         val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, GOOGLE_SIGN_IN_REQUEST_CODE)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == GOOGLE_SIGN_IN_REQUEST_CODE) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                val account = task.getResult(ApiException::class.java)
-                account?.let {
-                    val idToken = it.idToken
-                    val displayName = it.displayName
-
-                    if (idToken != null && displayName != null) {
-                        firebaseAuthWithGoogle(idToken, displayName)
-                    }
-                }
-            } catch (e: ApiException) {
-                Log.w("LoginFragment", "Google sign in failed", e)
-            }
-        }
+        googleSignInResult.launch(signInIntent)
     }
 
     private fun firebaseAuthWithGoogle(idToken: String, displayName: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         viewModel.onGoogleSignIn(credential, displayName)
-    }
-
-    private companion object {
-        private const val GOOGLE_SIGN_IN_REQUEST_CODE = 1234
     }
 }
