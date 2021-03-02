@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Share link"
-        android:textColor="@color/black_40"
+        android:textColor="@color/dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/share_link" />

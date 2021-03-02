@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/background">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/content_container"
@@ -97,7 +97,6 @@
             android:id="@+id/loading_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/black_40"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -2,18 +2,51 @@
     <!-- Base application theme. -->
     <style name="Theme.Couplet" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/red</item>
+        <item name="colorOnPrimary">@color/red_over</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/blue</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>
         <!-- Customize your theme here. -->
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="Title">
+        <item name="android:textSize">35sp</item>
+        <item name="android:fontFamily">@font/regular</item>
+        <item name="android:textColor">@color/dark</item>
+    </style>
+
+    <style name="H2Title">
+        <item name="android:textSize">28sp</item>
+        <item name="android:fontFamily">@font/regular</item>
+        <item name="android:textColor">@color/dark</item>
+    </style>
+
+    <style name="Label">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/regular</item>
+        <item name="android:textColor">@color/grey_blue</item>
+    </style>
+
+    <style name="Body">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/regular</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="Body.Disabled">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/regular</item>
+        <item name="android:textColor">@color/grey_blue</item>
+    </style>
+
+    <style name="Body.Highlight">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/medium</item>
+        <item name="android:textColor">@color/musk_green</item>
     </style>
 </resources>
