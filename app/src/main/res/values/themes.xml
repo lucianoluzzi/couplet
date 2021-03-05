@@ -133,13 +133,13 @@
         <item name="hintTextColor">@color/grey_blue</item>
         <item name="hintTextAppearance">@style/Body</item>
         <item name="shapeAppearance">@style/RoundCorners.8</item>
+        <item name="boxBackgroundColor">@color/text_input_background</item>
     </style>
 
     <style name="TextInputEditText">
         <item name="android:textColor">@color/musk_green</item>
         <item name="android:textAppearance">@style/Body.Highlight</item>
     </style>
-
 
     <style name="RoundCorners" />
 
