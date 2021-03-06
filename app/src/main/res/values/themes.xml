@@ -103,7 +103,7 @@
         <item name="android:paddingTop">16dp</item>
         <item name="android:paddingBottom">16dp</item>
         <item name="strokeColor">@color/blue_20</item>
-        <item name="rippleColor">@color/blue_55</item>
+        <item name="rippleColor">@color/outlined_button_ripple</item>
     </style>
 
     <style name="Button.Outlined.Icon" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
@@ -120,7 +120,7 @@
         <item name="android:paddingTop">16dp</item>
         <item name="android:paddingBottom">16dp</item>
         <item name="strokeColor">@color/blue_20</item>
-        <item name="rippleColor">@color/blue_55</item>
+        <item name="rippleColor">@color/outlined_button_ripple</item>
     </style>
 
     <style name="TextField" />
@@ -134,6 +134,7 @@
         <item name="hintTextAppearance">@style/Body</item>
         <item name="shapeAppearance">@style/RoundCorners.8</item>
         <item name="boxBackgroundColor">@color/text_input_background</item>
+        <item name="hintEnabled">false</item>
     </style>
 
     <style name="TextInputEditText">

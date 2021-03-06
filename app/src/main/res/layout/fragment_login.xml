@@ -33,7 +33,6 @@
                 android:id="@+id/email_input_layout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="E-mail"
                 app:errorEnabled="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -43,6 +42,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/TextInputEditText"
+                    android:hint="E-mail"
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

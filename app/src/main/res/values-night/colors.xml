@@ -3,8 +3,9 @@
     <color name="dark">#FFFFFF</color>
     <color name="blue">#86AEC6</color>
     <color name="background">#1E113F</color>
-    <color name="grey_blue">#9C9DBF</color>
+    <color name="grey_blue">#494B71</color>
     <color name="grey">#9C9DBF</color>
 
     <color name="text_input_background">#2D214B</color>
+    <color name="outlined_button_ripple">#252a52</color>
 </resources>
