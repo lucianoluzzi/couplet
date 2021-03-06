@@ -2,6 +2,7 @@ package com.couplesdating.couplet
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -24,6 +25,16 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(this, navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            val shouldShowBackNavigation = shouldShowBackNavigation(destination)
+            supportActionBar?.setDisplayShowHomeEnabled(shouldShowBackNavigation)
+            supportActionBar?.setDisplayHomeAsUpEnabled(shouldShowBackNavigation)
+        }
+    }
+
+    private fun shouldShowBackNavigation(destination: NavDestination): Boolean {
+        return destination.label != "OnboardingFirstFragment" && destination.label != "SocialLoginFragment"
     }
 
     override fun onSupportNavigateUp(): Boolean {
