@@ -13,8 +13,8 @@
     <color name="pink">#FFEEEE</color>
     <color name="light_pink">#FFF5F5</color>
     <color name="outlined_button_ripple">#8C46B5D7</color>
+    <color name="outlined_button_color">#2646B5D7</color>
     <color name="blue_20">#3346B5D7</color>
-    <color name="blue_15">#2646B5D7</color>
 
     <color name="white">#FFFFFF</color>
     <color name="white_50">#80FFFFFF</color>

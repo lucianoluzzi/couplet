@@ -7,5 +7,6 @@
     <color name="grey">#9C9DBF</color>
 
     <color name="text_input_background">#2D214B</color>
-    <color name="outlined_button_ripple">#252a52</color>
+    <color name="outlined_button_ripple">#2B4570</color>
+    <color name="outlined_button_color">#242956</color>
 </resources>
