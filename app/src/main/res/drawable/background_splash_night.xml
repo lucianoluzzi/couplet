@@ -1,0 +1,11 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="@color/background"/>
+        </shape>
+    </item>
+
+    <item android:drawable="@drawable/ic_splash_screen_background_night"
+        android:gravity="center">
+    </item>
+</layer-list>
