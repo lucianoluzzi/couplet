@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Couplet" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Couplet" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/red</item>
         <item name="colorOnPrimary">@color/red_over</item>
@@ -12,6 +12,13 @@
         <!-- Customize your theme here. -->
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:fitsSystemWindows">true</item>
+        <item name="actionBarStyle">@style/Theme.Couplet.ActionBar</item>
+    </style>
+
+    <style name="Theme.Couplet.ActionBar" parent="@style/Widget.MaterialComponents.ActionBar.Primary">
+        <item name="background">@color/background</item>
+        <item name="elevation">0dp</item>
+        <item name="displayOptions">showHome|useLogo</item>
     </style>
 
     <style name="Title">
