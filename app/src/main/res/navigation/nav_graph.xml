@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
-    app:startDestination="@id/socialLoginFragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
         android:id="@+id/socialLoginFragment"
@@ -49,4 +49,23 @@
         android:id="@+id/forgotPasswordFragment"
         android:name="com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordFragment"
         android:label="ForgotPasswordFragment" />
+    <fragment
+        android:id="@+id/onboardingFirstFragment"
+        android:name="com.couplesdating.couplet.ui.onboarding.OnboardingFirstFragment"
+        android:label="OnboardingFirstFragment" >
+        <action
+            android:id="@+id/action_onboardingFirstFragment_to_socialLoginFragment"
+            app:destination="@id/socialLoginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.couplesdating.couplet.ui.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_socialLoginFragment"
+            app:destination="@id/socialLoginFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_onboardingFirstFragment"
+            app:destination="@id/onboardingFirstFragment" />
+    </fragment>
 </navigation>

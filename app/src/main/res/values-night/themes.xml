@@ -13,6 +13,7 @@
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:fitsSystemWindows">true</item>
         <item name="actionBarStyle">@style/Theme.Couplet.ActionBar</item>
+        <item name="actionBarTheme">@style/Theme.Couplet.ActionBar.Theme</item>
     </style>
 
     <style name="Theme.Couplet.ActionBar" parent="@style/Widget.MaterialComponents.ActionBar.Primary">
@@ -21,9 +22,16 @@
         <item name="displayOptions">showHome|useLogo</item>
     </style>
 
+    <style name="Theme.Couplet.ActionBar.Theme" parent="@style/Widget.MaterialComponents.ActionBar.Primary">
+        <item name="background">@color/background</item>
+        <item name="elevation">0dp</item>
+        <item name="displayOptions">showHome|useLogo</item>
+        <item name="colorControlNormal">@color/white</item>
+    </style>
+
     <style name="SplashScreenTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:statusBarColor" tools:targetApi="l">@color/background</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowBackground">@drawable/background_splash_night</item>
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:fitsSystemWindows">true</item>
