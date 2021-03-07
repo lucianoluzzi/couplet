@@ -23,9 +23,9 @@ class OnboardingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.continueButton.setOnClickListener {
-            val actionOnboardingFragmentToSocialLoginFragment =
-                OnboardingFragmentDirections.actionOnboardingFragmentToSocialLoginFragment()
-            findNavController().navigate(actionOnboardingFragmentToSocialLoginFragment)
+            val toLearnFromFromProfessionals =
+                OnboardingFragmentDirections.actionOnboardingFragmentToLearnFromProfessionalsFragment()
+            findNavController().navigate(toLearnFromFromProfessionals)
         }
     }
 }

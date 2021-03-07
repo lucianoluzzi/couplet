@@ -23,8 +23,16 @@
         android:label="OnboardingFirstFragment" >
         <action
             android:id="@+id/action_onboardingFragment_to_learnFromProfessionalsFragment"
-            app:destination="@id/learnFromProfessionalsFragment" />
+            app:destination="@id/learnFromProfessionalsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
+    <fragment
+        android:id="@+id/learnFromProfessionalsFragment"
+        android:name="com.couplesdating.couplet.ui.onboarding.LearnFromProfessionalsOnboardingFragment"
+        android:label="LearnFromProfessionalsOnboardingFragment" />
     <fragment
         android:id="@+id/socialLoginFragment"
         android:name="com.couplesdating.couplet.ui.login.socialLogin.SocialLoginFragment"
@@ -71,9 +79,5 @@
         android:id="@+id/forgotPasswordFragment"
         android:name="com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordFragment"
         android:label="ForgotPasswordFragment" />
-    <fragment
-        android:id="@+id/learnFromProfessionalsFragment"
-        android:name="com.couplesdating.couplet.ui.onboarding.LearnFromProfessionalsFragment"
-        android:label="LearnFromProfessionalsFragment" />
 
 </navigation>
