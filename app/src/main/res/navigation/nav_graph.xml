@@ -22,8 +22,8 @@
         android:name="com.couplesdating.couplet.ui.onboarding.OnboardingFragment"
         android:label="OnboardingFirstFragment" >
         <action
-            android:id="@+id/action_onboardingFragment_to_socialLoginFragment"
-            app:destination="@id/socialLoginFragment" />
+            android:id="@+id/action_onboardingFragment_to_learnFromProfessionalsFragment"
+            app:destination="@id/learnFromProfessionalsFragment" />
     </fragment>
     <fragment
         android:id="@+id/socialLoginFragment"
@@ -71,5 +71,9 @@
         android:id="@+id/forgotPasswordFragment"
         android:name="com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordFragment"
         android:label="ForgotPasswordFragment" />
+    <fragment
+        android:id="@+id/learnFromProfessionalsFragment"
+        android:name="com.couplesdating.couplet.ui.onboarding.LearnFromProfessionalsFragment"
+        android:label="LearnFromProfessionalsFragment" />
 
 </navigation>

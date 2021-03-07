@@ -10,7 +10,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/background">
 
             <ImageView
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimension_20"
-                android:text="Weekly sex ideas for couples"
+                android:text="@string/weekly_sex_ideas_for_couples"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/app_name" />
@@ -68,7 +68,8 @@
                 android:layout_marginStart="@dimen/dimension_24"
                 android:layout_marginEnd="@dimen/dimension_24"
                 android:layout_marginBottom="@dimen/dimension_24"
-                android:text="Let's start"
+                android:text="@string/lets_start"
+                android:id="@+id/continue_button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
