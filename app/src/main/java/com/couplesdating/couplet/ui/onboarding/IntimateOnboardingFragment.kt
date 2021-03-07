@@ -8,37 +8,31 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
-import com.couplesdating.couplet.databinding.FragmentOnboardingPrivacyBinding
+import com.couplesdating.couplet.databinding.FragmentIntimateOnboardingBinding
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
 
-class PrivacyOnboardingFragment : Fragment() {
-    private lateinit var binding: FragmentOnboardingPrivacyBinding
+class IntimateOnboardingFragment : Fragment() {
+    private lateinit var binding: FragmentIntimateOnboardingBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentOnboardingPrivacyBinding.inflate(inflater, container, false)
+        binding = FragmentIntimateOnboardingBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         decorateTitle()
-        binding.continueButton.setOnClickListener {
-            val toIntimateFragment =
-                PrivacyOnboardingFragmentDirections.actionPrivacyOnboardingFragmentToIntimateOnboardingFragment()
-            findNavController().navigate(toIntimateFragment)
-        }
     }
 
     private fun decorateTitle() {
-        val title = binding.title.textValue()
+        val title = binding.happier.textValue()
         val spannable = SpannableString(title)
 
         val medium = Typeface.create(
@@ -46,8 +40,8 @@ class PrivacyOnboardingFragment : Fragment() {
             Typeface.NORMAL
         )
         val color = requireContext().getColor(R.color.red)
-        spannable.setColor(color, "privacy", title)
-        spannable.setFont(medium, "privacy", title)
-        binding.title.text = spannable
+        spannable.setColor(color, "happier", title)
+        spannable.setFont(medium, "happier", title)
+        binding.happier.text = spannable
     }
 }

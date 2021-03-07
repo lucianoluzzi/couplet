@@ -56,7 +56,19 @@
     <fragment
         android:id="@+id/privacyOnboardingFragment"
         android:name="com.couplesdating.couplet.ui.onboarding.PrivacyOnboardingFragment"
-        android:label="PrivacyOnboardingFragment" />
+        android:label="PrivacyOnboardingFragment" >
+        <action
+            android:id="@+id/action_privacyOnboardingFragment_to_intimateOnboardingFragment"
+            app:destination="@id/intimateOnboardingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/intimateOnboardingFragment"
+        android:name="com.couplesdating.couplet.ui.onboarding.IntimateOnboardingFragment"
+        android:label="IntimateOnboardingFragment" />
     <fragment
         android:id="@+id/socialLoginFragment"
         android:name="com.couplesdating.couplet.ui.login.socialLogin.SocialLoginFragment"
