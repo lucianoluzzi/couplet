@@ -10,10 +10,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/background</item>
         <item name="android:windowLightStatusBar">false</item>
         <!-- Customize your theme here. -->
-        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowBackground">@color/background</item>
         <item name="android:fitsSystemWindows">true</item>
         <item name="actionBarStyle">@style/Theme.Couplet.ActionBar</item>
         <item name="actionBarTheme">@style/Theme.Couplet.ActionBar.Theme</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
     <style name="Theme.Couplet.ActionBar" parent="@style/Widget.MaterialComponents.ActionBar.Primary">
@@ -37,8 +39,8 @@
         <item name="android:fitsSystemWindows">true</item>
     </style>
 
-    <style name="Title">
-        <item name="android:textSize">35sp</item>
+    <style name="H1Title">
+        <item name="android:textSize">350sp</item>
         <item name="android:fontFamily">@font/regular</item>
         <item name="android:textColor">@color/dark</item>
     </style>
@@ -82,7 +84,8 @@
         <item name="android:paddingTop">16dp</item>
         <item name="android:paddingBottom">16dp</item>
         <item name="strokeColor">@color/grey_blue_light</item>
-        <item name="rippleColor">@color/outlined_button_ripple</item> // todo: this color is wrong, awaiting designers response
+        <item name="rippleColor">@color/outlined_button_ripple</item>
+        // todo: this color is wrong, awaiting designers response
     </style>
 
     <style name="Button.Outlined.Icon" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
@@ -99,7 +102,8 @@
         <item name="android:paddingTop">16dp</item>
         <item name="android:paddingBottom">16dp</item>
         <item name="strokeColor">@color/grey_blue_light</item>
-        <item name="rippleColor">@color/outlined_button_ripple</item> // todo: this color is wrong, awaiting designers response
+        <item name="rippleColor">@color/outlined_button_ripple</item>
+        // todo: this color is wrong, awaiting designers response
     </style>
 
     <style name="TextInputLayout.Outlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">

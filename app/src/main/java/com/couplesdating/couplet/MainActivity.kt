@@ -27,14 +27,19 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(this, navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            val shouldShowBackNavigation = shouldShowBackNavigation(destination)
-            supportActionBar?.setDisplayShowHomeEnabled(shouldShowBackNavigation)
-            supportActionBar?.setDisplayHomeAsUpEnabled(shouldShowBackNavigation)
+            val shouldShowBackNavigation = shouldShowActionBar(destination)
+
+            if (shouldShowBackNavigation) {
+                supportActionBar?.show()
+            } else {
+                supportActionBar?.hide()
+            }
         }
     }
 
-    private fun shouldShowBackNavigation(destination: NavDestination): Boolean {
-        return destination.label != "OnboardingFirstFragment" && destination.label != "SocialLoginFragment"
+    private fun shouldShowActionBar(destination: NavDestination): Boolean {
+        val label = destination.label ?: return true
+        return !label.contains("Onboarding") && label != "SocialLoginFragment"
     }
 
     override fun onSupportNavigateUp(): Boolean {

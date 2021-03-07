@@ -32,7 +32,7 @@ class MainFragment : Fragment() {
             navController.navigate(navigateToSocialLogin)
         } else {
             val navigateToOnboarding =
-                MainFragmentDirections.actionMainFragmentToOnboardingFirstFragment()
+                MainFragmentDirections.actionMainFragmentToOnboardingFragment()
             navController.navigate(navigateToOnboarding)
         }
     }

@@ -11,18 +11,18 @@
             android:id="@+id/action_mainFragment_to_socialLoginFragment"
             app:destination="@id/socialLoginFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_onboardingFirstFragment"
+            android:id="@+id/action_mainFragment_to_onboardingFragment"
             app:popUpTo="@+id/nav_graph"
             app:popUpToInclusive="true"
             app:launchSingleTop="true"
-            app:destination="@id/onboardingFirstFragment" />
+            app:destination="@id/onboardingFragment" />
     </fragment>
     <fragment
-        android:id="@+id/onboardingFirstFragment"
-        android:name="com.couplesdating.couplet.ui.onboarding.OnboardingFirstFragment"
+        android:id="@+id/onboardingFragment"
+        android:name="com.couplesdating.couplet.ui.onboarding.OnboardingFragment"
         android:label="OnboardingFirstFragment" >
         <action
-            android:id="@+id/action_onboardingFirstFragment_to_socialLoginFragment"
+            android:id="@+id/action_onboardingFragment_to_socialLoginFragment"
             app:destination="@id/socialLoginFragment" />
     </fragment>
     <fragment

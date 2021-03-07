@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Couplet</string>
     <string name="facebook_app_id">431510494835122</string> <string name="fb_login_protocol_scheme">fb431510494835122</string>
@@ -12,4 +13,6 @@
     <string name="password_dont_match">Passwords does not match</string>
     <string name="terms_of_usage">When creating an account you agree to the <u>terms of usage</u></string>
     <string name="password_reset">An email has been sent with your new password</string>
+    <string name="welcome_to_couplet">Welcome to</string>
 </resources>
+

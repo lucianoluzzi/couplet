@@ -5,18 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.couplesdating.couplet.databinding.FragmentOnboardingFirstBinding
+import com.couplesdating.couplet.databinding.FragmentOnboardingBinding
 
-class OnboardingFirstFragment : Fragment() {
-
-    private lateinit var binding: FragmentOnboardingFirstBinding
+class OnboardingFragment : Fragment() {
+    private lateinit var binding: FragmentOnboardingBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentOnboardingFirstBinding.inflate(inflater, container, false)
+        binding = FragmentOnboardingBinding.inflate(inflater, container, false)
         return binding.root
     }
 }
