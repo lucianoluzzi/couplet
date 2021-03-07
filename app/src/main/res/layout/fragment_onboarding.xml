@@ -53,9 +53,11 @@
             <TextView
                 android:id="@+id/label"
                 style="@style/Body"
-                android:layout_width="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimension_16"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimension_20"
+                android:gravity="center"
                 android:text="@string/weekly_sex_ideas_for_couples"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
