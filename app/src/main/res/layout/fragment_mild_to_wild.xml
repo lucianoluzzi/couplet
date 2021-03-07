@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:fillViewport="true"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -18,7 +17,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dimension_16"
                 android:background="@drawable/cloud"
-                android:src="@drawable/couple_together"
+                android:src="@drawable/couple_dance"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -33,21 +32,19 @@
                 android:layout_marginEnd="@dimen/dimension_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Learn from"
+                android:text="Go from mild"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image" />
 
             <TextView
                 style="@style/H1Title"
-                android:id="@+id/professionals"
+                android:id="@+id/wild"
                 android:layout_marginStart="@dimen/dimension_24"
                 android:layout_marginEnd="@dimen/dimension_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="professionals"
-                android:textColor="@color/red"
-                android:fontFamily="@font/medium"
+                android:text="to wild"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title" />
@@ -59,10 +56,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimension_20"
                 android:gravity="center"
-                android:text="Tips designed by therapists and \nsexologists to get you guys intimate!"
+                android:text="Wheter you like it vanilla or prefer it\n hot, I got you covered with\n 5 different categories."
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/professionals" />
+                app:layout_constraintTop_toBottomOf="@id/wild" />
 
             <Button
                 style="@style/Button.Highlight"
@@ -78,6 +75,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/label"
                 app:layout_constraintVertical_bias="1.0" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

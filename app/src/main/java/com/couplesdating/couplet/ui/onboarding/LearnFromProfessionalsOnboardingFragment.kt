@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.databinding.FragmentLearnFromProfessionalsBinding
 
 class LearnFromProfessionalsOnboardingFragment : Fragment() {
@@ -17,5 +18,15 @@ class LearnFromProfessionalsOnboardingFragment : Fragment() {
     ): View {
         binding = FragmentLearnFromProfessionalsBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.continueButton.setOnClickListener {
+            val toWildOnboardingFragment =
+                LearnFromProfessionalsOnboardingFragmentDirections.actionLearnFromProfessionalsFragmentToMildToWildOnboardingFragment()
+            findNavController().navigate(toWildOnboardingFragment)
+        }
     }
 }

@@ -32,7 +32,15 @@
     <fragment
         android:id="@+id/learnFromProfessionalsFragment"
         android:name="com.couplesdating.couplet.ui.onboarding.LearnFromProfessionalsOnboardingFragment"
-        android:label="LearnFromProfessionalsOnboardingFragment" />
+        android:label="LearnFromProfessionalsOnboardingFragment" >
+        <action
+            android:id="@+id/action_learnFromProfessionalsFragment_to_mildToWildOnboardingFragment"
+            app:destination="@id/mildToWildOnboardingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"  />
+    </fragment>
     <fragment
         android:id="@+id/socialLoginFragment"
         android:name="com.couplesdating.couplet.ui.login.socialLogin.SocialLoginFragment"
@@ -79,5 +87,9 @@
         android:id="@+id/forgotPasswordFragment"
         android:name="com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordFragment"
         android:label="ForgotPasswordFragment" />
+    <fragment
+        android:id="@+id/mildToWildOnboardingFragment"
+        android:name="com.couplesdating.couplet.ui.onboarding.MildToWildOnboardingFragment"
+        android:label="MildToWildOnboardingFragment" />
 
 </navigation>
