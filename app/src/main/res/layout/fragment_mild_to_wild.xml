@@ -56,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimension_20"
                 android:gravity="center"
+                android:layout_marginHorizontal="@dimen/dimension_16"
                 android:text="Wheter you like it vanilla or prefer it\n hot, I got you covered with\n 5 different categories."
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

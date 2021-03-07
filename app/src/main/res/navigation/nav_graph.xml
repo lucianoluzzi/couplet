@@ -42,6 +42,22 @@
             app:popExitAnim="@android:anim/slide_out_right"  />
     </fragment>
     <fragment
+        android:id="@+id/mildToWildOnboardingFragment"
+        android:name="com.couplesdating.couplet.ui.onboarding.MildToWildOnboardingFragment"
+        android:label="MildToWildOnboardingFragment" >
+        <action
+            android:id="@+id/action_mildToWildOnboardingFragment_to_privacyOnboardingFragment"
+            app:destination="@id/privacyOnboardingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/privacyOnboardingFragment"
+        android:name="com.couplesdating.couplet.ui.onboarding.PrivacyOnboardingFragment"
+        android:label="PrivacyOnboardingFragment" />
+    <fragment
         android:id="@+id/socialLoginFragment"
         android:name="com.couplesdating.couplet.ui.login.socialLogin.SocialLoginFragment"
         android:label="SocialLoginFragment" >
@@ -87,9 +103,6 @@
         android:id="@+id/forgotPasswordFragment"
         android:name="com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordFragment"
         android:label="ForgotPasswordFragment" />
-    <fragment
-        android:id="@+id/mildToWildOnboardingFragment"
-        android:name="com.couplesdating.couplet.ui.onboarding.MildToWildOnboardingFragment"
-        android:label="MildToWildOnboardingFragment" />
+
 
 </navigation>
