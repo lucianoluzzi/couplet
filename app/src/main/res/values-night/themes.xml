@@ -40,7 +40,7 @@
     </style>
 
     <style name="H1Title">
-        <item name="android:textSize">350sp</item>
+        <item name="android:textSize">35sp</item>
         <item name="android:fontFamily">@font/regular</item>
         <item name="android:textColor">@color/dark</item>
     </style>
@@ -60,7 +60,7 @@
     <style name="Body">
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/regular</item>
-        <item name="android:textColor">@color/grey</item>
+        <item name="android:textColor">@color/blue</item>
     </style>
 
     <style name="Body.Disabled">
