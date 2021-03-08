@@ -1,5 +1,6 @@
 package com.couplesdating.couplet.ui.onboarding
 
+import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentIntimateOnboardingBinding
 import com.couplesdating.couplet.ui.extensions.setColor
@@ -29,6 +31,12 @@ class IntimateOnboardingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         decorateTitle()
+        binding.continueButton.setOnClickListener {
+            setOnboardingShown()
+            val toSocialLogin =
+                IntimateOnboardingFragmentDirections.actionIntimateOnboardingFragmentToSocialLoginFragment()
+            findNavController().navigate(toSocialLogin)
+        }
     }
 
     private fun decorateTitle() {
@@ -43,5 +51,13 @@ class IntimateOnboardingFragment : Fragment() {
         spannable.setColor(color, "happier", title)
         spannable.setFont(medium, "happier", title)
         binding.happier.text = spannable
+    }
+
+    private fun setOnboardingShown() {
+        val preferences = requireActivity().getPreferences(Context.MODE_PRIVATE)
+        with(preferences.edit()) {
+            putBoolean(getString(R.string.has_shown_onboarding_key), true)
+            apply()
+        }
     }
 }
