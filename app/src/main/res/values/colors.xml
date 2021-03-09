@@ -26,4 +26,6 @@
     <color name="grey_blue_light">#77799F</color>
 
     <color name="text_input_background">#FFFFFF</color>
+
+    <color name="register_color">@color/grey</color>
 </resources>

@@ -8,5 +8,7 @@
 
     <color name="text_input_background">#2D214B</color>
     <color name="outlined_button_ripple">#2B4570</color>
-    <color name="outlined_button_color">#242956</color>
+    <color name="outlined_button_color">#494B71</color>
+
+    <color name="register_color">@color/grey_blue</color>
 </resources>
