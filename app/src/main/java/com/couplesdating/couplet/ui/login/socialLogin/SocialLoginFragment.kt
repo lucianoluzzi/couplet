@@ -1,17 +1,24 @@
 package com.couplesdating.couplet.ui.login.socialLogin
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.SpannableString
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentSocialLoginBinding
+import com.couplesdating.couplet.ui.extensions.setColor
+import com.couplesdating.couplet.ui.extensions.setFont
+import com.couplesdating.couplet.ui.extensions.setUnderline
+import com.couplesdating.couplet.ui.extensions.textValue
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -79,6 +86,8 @@ class SocialLoginFragment : Fragment() {
                 SocialLoginFragmentDirections.actionSocialLoginFragmentToEmailAndPasswordFragment()
             button.findNavController().navigate(goToRegister)
         }
+
+        decorateTexts()
     }
 
     private fun loginWithGoogle() {
@@ -96,5 +105,43 @@ class SocialLoginFragment : Fragment() {
     private fun firebaseAuthWithGoogle(idToken: String, displayName: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         viewModel.onGoogleSignIn(credential, displayName)
+    }
+
+    private fun decorateTexts() {
+        decorateWelcome()
+        decorateRegister()
+    }
+
+    private fun decorateWelcome() {
+        val backText = binding.back.textValue()
+
+        val spannable = SpannableString(backText)
+        val medium = Typeface.create(
+            ResourcesCompat.getFont(requireContext(), R.font.medium),
+            Typeface.NORMAL
+        )
+        val color = requireContext().getColor(R.color.red)
+        val wordToDecorate = ":)"
+        spannable.setColor(color, wordToDecorate, backText)
+        spannable.setFont(medium, wordToDecorate, backText)
+
+        binding.back.text = spannable
+    }
+
+    private fun decorateRegister() {
+        val registerText = binding.register.textValue()
+
+        val spannable = SpannableString(registerText)
+        val color = requireContext().getColor(R.color.blue)
+        val medium = Typeface.create(
+            ResourcesCompat.getFont(requireContext(), R.font.medium),
+            Typeface.NORMAL
+        )
+        val wordToDecorate = "SIGN UP"
+        spannable.setColor(color, wordToDecorate, registerText)
+        spannable.setFont(medium, wordToDecorate, registerText)
+        spannable.setUnderline(wordToDecorate, registerText)
+
+        binding.register.text = spannable
     }
 }

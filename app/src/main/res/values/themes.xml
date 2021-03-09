@@ -102,6 +102,7 @@
         <item name="android:backgroundTint">@color/outlined_button_color</item>
         <item name="android:textAppearance">@style/Body.Highlight</item>
         <item name="android:textColor">@color/musk_green</item>
+        <item name="android:height">60dp</item>
         <item name="android:paddingTop">16dp</item>
         <item name="android:paddingBottom">16dp</item>
         <item name="strokeColor">@color/blue_20</item>

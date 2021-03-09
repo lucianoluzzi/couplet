@@ -2,87 +2,109 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/background"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="24dp">
+        android:fillViewport="true"
+        android:fitsSystemWindows="true">
 
-        <ImageView
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:id="@+id/logo"
-            android:src="@mipmap/ic_launcher_round"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            app:layout_constraintTop_toBottomOf="@id/logo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:textAlignment="center"
-            style="@style/TextAppearance.MaterialComponents.Headline4"
-            android:id="@+id/welcome"
-            android:text="Welcome to the App"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
-
-        <Button
-            app:layout_constraintTop_toBottomOf="@id/welcome"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="12dp"
-            android:id="@+id/with_email"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login with Email"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            style="@style/Button.Outlined" />
+            android:background="@color/background">
 
-        <Button
-            app:layout_constraintTop_toBottomOf="@id/with_email"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="12dp"
-            android:id="@+id/with_google"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Login with Google"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            app:icon="@drawable/ic_google"
-            style="@style/Button.Outlined.Icon" />
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            app:layout_constraintTop_toBottomOf="@id/with_google"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="12dp"
-            android:id="@+id/with_facebook"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Login with Facebook"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            app:icon="@drawable/ic_facebook"
-            style="@style/Button.Highlight.Icon" />
+            <TextView
+                android:id="@+id/welcome"
+                style="@style/H1Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="@dimen/dimension_36"
+                android:layout_marginEnd="12dp"
+                android:text="Welcome"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/logo" />
 
-        <TextView
-            android:id="@+id/register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:focusable="true"
-            android:fontFamily="More Fonts..."
-            android:text="@string/new_user_register"
-            android:textSize="18dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/back"
+                style="@style/H1Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:text="back :)"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/welcome" />
+
+            <Button
+                android:id="@+id/with_email"
+                style="@style/Button.Outlined.Icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="@dimen/dimension_32"
+                android:layout_marginEnd="24dp"
+                android:text="Login with Email"
+                app:icon="@drawable/ic_email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/back" />
+
+            <Button
+                android:id="@+id/with_google"
+                style="@style/Button.Outlined.Icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:text="Login with Google"
+                app:icon="@drawable/ic_google"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/with_email" />
+
+            <Button
+                android:id="@+id/with_facebook"
+                style="@style/Button.Highlight.Icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:text="Login with Facebook"
+                app:icon="@drawable/ic_facebook"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/with_google" />
+
+            <TextView
+                android:id="@+id/register"
+                style="@style/Body.Disabled"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimension_16"
+                android:layout_marginEnd="@dimen/dimension_16"
+                android:layout_marginBottom="@dimen/dimension_24"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/new_user_register"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>
