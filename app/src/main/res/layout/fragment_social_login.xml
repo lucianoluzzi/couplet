@@ -15,12 +15,15 @@
 
             <ImageView
                 android:id="@+id/logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="310dp"
+                android:layout_height="310dp"
+                android:layout_marginTop="@dimen/dimension_12"
                 android:src="@drawable/ic_logo"
+                app:layout_constraintBottom_toTopOf="@id/welcome"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/welcome"
@@ -28,13 +31,12 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="@dimen/dimension_36"
                 android:layout_marginEnd="12dp"
                 android:text="Welcome"
                 android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@id/back"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/logo" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/back"
@@ -43,11 +45,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
+                android:layout_marginBottom="@dimen/dimension_32"
                 android:text="back :)"
                 android:textAlignment="center"
+                app:layout_constraintBottom_toTopOf="@id/with_email"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/welcome" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/with_email"
@@ -59,9 +62,9 @@
                 android:layout_marginEnd="24dp"
                 android:text="Login with Email"
                 app:icon="@drawable/ic_email"
+                app:layout_constraintBottom_toTopOf="@id/with_google"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/back" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/with_google"
@@ -72,9 +75,9 @@
                 android:layout_marginEnd="24dp"
                 android:text="Login with Google"
                 app:icon="@drawable/ic_google"
+                app:layout_constraintBottom_toTopOf="@id/with_facebook"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/with_email" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/with_facebook"
@@ -83,11 +86,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
+                android:layout_marginBottom="@dimen/dimension_48"
                 android:text="Login with Facebook"
                 app:icon="@drawable/ic_facebook"
+                app:layout_constraintBottom_toTopOf="@id/register"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/with_google" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/register"
@@ -96,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimension_16"
                 android:layout_marginEnd="@dimen/dimension_16"
-                android:layout_marginBottom="@dimen/dimension_24"
+                android:layout_marginBottom="@dimen/dimension_32"
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
