@@ -65,26 +65,24 @@ class SocialLoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.userLiveData.observe(viewLifecycleOwner) { user ->
-            user?.let {
-                // already signed in
-            }
-        }
         viewModel.uiStateLiveData.observe(viewLifecycleOwner) { liveDataEvent ->
 
         }
 
-        binding.withEmail.setOnClickListener { button ->
-            val gotoLogin = SocialLoginFragmentDirections.actionSocialLoginFragmentToLoginFragment()
-            button.findNavController().navigate(gotoLogin)
-        }
-        binding.withGoogle.setOnClickListener {
-            loginWithGoogle()
-        }
-        binding.register.setOnClickListener { button ->
-            val goToRegister =
-                SocialLoginFragmentDirections.actionSocialLoginFragmentToEmailAndPasswordFragment()
-            button.findNavController().navigate(goToRegister)
+        with(binding) {
+            withEmail.setOnClickListener { button ->
+                val gotoLogin =
+                    SocialLoginFragmentDirections.actionSocialLoginFragmentToLoginFragment()
+                button.findNavController().navigate(gotoLogin)
+            }
+            withGoogle.setOnClickListener {
+                loginWithGoogle()
+            }
+            register.setOnClickListener { button ->
+                val goToRegister =
+                    SocialLoginFragmentDirections.actionSocialLoginFragmentToEmailAndPasswordFragment()
+                button.findNavController().navigate(goToRegister)
+            }
         }
 
         decorateTexts()
