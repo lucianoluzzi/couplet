@@ -1,14 +1,20 @@
 package com.couplesdating.couplet.ui.login.emailLogin
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.SpannableString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentLoginBinding
+import com.couplesdating.couplet.ui.extensions.setColor
+import com.couplesdating.couplet.ui.extensions.setFont
+import com.couplesdating.couplet.ui.extensions.setUnderline
 import com.couplesdating.couplet.ui.extensions.textValue
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -45,6 +51,8 @@ class LoginFragment : Fragment() {
                 LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment()
             findNavController().navigate(goToForgotPassword)
         }
+
+        decorateTexts()
     }
 
     private fun clearErrors() {
@@ -78,5 +86,42 @@ class LoginFragment : Fragment() {
     private fun goToSyncWithPartner() {
         val goToSyncPartner = LoginFragmentDirections.actionLoginFragmentToSyncPartnerFragment()
         findNavController().navigate(goToSyncPartner)
+    }
+
+    private fun decorateTexts() {
+        decorateTitle()
+        decorateForgotPassword()
+    }
+
+    private fun decorateTitle() {
+        val titleText = binding.title.textValue()
+        val spannable = SpannableString(titleText)
+
+        val color = requireContext().getColor(R.color.red)
+        val medium = Typeface.create(
+            ResourcesCompat.getFont(requireContext(), R.font.medium),
+            Typeface.NORMAL
+        )
+        spannable.setColor(
+            color = color,
+            wordToDecorate = "e-mail",
+            titleText
+        )
+        spannable.setFont(
+            typeface = medium,
+            wordToDecorate = "e-mail",
+            wholeText = titleText
+        )
+        binding.title.text = spannable
+    }
+
+    private fun decorateForgotPassword() {
+        val forgotPasswordText = binding.forgotPassword.textValue()
+        val spannable = SpannableString(forgotPasswordText)
+        spannable.setUnderline(
+            wordToDecorate = forgotPasswordText,
+            wholeText = forgotPasswordText
+        )
+        binding.forgotPassword.text = spannable
     }
 }
