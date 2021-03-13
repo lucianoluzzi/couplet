@@ -152,6 +152,16 @@
         <item name="hintEnabled">false</item>
     </style>
 
+    <style name="TextInputLayout.Outlined.Dropdown" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="android:height">60dp</item>
+        <item name="errorIconDrawable">@drawable/ic_error</item>
+        <item name="boxStrokeColor">@color/grey_blue_50</item>
+        <item name="boxStrokeErrorColor">@color/red_over</item>
+        <item name="shapeAppearance">@style/RoundCorners.8</item>
+        <item name="boxBackgroundColor">@color/text_input_background</item>
+        <item name="hintEnabled">false</item>
+    </style>
+
     <style name="TextInputEditText">
         <item name="android:textColorHint">@color/grey_blue</item>
         <item name="android:textColor">@color/musk_green</item>

@@ -1,18 +1,23 @@
 package com.couplesdating.couplet.ui.register.nameAndGender
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.text.SpannableString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentNameAndGenderBinding
+import com.couplesdating.couplet.ui.extensions.setFont
+import com.couplesdating.couplet.ui.extensions.setUnderline
 import com.couplesdating.couplet.ui.extensions.textValue
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -42,6 +47,7 @@ class NameAndGenderFragment : Fragment() {
                 )
             )
             gender.doOnTextChanged { text, _, _, _ ->
+                binding.otherGenderLabel.isVisible = text.toString() == "Other"
                 binding.otherGenderInputLayout.isVisible = text.toString() == "Other"
             }
             register.setOnClickListener {
@@ -85,11 +91,32 @@ class NameAndGenderFragment : Fragment() {
                     updateResponse.errorMessage
             }
         }
+        decorateTermsOfUsage()
     }
 
     private fun goToSyncPartner() {
         val goToSyncPartner =
             NameAndGenderFragmentDirections.actionNameAndGenderFragmentToSyncPartnerFragment()
         findNavController().navigate(goToSyncPartner)
+    }
+
+    private fun decorateTermsOfUsage() {
+        val termsOfUsageText = binding.termsOfUsage.textValue()
+
+        val spannable = SpannableString(termsOfUsageText)
+        val medium = Typeface.create(
+            ResourcesCompat.getFont(requireContext(), R.font.medium),
+            Typeface.NORMAL
+        )
+        spannable.setFont(
+            typeface = medium,
+            wordToDecorate = "terms and conditions",
+            wholeText = termsOfUsageText
+        )
+        spannable.setUnderline(
+            wordToDecorate = "terms and conditions",
+            wholeText = termsOfUsageText
+        )
+        binding.termsOfUsage.text = spannable
     }
 }

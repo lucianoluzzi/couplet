@@ -47,6 +47,7 @@ class EmailAndPasswordFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.emailScreenUIState.observe(viewLifecycleOwner) { liveDataEvent ->
+            binding.loadingContainer.isVisible = false
             when (val registerResult = liveDataEvent.getContentIfNotHandled()) {
                 EmailScreenUIState.Loading -> binding.loadingContainer.isVisible = true
                 EmailScreenUIState.ConfirmPasswordEmpty -> setError(
