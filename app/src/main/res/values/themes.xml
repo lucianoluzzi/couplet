@@ -83,9 +83,11 @@
         <item name="android:backgroundTint">@color/red</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAppearance">@style/Body.Highlight</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
         <item name="rippleColor">@color/red_over</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
     </style>
 
     <style name="Button.Highlight.Icon" parent="Widget.MaterialComponents.Button.UnelevatedButton.Icon">
@@ -97,9 +99,11 @@
         <item name="android:backgroundTint">@color/red</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textAppearance">@style/Body.Highlight</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
         <item name="rippleColor">@color/red_over</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
     </style>
 
     <style name="Button.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
@@ -109,10 +113,12 @@
         <item name="android:textAppearance">@style/Body.Highlight</item>
         <item name="android:textColor">@color/musk_green</item>
         <item name="android:height">60dp</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
         <item name="strokeColor">@color/blue_20</item>
         <item name="rippleColor">@color/outlined_button_ripple</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
     </style>
 
     <style name="Button.Outlined.Icon" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
@@ -126,10 +132,12 @@
         <item name="android:backgroundTint">@color/outlined_button_color</item>
         <item name="android:textColor">@color/musk_green</item>
         <item name="android:textAppearance">@style/Body.Highlight</item>
-        <item name="android:paddingTop">16dp</item>
-        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
         <item name="strokeColor">@color/blue_20</item>
         <item name="rippleColor">@color/outlined_button_ripple</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
     </style>
 
     <style name="TextField" />
