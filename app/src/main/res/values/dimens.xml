@@ -9,12 +9,18 @@
     <dimen name="dimension_16">16dp</dimen>
     <dimen name="dimension_20">20dp</dimen>
     <dimen name="dimension_24">24dp</dimen>
+    <dimen name="dimension_28">28dp</dimen>
     <dimen name="dimension_32">32dp</dimen>
     <dimen name="dimension_36">36dp</dimen>
     <dimen name="dimension_40">40dp</dimen>
+    <dimen name="dimension_44">44dp</dimen>
     <dimen name="dimension_48">48dp</dimen>
     <dimen name="dimension_52">52dp</dimen>
     <dimen name="dimension_56">56dp</dimen>
+    <dimen name="dimension_60">60dp</dimen>
     <dimen name="dimension_64">64dp</dimen>
+    <dimen name="dimension_68">68dp</dimen>
     <dimen name="dimension_72">72dp</dimen>
+    <dimen name="dimension_76">76dp</dimen>
+    <dimen name="dimension_80">80dp</dimen>
 </resources>
