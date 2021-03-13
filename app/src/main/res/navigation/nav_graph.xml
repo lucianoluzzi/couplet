@@ -89,6 +89,9 @@
         <action
             android:id="@+id/action_socialLoginFragment_to_emailAndPasswordFragment"
             app:destination="@id/emailAndPasswordFragment" />
+        <action
+            android:id="@+id/action_socialLoginFragment_to_syncPartnerFragment"
+            app:destination="@id/syncPartnerFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"

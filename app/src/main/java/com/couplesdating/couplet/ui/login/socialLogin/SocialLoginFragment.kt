@@ -15,10 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentSocialLoginBinding
-import com.couplesdating.couplet.ui.extensions.setColor
-import com.couplesdating.couplet.ui.extensions.setFont
-import com.couplesdating.couplet.ui.extensions.setUnderline
-import com.couplesdating.couplet.ui.extensions.textValue
+import com.couplesdating.couplet.ui.extensions.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -53,6 +50,11 @@ class SocialLoginFragment : Fragment() {
             }
     }
 
+    private fun firebaseAuthWithGoogle(idToken: String, displayName: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        viewModel.onGoogleSignIn(credential, displayName)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,7 +68,7 @@ class SocialLoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.uiStateLiveData.observe(viewLifecycleOwner) { liveDataEvent ->
-
+            handleUIState(liveDataEvent.getContentIfNotHandled())
         }
 
         with(binding) {
@@ -88,6 +90,22 @@ class SocialLoginFragment : Fragment() {
         decorateTexts()
     }
 
+    private fun handleUIState(uiState: SocialLoginUIState?) {
+        if (uiState == null) {
+            return
+        }
+
+        when (uiState) {
+            is SocialLoginUIState.Success -> { }
+            is SocialLoginUIState.AuthError -> { }
+            SocialLoginUIState.Loading -> doNothing
+        }
+    }
+
+    private fun goToSyncWithPartner() {
+
+    }
+
     private fun loginWithGoogle() {
         val googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -98,11 +116,6 @@ class SocialLoginFragment : Fragment() {
         val googleSignInClient = GoogleSignIn.getClient(requireContext(), googleSignInOptions)
         val signInIntent = googleSignInClient.signInIntent
         googleSignInResult.launch(signInIntent)
-    }
-
-    private fun firebaseAuthWithGoogle(idToken: String, displayName: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        viewModel.onGoogleSignIn(credential, displayName)
     }
 
     private fun decorateTexts() {
