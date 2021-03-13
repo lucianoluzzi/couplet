@@ -11,7 +11,7 @@
             android:id="@+id/content_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:padding="24dp"
+            android:paddingHorizontal="@dimen/dimension_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -19,11 +19,10 @@
 
             <TextView
                 android:id="@+id/title"
+                style="@style/H1Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:text="Login with e-mail"
-                android:textAppearance="?attr/textAppearanceHeadline4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,8 +31,8 @@
                 style="@style/Label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="E-mail"
                 android:layout_marginBottom="@dimen/dimension_4"
+                android:text="E-mail"
                 app:layout_constraintBottom_toTopOf="@id/email_input_layout"
                 app:layout_constraintStart_toStartOf="@id/email_input_layout" />
 
@@ -75,9 +74,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/password_input_layout"
                 style="@style/TextInputLayout.Outlined"
-                android:layout_marginTop="@dimen/dimension_4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimension_4"
                 app:endIconDrawable="@drawable/password_toggle_selector"
                 app:endIconMode="password_toggle"
                 app:endIconTint="@color/grey_blue"
@@ -112,9 +111,7 @@
                 style="@style/Button.Highlight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimension_16"
                 android:layout_marginTop="12dp"
-                android:layout_marginEnd="@dimen/dimension_16"
                 android:layout_marginBottom="@dimen/dimension_32"
                 android:text="Login"
                 app:layout_constraintBottom_toBottomOf="parent"
