@@ -1,6 +1,5 @@
 package com.couplesdating.couplet.ui.login.socialLogin
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,7 +14,7 @@ import com.google.firebase.auth.AuthCredential
 import kotlinx.coroutines.launch
 
 class SocialLoginViewModel(
-    getCurrentUserUseCase: GetCurrentUserUseCase,
+    private val getCurrentUserUseCase: GetCurrentUserUseCase,
     private val googleSignInUseCase: GoogleSignInUseCase
 ) : ViewModel() {
 
@@ -37,7 +36,16 @@ class SocialLoginViewModel(
             )
 
             when (response) {
-                is Response.Success -> setLiveDataValue(SocialLoginUIState.Success)
+                is Response.Success -> {
+                    val loggedInUser = getCurrentUserUseCase.getCurrentUser()
+                    loggedInUser?.let {
+                        setLiveDataValue(
+                            SocialLoginUIState.Success(
+                                it
+                            )
+                        )
+                    }
+                }
                 is Response.Error -> setLiveDataValue(
                     SocialLoginUIState.AuthError(
                         response.errorMessage ?: ""

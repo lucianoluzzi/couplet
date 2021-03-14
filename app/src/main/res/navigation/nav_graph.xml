@@ -1,24 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/homeFragment">
 
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.couplesdating.couplet.ui.MainFragment"
-        android:label="MainFragment" >
-        <action
-            android:id="@+id/action_mainFragment_to_socialLoginFragment"
-            app:destination="@id/socialLoginFragment"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_mainFragment_to_onboardingFragment"
-            app:popUpTo="@+id/nav_graph"
-            app:popUpToInclusive="true"
-            app:launchSingleTop="true"
-            app:destination="@id/onboardingFragment" />
-    </fragment>
     <fragment
         android:id="@+id/onboardingFragment"
         android:name="com.couplesdating.couplet.ui.onboarding.OnboardingFragment"
@@ -91,7 +75,9 @@
             app:destination="@id/emailAndPasswordFragment" />
         <action
             android:id="@+id/action_socialLoginFragment_to_syncPartnerFragment"
-            app:destination="@id/syncPartnerFragment" />
+            app:destination="@id/syncPartnerFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -128,6 +114,17 @@
         android:id="@+id/forgotPasswordFragment"
         android:name="com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordFragment"
         android:label="ForgotPasswordFragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.couplesdating.couplet.ui.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_socialLoginFragment"
+            app:destination="@id/socialLoginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_onboardingFragment"
+            app:destination="@id/onboardingFragment" />
+    </fragment>
 
 
 </navigation>

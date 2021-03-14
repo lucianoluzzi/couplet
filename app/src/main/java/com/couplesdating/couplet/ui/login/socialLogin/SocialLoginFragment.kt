@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentSocialLoginBinding
 import com.couplesdating.couplet.ui.extensions.*
@@ -96,14 +97,21 @@ class SocialLoginFragment : Fragment() {
         }
 
         when (uiState) {
-            is SocialLoginUIState.Success -> { }
-            is SocialLoginUIState.AuthError -> { }
+            is SocialLoginUIState.Success -> {
+                if (uiState.user.pairedPartner == null) {
+                    goToSyncWithPartner()
+                }
+            }
+            is SocialLoginUIState.AuthError -> {
+            }
             SocialLoginUIState.Loading -> doNothing
         }
     }
 
     private fun goToSyncWithPartner() {
-
+        val toSyncWithPartner =
+            SocialLoginFragmentDirections.actionSocialLoginFragmentToSyncPartnerFragment()
+        findNavController().navigate(toSyncWithPartner)
     }
 
     private fun loginWithGoogle() {
