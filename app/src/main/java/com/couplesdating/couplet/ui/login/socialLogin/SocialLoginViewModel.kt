@@ -6,16 +6,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.model.User
+import com.couplesdating.couplet.domain.useCase.FacebookSignInUseCase
 import com.couplesdating.couplet.domain.useCase.GetCurrentUserUseCase
 import com.couplesdating.couplet.domain.useCase.GoogleSignInUseCase
 import com.couplesdating.couplet.ui.utils.LiveDataEvent
 import com.couplesdating.couplet.ui.utils.asLiveDataEvent
+import com.facebook.AccessToken
 import com.google.firebase.auth.AuthCredential
 import kotlinx.coroutines.launch
 
 class SocialLoginViewModel(
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
-    private val googleSignInUseCase: GoogleSignInUseCase
+    private val googleSignInUseCase: GoogleSignInUseCase,
+    private val facebookSignInUseCase: FacebookSignInUseCase
 ) : ViewModel() {
 
     private val _userLiveData = MutableLiveData<User?>()
@@ -52,6 +55,34 @@ class SocialLoginViewModel(
                     )
                 )
             }
+        }
+    }
+
+    fun onFacebookSignIn(facebookAccessToken: AccessToken) {
+        viewModelScope.launch {
+            when (val response = facebookSignInUseCase.signIn(facebookAccessToken)) {
+                is Response.Error -> onResponseError(response)
+                is Response.Success -> onSuccessResponse()
+            }
+        }
+    }
+
+    private fun onResponseError(errorResponse: Response.Error) {
+        setLiveDataValue(
+            SocialLoginUIState.AuthError(
+                errorResponse.errorMessage ?: ""
+            )
+        )
+    }
+
+    private fun onSuccessResponse() {
+        val loggedInUser = getCurrentUserUseCase.getCurrentUser()
+        loggedInUser?.let {
+            setLiveDataValue(
+                SocialLoginUIState.Success(
+                    it
+                )
+            )
         }
     }
 

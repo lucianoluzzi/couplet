@@ -20,9 +20,6 @@ class UserRepositoryImpl(
             val name = it.displayName
             val email = it.email
 
-            if (name == null || email == null)
-                return null
-
             return User(
                 name = name,
                 email = email
@@ -33,8 +30,8 @@ class UserRepositoryImpl(
     }
 
     override suspend fun signIn(user: User): User? {
-        user.password?.let { userPassword ->
-            val authResult = authenticator.signIn(user.email, userPassword)
+        if (user.email != null && user.password != null) {
+            val authResult = authenticator.signIn(user.email, user.password)
             if (authResult.isSuccessful) {
                 Log.d("SignIn", "signInWithEmail:success")
 

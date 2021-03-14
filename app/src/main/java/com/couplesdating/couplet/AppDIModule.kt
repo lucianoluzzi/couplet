@@ -3,10 +3,10 @@ package com.couplesdating.couplet
 import com.couplesdating.couplet.data.UserRepository
 import com.couplesdating.couplet.data.UserRepositoryImpl
 import com.couplesdating.couplet.domain.useCase.*
+import com.couplesdating.couplet.ui.home.HomeViewModel
 import com.couplesdating.couplet.ui.login.emailLogin.LoginViewModel
 import com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordViewModel
 import com.couplesdating.couplet.ui.login.socialLogin.SocialLoginViewModel
-import com.couplesdating.couplet.ui.home.HomeViewModel
 import com.couplesdating.couplet.ui.register.emailAndPassword.EmailAndPasswordViewModel
 import com.couplesdating.couplet.ui.register.nameAndGender.NameAndGenderViewModel
 import com.google.firebase.auth.ktx.auth
@@ -29,11 +29,14 @@ val appModule = module {
 
     single<GoogleSignInUseCase> { GoogleSignInUseCaseImpl(get()) }
 
+    single<FacebookSignInUseCase> { FacebookSignInUseCaseImpl(get()) }
+
     viewModel {
         HomeViewModel(get())
     }
     viewModel {
         SocialLoginViewModel(
+            get(),
             get(),
             get()
         )

@@ -17,23 +17,31 @@ import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentSocialLoginBinding
 import com.couplesdating.couplet.ui.extensions.*
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import org.koin.android.viewmodel.ext.android.viewModel
 
+
 class SocialLoginFragment : Fragment() {
     private val viewModel: SocialLoginViewModel by viewModel()
     private lateinit var binding: FragmentSocialLoginBinding
 
     private lateinit var googleSignInResult: ActivityResultLauncher<Intent>
+    private val callbackManager by lazy {
+        CallbackManager.Factory.create()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         googleSignInResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
-
                 val task = GoogleSignIn.getSignedInAccountFromIntent(activityResult.data)
                 try {
                     val account = task.getResult(ApiException::class.java)
@@ -49,6 +57,7 @@ class SocialLoginFragment : Fragment() {
                     Log.w("LoginFragment", "Google sign in failed", e)
                 }
             }
+
     }
 
     private fun firebaseAuthWithGoogle(idToken: String, displayName: String) {
@@ -80,6 +89,9 @@ class SocialLoginFragment : Fragment() {
             }
             withGoogle.setOnClickListener {
                 loginWithGoogle()
+            }
+            withFacebook.setOnClickListener {
+                loginWithFacebook()
             }
             register.setOnClickListener { button ->
                 val goToRegister =
@@ -126,6 +138,31 @@ class SocialLoginFragment : Fragment() {
         googleSignInResult.launch(signInIntent)
     }
 
+    private fun loginWithFacebook() {
+        val loginManager = LoginManager.getInstance()
+        loginManager.registerCallback(
+            callbackManager,
+            object : FacebookCallback<LoginResult?> {
+                override fun onSuccess(loginResult: LoginResult?) {
+                    loginResult?.let {
+                        viewModel.onFacebookSignIn(it.accessToken)
+                    }
+                }
+
+                override fun onCancel() {
+                    // App code
+                }
+
+                override fun onError(exception: FacebookException) {
+                    // App code
+                }
+            }
+        )
+        loginManager.logInWithReadPermissions(
+            this, arrayListOf("public_profile", "email")
+        )
+    }
+
     private fun decorateTexts() {
         decorateWelcome()
         decorateRegister()
@@ -162,5 +199,10 @@ class SocialLoginFragment : Fragment() {
         spannable.setUnderline(wordToDecorate, registerText)
 
         binding.register.text = spannable
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }
