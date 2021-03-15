@@ -1,5 +1,8 @@
 package com.couplesdating.couplet
 
+import com.couplesdating.couplet.analytics.Analytics
+import com.couplesdating.couplet.analytics.FirebaseAnalyticsProvider
+import com.couplesdating.couplet.analytics.FirebaseAnalyticsTracker
 import com.couplesdating.couplet.data.UserRepository
 import com.couplesdating.couplet.data.UserRepositoryImpl
 import com.couplesdating.couplet.domain.useCase.*
@@ -15,6 +18,12 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
+    single<Analytics> {
+        FirebaseAnalyticsTracker(
+            FirebaseAnalyticsProvider().getFirebaseAnalyticsTracker()
+        )
+    }
+
     single<UserRepository> { UserRepositoryImpl(Firebase.auth) }
 
     single<GetCurrentUserUseCase> { GetCurrentUserUseCaseImpl(get()) }
