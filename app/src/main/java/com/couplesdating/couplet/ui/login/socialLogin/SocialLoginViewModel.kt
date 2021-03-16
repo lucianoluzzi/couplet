@@ -4,6 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.couplesdating.couplet.analytics.Analytics
+import com.couplesdating.couplet.analytics.events.LoginWithEmailCliked
+import com.couplesdating.couplet.analytics.events.LoginWithFacebookClicked
+import com.couplesdating.couplet.analytics.events.LoginWithGoogleClicked
+import com.couplesdating.couplet.analytics.events.RegisterClicked
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.domain.useCase.FacebookSignInUseCase
@@ -18,7 +23,8 @@ import kotlinx.coroutines.launch
 class SocialLoginViewModel(
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
     private val googleSignInUseCase: GoogleSignInUseCase,
-    private val facebookSignInUseCase: FacebookSignInUseCase
+    private val facebookSignInUseCase: FacebookSignInUseCase,
+    private val analytics: Analytics
 ) : ViewModel() {
 
     private val _userLiveData = MutableLiveData<User?>()
@@ -84,6 +90,22 @@ class SocialLoginViewModel(
                 )
             )
         }
+    }
+
+    fun onLoginWithEmailClick() {
+        analytics.trackEvent(LoginWithEmailCliked)
+    }
+
+    fun onLoginWithGoogleClick() {
+        analytics.trackEvent(LoginWithGoogleClicked)
+    }
+
+    fun onLoginWithFacebookClicked() {
+        analytics.trackEvent(LoginWithFacebookClicked)
+    }
+
+    fun onRegisterClicked() {
+        analytics.trackEvent(RegisterClicked)
     }
 
     private fun setLiveDataValue(uiState: SocialLoginUIState) {

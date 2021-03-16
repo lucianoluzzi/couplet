@@ -1,6 +1,7 @@
 package com.couplesdating.couplet.analytics
 
 import android.os.Bundle
+import com.couplesdating.couplet.analytics.events.AnalyticsEvent
 import com.google.firebase.analytics.FirebaseAnalytics
 
 class FirebaseAnalyticsTracker(
@@ -13,6 +14,13 @@ class FirebaseAnalyticsTracker(
             FirebaseAnalytics.Param.SCREEN_CLASS to screenName
         )
         trackEvent(FirebaseAnalytics.Event.SCREEN_VIEW, screenMap)
+    }
+
+    override fun trackEvent(event: AnalyticsEvent) {
+        trackEvent(
+            key = event.key,
+            values = event.parameters
+        )
     }
 
     override fun trackEvent(key: String, values: Map<String, String?>?) {

@@ -83,17 +83,21 @@ class SocialLoginFragment : Fragment() {
 
         with(binding) {
             withEmail.setOnClickListener { button ->
+                viewModel.onLoginWithEmailClick()
                 val gotoLogin =
                     SocialLoginFragmentDirections.actionSocialLoginFragmentToLoginFragment()
                 button.findNavController().navigate(gotoLogin)
             }
             withGoogle.setOnClickListener {
+                viewModel.onLoginWithGoogleClick()
                 loginWithGoogle()
             }
             withFacebook.setOnClickListener {
+                viewModel.onLoginWithFacebookClicked()
                 loginWithFacebook()
             }
             register.setOnClickListener { button ->
+                viewModel.onRegisterClicked()
                 val goToRegister =
                     SocialLoginFragmentDirections.actionSocialLoginFragmentToEmailAndPasswordFragment()
                 button.findNavController().navigate(goToRegister)

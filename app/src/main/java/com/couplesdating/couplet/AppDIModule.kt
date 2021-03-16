@@ -6,6 +6,7 @@ import com.couplesdating.couplet.analytics.FirebaseAnalyticsTracker
 import com.couplesdating.couplet.data.UserRepository
 import com.couplesdating.couplet.data.UserRepositoryImpl
 import com.couplesdating.couplet.domain.useCase.*
+import com.couplesdating.couplet.ui.MainViewModel
 import com.couplesdating.couplet.ui.home.HomeViewModel
 import com.couplesdating.couplet.ui.login.emailLogin.LoginViewModel
 import com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordViewModel
@@ -40,6 +41,9 @@ val appModule = module {
 
     single<FacebookSignInUseCase> { FacebookSignInUseCaseImpl(get()) }
 
+    viewModel {
+        MainViewModel(get())
+    }
     viewModel {
         HomeViewModel(get())
     }

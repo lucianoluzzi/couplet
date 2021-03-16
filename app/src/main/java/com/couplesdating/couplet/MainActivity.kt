@@ -8,8 +8,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.navigateUp
+import com.couplesdating.couplet.ui.MainViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
+    private val viewModel by viewModel<MainViewModel>()
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +30,9 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(this, navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            val shouldShowBackNavigation = shouldShowActionBar(destination)
+            viewModel.trackScreenShown(destination.label.toString())
 
+            val shouldShowBackNavigation = shouldShowActionBar(destination)
             if (shouldShowBackNavigation) {
                 supportActionBar?.show()
             } else {
