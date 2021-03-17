@@ -39,6 +39,7 @@ class LoginFragment : Fragment() {
             handleUIState(it)
         }
 
+        setTrackingForInputSelection()
         binding.login.setOnClickListener {
             clearErrors()
             viewModel.onLoginClicked(
@@ -47,12 +48,26 @@ class LoginFragment : Fragment() {
             )
         }
         binding.forgotPassword.setOnClickListener {
+            viewModel.onForgotPasswordClicked()
             val goToForgotPassword =
                 LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment()
             findNavController().navigate(goToForgotPassword)
         }
 
         decorateTexts()
+    }
+
+    private fun setTrackingForInputSelection() {
+        binding.email.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                viewModel.onEmailInputClicked()
+            }
+        }
+        binding.password.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                viewModel.onPasswordInputClicked()
+            }
+        }
     }
 
     private fun clearErrors() {

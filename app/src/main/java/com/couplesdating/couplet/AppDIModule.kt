@@ -51,11 +51,15 @@ val appModule = module {
         SocialLoginViewModel(
             get(),
             get(),
+            get(),
             get()
         )
     }
     viewModel {
-        LoginViewModel(get())
+        LoginViewModel(
+            get(),
+            get()
+        )
     }
     viewModel {
         EmailAndPasswordViewModel(get())
