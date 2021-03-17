@@ -13,6 +13,7 @@ import com.couplesdating.couplet.databinding.FragmentForgotPasswordBinding
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
 import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -47,10 +48,21 @@ class ForgotPasswordFragment : Fragment() {
             }
         }
         decorateTitle()
+        setEmailInputAnalyticsTrack()
     }
 
     private fun showConfirmation() {
-        Snackbar.make(binding.root, R.string.password_reset, LENGTH_LONG).show()
+        Snackbar
+            .make(binding.root, R.string.password_reset, LENGTH_LONG)
+            .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                    super.onDismissed(transientBottomBar, event)
+                    if (event == Snackbar.Callback.DISMISS_EVENT_SWIPE) {
+                        viewModel.onSnackbarDismissed()
+                    }
+                }
+            })
+            .show()
     }
 
     private fun decorateTitle() {
@@ -73,5 +85,13 @@ class ForgotPasswordFragment : Fragment() {
             wholeText = titleText
         )
         binding.title.text = spannable
+    }
+
+    private fun setEmailInputAnalyticsTrack() {
+        binding.email.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                viewModel.onEmailInputClicked()
+            }
+        }
     }
 }

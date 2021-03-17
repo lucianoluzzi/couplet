@@ -18,15 +18,15 @@ class LoginViewModel(
     val uiStateLiveData: LiveData<LoginUIState> = _uiStateLiveData
 
     fun onLoginClicked(email: String?, password: String?) {
-        analytics.trackEvent(LoginClicked)
+        analytics.trackEvent(LoginEvents.LoginClicked)
         _uiStateLiveData.value = LoginUIState.Loading
         when {
             email.isNullOrBlank() -> {
-                analytics.trackEvent(EmailEmptyState)
+                analytics.trackEvent(LoginEvents.EmailEmptyState)
                 _uiStateLiveData.value = LoginUIState.EmailEmpty
             }
             password.isNullOrBlank() -> {
-                analytics.trackEvent(PasswordEmptyState)
+                analytics.trackEvent(LoginEvents.PasswordEmptyState)
                 _uiStateLiveData.value = LoginUIState.PasswordEmpty
             }
             else -> doSignIn(email, password)
@@ -37,24 +37,24 @@ class LoginViewModel(
         viewModelScope.launch {
             val signedInUser = signInUseCase.signIn(email, password)
             signedInUser?.let {
-                analytics.trackEvent(SuccessState)
+                analytics.trackEvent(LoginEvents.SuccessState)
                 _uiStateLiveData.value = LoginUIState.Success
             } ?: run {
-                analytics.trackEvent(AuthenticationErrorState)
+                analytics.trackEvent(LoginEvents.AuthenticationErrorState)
                 _uiStateLiveData.value = LoginUIState.AuthError
             }
         }
     }
 
     fun onForgotPasswordClicked() {
-        analytics.trackEvent(ForgotPasswordClicked)
+        analytics.trackEvent(LoginEvents.ForgotPasswordClicked)
     }
 
     fun onEmailInputClicked() {
-        analytics.trackEvent(EmailClicked)
+        analytics.trackEvent(LoginEvents.EmailClicked)
     }
 
     fun onPasswordInputClicked() {
-        analytics.trackEvent(PasswordClicked)
+        analytics.trackEvent(LoginEvents.PasswordClicked)
     }
 }

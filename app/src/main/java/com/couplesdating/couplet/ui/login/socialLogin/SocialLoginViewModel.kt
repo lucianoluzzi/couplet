@@ -5,10 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.analytics.Analytics
-import com.couplesdating.couplet.analytics.events.LoginWithEmailCliked
-import com.couplesdating.couplet.analytics.events.LoginWithFacebookClicked
-import com.couplesdating.couplet.analytics.events.LoginWithGoogleClicked
-import com.couplesdating.couplet.analytics.events.RegisterClicked
+import com.couplesdating.couplet.analytics.events.*
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.domain.useCase.FacebookSignInUseCase
@@ -93,19 +90,19 @@ class SocialLoginViewModel(
     }
 
     fun onLoginWithEmailClick() {
-        analytics.trackEvent(LoginWithEmailCliked)
+        analytics.trackEvent(SocialLoginEvents.LoginWithEmailCliked)
     }
 
     fun onLoginWithGoogleClick() {
-        analytics.trackEvent(LoginWithGoogleClicked)
+        analytics.trackEvent(SocialLoginEvents.LoginWithGoogleClicked)
     }
 
     fun onLoginWithFacebookClicked() {
-        analytics.trackEvent(LoginWithFacebookClicked)
+        analytics.trackEvent(SocialLoginEvents.LoginWithFacebookClicked)
     }
 
     fun onRegisterClicked() {
-        analytics.trackEvent(RegisterClicked)
+        analytics.trackEvent(SocialLoginEvents.RegisterClicked)
     }
 
     private fun setLiveDataValue(uiState: SocialLoginUIState) {
