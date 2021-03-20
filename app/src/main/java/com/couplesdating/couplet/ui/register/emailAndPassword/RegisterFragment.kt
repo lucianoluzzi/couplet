@@ -2,6 +2,7 @@ package com.couplesdating.couplet.ui.register.emailAndPassword
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -9,7 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentEmailPasswordBinding
+import com.couplesdating.couplet.ui.extensions.getPasswordToggleButton
 import com.couplesdating.couplet.ui.extensions.textValue
+import com.google.android.material.internal.CheckableImageButton
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -46,6 +49,7 @@ class RegisterFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        setAnalyticsTrackingForInputs()
         viewModel.emailScreenUIState.observe(viewLifecycleOwner) { liveDataEvent ->
             binding.loadingContainer.isVisible = false
             when (val registerResult = liveDataEvent.getContentIfNotHandled()) {
@@ -75,13 +79,39 @@ class RegisterFragment : Fragment() {
         }
     }
 
+    private fun setAnalyticsTrackingForInputs() {
+        with(binding) {
+            email.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    viewModel.onEmailInputClicked()
+                }
+            }
+            password.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    viewModel.onPasswordInputClicked()
+                }
+            }
+            confirmPassword.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    viewModel.onConfirmPasswordInputclicked()
+                }
+            }
+
+            val passwordToggleButton = emailInputLayout.getPasswordToggleButton()
+            passwordToggleButton?.setOnTouchListener { button, motionEvent ->
+                // TODO
+                true
+            }
+        }
+    }
+
     private fun setError(textInput: TextInputLayout, errorMessage: String) {
         textInput.error = errorMessage
     }
 
     private fun goToNameAndGender() {
         val navigationAction =
-            EmailAndPasswordFragmentDirections.actionEmailAndPasswordFragmentToNameAndGenderFragment()
+            RegisterFragmentDirections.actionEmailAndPasswordFragmentToNameAndGenderFragment()
         findNavController().navigate(navigationAction)
     }
 }

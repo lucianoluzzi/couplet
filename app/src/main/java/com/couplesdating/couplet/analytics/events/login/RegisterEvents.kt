@@ -18,4 +18,22 @@ sealed class RegisterEvents {
     )
 
     object RegisterSuccess : AnalyticsEvent("${SCREEN_NAME}_register_success")
+    object EmailInputClicked : AnalyticsEvent("${SCREEN_NAME}_email_input_clicked")
+    object PasswordInputClicked : AnalyticsEvent("${SCREEN_NAME}_password_input_clicked")
+    object ConfirmPasswordInputClicked :
+        AnalyticsEvent("${SCREEN_NAME}_confirm_password_input_clicked")
+
+    data class PasswordToggleClicked(val isPasswordVisible: Boolean) : AnalyticsEvent(
+        "${SCREEN_NAME}_password_toggle_clicked",
+        mapOf(
+            "password_toggle_clicked" to isPasswordVisible.toString()
+        )
+    )
+
+    data class ConfirmPasswordToggleClicked(val isConfirmPasswordVisible: Boolean) : AnalyticsEvent(
+        "${SCREEN_NAME}_password_toggle_clicked",
+        mapOf(
+            "confirm_password_toggle_clicked" to isConfirmPasswordVisible.toString()
+        )
+    )
 }

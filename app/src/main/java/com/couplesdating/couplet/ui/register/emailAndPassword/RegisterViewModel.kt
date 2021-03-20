@@ -65,9 +65,9 @@ class RegisterViewModel(
                 password = password
             )
             if (registerResponse is Response.Error) {
-                analytics.trackEvent(RegisterEvents.RegisterError(
-                    registerResponse.errorMessage
-                ))
+                analytics.trackEvent(
+                    RegisterEvents.RegisterError(registerResponse.errorMessage)
+                )
                 setLiveDataValue(
                     EmailScreenUIState.RegistrationError(
                         registerResponse.errorMessage ?: ""
@@ -78,5 +78,25 @@ class RegisterViewModel(
                 setLiveDataValue(EmailScreenUIState.Success)
             }
         }
+    }
+
+    fun onEmailInputClicked() {
+        analytics.trackEvent(RegisterEvents.EmailInputClicked)
+    }
+
+    fun onPasswordInputClicked() {
+        analytics.trackEvent(RegisterEvents.PasswordInputClicked)
+    }
+
+    fun onConfirmPasswordInputclicked() {
+        analytics.trackEvent(RegisterEvents.ConfirmPasswordInputClicked)
+    }
+
+    fun onPasswordToggleClicked(isPasswordVisible: Boolean) {
+        analytics.trackEvent(RegisterEvents.PasswordToggleClicked(isPasswordVisible))
+    }
+
+    fun onConfirmPasswordToggleClicked(isConfirmPasswordVisible: Boolean) {
+        analytics.trackEvent(RegisterEvents.ConfirmPasswordToggleClicked(isConfirmPasswordVisible))
     }
 }
