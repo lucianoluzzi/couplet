@@ -4,14 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.couplesdating.couplet.analytics.Analytics
+import com.couplesdating.couplet.analytics.events.login.RegisterEvents
 import com.couplesdating.couplet.data.UserRepository
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.ui.utils.LiveDataEvent
 import com.couplesdating.couplet.ui.utils.asLiveDataEvent
 import kotlinx.coroutines.launch
 
-class EmailAndPasswordViewModel(
-    private val userRepository: UserRepository
+class RegisterViewModel(
+    private val userRepository: UserRepository,
+    private val analytics: Analytics
 ) : ViewModel() {
 
     private val _emailScreenUIState = MutableLiveData<LiveDataEvent<EmailScreenUIState>>()
@@ -22,12 +25,25 @@ class EmailAndPasswordViewModel(
         password: String?,
         confirmPassword: String?
     ) {
+        analytics.trackEvent(RegisterEvents.RegisterClicked)
         setLiveDataValue(EmailScreenUIState.Loading)
         when {
-            email.isNullOrBlank() -> setLiveDataValue(EmailScreenUIState.EmailEmpty)
-            password.isNullOrBlank() -> setLiveDataValue(EmailScreenUIState.PasswordEmpty)
-            confirmPassword.isNullOrBlank() -> setLiveDataValue(EmailScreenUIState.ConfirmPasswordEmpty)
-            password != confirmPassword -> setLiveDataValue(EmailScreenUIState.PasswordsDoesntMatch)
+            email.isNullOrBlank() -> {
+                analytics.trackEvent(RegisterEvents.EmailEmpty)
+                setLiveDataValue(EmailScreenUIState.EmailEmpty)
+            }
+            password.isNullOrBlank() -> {
+                analytics.trackEvent(RegisterEvents.PasswordEmpty)
+                setLiveDataValue(EmailScreenUIState.PasswordEmpty)
+            }
+            confirmPassword.isNullOrBlank() -> {
+                analytics.trackEvent(RegisterEvents.ConfirmPasswordEmpty)
+                setLiveDataValue(EmailScreenUIState.ConfirmPasswordEmpty)
+            }
+            password != confirmPassword -> {
+                analytics.trackEvent(RegisterEvents.PasswordsDontMatch)
+                setLiveDataValue(EmailScreenUIState.PasswordsDoesntMatch)
+            }
             else -> register(
                 email = email,
                 password = password
@@ -49,12 +65,16 @@ class EmailAndPasswordViewModel(
                 password = password
             )
             if (registerResponse is Response.Error) {
+                analytics.trackEvent(RegisterEvents.RegisterError(
+                    registerResponse.errorMessage
+                ))
                 setLiveDataValue(
                     EmailScreenUIState.RegistrationError(
                         registerResponse.errorMessage ?: ""
                     )
                 )
             } else {
+                analytics.trackEvent(RegisterEvents.RegisterSuccess)
                 setLiveDataValue(EmailScreenUIState.Success)
             }
         }

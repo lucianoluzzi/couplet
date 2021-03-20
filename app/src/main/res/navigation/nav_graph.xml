@@ -92,7 +92,7 @@
     </fragment>
     <fragment
         android:id="@+id/emailAndPasswordFragment"
-        android:name="com.couplesdating.couplet.ui.register.emailAndPassword.EmailAndPasswordFragment"
+        android:name="com.couplesdating.couplet.ui.register.emailAndPassword.RegisterFragment"
         android:label="EmailAndPasswordFragment" >
         <action
             android:id="@+id/action_emailAndPasswordFragment_to_nameAndGenderFragment"

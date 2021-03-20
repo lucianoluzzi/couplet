@@ -13,9 +13,9 @@ import com.couplesdating.couplet.ui.extensions.textValue
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class EmailAndPasswordFragment : Fragment() {
+class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentEmailPasswordBinding
-    private val viewModel: EmailAndPasswordViewModel by viewModel()
+    private val viewModel: RegisterViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
