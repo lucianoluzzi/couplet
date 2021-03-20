@@ -1,6 +1,6 @@
 package com.couplesdating.couplet.analytics.events
 
-private const val SCREEN_NAME = "forgot_password_"
+private const val SCREEN_NAME = "forgot_password"
 
 sealed class ForgotPasswordEvents {
     object SendLinkClicked : AnalyticsEvent("${SCREEN_NAME}_send_link_clicked")

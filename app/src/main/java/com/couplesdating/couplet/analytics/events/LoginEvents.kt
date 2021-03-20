@@ -1,6 +1,6 @@
 package com.couplesdating.couplet.analytics.events
 
-private const val SCREEN_NAME = "login_"
+private const val SCREEN_NAME = "login"
 
 sealed class LoginEvents {
     object LoginClicked : AnalyticsEvent("${SCREEN_NAME}_login_clicked")

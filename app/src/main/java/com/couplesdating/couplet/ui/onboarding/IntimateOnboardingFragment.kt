@@ -15,9 +15,11 @@ import com.couplesdating.couplet.databinding.FragmentIntimateOnboardingBinding
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class IntimateOnboardingFragment : Fragment() {
     private lateinit var binding: FragmentIntimateOnboardingBinding
+    private val viewModel by viewModel<IntimateOnboardingViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +34,7 @@ class IntimateOnboardingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         decorateTitle()
         binding.continueButton.setOnClickListener {
+            viewModel.onHellYeahClicked()
             setOnboardingShown()
             val toSocialLogin =
                 IntimateOnboardingFragmentDirections.actionIntimateOnboardingFragmentToSocialLoginFragment()
