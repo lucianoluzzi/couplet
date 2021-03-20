@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "207402731317",
+    "project_id": "couplet---dev",
+    "storage_bucket": "couplet---dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207402731317:android:3e6b3adc43a9399c5f2e7c",
+        "android_client_info": {
+          "package_name": "com.couplesdating.couplet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "207402731317-g9rvttmce1r2cmh40fvsbv0hs51778l9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.couplesdating.couplet",
+            "certificate_hash": "4462053f2e5252b5fbb9fc1226e0af98bc7aa9a6"
+          }
+        },
+        {
+          "client_id": "207402731317-4j1a43d07cbtf2a1mo87dorlln30cvg2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAubgfPzduTax9bn5NthfUqRyBE-xdEeLQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "207402731317-4j1a43d07cbtf2a1mo87dorlln30cvg2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
