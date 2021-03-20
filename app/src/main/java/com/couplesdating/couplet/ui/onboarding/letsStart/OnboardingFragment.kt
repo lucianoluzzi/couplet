@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.ui.onboarding
+package com.couplesdating.couplet.ui.onboarding.letsStart
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.databinding.FragmentOnboardingBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class OnboardingFragment : Fragment() {
     private lateinit var binding: FragmentOnboardingBinding
+    private val viewModel by viewModel<LetsStartViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,6 +25,7 @@ class OnboardingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.continueButton.setOnClickListener {
+            viewModel.onLetsStartClicked()
             val toLearnFromFromProfessionals =
                 OnboardingFragmentDirections.actionOnboardingFragmentToLearnFromProfessionalsFragment()
             findNavController().navigate(toLearnFromFromProfessionals)

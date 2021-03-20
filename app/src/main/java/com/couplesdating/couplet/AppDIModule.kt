@@ -11,7 +11,11 @@ import com.couplesdating.couplet.ui.home.HomeViewModel
 import com.couplesdating.couplet.ui.login.emailLogin.LoginViewModel
 import com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordViewModel
 import com.couplesdating.couplet.ui.login.socialLogin.SocialLoginViewModel
-import com.couplesdating.couplet.ui.onboarding.IntimateOnboardingViewModel
+import com.couplesdating.couplet.ui.onboarding.intimate.IntimateOnboardingViewModel
+import com.couplesdating.couplet.ui.onboarding.learnFromProfessionals.LearnFromProfessionalsViewModel
+import com.couplesdating.couplet.ui.onboarding.letsStart.LetsStartViewModel
+import com.couplesdating.couplet.ui.onboarding.mildToWild.MildToWildViewModel
+import com.couplesdating.couplet.ui.onboarding.privacy.PrivacyViewModel
 import com.couplesdating.couplet.ui.register.emailAndPassword.EmailAndPasswordViewModel
 import com.couplesdating.couplet.ui.register.nameAndGender.NameAndGenderViewModel
 import com.google.firebase.auth.ktx.auth
@@ -46,7 +50,19 @@ val appModule = module {
         MainViewModel(get())
     }
     viewModel {
+        PrivacyViewModel(get())
+    }
+    viewModel {
+        LetsStartViewModel(get())
+    }
+    viewModel {
         IntimateOnboardingViewModel(get())
+    }
+    viewModel {
+        LearnFromProfessionalsViewModel(get())
+    }
+    viewModel {
+        MildToWildViewModel(get())
     }
     viewModel {
         HomeViewModel(get())

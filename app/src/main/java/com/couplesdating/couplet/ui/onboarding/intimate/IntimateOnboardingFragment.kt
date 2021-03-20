@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.ui.onboarding
+package com.couplesdating.couplet.ui.onboarding.intimate
 
 import android.content.Context
 import android.graphics.Typeface

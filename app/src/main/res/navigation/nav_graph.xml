@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/onboardingFragment"
-        android:name="com.couplesdating.couplet.ui.onboarding.OnboardingFragment"
+        android:name="com.couplesdating.couplet.ui.onboarding.letsStart.OnboardingFragment"
         android:label="OnboardingFirstFragment" >
         <action
             android:id="@+id/action_onboardingFragment_to_learnFromProfessionalsFragment"
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/learnFromProfessionalsFragment"
-        android:name="com.couplesdating.couplet.ui.onboarding.LearnFromProfessionalsOnboardingFragment"
+        android:name="com.couplesdating.couplet.ui.onboarding.learnFromProfessionals.LearnFromProfessionalsOnboardingFragment"
         android:label="LearnFromProfessionalsOnboardingFragment" >
         <action
             android:id="@+id/action_learnFromProfessionalsFragment_to_mildToWildOnboardingFragment"
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/mildToWildOnboardingFragment"
-        android:name="com.couplesdating.couplet.ui.onboarding.MildToWildOnboardingFragment"
+        android:name="com.couplesdating.couplet.ui.onboarding.mildToWild.MildToWildOnboardingFragment"
         android:label="MildToWildOnboardingFragment" >
         <action
             android:id="@+id/action_mildToWildOnboardingFragment_to_privacyOnboardingFragment"
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/privacyOnboardingFragment"
-        android:name="com.couplesdating.couplet.ui.onboarding.PrivacyOnboardingFragment"
+        android:name="com.couplesdating.couplet.ui.onboarding.privacy.PrivacyOnboardingFragment"
         android:label="PrivacyOnboardingFragment" >
         <action
             android:id="@+id/action_privacyOnboardingFragment_to_intimateOnboardingFragment"
@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/intimateOnboardingFragment"
-        android:name="com.couplesdating.couplet.ui.onboarding.IntimateOnboardingFragment"
+        android:name="com.couplesdating.couplet.ui.onboarding.intimate.IntimateOnboardingFragment"
         android:label="IntimateOnboardingFragment" >
         <action
             android:id="@+id/action_intimateOnboardingFragment_to_socialLoginFragment"

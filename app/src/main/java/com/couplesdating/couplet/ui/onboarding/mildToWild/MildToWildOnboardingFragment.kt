@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.ui.onboarding
+package com.couplesdating.couplet.ui.onboarding.mildToWild
 
 import android.graphics.Typeface
 import android.os.Bundle
@@ -10,20 +10,23 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
-import com.couplesdating.couplet.databinding.FragmentOnboardingPrivacyBinding
+import com.couplesdating.couplet.databinding.FragmentMildToWildBinding
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
+import org.koin.android.viewmodel.ext.android.viewModel
 
-class PrivacyOnboardingFragment : Fragment() {
-    private lateinit var binding: FragmentOnboardingPrivacyBinding
+
+class MildToWildOnboardingFragment : Fragment() {
+    private lateinit var binding: FragmentMildToWildBinding
+    private val viewModel by viewModel<MildToWildViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentOnboardingPrivacyBinding.inflate(inflater, container, false)
+        binding = FragmentMildToWildBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -31,14 +34,15 @@ class PrivacyOnboardingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         decorateTitle()
         binding.continueButton.setOnClickListener {
-            val toIntimateFragment =
-                PrivacyOnboardingFragmentDirections.actionPrivacyOnboardingFragmentToIntimateOnboardingFragment()
-            findNavController().navigate(toIntimateFragment)
+            viewModel.onContinueClicked()
+            val toPrivacyFragment =
+                MildToWildOnboardingFragmentDirections.actionMildToWildOnboardingFragmentToPrivacyOnboardingFragment()
+            findNavController().navigate(toPrivacyFragment)
         }
     }
 
     private fun decorateTitle() {
-        val title = binding.title.textValue()
+        val title = binding.wild.textValue()
         val spannable = SpannableString(title)
 
         val medium = Typeface.create(
@@ -46,8 +50,8 @@ class PrivacyOnboardingFragment : Fragment() {
             Typeface.NORMAL
         )
         val color = requireContext().getColor(R.color.red)
-        spannable.setColor(color, "privacy", title)
-        spannable.setFont(medium, "privacy", title)
-        binding.title.text = spannable
+        spannable.setColor(color, "wild", title)
+        spannable.setFont(medium, "wild", title)
+        binding.wild.text = spannable
     }
 }
