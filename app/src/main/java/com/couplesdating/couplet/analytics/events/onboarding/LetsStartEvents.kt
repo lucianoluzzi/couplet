@@ -1,4 +1,6 @@
-package com.couplesdating.couplet.analytics.events
+package com.couplesdating.couplet.analytics.events.onboarding
+
+import com.couplesdating.couplet.analytics.events.AnalyticsEvent
 
 private const val SCREEN_NAME = "lets_start"
 

@@ -1,4 +1,6 @@
-package com.couplesdating.couplet.analytics.events
+package com.couplesdating.couplet.analytics.events.login
+
+import com.couplesdating.couplet.analytics.events.AnalyticsEvent
 
 private const val SCREEN_NAME = "forgot_password"
 
