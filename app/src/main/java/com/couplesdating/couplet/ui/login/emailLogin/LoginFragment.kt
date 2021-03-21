@@ -51,6 +51,7 @@ class LoginFragment : Fragment() {
             findNavController().navigate(goToForgotPassword)
         }
         binding.register.setOnClickListener {
+            viewModel.onRegisterClicked()
             goToRegister()
         }
 

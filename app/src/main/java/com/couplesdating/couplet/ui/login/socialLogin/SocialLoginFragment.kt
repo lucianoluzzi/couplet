@@ -1,5 +1,6 @@
 package com.couplesdating.couplet.ui.login.socialLogin
 
+import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
@@ -27,7 +28,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import org.koin.android.viewmodel.ext.android.viewModel
-import android.content.Intent
 
 class SocialLoginFragment : Fragment() {
     private val viewModel: SocialLoginViewModel by viewModel()
@@ -97,6 +97,7 @@ class SocialLoginFragment : Fragment() {
                 loginWithFacebook()
             }
             termsOfUsage.setOnClickListener {
+                viewModel.onTermsOfUsageClicked()
                 goToTermsOfUsage()
             }
         }

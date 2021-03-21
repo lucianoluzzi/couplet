@@ -13,4 +13,5 @@ sealed class LoginEvents {
     object PasswordEmptyState : AnalyticsEvent("${SCREEN_NAME}_password_empy")
     object AuthenticationErrorState : AnalyticsEvent("${SCREEN_NAME}_authentication_error")
     object SuccessState : AnalyticsEvent("${SCREEN_NAME}_login_success")
+    object RegisterClicked : AnalyticsEvent("${SCREEN_NAME}_register_click")
 }

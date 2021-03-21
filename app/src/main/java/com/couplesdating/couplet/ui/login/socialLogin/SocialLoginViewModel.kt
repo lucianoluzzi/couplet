@@ -101,8 +101,8 @@ class SocialLoginViewModel(
         analytics.trackEvent(SocialLoginEvents.LoginWithFacebookClicked)
     }
 
-    fun onRegisterClicked() {
-        analytics.trackEvent(SocialLoginEvents.RegisterClicked)
+    fun onTermsOfUsageClicked() {
+        analytics.trackEvent(SocialLoginEvents.TermsOfUsageClicked)
     }
 
     private fun setLiveDataValue(uiState: SocialLoginUIState) {

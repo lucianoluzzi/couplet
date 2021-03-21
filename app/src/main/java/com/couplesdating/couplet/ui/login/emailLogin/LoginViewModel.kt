@@ -58,4 +58,8 @@ class LoginViewModel(
     fun onPasswordInputClicked() {
         analytics.trackEvent(LoginEvents.PasswordClicked)
     }
+
+    fun onRegisterClicked() {
+        analytics.trackEvent(LoginEvents.RegisterClicked)
+    }
 }
