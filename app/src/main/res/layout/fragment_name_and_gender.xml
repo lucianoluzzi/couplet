@@ -55,11 +55,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:hint="How should I call you?"
+
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:lines="1"
                     android:maxLines="1"
-                    android:nextFocusDown="@id/password" />
+                    android:nextFocusDown="@id/gender" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -88,6 +89,7 @@
                 <AutoCompleteTextView
                     android:id="@+id/gender"
                     style="@style/TextInputEditText"
+                    android:imeOptions="actionDone"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:hint="How do you identify yourself?"
@@ -122,6 +124,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/other_gender"
                     style="@style/TextInputEditText"
+                    android:imeOptions="actionDone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="How do you identify yourself?"
