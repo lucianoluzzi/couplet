@@ -2,7 +2,6 @@ package com.couplesdating.couplet.ui.register.emailAndPassword
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -10,9 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentEmailPasswordBinding
-import com.couplesdating.couplet.ui.extensions.getPasswordToggleButton
+import com.couplesdating.couplet.ui.extensions.setPasswordToggleClickListener
 import com.couplesdating.couplet.ui.extensions.textValue
-import com.google.android.material.internal.CheckableImageButton
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -97,10 +95,11 @@ class RegisterFragment : Fragment() {
                 }
             }
 
-            val passwordToggleButton = emailInputLayout.getPasswordToggleButton()
-            passwordToggleButton?.setOnTouchListener { button, motionEvent ->
-                // TODO
-                true
+            passwordInputLayout.setPasswordToggleClickListener { isChecked ->
+                viewModel.onPasswordToggleClicked(isChecked)
+            }
+            confirmPasswordInputLayout.setPasswordToggleClickListener { isChecked ->
+                viewModel.onConfirmPasswordToggleClicked(isChecked)
             }
         }
     }
