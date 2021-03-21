@@ -50,6 +50,9 @@ class LoginFragment : Fragment() {
                 LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment()
             findNavController().navigate(goToForgotPassword)
         }
+        binding.register.setOnClickListener {
+
+        }
 
         decorateTexts()
     }
@@ -99,6 +102,7 @@ class LoginFragment : Fragment() {
     private fun decorateTexts() {
         decorateTitle()
         decorateForgotPassword()
+        decorateRegister()
     }
 
     private fun decorateTitle() {
@@ -131,5 +135,22 @@ class LoginFragment : Fragment() {
             wholeText = forgotPasswordText
         )
         binding.forgotPassword.text = spannable
+    }
+
+    private fun decorateRegister() {
+        val registerText = binding.register.textValue()
+
+        val spannable = SpannableString(registerText)
+        val color = requireContext().getColor(R.color.blue)
+        val medium = Typeface.create(
+            ResourcesCompat.getFont(requireContext(), R.font.medium),
+            Typeface.NORMAL
+        )
+        val wordToDecorate = "SIGN UP"
+        spannable.setColor(color, wordToDecorate, registerText)
+        spannable.setFont(medium, wordToDecorate, registerText)
+        spannable.setUnderline(wordToDecorate, registerText)
+
+        binding.register.text = spannable
     }
 }

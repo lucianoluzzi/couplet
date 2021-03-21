@@ -88,13 +88,13 @@
                 android:layout_marginBottom="@dimen/dimension_48"
                 android:text="Login with Facebook"
                 app:icon="@drawable/ic_facebook"
-                app:layout_constraintBottom_toTopOf="@id/register"
+                app:layout_constraintBottom_toTopOf="@id/terms_of_usage"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/register"
-                style="@style/Body.Disabled"
+                android:id="@+id/terms_of_usage"
+                style="@style/Label"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimension_16"
@@ -103,11 +103,12 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:gravity="center"
-                android:text="@string/new_user_register"
+                android:text="By continuing, you agree to our Privacy Policy."
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

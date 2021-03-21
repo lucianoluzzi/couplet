@@ -76,10 +76,6 @@ class NameAndGenderViewModel(
         }
     }
 
-    fun onTermsOfUsageClick() {
-        analytics.trackEvent(NameAndGenderEvents.TermsOfUsageClick)
-    }
-
     fun onNameClick() {
         analytics.trackEvent(NameAndGenderEvents.NameInputClick)
     }

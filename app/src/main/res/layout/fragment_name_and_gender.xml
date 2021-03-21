@@ -138,26 +138,10 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="@dimen/dimension_40"
                 android:text="Register"
-                app:layout_constraintBottom_toTopOf="@id/terms_of_usage"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/terms_of_usage"
-                style="@style/Label"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimension_16"
-                android:layout_marginEnd="@dimen/dimension_16"
-                android:layout_marginBottom="@dimen/dimension_40"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:text="By continuing, you agree to our terms and conditions"
-                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

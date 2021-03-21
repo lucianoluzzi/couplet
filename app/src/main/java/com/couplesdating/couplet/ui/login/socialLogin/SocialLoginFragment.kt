@@ -1,7 +1,7 @@
 package com.couplesdating.couplet.ui.login.socialLogin
 
-import android.content.Intent
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableString
 import android.util.Log
@@ -27,7 +27,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import org.koin.android.viewmodel.ext.android.viewModel
-
+import android.content.Intent
 
 class SocialLoginFragment : Fragment() {
     private val viewModel: SocialLoginViewModel by viewModel()
@@ -96,11 +96,8 @@ class SocialLoginFragment : Fragment() {
                 viewModel.onLoginWithFacebookClicked()
                 loginWithFacebook()
             }
-            register.setOnClickListener { button ->
-                viewModel.onRegisterClicked()
-                val goToRegister =
-                    SocialLoginFragmentDirections.actionSocialLoginFragmentToEmailAndPasswordFragment()
-                button.findNavController().navigate(goToRegister)
+            termsOfUsage.setOnClickListener {
+                goToTermsOfUsage()
             }
         }
 
@@ -167,7 +164,7 @@ class SocialLoginFragment : Fragment() {
 
     private fun decorateTexts() {
         decorateWelcome()
-        decorateRegister()
+        decorateTermsOfUsage()
     }
 
     private fun decorateWelcome() {
@@ -186,21 +183,30 @@ class SocialLoginFragment : Fragment() {
         binding.back.text = spannable
     }
 
-    private fun decorateRegister() {
-        val registerText = binding.register.textValue()
+    private fun decorateTermsOfUsage() {
+        val termsOfUsageText = binding.termsOfUsage.textValue()
 
-        val spannable = SpannableString(registerText)
-        val color = requireContext().getColor(R.color.blue)
+        val spannable = SpannableString(termsOfUsageText)
         val medium = Typeface.create(
             ResourcesCompat.getFont(requireContext(), R.font.medium),
             Typeface.NORMAL
         )
-        val wordToDecorate = "SIGN UP"
-        spannable.setColor(color, wordToDecorate, registerText)
-        spannable.setFont(medium, wordToDecorate, registerText)
-        spannable.setUnderline(wordToDecorate, registerText)
+        spannable.setFont(
+            typeface = medium,
+            wordToDecorate = "Privacy Policy",
+            wholeText = termsOfUsageText
+        )
+        spannable.setUnderline(
+            wordToDecorate = "Privacy Policy",
+            wholeText = termsOfUsageText
+        )
+        binding.termsOfUsage.text = spannable
+    }
 
-        binding.register.text = spannable
+    private fun goToTermsOfUsage() {
+        val browserIntent =
+            Intent(Intent.ACTION_VIEW, Uri.parse("https://couplet.flycricket.io/privacy.html"))
+        startActivity(browserIntent)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

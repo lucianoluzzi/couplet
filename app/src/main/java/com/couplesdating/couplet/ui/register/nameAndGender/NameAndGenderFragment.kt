@@ -60,10 +60,6 @@ class NameAndGenderFragment : Fragment() {
                     otherGender = otherGender.textValue()
                 )
             }
-            termsOfUsage.setOnClickListener {
-                viewModel.onTermsOfUsageClick()
-                goToTermsOfUsage()
-            }
         }
     }
 
@@ -71,11 +67,6 @@ class NameAndGenderFragment : Fragment() {
         binding.nameInputLayout.error = null
         binding.genderInputLayout.error = null
         binding.otherGenderInputLayout.error = null
-    }
-
-    private fun goToTermsOfUsage() {
-        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"))
-        startActivity(browserIntent)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -94,7 +85,6 @@ class NameAndGenderFragment : Fragment() {
                     updateResponse.errorMessage
             }
         }
-        decorateTermsOfUsage()
         setAnalyticsTrackingForInputs()
     }
 
@@ -102,26 +92,6 @@ class NameAndGenderFragment : Fragment() {
         val goToSyncPartner =
             NameAndGenderFragmentDirections.actionNameAndGenderFragmentToSyncPartnerFragment()
         findNavController().navigate(goToSyncPartner)
-    }
-
-    private fun decorateTermsOfUsage() {
-        val termsOfUsageText = binding.termsOfUsage.textValue()
-
-        val spannable = SpannableString(termsOfUsageText)
-        val medium = Typeface.create(
-            ResourcesCompat.getFont(requireContext(), R.font.medium),
-            Typeface.NORMAL
-        )
-        spannable.setFont(
-            typeface = medium,
-            wordToDecorate = "terms and conditions",
-            wholeText = termsOfUsageText
-        )
-        spannable.setUnderline(
-            wordToDecorate = "terms and conditions",
-            wholeText = termsOfUsageText
-        )
-        binding.termsOfUsage.text = spannable
     }
 
     private fun setAnalyticsTrackingForInputs() {
