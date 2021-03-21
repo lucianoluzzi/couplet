@@ -71,9 +71,6 @@
             android:id="@+id/action_socialLoginFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_socialLoginFragment_to_emailAndPasswordFragment"
-            app:destination="@id/emailAndPasswordFragment" />
-        <action
             android:id="@+id/action_socialLoginFragment_to_syncPartnerFragment"
             app:destination="@id/syncPartnerFragment"
             app:popUpTo="@id/nav_graph"
@@ -89,6 +86,9 @@
         <action
             android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_emailAndPasswordFragment"
+            app:destination="@id/emailAndPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/emailAndPasswordFragment"

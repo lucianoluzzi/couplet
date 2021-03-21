@@ -51,7 +51,7 @@ class LoginFragment : Fragment() {
             findNavController().navigate(goToForgotPassword)
         }
         binding.register.setOnClickListener {
-
+            goToRegister()
         }
 
         decorateTexts()
@@ -97,6 +97,12 @@ class LoginFragment : Fragment() {
     private fun goToSyncWithPartner() {
         val goToSyncPartner = LoginFragmentDirections.actionLoginFragmentToSyncPartnerFragment()
         findNavController().navigate(goToSyncPartner)
+    }
+
+    private fun goToRegister() {
+        val toRegister =
+            LoginFragmentDirections.actionLoginFragmentToEmailAndPasswordFragment()
+        findNavController().navigate(toRegister)
     }
 
     private fun decorateTexts() {
