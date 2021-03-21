@@ -88,7 +88,10 @@ val appModule = module {
         )
     }
     viewModel {
-        NameAndGenderViewModel(get())
+        NameAndGenderViewModel(
+            get(),
+            get()
+        )
     }
     viewModel {
         ForgotPasswordViewModel(

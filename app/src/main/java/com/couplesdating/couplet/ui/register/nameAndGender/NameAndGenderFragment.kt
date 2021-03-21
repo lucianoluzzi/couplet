@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableString
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentNameAndGenderBinding
+import com.couplesdating.couplet.ui.extensions.onGetFocus
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.setUnderline
 import com.couplesdating.couplet.ui.extensions.textValue
@@ -59,6 +61,7 @@ class NameAndGenderFragment : Fragment() {
                 )
             }
             termsOfUsage.setOnClickListener {
+                viewModel.onTermsOfUsageClick()
                 goToTermsOfUsage()
             }
         }
@@ -92,6 +95,7 @@ class NameAndGenderFragment : Fragment() {
             }
         }
         decorateTermsOfUsage()
+        setAnalyticsTrackingForInputs()
     }
 
     private fun goToSyncPartner() {
@@ -118,5 +122,20 @@ class NameAndGenderFragment : Fragment() {
             wholeText = termsOfUsageText
         )
         binding.termsOfUsage.text = spannable
+    }
+
+    private fun setAnalyticsTrackingForInputs() {
+        with(binding) {
+            name.onGetFocus {
+                viewModel.onNameClick()
+            }
+            gender.onGetFocus {
+                Log.d("GENDER", "gender clicked")
+                viewModel.onGenderClick()
+            }
+            otherGender.onGetFocus {
+                viewModel.onOtherGenderClick()
+            }
+        }
     }
 }
