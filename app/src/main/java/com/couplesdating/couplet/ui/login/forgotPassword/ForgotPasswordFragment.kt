@@ -10,6 +10,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentForgotPasswordBinding
+import com.couplesdating.couplet.ui.extensions.onGetFocus
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
@@ -88,10 +89,8 @@ class ForgotPasswordFragment : Fragment() {
     }
 
     private fun setEmailInputAnalyticsTrack() {
-        binding.email.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                viewModel.onEmailInputClicked()
-            }
+        binding.email.onGetFocus {
+            viewModel.onEmailInputClicked()
         }
     }
 }

@@ -153,12 +153,10 @@ class SocialLoginFragment : Fragment() {
                     }
                 }
 
-                override fun onCancel() {
-                    // App code
-                }
+                override fun onCancel() = doNothing
 
                 override fun onError(exception: FacebookException) {
-                    // App code
+                    // TODO
                 }
             }
         )

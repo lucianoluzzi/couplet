@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentEmailPasswordBinding
+import com.couplesdating.couplet.ui.extensions.onGetFocus
 import com.couplesdating.couplet.ui.extensions.setPasswordToggleClickListener
 import com.couplesdating.couplet.ui.extensions.textValue
 import com.google.android.material.textfield.TextInputLayout
@@ -79,20 +80,14 @@ class RegisterFragment : Fragment() {
 
     private fun setAnalyticsTrackingForInputs() {
         with(binding) {
-            email.setOnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) {
-                    viewModel.onEmailInputClicked()
-                }
+            email.onGetFocus {
+                viewModel.onEmailInputClicked()
             }
-            password.setOnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) {
-                    viewModel.onPasswordInputClicked()
-                }
+            password.onGetFocus {
+                viewModel.onPasswordInputClicked()
             }
-            confirmPassword.setOnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) {
-                    viewModel.onConfirmPasswordInputclicked()
-                }
+            confirmPassword.onGetFocus {
+                viewModel.onConfirmPasswordInputclicked()
             }
 
             passwordInputLayout.setPasswordToggleClickListener { isChecked ->

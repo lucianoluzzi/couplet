@@ -12,10 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentLoginBinding
-import com.couplesdating.couplet.ui.extensions.setColor
-import com.couplesdating.couplet.ui.extensions.setFont
-import com.couplesdating.couplet.ui.extensions.setUnderline
-import com.couplesdating.couplet.ui.extensions.textValue
+import com.couplesdating.couplet.ui.extensions.*
 import com.google.android.material.textfield.TextInputLayout
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -58,15 +55,11 @@ class LoginFragment : Fragment() {
     }
 
     private fun setTrackingForInputSelection() {
-        binding.email.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                viewModel.onEmailInputClicked()
-            }
+        binding.email.onGetFocus {
+            viewModel.onEmailInputClicked()
         }
-        binding.password.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                viewModel.onPasswordInputClicked()
-            }
+        binding.password.onGetFocus {
+            viewModel.onPasswordInputClicked()
         }
     }
 
