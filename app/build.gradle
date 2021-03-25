@@ -53,6 +53,8 @@ dependencies {
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
+    implementation 'com.airbnb.android:lottie:3.6.1'
+
     implementation 'com.facebook.android:facebook-login:8.2.0'
 
     implementation "org.koin:koin-core:$koin_version"

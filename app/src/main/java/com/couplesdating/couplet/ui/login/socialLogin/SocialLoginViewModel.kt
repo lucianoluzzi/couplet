@@ -98,6 +98,7 @@ class SocialLoginViewModel(
     }
 
     fun onLoginWithFacebookClicked() {
+        _uiStateLiveData.value = LiveDataEvent(SocialLoginUIState.Loading)
         analytics.trackEvent(SocialLoginEvents.LoginWithFacebookClicked)
     }
 

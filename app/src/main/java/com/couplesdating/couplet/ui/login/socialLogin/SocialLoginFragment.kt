@@ -5,19 +5,22 @@ import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableString
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentSocialLoginBinding
-import com.couplesdating.couplet.ui.extensions.*
+import com.couplesdating.couplet.ui.extensions.setColor
+import com.couplesdating.couplet.ui.extensions.setFont
+import com.couplesdating.couplet.ui.extensions.setUnderline
+import com.couplesdating.couplet.ui.extensions.textValue
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -54,7 +57,7 @@ class SocialLoginFragment : Fragment() {
                         }
                     }
                 } catch (e: ApiException) {
-                    Log.w("LoginFragment", "Google sign in failed", e)
+                    binding.loadingContainer.isVisible = false
                 }
             }
 
@@ -112,13 +115,17 @@ class SocialLoginFragment : Fragment() {
 
         when (uiState) {
             is SocialLoginUIState.Success -> {
+                binding.loadingContainer.isVisible = false
                 if (uiState.user.pairedPartner == null) {
                     goToSyncWithPartner()
                 }
             }
             is SocialLoginUIState.AuthError -> {
+                binding.loadingContainer.isVisible = false
             }
-            SocialLoginUIState.Loading -> doNothing
+            SocialLoginUIState.Loading -> {
+                binding.loadingContainer.isVisible = true
+            }
         }
     }
 
@@ -151,10 +158,12 @@ class SocialLoginFragment : Fragment() {
                     }
                 }
 
-                override fun onCancel() = doNothing
+                override fun onCancel() {
+                    binding.loadingContainer.isVisible = false
+                }
 
                 override fun onError(exception: FacebookException) {
-                    // TODO
+                    binding.loadingContainer.isVisible = false
                 }
             }
         )
