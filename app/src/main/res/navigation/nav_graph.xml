@@ -125,6 +125,9 @@
             android:id="@+id/action_homeFragment_to_onboardingFragment"
             app:destination="@id/onboardingFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/errorFragment"
+        android:name="com.couplesdating.couplet.ui.error.ErrorFragment"
+        android:label="ErrorFragment" />
 
 </navigation>

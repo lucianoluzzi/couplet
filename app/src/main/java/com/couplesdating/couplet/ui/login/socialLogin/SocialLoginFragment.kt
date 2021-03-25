@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -58,6 +59,7 @@ class SocialLoginFragment : Fragment() {
                     }
                 } catch (e: ApiException) {
                     binding.loadingContainer.isVisible = false
+                    goToError(e.message)
                 }
             }
 
@@ -122,6 +124,7 @@ class SocialLoginFragment : Fragment() {
             }
             is SocialLoginUIState.AuthError -> {
                 binding.loadingContainer.isVisible = false
+                goToError(uiState.error)
             }
             SocialLoginUIState.Loading -> {
                 binding.loadingContainer.isVisible = true
@@ -164,6 +167,7 @@ class SocialLoginFragment : Fragment() {
 
                 override fun onError(exception: FacebookException) {
                     binding.loadingContainer.isVisible = false
+                    goToError(exception.message)
                 }
             }
         )
@@ -217,6 +221,13 @@ class SocialLoginFragment : Fragment() {
         val browserIntent =
             Intent(Intent.ACTION_VIEW, Uri.parse("https://couplet.flycricket.io/privacy.html"))
         startActivity(browserIntent)
+    }
+
+    private fun goToError(errorMessage: String? = null) {
+        val bundle = errorMessage?.let {
+            bundleOf("error" to errorMessage)
+        }
+        findNavController().navigate(R.id.errorFragment, bundle)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
