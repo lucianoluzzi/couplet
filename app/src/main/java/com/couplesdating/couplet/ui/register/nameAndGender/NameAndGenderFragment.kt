@@ -90,7 +90,7 @@ class NameAndGenderFragment : Fragment() {
 
     private fun goToSyncPartner() {
         val goToSyncPartner =
-            NameAndGenderFragmentDirections.actionNameAndGenderFragmentToSyncPartnerFragment()
+            NameAndGenderFragmentDirections.actionNameAndGenderFragmentToInvitePartnerFragment()
         findNavController().navigate(goToSyncPartner)
     }
 

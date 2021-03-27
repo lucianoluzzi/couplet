@@ -96,7 +96,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun goToSyncWithPartner() {
-        val goToSyncPartner = LoginFragmentDirections.actionLoginFragmentToSyncPartnerFragment()
+        val goToSyncPartner = LoginFragmentDirections.actionLoginFragmentToInvitePartnerFragment()
         findNavController().navigate(goToSyncPartner)
     }
 

@@ -134,7 +134,7 @@ class SocialLoginFragment : Fragment() {
 
     private fun goToSyncWithPartner() {
         val toSyncWithPartner =
-            SocialLoginFragmentDirections.actionSocialLoginFragmentToSyncPartnerFragment()
+            SocialLoginFragmentDirections.actionSocialLoginFragmentToInvitePartnerFragment()
         findNavController().navigate(toSyncWithPartner)
     }
 
