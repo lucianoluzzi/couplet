@@ -134,7 +134,7 @@
         <deepLink
             android:id="@+id/deepLink"
             android:autoVerify="true"
-            app:uri="https://couplet.love/partner?id={id}?note={note}" />
+            app:uri="https://couplet.love/partner?id={id}&amp;note={note}" />
         <argument
             android:name="id"
             app:argType="string" />
