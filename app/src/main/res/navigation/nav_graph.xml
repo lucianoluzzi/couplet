@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/onboardingFragment"
         android:name="com.couplesdating.couplet.ui.onboarding.letsStart.OnboardingFragment"
-        android:label="OnboardingFirstFragment" >
+        android:label="OnboardingFirstFragment">
         <action
             android:id="@+id/action_onboardingFragment_to_learnFromProfessionalsFragment"
             app:destination="@id/learnFromProfessionalsFragment"
@@ -18,19 +19,19 @@
     <fragment
         android:id="@+id/learnFromProfessionalsFragment"
         android:name="com.couplesdating.couplet.ui.onboarding.learnFromProfessionals.LearnFromProfessionalsOnboardingFragment"
-        android:label="LearnFromProfessionalsOnboardingFragment" >
+        android:label="LearnFromProfessionalsOnboardingFragment">
         <action
             android:id="@+id/action_learnFromProfessionalsFragment_to_mildToWildOnboardingFragment"
             app:destination="@id/mildToWildOnboardingFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right"  />
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/mildToWildOnboardingFragment"
         android:name="com.couplesdating.couplet.ui.onboarding.mildToWild.MildToWildOnboardingFragment"
-        android:label="MildToWildOnboardingFragment" >
+        android:label="MildToWildOnboardingFragment">
         <action
             android:id="@+id/action_mildToWildOnboardingFragment_to_privacyOnboardingFragment"
             app:destination="@id/privacyOnboardingFragment"
@@ -42,7 +43,7 @@
     <fragment
         android:id="@+id/privacyOnboardingFragment"
         android:name="com.couplesdating.couplet.ui.onboarding.privacy.PrivacyOnboardingFragment"
-        android:label="PrivacyOnboardingFragment" >
+        android:label="PrivacyOnboardingFragment">
         <action
             android:id="@+id/action_privacyOnboardingFragment_to_intimateOnboardingFragment"
             app:destination="@id/intimateOnboardingFragment"
@@ -54,7 +55,7 @@
     <fragment
         android:id="@+id/intimateOnboardingFragment"
         android:name="com.couplesdating.couplet.ui.onboarding.intimate.IntimateOnboardingFragment"
-        android:label="IntimateOnboardingFragment" >
+        android:label="IntimateOnboardingFragment">
         <action
             android:id="@+id/action_intimateOnboardingFragment_to_socialLoginFragment"
             app:destination="@id/socialLoginFragment"
@@ -66,7 +67,7 @@
     <fragment
         android:id="@+id/socialLoginFragment"
         android:name="com.couplesdating.couplet.ui.login.socialLogin.SocialLoginFragment"
-        android:label="SocialLoginFragment" >
+        android:label="SocialLoginFragment">
         <action
             android:id="@+id/action_socialLoginFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -77,7 +78,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.couplesdating.couplet.ui.login.emailLogin.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment" />
@@ -91,7 +92,7 @@
     <fragment
         android:id="@+id/emailAndPasswordFragment"
         android:name="com.couplesdating.couplet.ui.register.emailAndPassword.RegisterFragment"
-        android:label="EmailAndPasswordFragment" >
+        android:label="EmailAndPasswordFragment">
         <action
             android:id="@+id/action_emailAndPasswordFragment_to_nameAndGenderFragment"
             app:destination="@id/nameAndGenderFragment" />
@@ -99,7 +100,7 @@
     <fragment
         android:id="@+id/nameAndGenderFragment"
         android:name="com.couplesdating.couplet.ui.register.nameAndGender.NameAndGenderFragment"
-        android:label="NameAndGenderFragment" >
+        android:label="NameAndGenderFragment">
         <action
             android:id="@+id/action_nameAndGenderFragment_to_invitePartnerFragment"
             app:destination="@id/invitePartnerFragment" />
@@ -111,7 +112,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.couplesdating.couplet.ui.home.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment">
         <action
             android:id="@+id/action_homeFragment_to_socialLoginFragment"
             app:destination="@id/socialLoginFragment" />
@@ -134,10 +135,14 @@
         <deepLink
             android:id="@+id/deepLink"
             android:autoVerify="true"
-            app:uri="https://couplet.love/partner?id={id}&amp;note={note}" />
+            app:uri="https://couplet.love/partner?id={id}&amp;displayName={displayName}&amp;note={note}" />
         <argument
             android:name="id"
             app:argType="string" />
+        <argument
+            android:name="displayName"
+            app:argType="string"
+            app:nullable="true" />
         <argument
             android:name="note"
             app:argType="string"

@@ -26,9 +26,9 @@ class InvitedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.invited.text = "You got invited"
-        val inviteeId = navigationArguments.id
-        if (inviteeId.isNotEmpty()) {
-            binding.invited.append(" by $inviteeId")
+        val displayName = navigationArguments.displayName
+        if (!displayName.isNullOrBlank()) {
+            binding.invited.append(" by $displayName")
         }
 
         navigationArguments.note?.let {

@@ -9,18 +9,20 @@ class GenerateInviteLinkUseCaseImpl(
 ) : GenerateInviteLinkUseCase {
 
     override suspend fun generateInviteLink(inviteModel: InviteModel): Uri {
-        val dataMap = inviteModel.note?.let {
-            mapOf(
-                "id" to inviteModel.userIdentification,
-                "note" to it
-            )
-        } ?: run {
-            mapOf("id" to inviteModel.userIdentification)
+        val inviteMap = mutableMapOf<String, String>().apply {
+            put("id", inviteModel.userId)
+
+            if (!inviteModel.displayName.isNullOrBlank()) {
+                put("displayName", inviteModel.displayName)
+            }
+            if (!inviteModel.note.isNullOrBlank()) {
+                put("note", inviteModel.note)
+            }
         }
 
         return dynamicLinkProvider.generateUri(
             suffix = "partner",
-            parameters = dataMap
+            parameters = inviteMap
         )
     }
 }

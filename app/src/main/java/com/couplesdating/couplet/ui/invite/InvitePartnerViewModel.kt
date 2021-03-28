@@ -22,13 +22,14 @@ class InvitePartnerViewModel(
     fun createInviteLink(note: String?) {
         val currentUser = getCurrentUserUseCase.getCurrentUser()
         currentUser?.let {
-            val userIdentification = when {
+            val displayName = when {
                 !it.name.isNullOrBlank() -> it.name
                 !it.email.isNullOrBlank() -> it.email
                 else -> ""
             }
             val inviteModel = InviteModel(
-                userIdentification = userIdentification,
+                userId = it.userId,
+                displayName = displayName,
                 note = note
             )
 
