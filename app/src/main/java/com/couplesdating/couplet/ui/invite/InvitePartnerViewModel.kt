@@ -4,10 +4,12 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.domain.useCase.GenerateInviteLinkUseCase
 import com.couplesdating.couplet.domain.useCase.GetCurrentUserUseCase
 import com.couplesdating.couplet.ui.utils.LiveDataEvent
+import kotlinx.coroutines.launch
 
 class InvitePartnerViewModel(
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
@@ -29,8 +31,11 @@ class InvitePartnerViewModel(
                 userIdentification = userIdentification,
                 note = note
             )
-            _deepLink.value =
-                LiveDataEvent(generateInviteLinkUseCase.generateInviteLink(inviteModel))
+
+            viewModelScope.launch {
+                _deepLink.value =
+                    LiveDataEvent(generateInviteLinkUseCase.generateInviteLink(inviteModel))
+            }
         }
     }
 }

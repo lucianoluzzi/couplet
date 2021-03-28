@@ -8,7 +8,7 @@ class GenerateInviteLinkUseCaseImpl(
     private val dynamicLinkProvider: DynamicLinkProvider
 ) : GenerateInviteLinkUseCase {
 
-    override fun generateInviteLink(inviteModel: InviteModel): Uri {
+    override suspend fun generateInviteLink(inviteModel: InviteModel): Uri {
         val dataMap = inviteModel.note?.let {
             mapOf(
                 "id" to inviteModel.userIdentification,
@@ -18,7 +18,7 @@ class GenerateInviteLinkUseCaseImpl(
             mapOf("id" to inviteModel.userIdentification)
         }
 
-        return dynamicLinkProvider.getUri(
+        return dynamicLinkProvider.generateUri(
             suffix = "partner",
             parameters = dataMap
         )
