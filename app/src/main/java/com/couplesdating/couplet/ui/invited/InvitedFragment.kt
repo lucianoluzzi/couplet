@@ -25,8 +25,12 @@ class InvitedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.invited.text = "You got invited"
         val inviteeId = navigationArguments.id
-        binding.invited.text = "You got invited by $inviteeId"
+        if (inviteeId.isNotEmpty()) {
+            binding.invited.append(" by $inviteeId")
+        }
+
         navigationArguments.note?.let {
             binding.note.isVisible = true
             binding.note.text = it

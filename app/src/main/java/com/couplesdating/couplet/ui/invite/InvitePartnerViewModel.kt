@@ -20,8 +20,13 @@ class InvitePartnerViewModel(
     fun createInviteLink(note: String?) {
         val currentUser = getCurrentUserUseCase.getCurrentUser()
         currentUser?.let {
+            val userIdentification = when {
+                !it.name.isNullOrBlank() -> it.name
+                !it.email.isNullOrBlank() -> it.email
+                else -> ""
+            }
             val inviteModel = InviteModel(
-                userId = it.userId,
+                userIdentification = userIdentification,
                 note = note
             )
             _deepLink.value =

@@ -11,11 +11,11 @@ class GenerateInviteLinkUseCaseImpl(
     override fun generateInviteLink(inviteModel: InviteModel): Uri {
         val dataMap = inviteModel.note?.let {
             mapOf(
-                "id" to inviteModel.userId,
+                "id" to inviteModel.userIdentification,
                 "note" to it
             )
         } ?: run {
-            mapOf("id" to inviteModel.userId)
+            mapOf("id" to inviteModel.userIdentification)
         }
 
         return dynamicLinkProvider.getUri(

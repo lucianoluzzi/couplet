@@ -1,6 +1,6 @@
 package com.couplesdating.couplet.ui.invite
 
 data class InviteModel(
-    val userId: String,
+    val userIdentification: String,
     val note: String?
 )
