@@ -127,5 +127,21 @@
         android:id="@+id/invitePartnerFragment"
         android:name="com.couplesdating.couplet.ui.invite.InvitePartnerFragment"
         android:label="InvitePartnerFragment" />
+    <fragment
+        android:id="@+id/invitedFragment"
+        android:name="com.couplesdating.couplet.ui.invited.InvitedFragment"
+        android:label="InvitedFragment">
+        <deepLink
+            android:id="@+id/deepLink"
+            android:autoVerify="true"
+            app:uri="https://couplet.love/partner?id={id}?note={note}" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="note"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 
 </navigation>
