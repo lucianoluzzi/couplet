@@ -26,6 +26,7 @@ internal class SocialLoginViewModelTest {
         @Test
         fun `then liveData emits value`() {
             val user = User(
+                userId = "",
                 name = "",
                 email = ""
             )

@@ -3,12 +3,14 @@ package com.couplesdating.couplet
 import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.FirebaseAnalyticsProvider
 import com.couplesdating.couplet.analytics.FirebaseAnalyticsTracker
+import com.couplesdating.couplet.data.DynamicLinkProvider
 import com.couplesdating.couplet.data.UserRepository
 import com.couplesdating.couplet.data.UserRepositoryImpl
 import com.couplesdating.couplet.domain.useCase.*
 import com.couplesdating.couplet.ui.MainViewModel
 import com.couplesdating.couplet.ui.error.ErrorViewModel
 import com.couplesdating.couplet.ui.home.HomeViewModel
+import com.couplesdating.couplet.ui.invite.InvitePartnerViewModel
 import com.couplesdating.couplet.ui.login.emailLogin.LoginViewModel
 import com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordViewModel
 import com.couplesdating.couplet.ui.login.socialLogin.SocialLoginViewModel
@@ -25,6 +27,8 @@ import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
+    single { DynamicLinkProvider() }
+
     single<Analytics> {
         FirebaseAnalyticsTracker(
             FirebaseAnalyticsProvider().getFirebaseAnalyticsTracker()
@@ -46,6 +50,8 @@ val appModule = module {
     single<GoogleSignInUseCase> { GoogleSignInUseCaseImpl(get()) }
 
     single<FacebookSignInUseCase> { FacebookSignInUseCaseImpl(get()) }
+
+    single<GenerateInviteLinkUseCase> { GenerateInviteLinkUseCaseImpl(get()) }
 
     viewModel {
         MainViewModel(get())
@@ -99,6 +105,13 @@ val appModule = module {
     }
     viewModel {
         ForgotPasswordViewModel(
+            get(),
+            get()
+        )
+    }
+    viewModel {
+        InvitePartnerViewModel(
+            get(),
             get(),
             get()
         )

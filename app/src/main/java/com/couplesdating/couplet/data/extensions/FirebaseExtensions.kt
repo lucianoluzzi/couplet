@@ -1,6 +1,5 @@
 package com.couplesdating.couplet.data.extensions
 
-import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import kotlinx.coroutines.suspendCancellableCoroutine

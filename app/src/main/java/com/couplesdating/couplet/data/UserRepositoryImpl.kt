@@ -17,10 +17,12 @@ class UserRepositoryImpl(
 
     override fun getCurrentUser(): User? {
         authenticator.currentUser?.let {
+            val userId = it.uid
             val name = it.displayName
             val email = it.email
 
             return User(
+                userId = userId,
                 name = name,
                 email = email
             )
@@ -37,11 +39,13 @@ class UserRepositoryImpl(
 
                 val authenticatedUser = authenticator.currentUser
                 authenticatedUser?.let {
+                    val userId = it.uid
                     val name = it.displayName
                     val email = it.email
 
                     if (name != null && email != null) {
                         return User(
+                            userId = userId,
                             name = name,
                             email = email
                         )

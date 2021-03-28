@@ -8,7 +8,11 @@ class SignInUseCaseImpl(
 ) : SignInUseCase {
 
     override suspend fun signIn(email: String, password: String): User? {
-        val user = User(email = email, password = password)
+        val user = User(
+            userId = "",
+            email = email,
+            password = password
+        )
         return userRepository.signIn(user)
     }
 }
