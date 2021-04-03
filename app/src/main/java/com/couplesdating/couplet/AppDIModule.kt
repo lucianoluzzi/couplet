@@ -3,9 +3,7 @@ package com.couplesdating.couplet
 import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.FirebaseAnalyticsProvider
 import com.couplesdating.couplet.analytics.FirebaseAnalyticsTracker
-import com.couplesdating.couplet.data.DynamicLinkProvider
-import com.couplesdating.couplet.data.UserRepository
-import com.couplesdating.couplet.data.UserRepositoryImpl
+import com.couplesdating.couplet.data.*
 import com.couplesdating.couplet.domain.useCase.*
 import com.couplesdating.couplet.ui.MainViewModel
 import com.couplesdating.couplet.ui.error.ErrorViewModel
@@ -21,21 +19,23 @@ import com.couplesdating.couplet.ui.onboarding.mildToWild.MildToWildViewModel
 import com.couplesdating.couplet.ui.onboarding.privacy.PrivacyViewModel
 import com.couplesdating.couplet.ui.register.emailAndPassword.RegisterViewModel
 import com.couplesdating.couplet.ui.register.nameAndGender.NameAndGenderViewModel
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
     single { DynamicLinkProvider() }
 
-    single<Analytics> {
-        FirebaseAnalyticsTracker(
-            FirebaseAnalyticsProvider().getFirebaseAnalyticsTracker()
-        )
-    }
+    single { FirestoreProvider().firestoreDatabase }
 
-    single<UserRepository> { UserRepositoryImpl(Firebase.auth) }
+    single { FirebaseAnalyticsProvider().analytics }
+
+    single { FirebaseAuthProvider().firebaseAuth }
+
+    single<Analytics> { FirebaseAnalyticsTracker(get()) }
+
+    single<UserRepository> { UserRepositoryImpl(get()) }
+
+    single<PairRepository> { PairRepositoryImpl(get()) }
 
     single<GetCurrentUserUseCase> { GetCurrentUserUseCaseImpl(get()) }
 
