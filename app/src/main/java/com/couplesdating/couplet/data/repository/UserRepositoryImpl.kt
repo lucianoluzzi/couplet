@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.data
+package com.couplesdating.couplet.data.repository
 
 import android.util.Log
 import com.couplesdating.couplet.data.extensions.register

@@ -1,6 +1,6 @@
 package com.couplesdating.couplet.domain.useCase
 
-import com.couplesdating.couplet.data.PairRepository
+import com.couplesdating.couplet.data.repository.PairRepository
 import com.couplesdating.couplet.domain.model.Response
 
 class FormPairUseCaseImpl(

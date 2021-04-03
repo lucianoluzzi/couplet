@@ -1,7 +1,6 @@
 package com.couplesdating.couplet.domain.useCase
 
-import android.os.Bundle
-import com.couplesdating.couplet.data.UserRepository
+import com.couplesdating.couplet.data.repository.UserRepository
 import com.couplesdating.couplet.domain.model.Response
 import com.facebook.AccessToken
 import com.google.firebase.auth.FacebookAuthProvider

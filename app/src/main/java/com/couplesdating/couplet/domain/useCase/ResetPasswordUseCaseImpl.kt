@@ -1,6 +1,6 @@
 package com.couplesdating.couplet.domain.useCase
 
-import com.couplesdating.couplet.data.UserRepository
+import com.couplesdating.couplet.data.repository.UserRepository
 import com.couplesdating.couplet.domain.model.Response
 
 class ResetPasswordUseCaseImpl(

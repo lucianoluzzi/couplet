@@ -4,6 +4,10 @@ import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.FirebaseAnalyticsProvider
 import com.couplesdating.couplet.analytics.FirebaseAnalyticsTracker
 import com.couplesdating.couplet.data.*
+import com.couplesdating.couplet.data.repository.PairRepository
+import com.couplesdating.couplet.data.repository.PairRepositoryImpl
+import com.couplesdating.couplet.data.repository.UserRepository
+import com.couplesdating.couplet.data.repository.UserRepositoryImpl
 import com.couplesdating.couplet.domain.useCase.*
 import com.couplesdating.couplet.ui.MainViewModel
 import com.couplesdating.couplet.ui.error.ErrorViewModel
