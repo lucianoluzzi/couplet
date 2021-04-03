@@ -13,9 +13,10 @@ class InvitedViewModel(
 
     fun onInviteAccepted(inviterId: String) {
         acceptUserInviteUseCase.acceptUserInvite(inviterId)
+        _uiState.value = InvitedUIState.AcceptedInvite
     }
 
     fun onInviteRejected() {
-        
+        _uiState.value = InvitedUIState.RejectedInvite
     }
 }
