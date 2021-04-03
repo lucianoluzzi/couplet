@@ -3,7 +3,10 @@ package com.couplesdating.couplet
 import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.FirebaseAnalyticsProvider
 import com.couplesdating.couplet.analytics.FirebaseAnalyticsTracker
-import com.couplesdating.couplet.data.*
+import com.couplesdating.couplet.data.DynamicLinkProvider
+import com.couplesdating.couplet.data.FirebaseAuthProvider
+import com.couplesdating.couplet.data.FirestoreProvider
+import com.couplesdating.couplet.data.SharedPreferencesProvider
 import com.couplesdating.couplet.data.repository.PairRepository
 import com.couplesdating.couplet.data.repository.PairRepositoryImpl
 import com.couplesdating.couplet.data.repository.UserRepository
@@ -23,10 +26,14 @@ import com.couplesdating.couplet.ui.onboarding.mildToWild.MildToWildViewModel
 import com.couplesdating.couplet.ui.onboarding.privacy.PrivacyViewModel
 import com.couplesdating.couplet.ui.register.emailAndPassword.RegisterViewModel
 import com.couplesdating.couplet.ui.register.nameAndGender.NameAndGenderViewModel
+import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
+
+    single { SharedPreferencesProvider(androidContext()).preferences }
+
     single { DynamicLinkProvider() }
 
     single { FirestoreProvider().firestoreDatabase }
@@ -39,7 +46,7 @@ val appModule = module {
 
     single<UserRepository> { UserRepositoryImpl(get()) }
 
-    single<PairRepository> { PairRepositoryImpl(get()) }
+    single<PairRepository> { PairRepositoryImpl(get(), get()) }
 
     single<GetCurrentUserUseCase> { GetCurrentUserUseCaseImpl(get()) }
 
