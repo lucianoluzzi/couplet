@@ -29,6 +29,7 @@ import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes.SIGN_IN_CANCELLED
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -58,11 +59,12 @@ class SocialLoginFragment : Fragment() {
                         }
                     }
                 } catch (e: ApiException) {
-                    binding.loadingContainer.isVisible = false
-                    goToError(e.message)
+                    if (e.statusCode != SIGN_IN_CANCELLED) {
+                        binding.loadingContainer.isVisible = false
+                        goToError(e.cause?.message)
+                    }
                 }
             }
-
     }
 
     private fun firebaseAuthWithGoogle(idToken: String, displayName: String) {
