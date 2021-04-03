@@ -16,6 +16,7 @@ import com.couplesdating.couplet.ui.MainViewModel
 import com.couplesdating.couplet.ui.error.ErrorViewModel
 import com.couplesdating.couplet.ui.home.HomeViewModel
 import com.couplesdating.couplet.ui.invite.InvitePartnerViewModel
+import com.couplesdating.couplet.ui.invited.InvitedViewModel
 import com.couplesdating.couplet.ui.login.emailLogin.LoginViewModel
 import com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordViewModel
 import com.couplesdating.couplet.ui.login.socialLogin.SocialLoginViewModel
@@ -63,6 +64,8 @@ val appModule = module {
     single<FacebookSignInUseCase> { FacebookSignInUseCaseImpl(get()) }
 
     single<GenerateInviteLinkUseCase> { GenerateInviteLinkUseCaseImpl(get()) }
+
+    single<AcceptUserInviteUseCase> { AcceptUserInviteUseCaseImpl(get()) }
 
     viewModel {
         MainViewModel(get())
@@ -123,6 +126,12 @@ val appModule = module {
     viewModel {
         InvitePartnerViewModel(
             get(),
+            get(),
+            get()
+        )
+    }
+    viewModel {
+        InvitedViewModel(
             get(),
             get()
         )
