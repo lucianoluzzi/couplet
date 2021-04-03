@@ -69,6 +69,8 @@ val appModule = module {
 
     single<GetAcceptedInviteUseCase> { GetAcceptedInviteUseCaseImpl(get()) }
 
+    single<FormPairUseCase> { FormPairUseCaseImpl(get(), get()) }
+
     viewModel {
         MainViewModel(get())
     }
