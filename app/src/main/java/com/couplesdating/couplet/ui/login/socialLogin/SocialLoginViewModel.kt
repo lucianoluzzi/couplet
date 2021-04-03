@@ -8,9 +8,7 @@ import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.events.login.SocialLoginEvents
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.model.User
-import com.couplesdating.couplet.domain.useCase.FacebookSignInUseCase
-import com.couplesdating.couplet.domain.useCase.GetCurrentUserUseCase
-import com.couplesdating.couplet.domain.useCase.GoogleSignInUseCase
+import com.couplesdating.couplet.domain.useCase.*
 import com.couplesdating.couplet.ui.utils.LiveDataEvent
 import com.couplesdating.couplet.ui.utils.asLiveDataEvent
 import com.facebook.AccessToken
@@ -21,6 +19,8 @@ class SocialLoginViewModel(
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
     private val googleSignInUseCase: GoogleSignInUseCase,
     private val facebookSignInUseCase: FacebookSignInUseCase,
+    private val getAcceptedInviteUseCase: GetAcceptedInviteUseCase,
+    private val formPairUseCase: FormPairUseCase,
     private val analytics: Analytics
 ) : ViewModel() {
 
@@ -42,21 +42,8 @@ class SocialLoginViewModel(
             )
 
             when (response) {
-                is Response.Success -> {
-                    val loggedInUser = getCurrentUserUseCase.getCurrentUser()
-                    loggedInUser?.let {
-                        setLiveDataValue(
-                            SocialLoginUIState.Success(
-                                it
-                            )
-                        )
-                    }
-                }
-                is Response.Error -> setLiveDataValue(
-                    SocialLoginUIState.AuthError(
-                        response.errorMessage ?: ""
-                    )
-                )
+                is Response.Success -> onSuccessResponse()
+                is Response.Error -> onResponseError(response)
             }
         }
     }
@@ -78,14 +65,22 @@ class SocialLoginViewModel(
         )
     }
 
-    private fun onSuccessResponse() {
+    private suspend fun onSuccessResponse() {
         val loggedInUser = getCurrentUserUseCase.getCurrentUser()
+        formPairIfInviteAccepted()
         loggedInUser?.let {
             setLiveDataValue(
                 SocialLoginUIState.Success(
                     it
                 )
             )
+        }
+    }
+
+    private suspend fun formPairIfInviteAccepted() {
+        val acceptedInviteUserId = getAcceptedInviteUseCase.getAcceptedInviteUserId()
+        acceptedInviteUserId?.let {
+            formPairUseCase.formPair(it)
         }
     }
 

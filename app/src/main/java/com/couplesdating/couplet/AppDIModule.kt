@@ -67,6 +67,8 @@ val appModule = module {
 
     single<AcceptUserInviteUseCase> { AcceptUserInviteUseCaseImpl(get()) }
 
+    single<GetAcceptedInviteUseCase> { GetAcceptedInviteUseCaseImpl(get()) }
+
     viewModel {
         MainViewModel(get())
     }
@@ -93,10 +95,12 @@ val appModule = module {
     }
     viewModel {
         SocialLoginViewModel(
-            get(),
-            get(),
-            get(),
-            get()
+            getCurrentUserUseCase = get(),
+            googleSignInUseCase = get(),
+            facebookSignInUseCase = get(),
+            getAcceptedInviteUseCase = get(),
+            formPairUseCase = get(),
+            analytics = get()
         )
     }
     viewModel {
