@@ -31,7 +31,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes.SIGN_IN_CANCELLED
 import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.GoogleAuthProvider
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class SocialLoginFragment : Fragment() {
@@ -55,7 +54,7 @@ class SocialLoginFragment : Fragment() {
                         val displayName = it.displayName
 
                         if (idToken != null && displayName != null) {
-                            firebaseAuthWithGoogle(idToken, displayName)
+                            viewModel.onGoogleSignIn(idToken, displayName)
                         }
                     }
                 } catch (e: ApiException) {
@@ -65,11 +64,6 @@ class SocialLoginFragment : Fragment() {
                     }
                 }
             }
-    }
-
-    private fun firebaseAuthWithGoogle(idToken: String, displayName: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        viewModel.onGoogleSignIn(credential, displayName)
     }
 
     override fun onCreateView(

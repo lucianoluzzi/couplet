@@ -60,11 +60,11 @@ class UserRepositoryImpl(
     }
 
     override suspend fun signIn(authCredential: AuthCredential, displayName: String?): Response {
-        val result = authenticator.signIn(authCredential)
-        return if (result.isSuccessful) {
+        val signInResult = authenticator.signIn(authCredential)
+        return if (signInResult.isSuccessful) {
             Response.Success
         } else {
-            Response.Error(result.exception?.message)
+            Response.Error(signInResult.exception?.message)
         }
     }
 

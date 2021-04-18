@@ -12,7 +12,6 @@ import com.couplesdating.couplet.domain.useCase.*
 import com.couplesdating.couplet.ui.utils.LiveDataEvent
 import com.couplesdating.couplet.ui.utils.asLiveDataEvent
 import com.facebook.AccessToken
-import com.google.firebase.auth.AuthCredential
 import kotlinx.coroutines.launch
 
 class SocialLoginViewModel(
@@ -34,10 +33,10 @@ class SocialLoginViewModel(
         _userLiveData.value = getCurrentUserUseCase.getCurrentUser()
     }
 
-    fun onGoogleSignIn(credential: AuthCredential, displayName: String) {
+    fun onGoogleSignIn(idToken: String, displayName: String) {
         viewModelScope.launch {
             val response = googleSignInUseCase.signIn(
-                authCredential = credential,
+                idToken = idToken,
                 displayName = displayName
             )
 
