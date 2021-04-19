@@ -1,12 +1,14 @@
 package com.couplesdating.couplet.ui.invite
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentInvitePartnerBinding
 import com.couplesdating.couplet.ui.extensions.textValue
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -28,7 +30,7 @@ class InvitePartnerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.deepLink.observe(viewLifecycleOwner) { liveDataEvent ->
             liveDataEvent.getContentIfNotHandled()?.let {
-                shareApp(it)
+                handleUIState(it)
             }
         }
 
@@ -39,11 +41,25 @@ class InvitePartnerFragment : Fragment() {
         }
     }
 
-    private fun shareApp(link: Uri) {
+    private fun handleUIState(uiState: InvitePartnerUIState) {
+        when (uiState) {
+            is InvitePartnerUIState.Error -> goToError(uiState.errorMessage)
+            is InvitePartnerUIState.Success -> shareApp(uiState.inviteUri)
+        }
+    }
+
+    private fun shareApp(link: String) {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "text/plain"
-        intent.putExtra(Intent.EXTRA_TEXT, link.toString())
+        intent.putExtra(Intent.EXTRA_TEXT, link)
 
         startActivity(Intent.createChooser(intent, "Share Link"))
+    }
+
+    private fun goToError(errorMessage: String? = null) {
+        val bundle = errorMessage?.let {
+            bundleOf("error" to errorMessage)
+        }
+        findNavController().navigate(R.id.errorFragment, bundle)
     }
 }

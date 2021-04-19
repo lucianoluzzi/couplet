@@ -3,6 +3,7 @@ package com.couplesdating.couplet.data.repository
 import android.content.SharedPreferences
 import com.couplesdating.couplet.data.extensions.insert
 import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.ui.invite.InviteModel
 import com.google.firebase.firestore.FirebaseFirestore
 
 class PairRepositoryImpl(
@@ -17,7 +18,8 @@ class PairRepositoryImpl(
         }
     }
 
-    override fun getAcceptedPairInviteUser(): String? = preferences.getString(ACCEPTED_PAIR_INVITE_KEY, null)
+    override fun getAcceptedPairInviteUser(): String? =
+        preferences.getString(ACCEPTED_PAIR_INVITE_KEY, null)
 
     override fun deletePairInvite() {
         with(preferences.edit()) {
@@ -40,7 +42,26 @@ class PairRepositoryImpl(
             .insert(pairMap)
 
         if (taskResponse.isSuccessful) {
-            return Response.Success
+            return Response.Completed
+        }
+
+        return Response.Error(taskResponse.exception?.message)
+    }
+
+    override suspend fun createInvite(inviteModel: InviteModel): Response {
+        val pairMap = hashMapOf(
+            "user_1" to inviteModel.userId,
+            "invite_id" to inviteModel.inviteId,
+            "display_name" to inviteModel.displayName,
+            "note" to inviteModel.note
+        )
+
+        val taskResponse = database
+            .collection("invite")
+            .insert(pairMap)
+
+        if (taskResponse.isSuccessful) {
+            return Response.Completed
         }
 
         return Response.Error(taskResponse.exception?.message)

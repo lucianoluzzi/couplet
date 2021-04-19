@@ -1,16 +1,11 @@
 package com.couplesdating.couplet.ui.register.nameAndGender
 
-import android.content.Intent
-import android.graphics.Typeface
-import android.net.Uri
 import android.os.Bundle
-import android.text.SpannableString
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -18,8 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentNameAndGenderBinding
 import com.couplesdating.couplet.ui.extensions.onGetFocus
-import com.couplesdating.couplet.ui.extensions.setFont
-import com.couplesdating.couplet.ui.extensions.setUnderline
 import com.couplesdating.couplet.ui.extensions.textValue
 import org.koin.android.viewmodel.ext.android.viewModel
 

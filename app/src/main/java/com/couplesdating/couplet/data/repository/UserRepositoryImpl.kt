@@ -62,7 +62,7 @@ class UserRepositoryImpl(
     override suspend fun signIn(authCredential: AuthCredential, displayName: String?): Response {
         val signInResult = authenticator.signIn(authCredential)
         return if (signInResult.isSuccessful) {
-            Response.Success
+            Response.Completed
         } else {
             Response.Error(signInResult.exception?.message)
         }
@@ -73,7 +73,7 @@ class UserRepositoryImpl(
             email = email, password = password
         )
         return if (authResult.isSuccessful) {
-            Response.Success
+            Response.Completed
         } else {
             Response.Error(authResult.exception?.message)
         }
@@ -87,7 +87,7 @@ class UserRepositoryImpl(
 
             val updateResult = currentUser.updateUser(userProfileChangeRequest)
             if (updateResult.isSuccessful) {
-                return Response.Success
+                return Response.Completed
             }
         }
 
@@ -97,7 +97,7 @@ class UserRepositoryImpl(
     override suspend fun resetPassword(email: String): Response {
         val resetPasswordResult = authenticator.resetPassword(email)
         return if (resetPasswordResult.isSuccessful) {
-            Response.Success
+            Response.Completed
         } else {
             Response.Error(resetPasswordResult.exception?.message)
         }

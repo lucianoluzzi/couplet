@@ -9,6 +9,7 @@ import com.couplesdating.couplet.analytics.events.login.SocialLoginEvents
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.domain.useCase.*
+import com.couplesdating.couplet.ui.extensions.doNothing
 import com.couplesdating.couplet.ui.utils.LiveDataEvent
 import com.couplesdating.couplet.ui.utils.asLiveDataEvent
 import com.facebook.AccessToken
@@ -41,8 +42,9 @@ class SocialLoginViewModel(
             )
 
             when (response) {
-                is Response.Success -> onSuccessResponse()
+                is Response.Success<*> -> doNothing
                 is Response.Error -> onResponseError(response)
+                is Response.Completed -> onSuccessResponse()
             }
         }
     }
@@ -51,7 +53,8 @@ class SocialLoginViewModel(
         viewModelScope.launch {
             when (val response = facebookSignInUseCase.signIn(facebookAccessToken)) {
                 is Response.Error -> onResponseError(response)
-                is Response.Success -> onSuccessResponse()
+                is Response.Completed -> onSuccessResponse()
+                is Response.Success<*> -> doNothing
             }
         }
     }

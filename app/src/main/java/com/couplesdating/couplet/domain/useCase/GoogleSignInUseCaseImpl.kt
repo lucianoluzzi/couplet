@@ -12,7 +12,7 @@ class GoogleSignInUseCaseImpl(
         val authCredential = GoogleAuthProvider.getCredential(idToken, null)
         val response = userRepository.signIn(authCredential, displayName)
 
-        if (response is Response.Success) {
+        if (response is Response.Completed) {
             userRepository.updateProfile(displayName)
         }
 

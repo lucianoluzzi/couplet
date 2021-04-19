@@ -17,7 +17,7 @@ class RegisterUseCaseImpl(
             email = email,
             password = password
         )
-        if (registerResponse is Response.Success) {
+        if (registerResponse is Response.Completed) {
             userRepository.updateProfile(
                 userName = name,
                 gender = gender
