@@ -22,11 +22,18 @@ class InvitePartnerViewModel(
     private val _deepLink = MutableLiveData<LiveDataEvent<InvitePartnerUIState>>()
     val deepLink: LiveData<LiveDataEvent<InvitePartnerUIState>> = _deepLink
 
-    fun createInviteLink(note: String?) {
+    fun createInviteLink(
+        displayName: String,
+        note: String?
+    ) {
         val currentUser = getCurrentUserUseCase.getCurrentUser()
         currentUser?.let {
             viewModelScope.launch {
-                val inviteResponse = createInviteUseCase.createInvite(currentUser, note)
+                val inviteResponse = createInviteUseCase.createInvite(
+                    currentUser = currentUser,
+                    displayName = displayName,
+                    inviteNote = note
+                )
                 when (inviteResponse) {
                     is Response.Completed -> doNothing
                     is Response.Error -> {

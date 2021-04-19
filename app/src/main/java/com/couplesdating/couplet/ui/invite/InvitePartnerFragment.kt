@@ -36,6 +36,7 @@ class InvitePartnerFragment : Fragment() {
 
         binding.shareLink.setOnClickListener {
             viewModel.createInviteLink(
+                binding.partner.textValue(),
                 binding.note.textValue()
             )
         }

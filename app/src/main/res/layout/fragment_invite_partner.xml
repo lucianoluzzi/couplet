@@ -33,11 +33,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dimension_4"
                 android:text="Partner name"
-                app:layout_constraintBottom_toTopOf="@id/email_input_layout"
-                app:layout_constraintStart_toStartOf="@id/email_input_layout" />
+                app:layout_constraintBottom_toTopOf="@id/partner_input_layout"
+                app:layout_constraintStart_toStartOf="@id/partner_name_label" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/email_input_layout"
+                android:id="@+id/partner_input_layout"
                 style="@style/TextInputLayout.Outlined"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
                 app:layout_constraintVertical_bias="0.35">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email"
+                    android:id="@+id/partner"
                     style="@style/TextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
@@ -68,8 +68,8 @@
                 android:layout_marginTop="@dimen/dimension_24"
                 android:layout_marginBottom="@dimen/dimension_4"
                 android:text="Note"
-                app:layout_constraintStart_toStartOf="@id/email_input_layout"
-                app:layout_constraintTop_toBottomOf="@id/email_input_layout" />
+                app:layout_constraintStart_toStartOf="@id/partner_input_layout"
+                app:layout_constraintTop_toBottomOf="@id/partner_input_layout" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/note_input_layout"

@@ -11,15 +11,17 @@ class CreateInviteUseCaseImpl(
 
     override suspend fun createInvite(
         currentUser: User,
+        displayName: String,
         inviteNote: String?
     ): Response {
-        val displayName = when {
+        val currentUserDisplayName = when {
             !currentUser.name.isNullOrBlank() -> currentUser.name
             !currentUser.email.isNullOrBlank() -> currentUser.email
             else -> ""
         }
         val inviteModel = InviteModel(
             userId = currentUser.userId,
+            currentUserDisplay = currentUserDisplayName,
             displayName = displayName,
             note = inviteNote,
             inviteId = currentUser.userId.hashCode().toString()

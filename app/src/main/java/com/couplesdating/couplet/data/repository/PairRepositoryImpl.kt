@@ -53,6 +53,7 @@ class PairRepositoryImpl(
             "user_1" to inviteModel.userId,
             "invite_id" to inviteModel.inviteId,
             "display_name" to inviteModel.displayName,
+            "inviter_name" to inviteModel.currentUserDisplay,
             "note" to inviteModel.note
         )
 
