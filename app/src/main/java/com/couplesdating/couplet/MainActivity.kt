@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun shouldShowActionBar(destination: NavDestination): Boolean {
         val label = destination.label ?: return true
-        return !label.contains("Onboarding") && label != "SocialLoginFragment"
+        return !label.contains("Onboarding") && label != "SocialLoginFragment" && label != "DashboardFragment"
     }
 
     override fun onSupportNavigateUp(): Boolean {

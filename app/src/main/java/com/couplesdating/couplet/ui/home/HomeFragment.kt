@@ -39,6 +39,8 @@ class HomeFragment : Fragment() {
     private fun doNavigate(user: User?) {
         if (user == null) {
             goToOnboardingOrLogin()
+        } else {
+            goToDashboard()
         }
     }
 
@@ -54,5 +56,10 @@ class HomeFragment : Fragment() {
     private fun hasShownOnboarding(): Boolean {
         val preferences = requireActivity().getPreferences(Context.MODE_PRIVATE)
         return preferences.getBoolean(getString(R.string.has_shown_onboarding_key), false)
+    }
+
+    private fun goToDashboard() {
+        val toDashboard = HomeFragmentDirections.actionHomeFragmentToDashboardFragment()
+        findNavController().navigate(toDashboard)
     }
 }

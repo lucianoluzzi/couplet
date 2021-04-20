@@ -87,7 +87,7 @@ class LoginFragment : Fragment() {
                 getString(R.string.auth_login_error)
             )
             LoginUIState.Loading -> binding.loadingContainer.isVisible = true
-            LoginUIState.Success -> goToSyncWithPartner()
+            LoginUIState.Success -> goToHome()
         }
     }
 
@@ -95,9 +95,9 @@ class LoginFragment : Fragment() {
         textInput.error = errorMessage
     }
 
-    private fun goToSyncWithPartner() {
-        val goToSyncPartner = LoginFragmentDirections.actionLoginFragmentToInvitePartnerFragment()
-        findNavController().navigate(goToSyncPartner)
+    private fun goToHome() {
+        val goToHome = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+        findNavController().navigate(goToHome)
     }
 
     private fun goToRegister() {

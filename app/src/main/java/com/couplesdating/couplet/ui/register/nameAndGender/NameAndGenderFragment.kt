@@ -73,7 +73,7 @@ class NameAndGenderFragment : Fragment() {
                     getString(R.string.empty_login_error)
                 NameAndGenderUIState.OtherGenderEmpty -> binding.otherGenderInputLayout.error =
                     getString(R.string.empty_login_error)
-                NameAndGenderUIState.Success -> goToSyncPartner()
+                NameAndGenderUIState.Success -> goToHome()
                 is NameAndGenderUIState.UpdateError -> binding.nameInputLayout.error =
                     updateResponse.errorMessage
             }
@@ -81,10 +81,10 @@ class NameAndGenderFragment : Fragment() {
         setAnalyticsTrackingForInputs()
     }
 
-    private fun goToSyncPartner() {
-        val goToSyncPartner =
-            NameAndGenderFragmentDirections.actionNameAndGenderFragmentToInvitePartnerFragment()
-        findNavController().navigate(goToSyncPartner)
+    private fun goToHome() {
+        val goToHome =
+            NameAndGenderFragmentDirections.actionNameAndGenderFragmentToHomeFragment()
+        findNavController().navigate(goToHome)
     }
 
     private fun setAnalyticsTrackingForInputs() {

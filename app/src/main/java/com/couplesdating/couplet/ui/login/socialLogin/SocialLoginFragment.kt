@@ -115,7 +115,7 @@ class SocialLoginFragment : Fragment() {
             is SocialLoginUIState.Success -> {
                 binding.loadingContainer.isVisible = false
                 if (uiState.user.pairedPartner == null) {
-                    goToSyncWithPartner()
+                    goToHome()
                 }
             }
             is SocialLoginUIState.AuthError -> {
@@ -128,10 +128,10 @@ class SocialLoginFragment : Fragment() {
         }
     }
 
-    private fun goToSyncWithPartner() {
-        val toSyncWithPartner =
-            SocialLoginFragmentDirections.actionSocialLoginFragmentToInvitePartnerFragment()
-        findNavController().navigate(toSyncWithPartner)
+    private fun goToHome() {
+        val toHome =
+            SocialLoginFragmentDirections.actionSocialLoginFragmentToHomeFragment()
+        findNavController().navigate(toHome)
     }
 
     private fun loginWithGoogle() {
