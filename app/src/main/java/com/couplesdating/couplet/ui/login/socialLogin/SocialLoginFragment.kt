@@ -31,10 +31,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes.SIGN_IN_CANCELLED
 import com.google.android.gms.common.api.ApiException
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SocialLoginFragment : Fragment() {
-    private val viewModel: SocialLoginViewModel by viewModel()
+    private val viewModel by viewModel<SocialLoginViewModel>()
     private lateinit var binding: FragmentSocialLoginBinding
 
     private lateinit var googleSignInResult: ActivityResultLauncher<Intent>

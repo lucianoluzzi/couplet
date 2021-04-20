@@ -14,7 +14,7 @@ import com.couplesdating.couplet.databinding.FragmentOnboardingPrivacyBinding
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PrivacyOnboardingFragment : Fragment() {
     private lateinit var binding: FragmentOnboardingPrivacyBinding

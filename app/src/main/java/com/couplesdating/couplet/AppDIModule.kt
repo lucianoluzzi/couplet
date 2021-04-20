@@ -13,6 +13,8 @@ import com.couplesdating.couplet.data.repository.UserRepository
 import com.couplesdating.couplet.data.repository.UserRepositoryImpl
 import com.couplesdating.couplet.domain.useCase.*
 import com.couplesdating.couplet.ui.MainViewModel
+import com.couplesdating.couplet.ui.dashboard.DashboardFragment
+import com.couplesdating.couplet.ui.dashboard.DashboardViewModel
 import com.couplesdating.couplet.ui.error.ErrorViewModel
 import com.couplesdating.couplet.ui.home.HomeViewModel
 import com.couplesdating.couplet.ui.invite.InvitePartnerViewModel
@@ -28,7 +30,8 @@ import com.couplesdating.couplet.ui.onboarding.privacy.PrivacyViewModel
 import com.couplesdating.couplet.ui.register.emailAndPassword.RegisterViewModel
 import com.couplesdating.couplet.ui.register.nameAndGender.NameAndGenderViewModel
 import org.koin.android.ext.koin.androidContext
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.fragment.dsl.fragment
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
@@ -72,6 +75,10 @@ val appModule = module {
     single<FormPairUseCase> { FormPairUseCaseImpl(get(), get()) }
 
     single<CreateInviteUseCase> { CreateInviteUseCaseImpl(get()) }
+
+    single<ShouldShowSyncUseCase> { ShouldShowSyncUseCaseImpl(get()) }
+
+    single<SetSyncShownUseCase> { SetSyncShownUseCaseImpl(get()) }
 
     viewModel {
         MainViewModel(get())
@@ -144,5 +151,13 @@ val appModule = module {
             get(),
             get()
         )
+    }
+
+    fragment {
+        val dashboardViewModel = DashboardViewModel(
+            shouldShowSyncUseCase = get(),
+            setSyncShownUseCase = get()
+        )
+        DashboardFragment(dashboardViewModel)
     }
 }

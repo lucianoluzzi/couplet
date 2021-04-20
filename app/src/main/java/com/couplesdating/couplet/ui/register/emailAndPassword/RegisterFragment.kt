@@ -13,11 +13,11 @@ import com.couplesdating.couplet.ui.extensions.onGetFocus
 import com.couplesdating.couplet.ui.extensions.setPasswordToggleClickListener
 import com.couplesdating.couplet.ui.extensions.textValue
 import com.google.android.material.textfield.TextInputLayout
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentEmailPasswordBinding
-    private val viewModel: RegisterViewModel by viewModel()
+    private val viewModel by viewModel<RegisterViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

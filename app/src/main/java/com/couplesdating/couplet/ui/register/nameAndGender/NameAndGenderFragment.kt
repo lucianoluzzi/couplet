@@ -14,12 +14,11 @@ import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentNameAndGenderBinding
 import com.couplesdating.couplet.ui.extensions.onGetFocus
 import com.couplesdating.couplet.ui.extensions.textValue
-import org.koin.android.viewmodel.ext.android.viewModel
-
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NameAndGenderFragment : Fragment() {
     private lateinit var binding: FragmentNameAndGenderBinding
-    private val viewModel: NameAndGenderViewModel by viewModel()
+    private val viewModel by viewModel<NameAndGenderViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

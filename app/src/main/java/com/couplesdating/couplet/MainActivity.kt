@@ -9,13 +9,17 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.navigateUp
 import com.couplesdating.couplet.ui.MainViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.fragment.android.setupKoinFragmentFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.KoinExperimentalAPI
 
+@KoinExperimentalAPI
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModel<MainViewModel>()
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setupKoinFragmentFactory()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

@@ -122,9 +122,6 @@
         <action
             android:id="@+id/action_homeFragment_to_dashboardFragment"
             app:destination="@id/dashboardFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_invitePartnerFragment"
-            app:destination="@id/invitePartnerFragment" />
     </fragment>
     <fragment
         android:id="@+id/errorFragment"
@@ -166,6 +163,10 @@
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.couplesdating.couplet.ui.dashboard.DashboardFragment"
-        android:label="DashboardFragment" />
+        android:label="DashboardFragment" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_invitePartnerFragment"
+            app:destination="@id/invitePartnerFragment" />
+    </fragment>
 
 </navigation>

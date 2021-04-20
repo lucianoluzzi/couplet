@@ -17,12 +17,12 @@ import com.couplesdating.couplet.ui.extensions.textValue
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
 import com.google.android.material.snackbar.Snackbar
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ForgotPasswordFragment : Fragment() {
 
     private lateinit var binding: FragmentForgotPasswordBinding
-    private val viewModel: ForgotPasswordViewModel by viewModel()
+    private val viewModel by viewModel<ForgotPasswordViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

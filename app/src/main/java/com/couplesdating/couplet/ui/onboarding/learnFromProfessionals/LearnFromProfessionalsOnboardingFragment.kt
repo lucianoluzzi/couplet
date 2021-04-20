@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.databinding.FragmentLearnFromProfessionalsBinding
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LearnFromProfessionalsOnboardingFragment : Fragment() {
     private lateinit var binding: FragmentLearnFromProfessionalsBinding

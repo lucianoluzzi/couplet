@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentInvitePartnerBinding
 import com.couplesdating.couplet.ui.extensions.textValue
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class InvitePartnerFragment : Fragment() {
     private lateinit var binding: FragmentInvitePartnerBinding

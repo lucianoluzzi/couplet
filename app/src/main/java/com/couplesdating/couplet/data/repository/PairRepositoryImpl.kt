@@ -28,6 +28,17 @@ class PairRepositoryImpl(
         }
     }
 
+    override fun shouldShowSync(): Boolean {
+        return preferences.getBoolean(SHOULD_SHOW_SYNC, true)
+    }
+
+    override fun setSyncPageShown() {
+        with(preferences.edit()) {
+            putBoolean(SHOULD_SHOW_SYNC, false)
+            apply()
+        }
+    }
+
     override suspend fun formPair(
         firstUserId: String,
         secondUserId: String
@@ -70,5 +81,6 @@ class PairRepositoryImpl(
 
     private companion object {
         private const val ACCEPTED_PAIR_INVITE_KEY = "ACCEPTED_PAIR_INVITE"
+        private const val SHOULD_SHOW_SYNC = "SHOULD_SHOW_SYNC"
     }
 }

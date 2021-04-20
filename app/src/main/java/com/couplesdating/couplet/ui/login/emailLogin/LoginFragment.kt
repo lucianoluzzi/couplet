@@ -14,12 +14,12 @@ import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentLoginBinding
 import com.couplesdating.couplet.ui.extensions.*
 import com.google.android.material.textfield.TextInputLayout
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
-    private val viewModel: LoginViewModel by viewModel()
+    private val viewModel by viewModel<LoginViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
