@@ -16,6 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class InvitePartnerFragment : Fragment() {
     private lateinit var binding: FragmentInvitePartnerBinding
     private val viewModel by viewModel<InvitePartnerViewModel>()
+    private var hasClickedOnShare = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,6 +51,7 @@ class InvitePartnerFragment : Fragment() {
     }
 
     private fun shareApp(link: String) {
+        hasClickedOnShare = true
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "text/plain"
         intent.putExtra(Intent.EXTRA_TEXT, link)
@@ -62,5 +64,12 @@ class InvitePartnerFragment : Fragment() {
             bundleOf("error" to errorMessage)
         }
         findNavController().navigate(R.id.errorFragment, bundle)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (hasClickedOnShare) {
+            findNavController().popBackStack()
+        }
     }
 }
