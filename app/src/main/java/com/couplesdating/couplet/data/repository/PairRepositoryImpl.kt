@@ -2,9 +2,11 @@ package com.couplesdating.couplet.data.repository
 
 import android.content.SharedPreferences
 import com.couplesdating.couplet.data.extensions.insert
+import com.couplesdating.couplet.data.extensions.observeKey
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.ui.invite.InviteModel
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.flow.Flow
 
 class PairRepositoryImpl(
     private val database: FirebaseFirestore,
@@ -28,9 +30,7 @@ class PairRepositoryImpl(
         }
     }
 
-    override fun shouldShowSync(): Boolean {
-        return preferences.getBoolean(SHOULD_SHOW_SYNC, true)
-    }
+    override fun shouldShowSync(): Flow<Boolean> = preferences.observeKey(SHOULD_SHOW_SYNC, true)
 
     override fun setSyncPageShown() {
         with(preferences.edit()) {

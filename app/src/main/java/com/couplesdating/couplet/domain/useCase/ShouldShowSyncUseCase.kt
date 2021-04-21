@@ -1,5 +1,7 @@
 package com.couplesdating.couplet.domain.useCase
 
+import kotlinx.coroutines.flow.Flow
+
 interface ShouldShowSyncUseCase {
-    fun invoke() : Boolean
+    fun invoke() : Flow<Boolean>
 }
