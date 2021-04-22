@@ -28,15 +28,17 @@ class InvitePartnerViewModel(
         note: String?
     ) {
         onShareLinkClicked()
-        val currentUser = getCurrentUserUseCase.getCurrentUser()
-        currentUser?.let {
-            viewModelScope.launch {
-                val inviteResponse = createInviteUseCase.createInvite(
-                    currentUser = currentUser,
-                    displayName = displayName,
-                    inviteNote = note
-                )
-                handleResponse(inviteResponse)
+        viewModelScope.launch {
+            val currentUser = getCurrentUserUseCase.getCurrentUser()
+            currentUser?.let {
+                viewModelScope.launch {
+                    val inviteResponse = createInviteUseCase.createInvite(
+                        currentUser = currentUser,
+                        displayName = displayName,
+                        inviteNote = note
+                    )
+                    handleResponse(inviteResponse)
+                }
             }
         }
     }

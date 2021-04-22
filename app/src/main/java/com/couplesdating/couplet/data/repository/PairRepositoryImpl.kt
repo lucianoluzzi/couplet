@@ -4,10 +4,12 @@ import android.content.SharedPreferences
 import com.couplesdating.couplet.data.extensions.insert
 import com.couplesdating.couplet.data.extensions.observeKey
 import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.ui.invite.InviteModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.tasks.await
 
 class PairRepositoryImpl(
     private val database: FirebaseFirestore,
@@ -79,6 +81,38 @@ class PairRepositoryImpl(
         }
 
         return Response.Error(taskResponse.exception?.message)
+    }
+
+    override suspend fun getPartner(currentUserId: String): Response {
+        val firstUserQuery = database.collection("pair")
+            .whereEqualTo("user_1", currentUserId)
+        val secondUserQuery = database.collection("pair")
+            .whereEqualTo("user_2", currentUserId)
+
+        val firstResult = firstUserQuery.get().await()
+        val secondResult = secondUserQuery.get().await()
+        val mergedResulted = firstResult.documents.map {
+            it.get("user_2")?.toString()
+        } + secondResult.documents.map {
+            it.get("user_1")?.toString()
+        }
+
+        val partnerId = mergedResulted.firstOrNull()
+        partnerId?.let {
+            val document = database.collection("users")
+                .document(partnerId).get().await()
+            val email = document.get("email")?.toString()
+            val id = document.get("id")?.toString() ?: ""
+            val displayName = document.get("displayName")?.toString()
+            val partner = User(
+                userId = id,
+                email = email,
+                name = displayName
+            )
+            return Response.Success(partner)
+        }
+
+        return Response.Error("Erro!")
     }
 
     private companion object {

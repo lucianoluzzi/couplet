@@ -31,7 +31,9 @@ class SocialLoginViewModel(
     val uiStateLiveData: LiveData<LiveDataEvent<SocialLoginUIState>> = _uiStateLiveData
 
     init {
-        _userLiveData.value = getCurrentUserUseCase.getCurrentUser()
+        viewModelScope.launch {
+            _userLiveData.value = getCurrentUserUseCase.getCurrentUser()
+        }
     }
 
     fun onGoogleSignIn(idToken: String, displayName: String) {

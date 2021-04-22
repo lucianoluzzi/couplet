@@ -12,4 +12,5 @@ interface PairRepository {
     fun setSyncPageShown()
     suspend fun formPair(firstUserId: String, secondUserId: String): Response
     suspend fun createInvite(inviteModel: InviteModel): Response
+    suspend fun getPartner(currentUserId: String): Response
 }

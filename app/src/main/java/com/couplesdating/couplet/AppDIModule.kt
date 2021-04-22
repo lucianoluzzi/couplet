@@ -53,7 +53,12 @@ val appModule = module {
 
     single<PairRepository> { PairRepositoryImpl(get(), get()) }
 
-    single<GetCurrentUserUseCase> { GetCurrentUserUseCaseImpl(get()) }
+    single<GetCurrentUserUseCase> {
+        GetCurrentUserUseCaseImpl(
+            getPartnerUseCase = get(),
+            userRepository = get()
+        )
+    }
 
     single<SignInUseCase> { SignInUseCaseImpl(get()) }
 
@@ -80,6 +85,8 @@ val appModule = module {
     single<ShouldShowSyncUseCase> { ShouldShowSyncUseCaseImpl(get()) }
 
     single<SetSyncShownUseCase> { SetSyncShownUseCaseImpl(get()) }
+
+    single<GetPartnerUseCase> { GetPartnerUseCaseImpl(get()) }
 
     viewModel {
         MainViewModel(get())
