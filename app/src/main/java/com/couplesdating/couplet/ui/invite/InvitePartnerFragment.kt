@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentInvitePartnerBinding
+import com.couplesdating.couplet.ui.extensions.onGetFocus
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
@@ -41,11 +42,19 @@ class InvitePartnerFragment : Fragment() {
             }
         }
 
-        binding.shareLink.setOnClickListener {
-            viewModel.createInviteLink(
-                binding.partner.textValue(),
-                binding.note.textValue()
-            )
+        with(binding) {
+            partner.onGetFocus {
+                viewModel.onDisplayNameClicked()
+            }
+            note.onGetFocus {
+                viewModel.onNoteClicked()
+            }
+            shareLink.setOnClickListener {
+                viewModel.createInviteLink(
+                    binding.partner.textValue(),
+                    binding.note.textValue()
+                )
+            }
         }
     }
 

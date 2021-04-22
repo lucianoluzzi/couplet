@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.analytics.Analytics
+import com.couplesdating.couplet.analytics.events.userPairing.InviteEvents
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.useCase.CreateInviteUseCase
 import com.couplesdating.couplet.domain.useCase.GenerateInviteLinkUseCase
@@ -26,6 +27,7 @@ class InvitePartnerViewModel(
         displayName: String,
         note: String?
     ) {
+        onShareLinkClicked()
         val currentUser = getCurrentUserUseCase.getCurrentUser()
         currentUser?.let {
             viewModelScope.launch {
@@ -34,25 +36,41 @@ class InvitePartnerViewModel(
                     displayName = displayName,
                     inviteNote = note
                 )
-                when (inviteResponse) {
-                    is Response.Completed -> doNothing
-                    is Response.Error -> {
-                        _deepLink.value = LiveDataEvent(
-                            InvitePartnerUIState.Error(
-                                inviteResponse.errorMessage ?: ""
-                            )
-                        )
-                    }
-                    is Response.Success<*> -> {
-                        if (inviteResponse.data is InviteModel) {
-                            val generatedInviteLink =
-                                generateInviteLinkUseCase.generateInviteLink(inviteResponse.data)
-                            _deepLink.value =
-                                LiveDataEvent(InvitePartnerUIState.Success(generatedInviteLink.toString()))
-                        }
-                    }
+                handleResponse(inviteResponse)
+            }
+        }
+    }
+
+    private fun onShareLinkClicked() {
+        analytics.trackEvent(InviteEvents.ShareLinkClicked)
+    }
+
+    private suspend fun handleResponse(inviteResponse: Response) {
+        when (inviteResponse) {
+            is Response.Completed -> doNothing
+            is Response.Error -> {
+                _deepLink.value = LiveDataEvent(
+                    InvitePartnerUIState.Error(
+                        inviteResponse.errorMessage ?: ""
+                    )
+                )
+            }
+            is Response.Success<*> -> {
+                if (inviteResponse.data is InviteModel) {
+                    val generatedInviteLink =
+                        generateInviteLinkUseCase.generateInviteLink(inviteResponse.data)
+                    _deepLink.value =
+                        LiveDataEvent(InvitePartnerUIState.Success(generatedInviteLink.toString()))
                 }
             }
         }
+    }
+
+    fun onDisplayNameClicked() {
+        analytics.trackEvent(InviteEvents.DisplayNameClicked)
+    }
+
+    fun onNoteClicked() {
+        analytics.trackEvent(InviteEvents.NoteClicked)
     }
 }
