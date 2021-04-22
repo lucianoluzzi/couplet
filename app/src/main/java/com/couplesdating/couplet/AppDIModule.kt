@@ -18,6 +18,7 @@ import com.couplesdating.couplet.ui.dashboard.DashboardViewModel
 import com.couplesdating.couplet.ui.error.ErrorViewModel
 import com.couplesdating.couplet.ui.home.HomeViewModel
 import com.couplesdating.couplet.ui.invite.InvitePartnerViewModel
+import com.couplesdating.couplet.ui.invited.InvitedFragment
 import com.couplesdating.couplet.ui.invited.InvitedViewModel
 import com.couplesdating.couplet.ui.login.emailLogin.LoginViewModel
 import com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordViewModel
@@ -159,5 +160,12 @@ val appModule = module {
             setSyncShownUseCase = get()
         )
         DashboardFragment(dashboardViewModel)
+    }
+    fragment {
+        val invitedViewModel = InvitedViewModel(
+            acceptUserInviteUseCase = get(),
+            analytics = get()
+        )
+        InvitedFragment(invitedViewModel)
     }
 }

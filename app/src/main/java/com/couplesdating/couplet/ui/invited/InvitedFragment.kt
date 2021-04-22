@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.databinding.FragmentInvitedBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class InvitedFragment : Fragment() {
+class InvitedFragment(
+    private val viewModel: InvitedViewModel
+) : Fragment() {
     private lateinit var binding: FragmentInvitedBinding
     private val navigationArguments by navArgs<InvitedFragmentArgs>()
-    private val viewModel by viewModel<InvitedViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

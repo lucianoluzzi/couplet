@@ -11,7 +11,7 @@ class GenerateInviteLinkUseCaseImpl(
     override suspend fun generateInviteLink(inviteModel: InviteModel): Uri {
         val inviteMap = mutableMapOf<String, String>().apply {
             put("id", inviteModel.userId)
-            put("invite_id", inviteModel.inviteId)
+            put("inviteId", inviteModel.inviteId)
             if (inviteModel.displayName.isNotBlank()) {
                 put("displayName", inviteModel.displayName)
             }

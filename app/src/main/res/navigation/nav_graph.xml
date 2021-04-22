@@ -138,9 +138,12 @@
         <deepLink
             android:id="@+id/deepLink"
             android:autoVerify="true"
-            app:uri="https://couplet.love/partner?id={id}&amp;displayName={displayName}&amp;note={note}" />
+            app:uri="https://couplet.love/partner?id={id}&amp;inviteId={inviteId}&amp;displayName={displayName}&amp;note={note}" />
         <argument
             android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="inviteId"
             app:argType="string" />
         <argument
             android:name="displayName"
@@ -163,7 +166,7 @@
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.couplesdating.couplet.ui.dashboard.DashboardFragment"
-        android:label="DashboardFragment" >
+        android:label="DashboardFragment">
         <action
             android:id="@+id/action_dashboardFragment_to_invitePartnerFragment"
             app:destination="@id/invitePartnerFragment" />
