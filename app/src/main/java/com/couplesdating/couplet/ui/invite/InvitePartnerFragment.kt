@@ -1,15 +1,20 @@
 package com.couplesdating.couplet.ui.invite
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.SpannableString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentInvitePartnerBinding
+import com.couplesdating.couplet.ui.extensions.setColor
+import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,6 +34,7 @@ class InvitePartnerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        decorateTitle()
         viewModel.deepLink.observe(viewLifecycleOwner) { liveDataEvent ->
             liveDataEvent.getContentIfNotHandled()?.let {
                 handleUIState(it)
@@ -41,6 +47,20 @@ class InvitePartnerFragment : Fragment() {
                 binding.note.textValue()
             )
         }
+    }
+
+    private fun decorateTitle() {
+        val titleText = binding.title.textValue()
+        val spannable = SpannableString(titleText)
+
+        val medium = Typeface.create(
+            ResourcesCompat.getFont(requireContext(), R.font.medium),
+            Typeface.NORMAL
+        )
+        val color = requireContext().getColor(R.color.red)
+        spannable.setColor(color, "partner", titleText)
+        spannable.setFont(medium, "partner", titleText)
+        binding.title.text = spannable
     }
 
     private fun handleUIState(uiState: InvitePartnerUIState) {
