@@ -13,7 +13,7 @@ class GenerateInviteLinkUseCaseImpl(
             put("id", inviteModel.userId)
             put("inviteId", inviteModel.inviteId)
             if (inviteModel.displayName.isNotBlank()) {
-                put("displayName", inviteModel.displayName)
+                put("displayName", inviteModel.currentUserDisplay)
             }
             if (!inviteModel.note.isNullOrBlank()) {
                 put("note", inviteModel.note)

@@ -124,6 +124,8 @@ val appModule = module {
     viewModel {
         RegisterViewModel(
             get(),
+            get(),
+            get(),
             get()
         )
     }
