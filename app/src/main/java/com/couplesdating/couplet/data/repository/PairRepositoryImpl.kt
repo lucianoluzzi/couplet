@@ -6,6 +6,7 @@ import com.couplesdating.couplet.data.extensions.observeKey
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.ui.invite.InviteModel
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.flow.Flow
 
 class PairRepositoryImpl(
@@ -71,7 +72,7 @@ class PairRepositoryImpl(
         val taskResponse = database
             .collection("invite")
             .document(inviteModel.userId)
-            .set(pairMap)
+            .set(pairMap, SetOptions.merge())
 
         if (taskResponse.isSuccessful) {
             return Response.Completed
