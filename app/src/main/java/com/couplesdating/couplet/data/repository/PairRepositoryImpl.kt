@@ -70,7 +70,8 @@ class PairRepositoryImpl(
 
         val taskResponse = database
             .collection("invite")
-            .insert(pairMap)
+            .document(inviteModel.userId)
+            .set(pairMap)
 
         if (taskResponse.isSuccessful) {
             return Response.Completed
