@@ -1,14 +1,22 @@
 package com.couplesdating.couplet.ui.invited
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentInvitedBinding
+import com.couplesdating.couplet.ui.extensions.setColor
+import com.couplesdating.couplet.ui.extensions.setFont
+import com.couplesdating.couplet.ui.extensions.textValue
 
 class InvitedFragment(
     private val viewModel: InvitedViewModel
@@ -48,17 +56,53 @@ class InvitedFragment(
         findNavController().navigate(toSocialLogin)
     }
 
-    private fun setUpTexts() {
-        binding.invited.text = "You got invited"
+    private fun setUpTexts() = with(binding) {
+        decorateTitle()
+
+        val invitedByText = invitedBy.textValue()
         val displayName = navigationArguments.displayName
         if (!displayName.isNullOrBlank()) {
-            binding.invited.append(" by $displayName")
+            invitedBy.text = invitedByText.replace("Someone", displayName)
+            invitedBy.text = decorateText(
+                textToDecorate = displayName,
+                fullText = invitedBy.textValue()
+            )
+        } else {
+            invitedBy.text = decorateText(
+                textToDecorate = "pair",
+                fullText = invitedByText
+            )
         }
 
         navigationArguments.note?.let {
-            binding.note.isVisible = true
-            binding.note.text = it
+            note.isVisible = true
+            note.text = it
         }
+    }
+
+    private fun FragmentInvitedBinding.decorateTitle() {
+        val titleText = title.textValue()
+        title.text = decorateText(
+            textToDecorate = "invited",
+            fullText = titleText
+        )
+    }
+
+    private fun decorateText(
+        textToDecorate: String,
+        fullText: String
+    ): Spannable {
+        val spannable = SpannableString(fullText)
+
+        val medium = Typeface.create(
+            ResourcesCompat.getFont(requireContext(), R.font.medium),
+            Typeface.NORMAL
+        )
+        val color = requireContext().getColor(R.color.red)
+        spannable.setColor(color, textToDecorate, fullText)
+        spannable.setFont(medium, textToDecorate, fullText)
+
+        return spannable
     }
 
     private fun setUpButtonsClick() {
@@ -66,7 +110,7 @@ class InvitedFragment(
             val inviterId = navigationArguments.id
             viewModel.onInviteAccepted(inviterId)
         }
-        binding.reject.setOnClickListener {
+        binding.close.setOnClickListener {
             viewModel.onInviteRejected()
         }
     }
