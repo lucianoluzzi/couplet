@@ -56,6 +56,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_close"
+                android:padding="@dimen/dimension_8"
+                android:background="?selectableItemBackground"
                 app:layout_constraintBottom_toBottomOf="@id/title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/title"
