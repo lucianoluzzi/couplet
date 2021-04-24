@@ -39,6 +39,7 @@ class InvitedFragment(
         viewModel.uiState.observe(viewLifecycleOwner) {
             onUiState(it)
         }
+        viewModel.inviteExists(navigationArguments.inviteId)
         setUpTexts()
         setUpButtonsClick()
     }
@@ -47,6 +48,14 @@ class InvitedFragment(
         when (uiState) {
             is InvitedUIState.AcceptedInvite -> findNavController().popBackStack()
             is InvitedUIState.RejectedInvite -> findNavController().popBackStack()
+            is InvitedUIState.InviteExists -> {
+                if (!uiState.exists) {
+                    findNavController().popBackStack()
+                } else {
+                    binding.loadingContainer.isVisible = false
+                    binding.contentContainer.isVisible = true
+                }
+            }
         }
     }
 

@@ -89,6 +89,8 @@ val appModule = module {
 
     single<GetPartnerUseCase> { GetPartnerUseCaseImpl(get()) }
 
+    single<InviteExistsUseCase> { InviteExistsUseCaseImpl(get()) }
+
     viewModel {
         MainViewModel(get())
     }
@@ -154,12 +156,6 @@ val appModule = module {
             get()
         )
     }
-    viewModel {
-        InvitedViewModel(
-            get(),
-            get()
-        )
-    }
 
     fragment {
         val dashboardViewModel = DashboardViewModel(
@@ -171,6 +167,7 @@ val appModule = module {
     fragment {
         val invitedViewModel = InvitedViewModel(
             acceptUserInviteUseCase = get(),
+            inviteExistsUseCase = get(),
             analytics = get()
         )
         InvitedFragment(invitedViewModel)

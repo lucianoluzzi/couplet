@@ -13,4 +13,5 @@ interface PairRepository {
     suspend fun formPair(firstUserId: String, secondUserId: String): Response
     suspend fun createInvite(inviteModel: InviteModel): Response
     suspend fun getPartner(currentUserId: String): Response
+    suspend fun inviteExists(inviteId: String): Boolean
 }

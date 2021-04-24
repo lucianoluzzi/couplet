@@ -73,7 +73,7 @@ class PairRepositoryImpl(
 
         val taskResponse = database
             .collection("invite")
-            .document(inviteModel.userId)
+            .document(inviteModel.inviteId)
             .set(pairMap, SetOptions.merge())
 
         if (taskResponse.isSuccessful) {
@@ -113,6 +113,14 @@ class PairRepositoryImpl(
         }
 
         return Response.Error("Erro!")
+    }
+
+    override suspend fun inviteExists(inviteId: String): Boolean {
+        val response = database.collection("invite")
+            .document(inviteId)
+            .get().await()
+
+        return response.exists()
     }
 
     private companion object {
