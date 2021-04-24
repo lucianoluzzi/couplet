@@ -21,7 +21,7 @@ class InvitedViewModel(
     }
 
     fun onInviteRejected() {
-        analytics.trackEvent(InvitedEvents.RejectInviteClicked)
+        analytics.trackEvent(InvitedEvents.CloseClicked)
         _uiState.value = InvitedUIState.RejectedInvite
     }
 }

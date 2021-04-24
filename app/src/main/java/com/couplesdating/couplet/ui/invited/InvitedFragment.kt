@@ -58,7 +58,15 @@ class InvitedFragment(
 
     private fun setUpTexts() = with(binding) {
         decorateTitle()
+        setInvitedByText()
 
+        navigationArguments.note?.let {
+            note.isVisible = true
+            note.text = it
+        }
+    }
+
+    private fun FragmentInvitedBinding.setInvitedByText() {
         val invitedByText = invitedBy.textValue()
         val displayName = navigationArguments.displayName
         if (!displayName.isNullOrBlank()) {
@@ -72,11 +80,6 @@ class InvitedFragment(
                 textToDecorate = "pair",
                 fullText = invitedByText
             )
-        }
-
-        navigationArguments.note?.let {
-            note.isVisible = true
-            note.text = it
         }
     }
 
