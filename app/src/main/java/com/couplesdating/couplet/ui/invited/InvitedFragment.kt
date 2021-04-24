@@ -45,15 +45,9 @@ class InvitedFragment(
 
     private fun onUiState(uiState: InvitedUIState) {
         when (uiState) {
-            is InvitedUIState.AcceptedInvite -> navigateToSocialLogin()
-            is InvitedUIState.RejectedInvite -> navigateToSocialLogin()
+            is InvitedUIState.AcceptedInvite -> findNavController().popBackStack()
+            is InvitedUIState.RejectedInvite -> findNavController().popBackStack()
         }
-    }
-
-    private fun navigateToSocialLogin() {
-        val toSocialLogin =
-            InvitedFragmentDirections.actionInvitedFragmentToSocialLoginFragment()
-        findNavController().navigate(toSocialLogin)
     }
 
     private fun setUpTexts() = with(binding) {
