@@ -3,11 +3,13 @@ package com.couplesdating.couplet.data.repository
 import android.content.SharedPreferences
 import com.couplesdating.couplet.data.extensions.insert
 import com.couplesdating.couplet.data.extensions.observeKey
+import com.couplesdating.couplet.domain.model.AcceptedInvite
+import com.couplesdating.couplet.domain.model.InviteModel
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.model.User
-import com.couplesdating.couplet.domain.model.InviteModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
 
@@ -16,15 +18,20 @@ class PairRepositoryImpl(
     private val preferences: SharedPreferences
 ) : PairRepository {
 
-    override fun saveAcceptedPairInvite(firstUserId: String) {
+    override fun saveAcceptedPairInvite(acceptedInvite: AcceptedInvite) {
+        val acceptedInviteJson = Gson().toJson(acceptedInvite)
         with(preferences.edit()) {
-            putString(ACCEPTED_PAIR_INVITE_KEY, firstUserId)
+            putString(ACCEPTED_PAIR_INVITE_KEY, acceptedInviteJson)
             apply()
         }
     }
 
-    override fun getAcceptedPairInviteUser(): String? =
-        preferences.getString(ACCEPTED_PAIR_INVITE_KEY, null)
+    override fun getAcceptedPairInviteUser(): AcceptedInvite? {
+        val acceptedInviteJson = preferences.getString(ACCEPTED_PAIR_INVITE_KEY, null)
+        return acceptedInviteJson?.let {
+            Gson().fromJson(it, AcceptedInvite::class.java)
+        }
+    }
 
     override fun deletePairInvite() {
         with(preferences.edit()) {

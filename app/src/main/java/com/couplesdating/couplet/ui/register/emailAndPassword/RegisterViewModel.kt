@@ -86,9 +86,9 @@ class RegisterViewModel(
     }
 
     private suspend fun formPairIfInviteAccepted() {
-        val acceptedInviteUserId = getAcceptedInviteUseCase.getAcceptedInviteUserId()
+        val acceptedInviteUserId = getAcceptedInviteUseCase.getAcceptedInvite()
         acceptedInviteUserId?.let {
-            formPairUseCase.formPair(it)
+            formPairUseCase.formPair(it.userId)
         }
     }
 

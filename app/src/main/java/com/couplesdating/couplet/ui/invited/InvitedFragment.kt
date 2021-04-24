@@ -113,8 +113,10 @@ class InvitedFragment(
 
     private fun setUpButtonsClick() {
         binding.accept.setOnClickListener {
-            val inviterId = navigationArguments.id
-            viewModel.onInviteAccepted(inviterId)
+            viewModel.onInviteAccepted(
+                inviterId = navigationArguments.id,
+                inviteId = navigationArguments.inviteId
+            )
         }
         binding.close.setOnClickListener {
             viewModel.onInviteRejected()

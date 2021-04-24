@@ -25,9 +25,15 @@ class InvitedViewModel(
         }
     }
 
-    fun onInviteAccepted(inviterId: String) {
+    fun onInviteAccepted(
+        inviteId: String,
+        inviterId: String
+    ) {
         analytics.trackEvent(InvitedEvents.AcceptInviteClicked)
-        acceptUserInviteUseCase.acceptUserInvite(inviterId)
+        acceptUserInviteUseCase.acceptUserInvite(
+            inviteId,
+            inviterId
+        )
         _uiState.value = InvitedUIState.AcceptedInvite
     }
 

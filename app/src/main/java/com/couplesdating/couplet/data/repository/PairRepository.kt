@@ -1,12 +1,13 @@
 package com.couplesdating.couplet.data.repository
 
+import com.couplesdating.couplet.domain.model.AcceptedInvite
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.model.InviteModel
 import kotlinx.coroutines.flow.Flow
 
 interface PairRepository {
-    fun saveAcceptedPairInvite(firstUserId: String)
-    fun getAcceptedPairInviteUser(): String?
+    fun saveAcceptedPairInvite(acceptedInvite: AcceptedInvite)
+    fun getAcceptedPairInviteUser(): AcceptedInvite?
     fun deletePairInvite()
     fun shouldShowSync(): Flow<Boolean>
     fun setSyncPageShown()

@@ -70,8 +70,8 @@ class SocialLoginViewModel(
     }
 
     private suspend fun onSuccessResponse() {
-        val loggedInUser = getCurrentUserUseCase.getCurrentUser()
         formPairIfInviteAccepted()
+        val loggedInUser = getCurrentUserUseCase.getCurrentUser()
         loggedInUser?.let {
             setLiveDataValue(
                 SocialLoginUIState.Success(
@@ -82,9 +82,9 @@ class SocialLoginViewModel(
     }
 
     private suspend fun formPairIfInviteAccepted() {
-        val acceptedInviteUserId = getAcceptedInviteUseCase.getAcceptedInviteUserId()
+        val acceptedInviteUserId = getAcceptedInviteUseCase.getAcceptedInvite()
         acceptedInviteUserId?.let {
-            formPairUseCase.formPair(it)
+            formPairUseCase.formPair(it.userId)
         }
     }
 
