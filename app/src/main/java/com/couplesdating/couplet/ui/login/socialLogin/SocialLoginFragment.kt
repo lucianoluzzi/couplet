@@ -18,6 +18,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentSocialLoginBinding
+import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.setUnderline
@@ -114,9 +115,7 @@ class SocialLoginFragment : Fragment() {
         when (uiState) {
             is SocialLoginUIState.Success -> {
                 binding.loadingContainer.isVisible = false
-                if (uiState.user.pairedPartner == null) {
-                    goToHome()
-                }
+                goToHome(uiState.user)
             }
             is SocialLoginUIState.AuthError -> {
                 binding.loadingContainer.isVisible = false
@@ -128,9 +127,9 @@ class SocialLoginFragment : Fragment() {
         }
     }
 
-    private fun goToHome() {
+    private fun goToHome(user: User?) {
         val toHome =
-            SocialLoginFragmentDirections.actionSocialLoginFragmentToHomeFragment()
+            SocialLoginFragmentDirections.actionSocialLoginFragmentToHomeFragment(user)
         findNavController().navigate(toHome)
     }
 

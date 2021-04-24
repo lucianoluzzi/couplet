@@ -7,18 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentHomeBinding
 import com.couplesdating.couplet.domain.model.User
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
-
-    private val viewModel by viewModel<HomeViewModel>()
     private lateinit var binding: FragmentHomeBinding
-    private val navController by lazy {
-        findNavController()
-    }
+    private val navigationArgs: HomeFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,16 +27,14 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.currentUser.observe(viewLifecycleOwner) { user ->
-            doNavigate(user)
-        }
+        doNavigate(navigationArgs.user)
     }
 
     private fun doNavigate(user: User?) {
         if (user == null) {
             goToOnboardingOrLogin()
         } else {
-            goToDashboard()
+            goToDashboard(user)
         }
     }
 
@@ -50,7 +44,7 @@ class HomeFragment : Fragment() {
         } else {
             HomeFragmentDirections.actionHomeFragmentToOnboardingFragment()
         }
-        navController.navigate(direction)
+        findNavController().navigate(direction)
     }
 
     private fun hasShownOnboarding(): Boolean {
@@ -58,8 +52,8 @@ class HomeFragment : Fragment() {
         return preferences.getBoolean(getString(R.string.has_shown_onboarding_key), false)
     }
 
-    private fun goToDashboard() {
-        val toDashboard = HomeFragmentDirections.actionHomeFragmentToDashboardFragment()
+    private fun goToDashboard(user: User?) {
+        val toDashboard = HomeFragmentDirections.actionHomeFragmentToDashboardFragment(user)
         findNavController().navigate(toDashboard)
     }
 }
