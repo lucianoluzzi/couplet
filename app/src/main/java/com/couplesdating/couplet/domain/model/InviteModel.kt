@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.ui.invite
+package com.couplesdating.couplet.domain.model
 
 data class InviteModel(
     val userId: String,

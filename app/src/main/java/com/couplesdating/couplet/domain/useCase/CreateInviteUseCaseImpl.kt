@@ -3,7 +3,7 @@ package com.couplesdating.couplet.domain.useCase
 import com.couplesdating.couplet.data.repository.PairRepository
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.model.User
-import com.couplesdating.couplet.ui.invite.InviteModel
+import com.couplesdating.couplet.domain.model.InviteModel
 
 class CreateInviteUseCaseImpl(
     private val pairRepository: PairRepository

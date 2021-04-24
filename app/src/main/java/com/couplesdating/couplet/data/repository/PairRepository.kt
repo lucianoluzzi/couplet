@@ -1,7 +1,7 @@
 package com.couplesdating.couplet.data.repository
 
 import com.couplesdating.couplet.domain.model.Response
-import com.couplesdating.couplet.ui.invite.InviteModel
+import com.couplesdating.couplet.domain.model.InviteModel
 import kotlinx.coroutines.flow.Flow
 
 interface PairRepository {

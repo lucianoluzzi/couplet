@@ -2,7 +2,7 @@ package com.couplesdating.couplet.domain.useCase
 
 import android.net.Uri
 import com.couplesdating.couplet.data.DynamicLinkProvider
-import com.couplesdating.couplet.ui.invite.InviteModel
+import com.couplesdating.couplet.domain.model.InviteModel
 
 class GenerateInviteLinkUseCaseImpl(
     private val dynamicLinkProvider: DynamicLinkProvider

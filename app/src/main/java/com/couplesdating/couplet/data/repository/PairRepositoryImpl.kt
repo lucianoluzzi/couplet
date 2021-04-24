@@ -5,7 +5,7 @@ import com.couplesdating.couplet.data.extensions.insert
 import com.couplesdating.couplet.data.extensions.observeKey
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.model.User
-import com.couplesdating.couplet.ui.invite.InviteModel
+import com.couplesdating.couplet.domain.model.InviteModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.flow.Flow
