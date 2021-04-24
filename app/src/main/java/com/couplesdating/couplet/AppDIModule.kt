@@ -16,6 +16,8 @@ import com.couplesdating.couplet.ui.MainViewModel
 import com.couplesdating.couplet.ui.dashboard.DashboardFragment
 import com.couplesdating.couplet.ui.dashboard.DashboardViewModel
 import com.couplesdating.couplet.ui.error.ErrorViewModel
+import com.couplesdating.couplet.ui.home.HomeFragment
+import com.couplesdating.couplet.ui.home.HomeViewModel
 import com.couplesdating.couplet.ui.invite.InvitePartnerViewModel
 import com.couplesdating.couplet.ui.invited.InvitedFragment
 import com.couplesdating.couplet.ui.invited.InvitedViewModel
@@ -172,5 +174,11 @@ val appModule = module {
             analytics = get()
         )
         InvitedFragment(invitedViewModel)
+    }
+    fragment {
+        val homeViewModel = HomeViewModel(
+            getCurrentUserUseCase = get()
+        )
+        HomeFragment(homeViewModel)
     }
 }

@@ -165,12 +165,8 @@
             app:argType="string"
             app:nullable="true" />
         <action
-            android:id="@+id/action_invitedFragment_to_socialLoginFragment"
-            app:destination="@id/socialLoginFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"
+            android:id="@+id/action_invitedFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
             app:popUpTo="@id/invitedFragment"
             app:popUpToInclusive="true" />
     </fragment>

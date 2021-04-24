@@ -12,7 +12,9 @@ import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentHomeBinding
 import com.couplesdating.couplet.domain.model.User
 
-class HomeFragment : Fragment() {
+class HomeFragment(
+    private val viewModel: HomeViewModel
+) : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private val navigationArgs: HomeFragmentArgs by navArgs()
 
@@ -27,7 +29,14 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        doNavigate(navigationArgs.user)
+
+        navigationArgs.user?.let {
+            doNavigate(it)
+        } ?: run {
+            viewModel.currentUser.observe(viewLifecycleOwner) {
+                doNavigate(it)
+            }
+        }
     }
 
     private fun doNavigate(user: User?) {
