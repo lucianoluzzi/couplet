@@ -19,6 +19,7 @@ val fragmentModule = module {
     }
     fragment {
         val invitedViewModel = InvitedViewModel(
+            getCurrentUserUseCase = get(),
             acceptUserInviteUseCase = get(),
             inviteExistsUseCase = get(),
             analytics = get()

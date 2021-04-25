@@ -8,9 +8,11 @@ import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.events.userPairing.InvitedEvents
 import com.couplesdating.couplet.domain.useCase.invite.AcceptUserInviteUseCase
 import com.couplesdating.couplet.domain.useCase.invite.InviteExistsUseCase
+import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCase
 import kotlinx.coroutines.launch
 
 class InvitedViewModel(
+    private val getCurrentUserUseCase: GetCurrentUserUseCase,
     private val acceptUserInviteUseCase: AcceptUserInviteUseCase,
     private val inviteExistsUseCase: InviteExistsUseCase,
     private val analytics: Analytics
@@ -18,10 +20,16 @@ class InvitedViewModel(
     private val _uiState = MutableLiveData<InvitedUIState>()
     val uiState: LiveData<InvitedUIState> = _uiState
 
-    fun inviteExists(inviteId: String) {
+    fun getData(inviteId: String) {
         viewModelScope.launch {
             val inviteExists = inviteExistsUseCase.inviteExists(inviteId)
-            _uiState.value = InvitedUIState.InviteExists(inviteExists)
+            val currentUser = getCurrentUserUseCase.getCurrentUser()
+
+            if (currentUser != null) {
+                _uiState.value = InvitedUIState.SameUser
+            } else {
+                _uiState.value = InvitedUIState.InviteExists(inviteExists)
+            }
         }
     }
 

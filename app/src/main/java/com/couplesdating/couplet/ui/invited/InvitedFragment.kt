@@ -39,7 +39,7 @@ class InvitedFragment(
         viewModel.uiState.observe(viewLifecycleOwner) {
             onUiState(it)
         }
-        viewModel.inviteExists(navigationArguments.inviteId)
+        viewModel.getData(navigationArguments.inviteId)
         setUpTexts()
         setUpButtonsClick()
     }
@@ -56,6 +56,7 @@ class InvitedFragment(
                     binding.contentContainer.isVisible = true
                 }
             }
+            InvitedUIState.SameUser -> findNavController().popBackStack()
         }
     }
 
