@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.couplesdating.couplet.domain.useCase.SetSyncShownUseCase
-import com.couplesdating.couplet.domain.useCase.ShouldShowSyncUseCase
+import com.couplesdating.couplet.domain.useCase.pair.SetSyncShownUseCase
+import com.couplesdating.couplet.domain.useCase.pair.ShouldShowSyncUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 

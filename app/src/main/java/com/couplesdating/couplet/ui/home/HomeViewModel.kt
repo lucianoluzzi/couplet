@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.couplesdating.couplet.domain.useCase.GetAcceptedInviteUseCase
-import com.couplesdating.couplet.domain.useCase.GetCurrentUserUseCase
+import com.couplesdating.couplet.domain.useCase.invite.GetAcceptedInviteUseCase
+import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCase
 import kotlinx.coroutines.launch
 
 class HomeViewModel(

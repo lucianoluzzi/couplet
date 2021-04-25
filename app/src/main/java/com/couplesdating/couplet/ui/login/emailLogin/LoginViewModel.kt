@@ -5,9 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.analytics.Analytics
-import com.couplesdating.couplet.analytics.events.*
 import com.couplesdating.couplet.analytics.events.onboarding.LoginEvents
-import com.couplesdating.couplet.domain.useCase.SignInUseCase
+import com.couplesdating.couplet.domain.useCase.auth.SignInUseCase
 import kotlinx.coroutines.launch
 
 class LoginViewModel(

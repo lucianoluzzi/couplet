@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.events.userPairing.InvitedEvents
-import com.couplesdating.couplet.domain.useCase.AcceptUserInviteUseCase
-import com.couplesdating.couplet.domain.useCase.InviteExistsUseCase
+import com.couplesdating.couplet.domain.useCase.invite.AcceptUserInviteUseCase
+import com.couplesdating.couplet.domain.useCase.invite.InviteExistsUseCase
 import kotlinx.coroutines.launch
 
 class InvitedViewModel(

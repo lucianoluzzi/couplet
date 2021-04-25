@@ -8,8 +8,8 @@ import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.events.login.RegisterEvents
 import com.couplesdating.couplet.data.repository.UserRepository
 import com.couplesdating.couplet.domain.model.Response
-import com.couplesdating.couplet.domain.useCase.FormPairUseCase
-import com.couplesdating.couplet.domain.useCase.GetAcceptedInviteUseCase
+import com.couplesdating.couplet.domain.useCase.pair.FormPairUseCase
+import com.couplesdating.couplet.domain.useCase.invite.GetAcceptedInviteUseCase
 import com.couplesdating.couplet.ui.utils.LiveDataEvent
 import com.couplesdating.couplet.ui.utils.asLiveDataEvent
 import kotlinx.coroutines.launch

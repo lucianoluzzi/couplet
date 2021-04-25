@@ -8,7 +8,13 @@ import com.couplesdating.couplet.data.FirebaseAuthProvider
 import com.couplesdating.couplet.data.FirestoreProvider
 import com.couplesdating.couplet.data.SharedPreferencesProvider
 import com.couplesdating.couplet.data.repository.*
-import com.couplesdating.couplet.domain.useCase.*
+import com.couplesdating.couplet.domain.useCase.auth.*
+import com.couplesdating.couplet.domain.useCase.invite.*
+import com.couplesdating.couplet.domain.useCase.pair.*
+import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCase
+import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCaseImpl
+import com.couplesdating.couplet.domain.useCase.user.UpdateUserUseCase
+import com.couplesdating.couplet.domain.useCase.user.UpdateUserUseCaseImpl
 import com.couplesdating.couplet.ui.MainViewModel
 import com.couplesdating.couplet.ui.dashboard.DashboardFragment
 import com.couplesdating.couplet.ui.dashboard.DashboardViewModel
