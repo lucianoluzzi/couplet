@@ -1,20 +1,5 @@
 package com.couplesdating.couplet
 
-import com.couplesdating.couplet.analytics.Analytics
-import com.couplesdating.couplet.analytics.FirebaseAnalyticsProvider
-import com.couplesdating.couplet.analytics.FirebaseAnalyticsTracker
-import com.couplesdating.couplet.data.DynamicLinkProvider
-import com.couplesdating.couplet.data.FirebaseAuthProvider
-import com.couplesdating.couplet.data.FirestoreProvider
-import com.couplesdating.couplet.data.SharedPreferencesProvider
-import com.couplesdating.couplet.data.repository.*
-import com.couplesdating.couplet.domain.useCase.auth.*
-import com.couplesdating.couplet.domain.useCase.invite.*
-import com.couplesdating.couplet.domain.useCase.pair.*
-import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCase
-import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCaseImpl
-import com.couplesdating.couplet.domain.useCase.user.UpdateUserUseCase
-import com.couplesdating.couplet.domain.useCase.user.UpdateUserUseCaseImpl
 import com.couplesdating.couplet.ui.MainViewModel
 import com.couplesdating.couplet.ui.dashboard.DashboardFragment
 import com.couplesdating.couplet.ui.dashboard.DashboardViewModel
@@ -34,69 +19,11 @@ import com.couplesdating.couplet.ui.onboarding.mildToWild.MildToWildViewModel
 import com.couplesdating.couplet.ui.onboarding.privacy.PrivacyViewModel
 import com.couplesdating.couplet.ui.register.emailAndPassword.RegisterViewModel
 import com.couplesdating.couplet.ui.register.nameAndGender.NameAndGenderViewModel
-import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.fragment.dsl.fragment
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
-
-    single { SharedPreferencesProvider(androidContext()).preferences }
-
-    single { DynamicLinkProvider() }
-
-    single { FirestoreProvider().firestoreDatabase }
-
-    single { FirebaseAnalyticsProvider().analytics }
-
-    single { FirebaseAuthProvider().firebaseAuth }
-
-    single<Analytics> { FirebaseAnalyticsTracker(get()) }
-
-    single<UserRepository> { UserRepositoryImpl(get()) }
-
-    single<PairRepository> { PairRepositoryImpl(get(), get()) }
-
-    single<InviteRepository> { InviteRepositoryImpl(get(), get()) }
-
-    single<GetCurrentUserUseCase> {
-        GetCurrentUserUseCaseImpl(
-            getPartnerUseCase = get(),
-            userRepository = get()
-        )
-    }
-
-    single<SignInUseCase> { SignInUseCaseImpl(get()) }
-
-    single<RegisterUseCase> { RegisterUseCaseImpl(get()) }
-
-    single<UpdateUserUseCase> { UpdateUserUseCaseImpl(get()) }
-
-    single<ResetPasswordUseCase> { ResetPasswordUseCaseImpl(get()) }
-
-    single<GoogleSignInUseCase> { GoogleSignInUseCaseImpl(get()) }
-
-    single<FacebookSignInUseCase> { FacebookSignInUseCaseImpl(get()) }
-
-    single<GenerateInviteLinkUseCase> { GenerateInviteLinkUseCaseImpl(get()) }
-
-    single<AcceptUserInviteUseCase> { AcceptUserInviteUseCaseImpl(get()) }
-
-    single<GetAcceptedInviteUseCase> { GetAcceptedInviteUseCaseImpl(get()) }
-
-    single<DeleteInviteUseCase> { DeleteInviteUseCaseImpl(get()) }
-
-    single<FormPairUseCase> { FormPairUseCaseImpl(get(), get()) }
-
-    single<CreateInviteUseCase> { CreateInviteUseCaseImpl(get()) }
-
-    single<ShouldShowSyncUseCase> { ShouldShowSyncUseCaseImpl(get()) }
-
-    single<SetSyncShownUseCase> { SetSyncShownUseCaseImpl(get()) }
-
-    single<GetPartnerUseCase> { GetPartnerUseCaseImpl(get()) }
-
-    single<InviteExistsUseCase> { InviteExistsUseCaseImpl(get()) }
 
     viewModel {
         MainViewModel(get())
@@ -163,28 +90,5 @@ val appModule = module {
             get(),
             get()
         )
-    }
-
-    fragment {
-        val dashboardViewModel = DashboardViewModel(
-            shouldShowSyncUseCase = get(),
-            setSyncShownUseCase = get()
-        )
-        DashboardFragment(dashboardViewModel)
-    }
-    fragment {
-        val invitedViewModel = InvitedViewModel(
-            acceptUserInviteUseCase = get(),
-            inviteExistsUseCase = get(),
-            analytics = get()
-        )
-        InvitedFragment(invitedViewModel)
-    }
-    fragment {
-        val homeViewModel = HomeViewModel(
-            getCurrentUserUseCase = get(),
-            getAcceptedInviteUseCase = get()
-        )
-        HomeFragment(homeViewModel)
     }
 }
