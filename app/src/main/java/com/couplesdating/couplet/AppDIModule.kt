@@ -176,7 +176,8 @@ val appModule = module {
     }
     fragment {
         val homeViewModel = HomeViewModel(
-            getCurrentUserUseCase = get()
+            getCurrentUserUseCase = get(),
+            getAcceptedInviteUseCase = get()
         )
         HomeFragment(homeViewModel)
     }

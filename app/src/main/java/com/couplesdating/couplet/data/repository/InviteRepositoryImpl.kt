@@ -18,7 +18,7 @@ class InviteRepositoryImpl(
         val acceptedInviteJson = Gson().toJson(acceptedInvite)
         with(preferences.edit()) {
             putString(ACCEPTED_PAIR_INVITE_KEY, acceptedInviteJson)
-            apply()
+            commit()
         }
     }
 
