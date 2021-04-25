@@ -78,6 +78,8 @@ val appModule = module {
 
     single<GetAcceptedInviteUseCase> { GetAcceptedInviteUseCaseImpl(get()) }
 
+    single<DeleteInviteUseCase> { DeleteInviteUseCaseImpl(get()) }
+
     single<FormPairUseCase> { FormPairUseCaseImpl(get(), get()) }
 
     single<CreateInviteUseCase> { CreateInviteUseCaseImpl(get()) }
@@ -117,6 +119,7 @@ val appModule = module {
             googleSignInUseCase = get(),
             facebookSignInUseCase = get(),
             getAcceptedInviteUseCase = get(),
+            deleteInviteUseCase = get(),
             formPairUseCase = get(),
             analytics = get()
         )

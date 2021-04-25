@@ -29,17 +29,11 @@ class InviteRepositoryImpl(
         }
     }
 
-    override suspend fun deletePairInvite() {
-        val acceptedInviteJson = preferences.getString(ACCEPTED_PAIR_INVITE_KEY, null)
-        val acceptedInvite = acceptedInviteJson?.let {
-            Gson().fromJson(it, AcceptedInvite::class.java)
-        }
-        acceptedInvite?.inviteId?.let {
-            database.collection("invite")
-                .document(it)
-                .delete()
-                .await()
-        }
+    override suspend fun deletePairInvite(inviteId: String) {
+        database.collection("invite")
+            .document(inviteId)
+            .delete()
+            .await()
 
         with(preferences.edit()) {
             putString(ACCEPTED_PAIR_INVITE_KEY, null)

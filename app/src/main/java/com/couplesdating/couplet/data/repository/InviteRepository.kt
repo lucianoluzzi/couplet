@@ -9,5 +9,5 @@ interface InviteRepository {
     suspend fun inviteExists(inviteId: String): Boolean
     fun saveAcceptedPairInvite(acceptedInvite: AcceptedInvite)
     fun getAcceptedPairInviteUser(): AcceptedInvite?
-    suspend fun deletePairInvite()
+    suspend fun deletePairInvite(inviteId: String)
 }

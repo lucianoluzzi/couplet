@@ -20,6 +20,7 @@ class SocialLoginViewModel(
     private val googleSignInUseCase: GoogleSignInUseCase,
     private val facebookSignInUseCase: FacebookSignInUseCase,
     private val getAcceptedInviteUseCase: GetAcceptedInviteUseCase,
+    private val deleteInviteUseCase: DeleteInviteUseCase,
     private val formPairUseCase: FormPairUseCase,
     private val analytics: Analytics
 ) : ViewModel() {
@@ -82,9 +83,10 @@ class SocialLoginViewModel(
     }
 
     private suspend fun formPairIfInviteAccepted() {
-        val acceptedInviteUserId = getAcceptedInviteUseCase.getAcceptedInvite()
-        acceptedInviteUserId?.let {
+        val acceptedInvite = getAcceptedInviteUseCase.getAcceptedInvite()
+        acceptedInvite?.let {
             formPairUseCase.formPair(it.userId)
+            deleteInviteUseCase.deleteInvite(it)
         }
     }
 
