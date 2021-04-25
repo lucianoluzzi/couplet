@@ -1,11 +1,12 @@
 package com.couplesdating.couplet.domain.useCase
 
-import com.couplesdating.couplet.data.repository.PairRepository
+import com.couplesdating.couplet.data.repository.InviteRepository
 import com.couplesdating.couplet.domain.model.AcceptedInvite
 
 class GetAcceptedInviteUseCaseImpl(
-    private val pairRepository: PairRepository
+    private val inviteRepository: InviteRepository
 ) : GetAcceptedInviteUseCase {
 
-    override fun getAcceptedInvite(): AcceptedInvite? = pairRepository.getAcceptedPairInviteUser()
+    override fun getAcceptedInvite(): AcceptedInvite? =
+        inviteRepository.getAcceptedPairInviteUser()
 }

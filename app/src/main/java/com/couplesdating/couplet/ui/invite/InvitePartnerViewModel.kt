@@ -32,14 +32,12 @@ class InvitePartnerViewModel(
         viewModelScope.launch {
             val currentUser = getCurrentUserUseCase.getCurrentUser()
             currentUser?.let {
-                viewModelScope.launch {
-                    val inviteResponse = createInviteUseCase.createInvite(
-                        currentUser = currentUser,
-                        displayName = displayName,
-                        inviteNote = note
-                    )
-                    handleResponse(inviteResponse)
-                }
+                val inviteResponse = createInviteUseCase.createInvite(
+                    currentUser = currentUser,
+                    displayName = displayName,
+                    inviteNote = note
+                )
+                handleResponse(inviteResponse)
             }
         }
     }

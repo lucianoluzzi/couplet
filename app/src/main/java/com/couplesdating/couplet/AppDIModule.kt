@@ -7,10 +7,7 @@ import com.couplesdating.couplet.data.DynamicLinkProvider
 import com.couplesdating.couplet.data.FirebaseAuthProvider
 import com.couplesdating.couplet.data.FirestoreProvider
 import com.couplesdating.couplet.data.SharedPreferencesProvider
-import com.couplesdating.couplet.data.repository.PairRepository
-import com.couplesdating.couplet.data.repository.PairRepositoryImpl
-import com.couplesdating.couplet.data.repository.UserRepository
-import com.couplesdating.couplet.data.repository.UserRepositoryImpl
+import com.couplesdating.couplet.data.repository.*
 import com.couplesdating.couplet.domain.useCase.*
 import com.couplesdating.couplet.ui.MainViewModel
 import com.couplesdating.couplet.ui.dashboard.DashboardFragment
@@ -53,6 +50,8 @@ val appModule = module {
     single<UserRepository> { UserRepositoryImpl(get()) }
 
     single<PairRepository> { PairRepositoryImpl(get(), get()) }
+
+    single<InviteRepository> { InviteRepositoryImpl(get(), get()) }
 
     single<GetCurrentUserUseCase> {
         GetCurrentUserUseCaseImpl(

@@ -18,28 +18,6 @@ class PairRepositoryImpl(
     private val preferences: SharedPreferences
 ) : PairRepository {
 
-    override fun saveAcceptedPairInvite(acceptedInvite: AcceptedInvite) {
-        val acceptedInviteJson = Gson().toJson(acceptedInvite)
-        with(preferences.edit()) {
-            putString(ACCEPTED_PAIR_INVITE_KEY, acceptedInviteJson)
-            apply()
-        }
-    }
-
-    override fun getAcceptedPairInviteUser(): AcceptedInvite? {
-        val acceptedInviteJson = preferences.getString(ACCEPTED_PAIR_INVITE_KEY, null)
-        return acceptedInviteJson?.let {
-            Gson().fromJson(it, AcceptedInvite::class.java)
-        }
-    }
-
-    override fun deletePairInvite() {
-        with(preferences.edit()) {
-            putString(ACCEPTED_PAIR_INVITE_KEY, null)
-            apply()
-        }
-    }
-
     override fun shouldShowSync(): Flow<Boolean> = preferences.observeKey(SHOULD_SHOW_SYNC, true)
 
     override fun setSyncPageShown() {
@@ -61,27 +39,6 @@ class PairRepositoryImpl(
         val taskResponse = database
             .collection("pair")
             .insert(pairMap)
-
-        if (taskResponse.isSuccessful) {
-            return Response.Completed
-        }
-
-        return Response.Error(taskResponse.exception?.message)
-    }
-
-    override suspend fun createInvite(inviteModel: InviteModel): Response {
-        val pairMap = hashMapOf(
-            "user_1" to inviteModel.userId,
-            "invite_id" to inviteModel.inviteId,
-            "display_name" to inviteModel.displayName,
-            "inviter_name" to inviteModel.currentUserDisplay,
-            "note" to inviteModel.note
-        )
-
-        val taskResponse = database
-            .collection("invite")
-            .document(inviteModel.inviteId)
-            .set(pairMap, SetOptions.merge())
 
         if (taskResponse.isSuccessful) {
             return Response.Completed
@@ -120,14 +77,6 @@ class PairRepositoryImpl(
         }
 
         return Response.Error("Erro!")
-    }
-
-    override suspend fun inviteExists(inviteId: String): Boolean {
-        val response = database.collection("invite")
-            .document(inviteId)
-            .get().await()
-
-        return response.exists()
     }
 
     private companion object {

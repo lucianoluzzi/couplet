@@ -1,14 +1,14 @@
 package com.couplesdating.couplet.domain.useCase
 
-import com.couplesdating.couplet.data.repository.PairRepository
+import com.couplesdating.couplet.data.repository.InviteRepository
 
 class InviteExistsUseCaseImpl(
-    private val pairRepository: PairRepository
+    private val inviteRepository: InviteRepository
 ) : InviteExistsUseCase {
 
     override suspend fun inviteExists(inviteId: String): Boolean {
         return try {
-            pairRepository.inviteExists(inviteId)
+            inviteRepository.inviteExists(inviteId)
         } catch (exception: Exception) {
             false
         }

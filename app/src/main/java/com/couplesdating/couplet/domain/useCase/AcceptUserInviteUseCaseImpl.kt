@@ -1,10 +1,10 @@
 package com.couplesdating.couplet.domain.useCase
 
-import com.couplesdating.couplet.data.repository.PairRepository
+import com.couplesdating.couplet.data.repository.InviteRepository
 import com.couplesdating.couplet.domain.model.AcceptedInvite
 
 class AcceptUserInviteUseCaseImpl(
-    private val pairRepository: PairRepository
+    private val inviteRepository: InviteRepository
 ) : AcceptUserInviteUseCase {
 
     override fun acceptUserInvite(
@@ -15,6 +15,6 @@ class AcceptUserInviteUseCaseImpl(
             inviteId = inviteId,
             userId = userId
         )
-        pairRepository.saveAcceptedPairInvite(acceptedInvite)
+        inviteRepository.saveAcceptedPairInvite(acceptedInvite)
     }
 }

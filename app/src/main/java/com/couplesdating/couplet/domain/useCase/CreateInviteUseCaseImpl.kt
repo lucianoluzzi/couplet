@@ -1,12 +1,12 @@
 package com.couplesdating.couplet.domain.useCase
 
-import com.couplesdating.couplet.data.repository.PairRepository
+import com.couplesdating.couplet.data.repository.InviteRepository
+import com.couplesdating.couplet.domain.model.InviteModel
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.model.User
-import com.couplesdating.couplet.domain.model.InviteModel
 
 class CreateInviteUseCaseImpl(
-    private val pairRepository: PairRepository
+    private val inviteRepository: InviteRepository
 ) : CreateInviteUseCase {
 
     override suspend fun createInvite(
@@ -27,10 +27,11 @@ class CreateInviteUseCaseImpl(
             inviteId = currentUser.userId.hashCode().toString()
         )
 
-        return when (val response = pairRepository.createInvite(inviteModel)) {
-            is Response.Error -> response
-            is Response.Completed -> Response.Success(inviteModel)
-            is Response.Success<*> -> Response.Success(inviteModel)
+        return try {
+            inviteRepository.createInvite(inviteModel)
+            Response.Success(inviteModel)
+        } catch (exception: Exception) {
+            Response.Error(exception.message)
         }
     }
 }
