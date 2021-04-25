@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="dark">#1E113F</color>
+    <color name="dark_50">#801E113F</color>
     <color name="red">#F25A6C</color>
     <color name="blue">#46B5D7</color>
 
     <color name="red_over">#D84758</color>
     <color name="green">#2DCA73</color>
-    <color name="yellow">#FFDD7F</color>
+    <color name="yellow">#FFEDBE</color>
 
     <color name="musk_green">#256186</color>
     <color name="darker_pink">#F0B7B7</color>
