@@ -23,14 +23,25 @@ class DashboardFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
+            handleUIState(uiState)
+        }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val currentUser = navigationArgs.user
-        viewModel.shouldShowSyncScreen.observe(viewLifecycleOwner) { shouldShowSync ->
-            if (shouldShowSync && currentUser?.pairedPartner == null) {
+        viewModel.init(currentUser)
+    }
+
+    private fun handleUIState(uiState: DashboardUIState?) {
+        when (uiState) {
+            DashboardUIState.ShowSync -> {
                 viewModel.onSyncShown()
                 navigateToSync()
             }
         }
-        return binding.root
     }
 
     private fun navigateToSync() {

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.domain.useCase.pair.SetSyncShownUseCase
 import com.couplesdating.couplet.domain.useCase.pair.ShouldShowSyncUseCase
 import kotlinx.coroutines.flow.collect
@@ -14,16 +15,17 @@ class DashboardViewModel(
     private val setSyncShownUseCase: SetSyncShownUseCase
 ) : ViewModel() {
 
-    private val _shouldShowSyncScreen = MutableLiveData<Boolean>()
-    val shouldShowSyncScreen: LiveData<Boolean> = _shouldShowSyncScreen
+    private val _uiState = MutableLiveData<DashboardUIState>()
+    val uiState: LiveData<DashboardUIState> = _uiState
 
-    init {
+    fun init(currentUser: User?) {
         viewModelScope.launch {
             shouldShowSyncUseCase.invoke().collect {
-                _shouldShowSyncScreen.value = it
+                if (it && currentUser?.pairedPartner == null) {
+                    _uiState.value = DashboardUIState.ShowSync
+                }
             }
         }
-
     }
 
     fun onSyncShown() {
