@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="dark">#1E113F</color>
-    <color name="dark_50">#801E113F</color>
+    <color name="black">#1E113F</color>
+    <color name="dark_60">#991E113F</color>
     <color name="red">#F25A6C</color>
     <color name="blue">#46B5D7</color>
 
@@ -11,7 +12,7 @@
 
     <color name="musk_green">#256186</color>
     <color name="darker_pink">#F0B7B7</color>
-    <color name="pink">#FFEEEE</color>
+    <color name="pink">#F6DFE0</color>
     <color name="light_pink">#FFF5F5</color>
     <color name="outlined_button_ripple">#8C46B5D7</color>
     <color name="outlined_button_color">#2646B5D7</color>

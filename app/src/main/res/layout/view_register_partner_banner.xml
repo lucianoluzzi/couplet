@@ -23,6 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Register a partner"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,12 +43,11 @@
         android:layout_width="125dp"
         android:layout_height="100dp"
         android:layout_marginTop="@dimen/dimension_16"
-        android:layout_marginEnd="@dimen/dimension_16"
         android:src="@drawable/ic_register_partner"
-        app:layout_constraintVertical_bias="1.0"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/next" />
+        app:layout_constraintEnd_toStartOf="@id/next"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/next"
@@ -57,5 +57,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/dark_50" />
+        app:tint="@color/dark_60" />
 </androidx.constraintlayout.widget.ConstraintLayout>
