@@ -38,23 +38,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?selectableItemBackground"
-                android:padding="@dimen/dimension_12"
-                android:src="@drawable/ic_more_options"
                 android:clickable="true"
                 android:focusable="true"
+                android:padding="@dimen/dimension_12"
+                android:src="@drawable/ic_more_options"
                 app:layout_constraintBottom_toBottomOf="@id/welcome"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/welcome"
                 app:tint="@color/dark" />
 
-            <include layout="@layout/view_become_premium_banner"
+            <include
                 android:id="@+id/register_partner_banner"
+                layout="@layout/view_pending_invite_banner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimension_20"
-                app:layout_constraintTop_toBottomOf="@id/to_couplet"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/to_couplet" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
