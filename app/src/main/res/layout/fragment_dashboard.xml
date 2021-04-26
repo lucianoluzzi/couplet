@@ -47,7 +47,7 @@
                 app:layout_constraintTop_toTopOf="@id/welcome"
                 app:tint="@color/dark" />
 
-            <include layout="@layout/view_register_partner_banner"
+            <include layout="@layout/view_new_matches_banner"
                 android:id="@+id/register_partner_banner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
