@@ -5,6 +5,7 @@
     <color name="dark_60">#991E113F</color>
     <color name="red">#F25A6C</color>
     <color name="blue">#46B5D7</color>
+    <color name="blue_background">#ECF7FB</color>
 
     <color name="red_over">#D84758</color>
     <color name="green">#2DCA73</color>
@@ -25,12 +26,13 @@
     <color name="grey_blue">#86AEC6</color>
     <color name="grey_blue_50">#8086AEC6</color>
     <color name="grey">#494B71</color>
-    <color name="loading_overlay">#33494B71</color>
+
     <color name="light_grey">#B8BCC9</color>
 
     <color name="grey_blue_light">#77799F</color>
 
     <color name="text_input_background">#FFFFFF</color>
-
     <color name="register_color">@color/grey</color>
+    <color name="loading_overlay">#33494B71</color>
+    <color name="new_cards_text_color">#F25A6C</color>
 </resources>
