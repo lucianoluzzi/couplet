@@ -1,95 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/background_rounded_20"
-    android:backgroundTint="@color/blue_background"
-    android:padding="@dimen/dimension_16"
-    android:layout_marginBottom="@dimen/dimension_16">
-
-    <ImageView
-        android:id="@+id/illustration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_category_1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_category_1" />
-
-
-    <ImageView
-        android:id="@+id/premium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingEnd="@dimen/dimension_20"
-        android:paddingBottom="@dimen/dimension_20"
-        android:src="@drawable/ic_premium_blue"
-        app:layout_constraintBottom_toBottomOf="@id/illustration"
-        app:layout_constraintEnd_toEndOf="@id/illustration"
-        app:layout_constraintStart_toEndOf="@id/illustration"
-        app:layout_constraintTop_toBottomOf="@id/illustration" />
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dimension_16"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/illustration"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginBottom="@dimen/dimension_8"
+        android:focusable="true"
+        android:clickable="true"
+        android:background="@drawable/background_rounded_20"
+        android:backgroundTint="@color/blue_background"
+        android:padding="@dimen/dimension_16">
 
-        <TextView
-            android:id="@+id/title"
-            style="@style/H3Title"
+        <ImageView
+            android:id="@+id/illustration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/ic_category_1"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Esquenta relação" />
+            tools:src="@drawable/ic_category_1" />
 
-        <TextView
-            android:id="@+id/description"
-            style="@style/Subtitle2"
+
+        <ImageView
+            android:id="@+id/premium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimension_4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            tools:text="Vamos esquentar essa relação?" />
+            android:paddingEnd="@dimen/dimension_20"
+            android:paddingBottom="@dimen/dimension_20"
+            android:src="@drawable/ic_premium_blue"
+            app:layout_constraintBottom_toBottomOf="@id/illustration"
+            app:layout_constraintEnd_toEndOf="@id/illustration"
+            app:layout_constraintStart_toEndOf="@id/illustration"
+            app:layout_constraintTop_toBottomOf="@id/illustration" />
 
-        <androidx.recyclerview.widget.RecyclerView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimension_8"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/description"
-            tools:listitem="@layout/view_pepper_item" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_new_background"
-        android:paddingHorizontal="@dimen/dimension_12"
-        android:paddingVertical="@dimen/dimension_8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            style="@style/H3Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New"
-            android:textColor="@color/new_cards_text_color"
+            android:layout_marginStart="@dimen/dimension_16"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintStart_toEndOf="@id/illustration"
+            app:layout_constraintTop_toTopOf="parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/title"
+                style="@style/H3Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Esquenta relação" />
+
+            <TextView
+                android:id="@+id/description"
+                style="@style/Subtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimension_4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:text="Vamos esquentar essa relação?" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimension_8"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/description"
+                tools:listitem="@layout/view_pepper_item" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/new_ideas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_new_background"
+            android:paddingHorizontal="@dimen/dimension_12"
+            android:paddingVertical="@dimen/dimension_6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                style="@style/H3Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New"
+                android:textColor="@color/new_cards_text_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

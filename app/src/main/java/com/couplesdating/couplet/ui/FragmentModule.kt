@@ -13,7 +13,8 @@ val fragmentModule = module {
     fragment {
         val dashboardViewModel = DashboardViewModel(
             shouldShowSyncUseCase = get(),
-            setSyncShownUseCase = get()
+            setSyncShownUseCase = get(),
+            getCategoriesUseCase = get()
         )
         DashboardFragment(dashboardViewModel)
     }

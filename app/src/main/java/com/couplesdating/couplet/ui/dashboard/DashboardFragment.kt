@@ -12,6 +12,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentDashboardBindingImpl
+import com.couplesdating.couplet.ui.dashboard.adapter.CategoryAdapter
+import com.couplesdating.couplet.ui.dashboard.adapter.CategoryUIModel
+import com.couplesdating.couplet.ui.extensions.doNothing
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
@@ -33,9 +36,16 @@ class DashboardFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
+        viewModel.shouldShowSync.observe(viewLifecycleOwner) {
+            if (it) {
+                viewModel.onSyncShown()
+                navigateToSync()
+            }
+        }
+        viewModel.uiData.observe(viewLifecycleOwner) { uiState ->
             handleUIState(uiState)
         }
+
         return binding.root
     }
 
@@ -81,11 +91,16 @@ class DashboardFragment(
 
     private fun handleUIState(uiState: DashboardUIState?) {
         when (uiState) {
-            DashboardUIState.ShowSync -> {
-                viewModel.onSyncShown()
-                navigateToSync()
+            is DashboardUIState.Success -> {
+                setCategories(uiState.categories)
             }
+            DashboardUIState.Loading -> doNothing
+            null -> doNothing
         }
+    }
+
+    private fun setCategories(categories: List<CategoryUIModel>) {
+        binding.categories.adapter = CategoryAdapter(categories)
     }
 
     private fun navigateToSync() {

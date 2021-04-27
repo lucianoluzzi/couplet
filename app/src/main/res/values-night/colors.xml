@@ -2,11 +2,12 @@
 <resources>
     <color name="dark">#FFFFFF</color>
     <color name="blue">#86AEC6</color>
+    <color name="dark_blue">#1E113F</color>
     <color name="background">#1E113F</color>
     <color name="grey">#9C9DBF</color>
     <color name="pink">#F6DFE0</color>
     <color name="purple">#DAD5EF</color>
-    <color name="blue_background">#46B5D7</color>
+    <color name="blue_background">#6646B5D7</color>
 
     <color name="text_input_background">#2D214B</color>
     <color name="outlined_button_ripple">#2B4570</color>
@@ -14,4 +15,5 @@
 
     <color name="register_color">@color/grey_blue</color>
     <color name="new_cards_text_color">#FFFFFF</color>
+    <color name="new_cards_background">#905774</color>
 </resources>

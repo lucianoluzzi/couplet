@@ -5,7 +5,7 @@
     android:viewportHeight="30">
   <path
       android:pathData="M15,0L45,0A15,15 0,0 1,60 15L60,15A15,15 0,0 1,45 30L15,30A15,15 0,0 1,0 15L0,15A15,15 0,0 1,15 0z"
-      android:strokeAlpha="0.2"
-      android:fillColor="#f25a6c"
-      android:fillAlpha="0.2"/>
+      android:strokeAlpha="1"
+      android:fillColor="@color/new_cards_background"
+      android:fillAlpha="1"/>
 </vector>
