@@ -33,6 +33,7 @@ class CategoryAdapter(
             description.text = category.description
             premium.isVisible = category.isPremium
             newIdeas.isVisible = category.hasNewIdeas
+            spicinessIndicator.adapter = SpicinessAdapter(category.spiciness)
         }
     }
 }

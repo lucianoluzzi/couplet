@@ -7,10 +7,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dimension_8"
-        android:focusable="true"
-        android:clickable="true"
         android:background="@drawable/background_rounded_20"
         android:backgroundTint="@color/blue_background"
+        android:clickable="true"
+        android:focusable="true"
         android:padding="@dimen/dimension_16">
 
         <ImageView
@@ -23,18 +23,13 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_category_1" />
 
-
         <ImageView
             android:id="@+id/premium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingEnd="@dimen/dimension_20"
-            android:paddingBottom="@dimen/dimension_20"
             android:src="@drawable/ic_premium_blue"
             app:layout_constraintBottom_toBottomOf="@id/illustration"
-            app:layout_constraintEnd_toEndOf="@id/illustration"
-            app:layout_constraintStart_toEndOf="@id/illustration"
-            app:layout_constraintTop_toBottomOf="@id/illustration" />
+            app:layout_constraintEnd_toEndOf="@id/illustration" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/content"
@@ -65,6 +60,7 @@
                 tools:text="Vamos esquentar essa relação?" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/spiciness_indicator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimension_8"
