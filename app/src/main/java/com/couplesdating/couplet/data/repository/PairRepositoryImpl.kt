@@ -3,13 +3,9 @@ package com.couplesdating.couplet.data.repository
 import android.content.SharedPreferences
 import com.couplesdating.couplet.data.extensions.insert
 import com.couplesdating.couplet.data.extensions.observeKey
-import com.couplesdating.couplet.domain.model.AcceptedInvite
-import com.couplesdating.couplet.domain.model.InviteModel
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.model.User
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.SetOptions
-import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
 

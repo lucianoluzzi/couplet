@@ -33,9 +33,9 @@ val useCaseModule = module {
 
     single<GenerateInviteLinkUseCase> { GenerateInviteLinkUseCaseImpl(get()) }
 
-    single<AcceptUserInviteUseCase> { AcceptUserInviteUseCaseImpl(get()) }
+    single<SavePairInviteUseCase> { SavePairInviteUseCaseImpl(get()) }
 
-    single<GetAcceptedInviteUseCase> { GetAcceptedInviteUseCaseImpl(get()) }
+    single<GetInviteUseCase> { GetAInviteUseCaseImpl(get()) }
 
     single<DeleteInviteUseCase> { DeleteInviteUseCaseImpl(get()) }
 
@@ -52,4 +52,6 @@ val useCaseModule = module {
     single<InviteExistsUseCase> { InviteExistsUseCaseImpl(get()) }
 
     single<GetCategoriesUseCase> { GetCategoriesUseCaseImpl(get()) }
+
+    single<AddInviteeIdUseCase> { AddInviteeIdUseCaseImpl(get()) }
 }

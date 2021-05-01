@@ -39,7 +39,12 @@ class InvitedFragment(
         viewModel.uiState.observe(viewLifecycleOwner) {
             onUiState(it)
         }
-        viewModel.getData(navigationArguments.inviteId)
+        viewModel.getData(
+            inviteId = navigationArguments.inviteId,
+            inviterId = navigationArguments.inviterId,
+            inviterDisplayName = navigationArguments.inviterDisplayName,
+            note = navigationArguments.note
+        )
         setUpTexts()
         setUpButtonsClick()
     }
@@ -72,7 +77,7 @@ class InvitedFragment(
 
     private fun FragmentInvitedBinding.setInvitedByText() {
         val invitedByText = invitedBy.textValue()
-        val displayName = navigationArguments.displayName
+        val displayName = navigationArguments.inviterDisplayName
         if (!displayName.isNullOrBlank()) {
             invitedBy.text = invitedByText.replace("Someone", displayName)
             invitedBy.text = decorateText(
@@ -115,8 +120,10 @@ class InvitedFragment(
     private fun setUpButtonsClick() {
         binding.accept.setOnClickListener {
             viewModel.onInviteAccepted(
-                inviterId = navigationArguments.id,
-                inviteId = navigationArguments.inviteId
+                inviterId = navigationArguments.inviterId,
+                inviteId = navigationArguments.inviteId,
+                inviterDisplayName = navigationArguments.inviterDisplayName,
+                note = navigationArguments.note
             )
         }
         binding.close.setOnClickListener {

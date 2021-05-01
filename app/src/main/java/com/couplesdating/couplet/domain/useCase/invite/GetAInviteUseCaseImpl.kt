@@ -3,11 +3,11 @@ package com.couplesdating.couplet.domain.useCase.invite
 import com.couplesdating.couplet.data.repository.InviteRepository
 import com.couplesdating.couplet.domain.model.InviteModel
 
-class DeleteInviteUseCaseImpl(
+class GetAInviteUseCaseImpl(
     private val inviteRepository: InviteRepository
-) : DeleteInviteUseCase {
+) : GetInviteUseCase {
 
-    override suspend fun deleteInvite(invite: InviteModel) {
-        inviteRepository.deletePairInvite(invite.inviteId)
+    override fun getInvite(): InviteModel? {
+        return inviteRepository.getPairInvite()
     }
 }

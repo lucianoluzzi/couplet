@@ -1,14 +1,8 @@
 package com.couplesdating.couplet
 
 import com.couplesdating.couplet.ui.MainViewModel
-import com.couplesdating.couplet.ui.dashboard.DashboardFragment
-import com.couplesdating.couplet.ui.dashboard.DashboardViewModel
 import com.couplesdating.couplet.ui.error.ErrorViewModel
-import com.couplesdating.couplet.ui.home.HomeFragment
-import com.couplesdating.couplet.ui.home.HomeViewModel
 import com.couplesdating.couplet.ui.invite.InvitePartnerViewModel
-import com.couplesdating.couplet.ui.invited.InvitedFragment
-import com.couplesdating.couplet.ui.invited.InvitedViewModel
 import com.couplesdating.couplet.ui.login.emailLogin.LoginViewModel
 import com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordViewModel
 import com.couplesdating.couplet.ui.login.socialLogin.SocialLoginViewModel
@@ -19,7 +13,6 @@ import com.couplesdating.couplet.ui.onboarding.mildToWild.MildToWildViewModel
 import com.couplesdating.couplet.ui.onboarding.privacy.PrivacyViewModel
 import com.couplesdating.couplet.ui.register.emailAndPassword.RegisterViewModel
 import com.couplesdating.couplet.ui.register.nameAndGender.NameAndGenderViewModel
-import org.koin.androidx.fragment.dsl.fragment
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -51,9 +44,10 @@ val appModule = module {
             getCurrentUserUseCase = get(),
             googleSignInUseCase = get(),
             facebookSignInUseCase = get(),
-            getAcceptedInviteUseCase = get(),
+            getInviteUseCase = get(),
             deleteInviteUseCase = get(),
             formPairUseCase = get(),
+            addInviteeIdUseCase = get(),
             analytics = get()
         )
     }

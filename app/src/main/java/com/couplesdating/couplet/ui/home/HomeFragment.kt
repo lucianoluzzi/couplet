@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentHomeBinding
-import com.couplesdating.couplet.domain.model.AcceptedInvite
+import com.couplesdating.couplet.domain.model.InviteModel
 import com.couplesdating.couplet.domain.model.User
 
 class HomeFragment(
@@ -47,14 +47,14 @@ class HomeFragment(
 
     private fun doNavigate(homeUIData: HomeUIData) {
         if (homeUIData.user == null) {
-            goToOnboardingOrLogin(homeUIData.acceptedInvite)
+            goToOnboardingOrLogin(homeUIData.invite)
         } else {
             goToDashboard(homeUIData.user)
         }
     }
 
-    private fun goToOnboardingOrLogin(acceptedInvite: AcceptedInvite?) {
-        val direction = if (hasShownOnboarding() || acceptedInvite != null) {
+    private fun goToOnboardingOrLogin(invite: InviteModel?) {
+        val direction = if (hasShownOnboarding() || invite != null) {
             HomeFragmentDirections.actionHomeFragmentToSocialLoginFragment()
         } else {
             HomeFragmentDirections.actionHomeFragmentToOnboardingFragment()

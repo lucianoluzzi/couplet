@@ -21,7 +21,7 @@ val fragmentModule = module {
     fragment {
         val invitedViewModel = InvitedViewModel(
             getCurrentUserUseCase = get(),
-            acceptUserInviteUseCase = get(),
+            savePairInviteUseCase = get(),
             inviteExistsUseCase = get(),
             analytics = get()
         )
@@ -30,7 +30,7 @@ val fragmentModule = module {
     fragment {
         val homeViewModel = HomeViewModel(
             getCurrentUserUseCase = get(),
-            getAcceptedInviteUseCase = get()
+            getInviteUseCase = get()
         )
         HomeFragment(homeViewModel)
     }

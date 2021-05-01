@@ -1,9 +1,9 @@
 package com.couplesdating.couplet.data.repository
 
 import android.content.SharedPreferences
-import com.couplesdating.couplet.domain.model.AcceptedInvite
 import com.couplesdating.couplet.domain.model.InviteModel
 import com.couplesdating.couplet.domain.model.Response
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.gson.Gson
@@ -14,18 +14,18 @@ class InviteRepositoryImpl(
     private val preferences: SharedPreferences
 ) : InviteRepository {
 
-    override fun saveAcceptedPairInvite(acceptedInvite: AcceptedInvite) {
-        val acceptedInviteJson = Gson().toJson(acceptedInvite)
+    override fun savePairInvite(invite: InviteModel) {
+        val inviteJson = Gson().toJson(invite)
         with(preferences.edit()) {
-            putString(ACCEPTED_PAIR_INVITE_KEY, acceptedInviteJson)
-            commit()
+            putString(RECEIVED_PAIR_INVITE_KEY, inviteJson)
+            apply()
         }
     }
 
-    override fun getAcceptedPairInviteUser(): AcceptedInvite? {
-        val acceptedInviteJson = preferences.getString(ACCEPTED_PAIR_INVITE_KEY, null)
-        return acceptedInviteJson?.let {
-            Gson().fromJson(it, AcceptedInvite::class.java)
+    override fun getPairInvite(): InviteModel? {
+        val inviteJson = preferences.getString(RECEIVED_PAIR_INVITE_KEY, null)
+        return inviteJson?.let {
+            Gson().fromJson(it, InviteModel::class.java)
         }
     }
 
@@ -36,19 +36,29 @@ class InviteRepositoryImpl(
             .await()
 
         with(preferences.edit()) {
-            putString(ACCEPTED_PAIR_INVITE_KEY, null)
+            putString(RECEIVED_PAIR_INVITE_KEY, null)
             apply()
         }
     }
 
-    override suspend fun createInvite(inviteModel: InviteModel): Response {
-        val pairMap = hashMapOf(
-            "user_1" to inviteModel.userId,
+    override suspend fun saveInvite(inviteModel: InviteModel): Response {
+        val pairMap = hashMapOf<String, Any>(
+            "inviter_id" to inviteModel.inviterId,
             "invite_id" to inviteModel.inviteId,
-            "display_name" to inviteModel.displayName,
-            "inviter_name" to inviteModel.currentUserDisplay,
-            "note" to inviteModel.note
+            "inviter_display_name" to inviteModel.inviterDisplayName,
         )
+        inviteModel.note?.let {
+            pairMap.put("note", inviteModel.note)
+        }
+        inviteModel.inputInviteeDisplayName?.let {
+            pairMap.put("invitee_input_display_name", inviteModel.inputInviteeDisplayName)
+        }
+        inviteModel.timestamp?.let {
+            pairMap.put("timestamp", Timestamp(it))
+        }
+        inviteModel.inviteeId?.let {
+            pairMap.put("invitee_id", it)
+        }
 
         database
             .collection("invite")
@@ -68,6 +78,6 @@ class InviteRepositoryImpl(
     }
 
     private companion object {
-        private const val ACCEPTED_PAIR_INVITE_KEY = "ACCEPTED_PAIR_INVITE"
+        private const val RECEIVED_PAIR_INVITE_KEY = "RECEIVED_PAIR_INVITE"
     }
 }

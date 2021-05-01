@@ -149,15 +149,15 @@
         <deepLink
             android:id="@+id/deepLink"
             android:autoVerify="true"
-            app:uri="https://couplet.love/partner?id={id}&amp;inviteId={inviteId}&amp;displayName={displayName}&amp;note={note}" />
+            app:uri="https://couplet.love/partner?inviterId={inviterId}&amp;inviteId={inviteId}&amp;inviterDisplayName={inviterDisplayName}&amp;note={note}" />
         <argument
-            android:name="id"
+            android:name="inviterId"
             app:argType="string" />
         <argument
             android:name="inviteId"
             app:argType="string" />
         <argument
-            android:name="displayName"
+            android:name="inviterDisplayName"
             app:argType="string"
             app:nullable="true" />
         <argument

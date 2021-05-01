@@ -10,8 +10,9 @@ import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.domain.useCase.auth.FacebookSignInUseCase
 import com.couplesdating.couplet.domain.useCase.auth.GoogleSignInUseCase
+import com.couplesdating.couplet.domain.useCase.invite.AddInviteeIdUseCase
 import com.couplesdating.couplet.domain.useCase.invite.DeleteInviteUseCase
-import com.couplesdating.couplet.domain.useCase.invite.GetAcceptedInviteUseCase
+import com.couplesdating.couplet.domain.useCase.invite.GetInviteUseCase
 import com.couplesdating.couplet.domain.useCase.pair.FormPairUseCase
 import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCase
 import com.couplesdating.couplet.ui.extensions.doNothing
@@ -24,9 +25,10 @@ class SocialLoginViewModel(
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
     private val googleSignInUseCase: GoogleSignInUseCase,
     private val facebookSignInUseCase: FacebookSignInUseCase,
-    private val getAcceptedInviteUseCase: GetAcceptedInviteUseCase,
+    private val getInviteUseCase: GetInviteUseCase,
     private val deleteInviteUseCase: DeleteInviteUseCase,
     private val formPairUseCase: FormPairUseCase,
+    private val addInviteeIdUseCase: AddInviteeIdUseCase,
     private val analytics: Analytics
 ) : ViewModel() {
 
@@ -76,22 +78,30 @@ class SocialLoginViewModel(
     }
 
     private suspend fun onSuccessResponse() {
-        formPairIfInviteAccepted()
         val loggedInUser = getCurrentUserUseCase.getCurrentUser()
         loggedInUser?.let {
-            setLiveDataValue(
-                SocialLoginUIState.Success(
-                    it
-                )
+            saveInvite(it.userId)
+            _uiStateLiveData.postValue(
+                LiveDataEvent(SocialLoginUIState.Success(it))
             )
         }
     }
 
-    private suspend fun formPairIfInviteAccepted() {
-        val acceptedInvite = getAcceptedInviteUseCase.getAcceptedInvite()
-        acceptedInvite?.let {
-            formPairUseCase.formPair(it.userId)
-            deleteInviteUseCase.deleteInvite(it)
+    private suspend fun saveInvite(currentUserId: String) {
+        val savedPairInvite = getInviteUseCase.getInvite()
+        savedPairInvite?.let { invite ->
+            if (invite.hasAccepted) {
+                formPairUseCase.formPair(invite.inviterId)
+                deleteInviteUseCase.deleteInvite(invite)
+            } else {
+                addInviteeIdUseCase.addInviteeId(
+                    inviteeId = currentUserId,
+                    inviteId = invite.inviteId,
+                    inviterId = invite.inviterId,
+                    inviterDisplayName = invite.inviterDisplayName,
+                    note = invite.note
+                )
+            }
         }
     }
 
