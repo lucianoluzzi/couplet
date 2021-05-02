@@ -6,6 +6,7 @@ import android.text.SpannableString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -114,6 +115,11 @@ class DashboardFragment(
         when (banner) {
             is Banner.PendingInvite -> {
                 binding.pendingInviteBanner.isVisible = true
+                val description =
+                    binding.pendingInviteBanner.findViewById<TextView>(R.id.description)
+                if (currentUser?.firstName != null && banner.invite.inviterDisplayName.isNotBlank()) {
+                    description.text = "${currentUser?.firstName}, you a pending invite from ${banner.invite.inviterDisplayName}"
+                }
             }
         }
     }

@@ -16,8 +16,8 @@ class SavePairInviteUseCaseImpl(
     ) {
         val invite = InviteModel(
             inviteId = inviteId,
-            inviterId = inviteId,
-            inviterDisplayName = inviterId,
+            inviterId = inviterId,
+            inviterDisplayName = inviterDisplayName ?: "",
             note = note,
             hasAccepted = hasAccepted
         )

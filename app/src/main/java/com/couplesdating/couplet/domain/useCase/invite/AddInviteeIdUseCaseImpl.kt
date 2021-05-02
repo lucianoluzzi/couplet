@@ -18,8 +18,8 @@ class AddInviteeIdUseCaseImpl(
         val invite = InviteModel(
             inviteId = inviteId,
             inviteeId = inviteeId,
-            inviterId = inviteId,
-            inviterDisplayName = inviterId,
+            inviterId = inviterId,
+            inviterDisplayName = inviterDisplayName ?: "",
             note = note,
             hasAccepted = false
         )
