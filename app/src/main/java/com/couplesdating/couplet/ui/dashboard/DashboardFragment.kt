@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -14,6 +15,8 @@ import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentDashboardBindingImpl
 import com.couplesdating.couplet.ui.dashboard.adapter.CategoryAdapter
 import com.couplesdating.couplet.ui.dashboard.adapter.CategoryUIModel
+import com.couplesdating.couplet.ui.dashboard.model.Banner
+import com.couplesdating.couplet.ui.dashboard.model.DashboardUIState
 import com.couplesdating.couplet.ui.extensions.doNothing
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
@@ -92,15 +95,27 @@ class DashboardFragment(
     private fun handleUIState(uiState: DashboardUIState?) {
         when (uiState) {
             is DashboardUIState.Success -> {
+                binding.loadingContainer.isVisible = false
                 setCategories(uiState.categories)
+                handleBannerState(uiState.banner)
             }
-            DashboardUIState.Loading -> doNothing
+            DashboardUIState.Loading -> {
+                binding.loadingContainer.isVisible = true
+            }
             null -> doNothing
         }
     }
 
     private fun setCategories(categories: List<CategoryUIModel>) {
         binding.categories.adapter = CategoryAdapter(categories)
+    }
+
+    private fun handleBannerState(banner: Banner?) {
+        when (banner) {
+            is Banner.PendingInvite -> {
+                binding.pendingInviteBanner.isVisible = true
+            }
+        }
     }
 
     private fun navigateToSync() {

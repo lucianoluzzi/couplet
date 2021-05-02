@@ -14,7 +14,8 @@ val fragmentModule = module {
         val dashboardViewModel = DashboardViewModel(
             shouldShowSyncUseCase = get(),
             setSyncShownUseCase = get(),
-            getCategoriesUseCase = get()
+            getCategoriesUseCase = get(),
+            getInviteUseCase = get()
         )
         DashboardFragment(dashboardViewModel)
     }

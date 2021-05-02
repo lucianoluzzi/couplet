@@ -8,6 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.gson.Gson
 import kotlinx.coroutines.tasks.await
+import java.util.*
 
 class InviteRepositoryImpl(
     private val database: FirebaseFirestore,
@@ -22,10 +23,27 @@ class InviteRepositoryImpl(
         }
     }
 
-    override fun getPairInvite(): InviteModel? {
+    override suspend fun getPairInvite(currentUserId: String?): InviteModel? {
         val inviteJson = preferences.getString(RECEIVED_PAIR_INVITE_KEY, null)
         return inviteJson?.let {
             Gson().fromJson(it, InviteModel::class.java)
+        } ?: run {
+            val response = database.collection("invite")
+                .whereEqualTo("invitee_id", currentUserId)
+                .get()
+                .await()
+            response.documents.map { document ->
+                InviteModel(
+                    inviterId = document.get("inviter_id").toString(),
+                    inviteeId = document.get("invitee_id").toString(),
+                    inviterDisplayName = document.get("inviter_display_name").toString(),
+                    inputInviteeDisplayName = document.get("invitee_input_display_name").toString(),
+                    note = document.get("note").toString(),
+                    inviteId = document.get("invite_id").toString(),
+                    timestamp = Date(document.get("timestamp").toString()),
+                    hasAccepted = false
+                )
+            }.firstOrNull()
         }
     }
 

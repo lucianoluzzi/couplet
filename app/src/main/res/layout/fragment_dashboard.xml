@@ -49,11 +49,46 @@
                 app:tint="@color/dark" />
 
             <include
-                android:id="@+id/banner"
+                android:id="@+id/pending_invite_banner"
                 layout="@layout/view_pending_invite_banner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimension_20"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/to_couplet"
+                tools:visibility="visible" />
+
+            <include
+                android:id="@+id/become_premium_banner"
+                layout="@layout/view_become_premium_banner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimension_20"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/to_couplet" />
+
+            <include
+                android:id="@+id/new_matches_banner"
+                layout="@layout/view_new_matches_banner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimension_20"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/to_couplet" />
+
+            <include
+                android:id="@+id/register_partner_banner"
+                layout="@layout/view_register_partner_banner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimension_20"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/to_couplet" />
@@ -62,13 +97,38 @@
                 android:id="@+id/categories"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/banner"
+                app:layout_constraintTop_toBottomOf="@id/pending_invite_banner"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_marginTop="@dimen/dimension_20"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 tools:listitem="@layout/view_category_item"/>
+
+            <LinearLayout
+                android:id="@+id/loading_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.2"
+                android:background="@color/grey"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/loading"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/loading" />
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
