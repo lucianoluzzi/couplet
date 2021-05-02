@@ -56,7 +56,9 @@ class DashboardFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         decorateTitle()
-        viewModel.init(currentUser)
+        currentUser?.let {
+            viewModel.init(it)
+        }
     }
 
     private fun decorateTitle() {
@@ -113,15 +115,28 @@ class DashboardFragment(
 
     private fun handleBannerState(banner: Banner?) {
         when (banner) {
-            is Banner.PendingInvite -> {
-                binding.pendingInviteBanner.isVisible = true
-                val description =
-                    binding.pendingInviteBanner.findViewById<TextView>(R.id.description)
-                if (currentUser?.firstName != null && banner.invite.inviterDisplayName.isNotBlank()) {
-                    description.text =
-                        "${currentUser?.firstName}, you a pending invite from ${banner.invite.inviterDisplayName}"
-                }
-            }
+            is Banner.PendingInvite -> setPendingInviteBanner(banner)
+            Banner.RegisterPartner -> setRegisterPartnerBanner()
+            null -> TODO()
+        }
+    }
+
+    private fun setPendingInviteBanner(banner: Banner.PendingInvite) = with(binding) {
+        pendingInviteBanner.isVisible = true
+        val description = pendingInviteBanner.findViewById<TextView>(R.id.description)
+        if (currentUser?.firstName != null && banner.invite.inviterDisplayName.isNotBlank()) {
+            description.text =
+                "${currentUser?.firstName}, you a pending invite from ${banner.invite.inviterDisplayName}"
+        }
+    }
+
+    private fun setRegisterPartnerBanner() = with(binding) {
+        registerPartnerBanner.isVisible = true
+        val description = registerPartnerBanner.findViewById<TextView>(R.id.description)
+        description.text = currentUser?.let {
+            "${it.firstName}, we are almost there. Register a partner and get kinky!"
+        } ?: run {
+            "We are almost there, register a partner and get kinky!"
         }
     }
 

@@ -30,22 +30,33 @@ class DashboardViewModel(
     private val _uiData = MutableLiveData<DashboardUIState>()
     val uiData: LiveData<DashboardUIState> = _uiData
 
-    fun init(currentUser: User?) {
+    fun init(currentUser: User) {
         viewModelScope.launch {
             shouldShowSyncUseCase.invoke().collect {
-                _shouldShowSync.value = it && currentUser?.pairedPartner == null
+                _shouldShowSync.value = it && currentUser.pairedPartner == null
             }
         }
 
         viewModelScope.launch {
-            val pendingInvite = getInviteUseCase.getInvite(currentUser?.userId)
             getCategoriesUseCase.getCategories().collect {
                 _uiData.value = DashboardUIState.Success(
                     categories = mapCategoryToUIModel(it),
-                    banner = if (pendingInvite != null) Banner.PendingInvite(pendingInvite) else null
+                    banner = getBanner(currentUser)
                 )
             }
         }
+    }
+
+    private suspend fun getBanner(currentUser: User): Banner? {
+        val pendingInvite = getInviteUseCase.getInvite(currentUser.userId)
+        if (pendingInvite != null) {
+            return Banner.PendingInvite(pendingInvite)
+        }
+        if (currentUser.pairedPartner == null) {
+            return Banner.RegisterPartner
+        }
+
+        return null
     }
 
     private fun mapCategoryToUIModel(categories: List<Category>): List<CategoryUIModel> {

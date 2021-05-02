@@ -48,56 +48,58 @@
                 app:layout_constraintTop_toTopOf="@id/welcome"
                 app:tint="@color/dark" />
 
-            <include
-                android:id="@+id/pending_invite_banner"
-                layout="@layout/view_pending_invite_banner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimension_20"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/to_couplet"
-                tools:visibility="visible" />
-
-            <include
-                android:id="@+id/become_premium_banner"
-                layout="@layout/view_become_premium_banner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimension_20"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/to_couplet" />
-
-            <include
-                android:id="@+id/new_matches_banner"
-                layout="@layout/view_new_matches_banner"
+                android:id="@+id/banner_container"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimension_20"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/to_couplet" />
+                android:layout_height="wrap_content">
 
-            <include
-                android:id="@+id/register_partner_banner"
-                layout="@layout/view_register_partner_banner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimension_20"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/to_couplet" />
+                <include
+                    android:id="@+id/pending_invite_banner"
+                    layout="@layout/view_pending_invite_banner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:visibility="visible" />
+
+                <include
+                    android:id="@+id/become_premium_banner"
+                    layout="@layout/view_become_premium_banner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <include
+                    android:id="@+id/new_matches_banner"
+                    layout="@layout/view_new_matches_banner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <include
+                    android:id="@+id/register_partner_banner"
+                    layout="@layout/view_register_partner_banner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/categories"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pending_invite_banner"
+                app:layout_constraintTop_toBottomOf="@id/banner_container"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_marginTop="@dimen/dimension_20"
