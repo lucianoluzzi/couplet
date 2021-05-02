@@ -9,14 +9,14 @@ import com.couplesdating.couplet.analytics.events.login.RegisterEvents
 import com.couplesdating.couplet.data.repository.UserRepository
 import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.useCase.pair.FormPairUseCase
-import com.couplesdating.couplet.domain.useCase.invite.GetInviteUseCase
+import com.couplesdating.couplet.domain.useCase.invite.GetReceivedInviteUseCase
 import com.couplesdating.couplet.ui.utils.LiveDataEvent
 import com.couplesdating.couplet.ui.utils.asLiveDataEvent
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(
     private val userRepository: UserRepository,
-    private val getInviteUseCase: GetInviteUseCase,
+    private val getReceivedInviteUseCase: GetReceivedInviteUseCase,
     private val formPairUseCase: FormPairUseCase,
     private val analytics: Analytics
 ) : ViewModel() {
@@ -86,7 +86,7 @@ class RegisterViewModel(
     }
 
     private suspend fun formPairIfInviteAccepted() {
-        val acceptedInviteUserId = getInviteUseCase.getInvite()
+        val acceptedInviteUserId = getReceivedInviteUseCase.getReceivedInvite()
         acceptedInviteUserId?.let {
             formPairUseCase.formPair(it.inviterId)
         }

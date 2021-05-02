@@ -12,7 +12,7 @@ import com.couplesdating.couplet.domain.useCase.auth.FacebookSignInUseCase
 import com.couplesdating.couplet.domain.useCase.auth.GoogleSignInUseCase
 import com.couplesdating.couplet.domain.useCase.invite.AddInviteeIdUseCase
 import com.couplesdating.couplet.domain.useCase.invite.DeleteInviteUseCase
-import com.couplesdating.couplet.domain.useCase.invite.GetInviteUseCase
+import com.couplesdating.couplet.domain.useCase.invite.GetReceivedInviteUseCase
 import com.couplesdating.couplet.domain.useCase.pair.FormPairUseCase
 import com.couplesdating.couplet.domain.useCase.pair.GetPartnerUseCase
 import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCase
@@ -26,7 +26,7 @@ class SocialLoginViewModel(
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
     private val googleSignInUseCase: GoogleSignInUseCase,
     private val facebookSignInUseCase: FacebookSignInUseCase,
-    private val getInviteUseCase: GetInviteUseCase,
+    private val getReceivedInviteUseCase: GetReceivedInviteUseCase,
     private val deleteInviteUseCase: DeleteInviteUseCase,
     private val formPairUseCase: FormPairUseCase,
     private val addInviteeIdUseCase: AddInviteeIdUseCase,
@@ -93,7 +93,7 @@ class SocialLoginViewModel(
     }
 
     private suspend fun saveInvite(currentUserId: String) {
-        val savedPairInvite = getInviteUseCase.getInvite()
+        val savedPairInvite = getReceivedInviteUseCase.getReceivedInvite()
         savedPairInvite?.let { invite ->
             if (invite.hasAccepted) {
                 formPairUseCase.formPair(invite.inviterId)

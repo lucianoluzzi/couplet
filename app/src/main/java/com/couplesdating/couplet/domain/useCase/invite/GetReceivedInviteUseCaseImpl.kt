@@ -3,11 +3,11 @@ package com.couplesdating.couplet.domain.useCase.invite
 import com.couplesdating.couplet.data.repository.InviteRepository
 import com.couplesdating.couplet.domain.model.InviteModel
 
-class GetInviteUseCaseImpl(
+class GetReceivedInviteUseCaseImpl(
     private val inviteRepository: InviteRepository
-) : GetInviteUseCase {
+) : GetReceivedInviteUseCase {
 
-    override suspend fun getInvite(currentUserId: String?): InviteModel? {
-        return inviteRepository.getPairInvite(currentUserId)
+    override suspend fun getReceivedInvite(currentUserId: String?): InviteModel? {
+        return inviteRepository.getReceivedPairInvite(currentUserId)
     }
 }

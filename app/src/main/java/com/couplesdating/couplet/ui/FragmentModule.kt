@@ -15,7 +15,8 @@ val fragmentModule = module {
             shouldShowSyncUseCase = get(),
             setSyncShownUseCase = get(),
             getCategoriesUseCase = get(),
-            getInviteUseCase = get()
+            getReceivedInviteUseCase = get(),
+            getSentPairInviteUseCase = get()
         )
         DashboardFragment(dashboardViewModel)
     }
@@ -31,7 +32,7 @@ val fragmentModule = module {
     fragment {
         val homeViewModel = HomeViewModel(
             getCurrentUserUseCase = get(),
-            getInviteUseCase = get()
+            getReceivedInviteUseCase = get()
         )
         HomeFragment(homeViewModel)
     }

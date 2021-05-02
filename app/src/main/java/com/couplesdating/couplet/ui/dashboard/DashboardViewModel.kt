@@ -8,7 +8,8 @@ import com.couplesdating.couplet.R
 import com.couplesdating.couplet.domain.model.Category
 import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.domain.useCase.category.GetCategoriesUseCase
-import com.couplesdating.couplet.domain.useCase.invite.GetInviteUseCase
+import com.couplesdating.couplet.domain.useCase.invite.GetReceivedInviteUseCase
+import com.couplesdating.couplet.domain.useCase.invite.GetSentPairInviteUseCase
 import com.couplesdating.couplet.domain.useCase.pair.SetSyncShownUseCase
 import com.couplesdating.couplet.domain.useCase.pair.ShouldShowSyncUseCase
 import com.couplesdating.couplet.ui.dashboard.adapter.CategoryUIModel
@@ -21,7 +22,8 @@ class DashboardViewModel(
     private val shouldShowSyncUseCase: ShouldShowSyncUseCase,
     private val setSyncShownUseCase: SetSyncShownUseCase,
     private val getCategoriesUseCase: GetCategoriesUseCase,
-    private val getInviteUseCase: GetInviteUseCase
+    private val getReceivedInviteUseCase: GetReceivedInviteUseCase,
+    private val getSentPairInviteUseCase: GetSentPairInviteUseCase
 ) : ViewModel() {
 
     private val _shouldShowSync = MutableLiveData<Boolean>()
@@ -48,11 +50,12 @@ class DashboardViewModel(
     }
 
     private suspend fun getBanner(currentUser: User): Banner? {
-        val pendingInvite = getInviteUseCase.getInvite(currentUser.userId)
+        val pendingInvite = getReceivedInviteUseCase.getReceivedInvite(currentUser.userId)
+        val receivedInvite = getSentPairInviteUseCase.getSentPairInvite(currentUser.userId)
         if (pendingInvite != null) {
             return Banner.PendingInvite(pendingInvite)
         }
-        if (currentUser.pairedPartner == null) {
+        if (currentUser.pairedPartner == null && receivedInvite == null) {
             return Banner.RegisterPartner
         }
 

@@ -23,7 +23,26 @@ class InviteRepositoryImpl(
         }
     }
 
-    override suspend fun getPairInvite(currentUserId: String?): InviteModel? {
+    override suspend fun getSentPairInvite(currentUserId: String): InviteModel? {
+        val response = database.collection("invite")
+            .whereEqualTo("inviter_id", currentUserId)
+            .get()
+            .await()
+        return response.documents.map { document ->
+            InviteModel(
+                inviterId = document.get("inviter_id").toString(),
+                inviteeId = document.get("invitee_id").toString(),
+                inviterDisplayName = document.get("inviter_display_name").toString(),
+                inputInviteeDisplayName = document.get("invitee_input_display_name").toString(),
+                note = document.get("note").toString(),
+                inviteId = document.get("invite_id").toString(),
+                timestamp = (document.get("timestamp") as Timestamp).toDate(),
+                hasAccepted = false
+            )
+        }.firstOrNull()
+    }
+
+    override suspend fun getReceivedPairInvite(currentUserId: String?): InviteModel? {
         val inviteJson = preferences.getString(RECEIVED_PAIR_INVITE_KEY, null)
         return inviteJson?.let {
             Gson().fromJson(it, InviteModel::class.java)
@@ -40,7 +59,7 @@ class InviteRepositoryImpl(
                     inputInviteeDisplayName = document.get("invitee_input_display_name").toString(),
                     note = document.get("note").toString(),
                     inviteId = document.get("invite_id").toString(),
-                    timestamp = Date(document.get("timestamp").toString()),
+                    timestamp = (document.get("timestamp") as Timestamp).toDate(),
                     hasAccepted = false
                 )
             }.firstOrNull()

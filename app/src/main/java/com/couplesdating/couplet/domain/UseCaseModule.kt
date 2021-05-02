@@ -35,7 +35,7 @@ val useCaseModule = module {
 
     single<SavePairInviteUseCase> { SavePairInviteUseCaseImpl(get()) }
 
-    single<GetInviteUseCase> { GetInviteUseCaseImpl(get()) }
+    single<GetReceivedInviteUseCase> { GetReceivedInviteUseCaseImpl(get()) }
 
     single<DeleteInviteUseCase> { DeleteInviteUseCaseImpl(get()) }
 
@@ -59,4 +59,6 @@ val useCaseModule = module {
     single<GetCategoriesUseCase> { GetCategoriesUseCaseImpl(get()) }
 
     single<AddInviteeIdUseCase> { AddInviteeIdUseCaseImpl(get()) }
+
+    single<GetSentPairInviteUseCase> { GetSentPairInviteUseCaseImpl(get()) }
 }

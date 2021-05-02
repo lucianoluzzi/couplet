@@ -13,7 +13,7 @@ class ShouldShowSyncUseCaseImpl(
     override suspend fun invoke(currentUser: User?) =
         pairRepository.shouldShowSync().map { shouldShowSync ->
             shouldShowSync && currentUser?.let { user ->
-                currentUser.pairedPartner == null && inviteRepository.getPairInvite(user.userId) == null
+                currentUser.pairedPartner == null && inviteRepository.getReceivedPairInvite(user.userId) == null
             } ?: true
         }
 }

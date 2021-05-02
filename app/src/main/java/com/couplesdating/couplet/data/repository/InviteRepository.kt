@@ -7,6 +7,7 @@ interface InviteRepository {
     suspend fun saveInvite(inviteModel: InviteModel): Response
     suspend fun inviteExists(inviteId: String): Boolean
     fun savePairInvite(invite: InviteModel)
-    suspend fun getPairInvite(currentUserId: String? = null): InviteModel?
+    suspend fun getSentPairInvite(currentUserId: String): InviteModel?
+    suspend fun getReceivedPairInvite(currentUserId: String? = null): InviteModel?
     suspend fun deletePairInvite(inviteId: String)
 }
