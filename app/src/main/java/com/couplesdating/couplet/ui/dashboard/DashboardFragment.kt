@@ -62,7 +62,7 @@ class DashboardFragment(
     private fun decorateTitle() {
         currentUser?.let { user ->
             if (!user.firstName.isNullOrBlank()) {
-                binding.toCouplet.append(" ${user.firstName}")
+                binding.toCouplet.text = "to Couplet ${user.firstName}"
             }
         }
         val titleText = binding.toCouplet.textValue()
@@ -118,7 +118,8 @@ class DashboardFragment(
                 val description =
                     binding.pendingInviteBanner.findViewById<TextView>(R.id.description)
                 if (currentUser?.firstName != null && banner.invite.inviterDisplayName.isNotBlank()) {
-                    description.text = "${currentUser?.firstName}, you a pending invite from ${banner.invite.inviterDisplayName}"
+                    description.text =
+                        "${currentUser?.firstName}, you a pending invite from ${banner.invite.inviterDisplayName}"
                 }
             }
         }
