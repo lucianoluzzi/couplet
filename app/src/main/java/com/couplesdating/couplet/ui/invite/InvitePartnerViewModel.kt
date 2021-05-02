@@ -25,7 +25,7 @@ class InvitePartnerViewModel(
     val deepLink: LiveData<LiveDataEvent<InvitePartnerUIState>> = _deepLink
 
     fun createInviteLink(
-        displayName: String,
+        inviteeDisplayName: String,
         note: String?
     ) {
         onShareLinkClicked()
@@ -34,7 +34,7 @@ class InvitePartnerViewModel(
             currentUser?.let {
                 val inviteResponse = createInviteUseCase.createInvite(
                     currentUser = currentUser,
-                    displayName = displayName,
+                    inviteeDisplayName = inviteeDisplayName,
                     inviteNote = note
                 )
                 handleResponse(inviteResponse)

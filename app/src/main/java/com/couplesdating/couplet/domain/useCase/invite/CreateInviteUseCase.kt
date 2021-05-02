@@ -6,7 +6,7 @@ import com.couplesdating.couplet.domain.model.User
 interface CreateInviteUseCase {
     suspend fun createInvite(
         currentUser: User,
-        displayName: String,
+        inviteeDisplayName: String,
         inviteNote: String?
     ): Response
 }

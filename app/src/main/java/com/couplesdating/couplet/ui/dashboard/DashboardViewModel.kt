@@ -32,8 +32,8 @@ class DashboardViewModel(
 
     fun init(currentUser: User) {
         viewModelScope.launch {
-            shouldShowSyncUseCase.invoke().collect {
-                _shouldShowSync.value = it && currentUser.pairedPartner == null
+            shouldShowSyncUseCase.invoke(currentUser).collect {
+                _shouldShowSync.value = it
             }
         }
 

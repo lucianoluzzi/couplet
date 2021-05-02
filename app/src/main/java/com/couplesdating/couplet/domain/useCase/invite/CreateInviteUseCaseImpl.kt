@@ -12,7 +12,7 @@ class CreateInviteUseCaseImpl(
 
     override suspend fun createInvite(
         currentUser: User,
-        displayName: String,
+        inviteeDisplayName: String,
         inviteNote: String?
     ): Response {
         val currentUserDisplayName = when {
@@ -23,7 +23,7 @@ class CreateInviteUseCaseImpl(
         val inviterDisplayName = InviteModel(
             inviterId = currentUser.userId,
             inviterDisplayName = currentUserDisplayName,
-            inputInviteeDisplayName = displayName,
+            inputInviteeDisplayName = inviteeDisplayName,
             note = inviteNote,
             inviteId = currentUser.userId.hashCode().toString(),
             timestamp = Date()

@@ -12,9 +12,7 @@ class GenerateInviteLinkUseCaseImpl(
         val inviteMap = mutableMapOf<String, String>().apply {
             put("inviterId", inviteModel.inviterId)
             put("inviteId", inviteModel.inviteId)
-            if (!inviteModel.inputInviteeDisplayName.isNullOrBlank()) {
-                put("inviterDisplayName", inviteModel.inviterDisplayName)
-            }
+            put("inviterDisplayName", inviteModel.inviterDisplayName)
             if (!inviteModel.note.isNullOrBlank()) {
                 put("note", inviteModel.note)
             }

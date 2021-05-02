@@ -43,7 +43,12 @@ val useCaseModule = module {
 
     single<CreateInviteUseCase> { CreateInviteUseCaseImpl(get()) }
 
-    single<ShouldShowSyncUseCase> { ShouldShowSyncUseCaseImpl(get()) }
+    single<ShouldShowSyncUseCase> {
+        ShouldShowSyncUseCaseImpl(
+            pairRepository = get(),
+            inviteRepository = get()
+        )
+    }
 
     single<SetSyncShownUseCase> { SetSyncShownUseCaseImpl(get()) }
 

@@ -117,7 +117,7 @@ class DashboardFragment(
         when (banner) {
             is Banner.PendingInvite -> setPendingInviteBanner(banner)
             Banner.RegisterPartner -> setRegisterPartnerBanner()
-            null -> TODO()
+            else -> doNothing
         }
     }
 

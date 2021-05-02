@@ -26,12 +26,6 @@ class InvitedViewModel(
         inviterDisplayName: String?,
         note: String?
     ) {
-        saveReceivedInvite(
-            inviteId = inviteId,
-            inviterId = inviterId,
-            inviterDisplayName = inviterDisplayName,
-            note = note
-        )
         viewModelScope.launch {
             val inviteExists = inviteExistsUseCase.inviteExists(inviteId)
             val currentUser = getCurrentUserUseCase.getCurrentUser()
@@ -39,6 +33,12 @@ class InvitedViewModel(
             if (currentUser != null && currentUser.userId == inviterId) {
                 _uiState.value = InvitedUIState.SameUser
             } else {
+                saveReceivedInvite(
+                    inviteId = inviteId,
+                    inviterId = inviterId,
+                    inviterDisplayName = inviterDisplayName,
+                    note = note
+                )
                 _uiState.value = InvitedUIState.InviteExists(inviteExists)
             }
         }

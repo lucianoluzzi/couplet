@@ -14,6 +14,7 @@ import com.couplesdating.couplet.domain.useCase.invite.AddInviteeIdUseCase
 import com.couplesdating.couplet.domain.useCase.invite.DeleteInviteUseCase
 import com.couplesdating.couplet.domain.useCase.invite.GetInviteUseCase
 import com.couplesdating.couplet.domain.useCase.pair.FormPairUseCase
+import com.couplesdating.couplet.domain.useCase.pair.GetPartnerUseCase
 import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCase
 import com.couplesdating.couplet.ui.extensions.doNothing
 import com.couplesdating.couplet.ui.utils.LiveDataEvent
@@ -29,6 +30,7 @@ class SocialLoginViewModel(
     private val deleteInviteUseCase: DeleteInviteUseCase,
     private val formPairUseCase: FormPairUseCase,
     private val addInviteeIdUseCase: AddInviteeIdUseCase,
+    private val getPartnerUseCase: GetPartnerUseCase,
     private val analytics: Analytics
 ) : ViewModel() {
 
@@ -79,10 +81,13 @@ class SocialLoginViewModel(
 
     private suspend fun onSuccessResponse() {
         val loggedInUser = getCurrentUserUseCase.getCurrentUser()
-        loggedInUser?.let {
-            saveInvite(it.userId)
+        loggedInUser?.let { currentUser ->
+            saveInvite(currentUser.userId)
+            val userWithPartner = getCurrentUserUseCase.getCurrentUser() ?: currentUser
             _uiStateLiveData.postValue(
-                LiveDataEvent(SocialLoginUIState.Success(it))
+                LiveDataEvent(
+                    SocialLoginUIState.Success(userWithPartner)
+                )
             )
         }
     }
