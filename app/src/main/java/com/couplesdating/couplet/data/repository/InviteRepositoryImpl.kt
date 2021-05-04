@@ -47,22 +47,24 @@ class InviteRepositoryImpl(
         return inviteJson?.let {
             Gson().fromJson(it, InviteModel::class.java)
         } ?: run {
-            val response = database.collection("invite")
-                .whereEqualTo("invitee_id", currentUserId)
-                .get()
-                .await()
-            response.documents.map { document ->
-                InviteModel(
-                    inviterId = document.get("inviter_id").toString(),
-                    inviteeId = document.get("invitee_id").toString(),
-                    inviterDisplayName = document.get("inviter_display_name").toString(),
-                    inputInviteeDisplayName = document.get("invitee_input_display_name").toString(),
-                    note = document.get("note").toString(),
-                    inviteId = document.get("invite_id").toString(),
-                    timestamp = (document.get("timestamp") as Timestamp).toDate(),
-                    hasAccepted = false
-                )
-            }.firstOrNull()
+            return currentUserId?.let {
+                val response = database.collection("invite")
+                    .whereEqualTo("invitee_id", currentUserId)
+                    .get()
+                    .await()
+                response.documents.map { document ->
+                    InviteModel(
+                        inviterId = document.get("inviter_id").toString(),
+                        inviteeId = document.get("invitee_id").toString(),
+                        inviterDisplayName = document.get("inviter_display_name").toString(),
+                        inputInviteeDisplayName = document.get("invitee_input_display_name").toString(),
+                        note = document.get("note").toString(),
+                        inviteId = document.get("invite_id").toString(),
+                        timestamp = (document.get("timestamp") as Timestamp).toDate(),
+                        hasAccepted = false
+                    )
+                }.firstOrNull()
+            }
         }
     }
 
