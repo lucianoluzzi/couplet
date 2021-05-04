@@ -9,7 +9,8 @@ data class User(
     val email: String?,
     val name: String? = null,
     val password: String? = null,
-    val pairedPartner: User? = null
+    val pairedPartner: User? = null,
+    val isPremium: Boolean = false
 ) : Parcelable {
     val firstName = name?.split(" ")?.firstOrNull()
 }

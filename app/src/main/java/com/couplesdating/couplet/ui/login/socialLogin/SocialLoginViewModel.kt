@@ -30,7 +30,6 @@ class SocialLoginViewModel(
     private val deleteInviteUseCase: DeleteInviteUseCase,
     private val formPairUseCase: FormPairUseCase,
     private val addInviteeIdUseCase: AddInviteeIdUseCase,
-    private val getPartnerUseCase: GetPartnerUseCase,
     private val analytics: Analytics
 ) : ViewModel() {
 

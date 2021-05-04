@@ -117,6 +117,8 @@ class DashboardFragment(
         when (banner) {
             is Banner.PendingInvite -> setPendingInviteBanner(banner)
             Banner.RegisterPartner -> setRegisterPartnerBanner()
+            Banner.BecomePremium -> binding.becomePremiumBanner.isVisible = true
+            Banner.NewMatches -> TODO()
             else -> doNothing
         }
     }

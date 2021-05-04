@@ -10,21 +10,33 @@ import com.couplesdating.couplet.domain.model.User
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.tasks.await
 
 class UserRepositoryImpl(
+    private val database: FirebaseFirestore,
     private val authenticator: FirebaseAuth
 ) : UserRepository {
 
-    override fun getCurrentUser(): User? {
+    override suspend fun getCurrentUser(): User? {
         authenticator.currentUser?.let {
             val userId = it.uid
             val name = it.displayName
             val email = it.email
 
+            val userResponse = database.collection("users")
+                .whereEqualTo("id", userId)
+                .get()
+                .await()
+            val isPremium = userResponse.map { response ->
+                response.getBoolean("is_premium")
+            }.firstOrNull() ?: false
+
             return User(
                 userId = userId,
                 name = name,
-                email = email
+                email = email,
+                isPremium = isPremium
             )
         }
 

@@ -48,7 +48,6 @@ val appModule = module {
             deleteInviteUseCase = get(),
             formPairUseCase = get(),
             addInviteeIdUseCase = get(),
-            getPartnerUseCase = get(),
             analytics = get()
         )
     }

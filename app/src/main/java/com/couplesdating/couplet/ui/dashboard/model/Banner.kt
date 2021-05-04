@@ -6,4 +6,5 @@ sealed class Banner {
     data class PendingInvite(val invite: InviteModel) : Banner()
     object RegisterPartner : Banner()
     object NewMatches : Banner()
+    object BecomePremium : Banner()
 }

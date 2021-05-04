@@ -58,6 +58,9 @@ class DashboardViewModel(
         if (currentUser.pairedPartner == null && receivedInvite == null) {
             return Banner.RegisterPartner
         }
+        if (currentUser.isPremium.not()) {
+            return Banner.BecomePremium
+        }
 
         return null
     }

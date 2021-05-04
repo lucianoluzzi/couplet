@@ -7,7 +7,12 @@ import org.koin.dsl.module
 val repositoryModule = module {
     single<Analytics> { FirebaseAnalyticsTracker(get()) }
 
-    single<UserRepository> { UserRepositoryImpl(get()) }
+    single<UserRepository> {
+        UserRepositoryImpl(
+            database = get(),
+            authenticator = get()
+        )
+    }
 
     single<PairRepository> { PairRepositoryImpl(get(), get()) }
 
