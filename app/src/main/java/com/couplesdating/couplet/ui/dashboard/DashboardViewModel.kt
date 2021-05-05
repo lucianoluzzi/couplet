@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.R
+import com.couplesdating.couplet.domain.extensions.isNull
 import com.couplesdating.couplet.domain.model.Category
 import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.domain.useCase.category.GetCategoriesUseCase
@@ -55,7 +56,7 @@ class DashboardViewModel(
         if (pendingInvite != null) {
             return Banner.PendingInvite(pendingInvite)
         }
-        if (currentUser.pairedPartner == null && receivedInvite == null) {
+        if (currentUser.pairedPartner.isNull() && receivedInvite.isNull()) {
             return Banner.RegisterPartner
         }
         if (currentUser.isPremium.not()) {
