@@ -19,4 +19,6 @@ val repositoryModule = module {
     single<InviteRepository> { InviteRepositoryImpl(get(), get()) }
 
     single<CategoryRepository> { CategoryRepositoryImpl() }
+
+    single<MatchRepository> { MatchRepositoryImpl(get()) }
 }

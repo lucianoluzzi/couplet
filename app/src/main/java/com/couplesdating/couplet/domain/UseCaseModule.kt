@@ -4,6 +4,8 @@ import com.couplesdating.couplet.domain.useCase.auth.*
 import com.couplesdating.couplet.domain.useCase.category.GetCategoriesUseCase
 import com.couplesdating.couplet.domain.useCase.category.GetCategoriesUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.invite.*
+import com.couplesdating.couplet.domain.useCase.match.GetNewMatchesUseCase
+import com.couplesdating.couplet.domain.useCase.match.GetNewMatchesUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.pair.*
 import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCase
 import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCaseImpl
@@ -61,4 +63,6 @@ val useCaseModule = module {
     single<AddInviteeIdUseCase> { AddInviteeIdUseCaseImpl(get()) }
 
     single<GetSentPairInviteUseCase> { GetSentPairInviteUseCaseImpl(get()) }
+
+    single<GetNewMatchesUseCase> { GetNewMatchesUseCaseImpl(get()) }
 }

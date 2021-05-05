@@ -7,10 +7,13 @@ import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.domain.extensions.isNull
 import com.couplesdating.couplet.domain.model.Category
+import com.couplesdating.couplet.domain.model.Match
+import com.couplesdating.couplet.domain.model.Response
 import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.domain.useCase.category.GetCategoriesUseCase
 import com.couplesdating.couplet.domain.useCase.invite.GetReceivedInviteUseCase
 import com.couplesdating.couplet.domain.useCase.invite.GetSentPairInviteUseCase
+import com.couplesdating.couplet.domain.useCase.match.GetNewMatchesUseCase
 import com.couplesdating.couplet.domain.useCase.pair.SetSyncShownUseCase
 import com.couplesdating.couplet.domain.useCase.pair.ShouldShowSyncUseCase
 import com.couplesdating.couplet.ui.dashboard.adapter.CategoryUIModel
@@ -24,7 +27,8 @@ class DashboardViewModel(
     private val setSyncShownUseCase: SetSyncShownUseCase,
     private val getCategoriesUseCase: GetCategoriesUseCase,
     private val getReceivedInviteUseCase: GetReceivedInviteUseCase,
-    private val getSentPairInviteUseCase: GetSentPairInviteUseCase
+    private val getSentPairInviteUseCase: GetSentPairInviteUseCase,
+    private val getNewMatchesUseCase: GetNewMatchesUseCase
 ) : ViewModel() {
 
     private val _shouldShowSync = MutableLiveData<Boolean>()
@@ -53,11 +57,17 @@ class DashboardViewModel(
     private suspend fun getBanner(currentUser: User): Banner? {
         val pendingInvite = getReceivedInviteUseCase.getReceivedInvite(currentUser.userId)
         val receivedInvite = getSentPairInviteUseCase.getSentPairInvite(currentUser.userId)
+        val newMatches = getNewMatchesUseCase.getNewMatches(currentUser.userId)
         if (pendingInvite != null) {
             return Banner.PendingInvite(pendingInvite)
         }
         if (currentUser.pairedPartner.isNull() && receivedInvite.isNull()) {
             return Banner.RegisterPartner
+        }
+        if (newMatches is Response.Success<*>) {
+            if (newMatches.data is List<*> && newMatches.data.isNotEmpty()) {
+                return Banner.NewMatches(newMatches.data as List<Match>)
+            }
         }
         if (currentUser.isPremium.not()) {
             return Banner.BecomePremium

@@ -16,7 +16,8 @@ val fragmentModule = module {
             setSyncShownUseCase = get(),
             getCategoriesUseCase = get(),
             getReceivedInviteUseCase = get(),
-            getSentPairInviteUseCase = get()
+            getSentPairInviteUseCase = get(),
+            getNewMatchesUseCase = get()
         )
         DashboardFragment(dashboardViewModel)
     }
