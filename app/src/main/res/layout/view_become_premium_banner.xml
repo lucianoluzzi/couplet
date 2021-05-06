@@ -4,7 +4,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_rounded_20"
+    android:background="@drawable/background_rounded_20_ripple"
     android:backgroundTint="@color/yellow"
     android:paddingVertical="@dimen/dimension_20"
     android:paddingStart="@dimen/dimension_24"

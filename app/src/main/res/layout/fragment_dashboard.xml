@@ -52,6 +52,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/to_couplet"
+                android:clickable="true"
+                android:focusable="true"
                 android:layout_marginTop="@dimen/dimension_20"
                 android:id="@+id/banner_container"
                 android:layout_width="0dp"
