@@ -18,7 +18,11 @@ val repositoryModule = module {
 
     single<InviteRepository> { InviteRepositoryImpl(get(), get()) }
 
-    single<CategoryRepository> { CategoryRepositoryImpl() }
+    single<CategoryRepository> {
+        CategoryRepositoryImpl(
+            database = get()
+        )
+    }
 
     single<MatchRepository> { MatchRepositoryImpl(get()) }
 }
