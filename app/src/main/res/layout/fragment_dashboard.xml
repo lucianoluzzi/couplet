@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -104,7 +104,8 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:layout_marginTop="@dimen/dimension_20"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/view_category_item"/>
 
             <LinearLayout
@@ -134,5 +135,5 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </layout>
