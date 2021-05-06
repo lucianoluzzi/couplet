@@ -13,8 +13,11 @@ class MatchRepositoryImpl(
     override suspend fun getNewMatches(currentUserId: String): Response {
         val firstUserQuery = database.collection("match")
             .whereEqualTo("user_1_id", currentUserId)
+            .whereEqualTo("user_1_has_seen", false)
+
         val secondUserQuery = database.collection("match")
             .whereEqualTo("user_2_id", currentUserId)
+            .whereEqualTo("user_2_has_seen", false)
 
         val firstResult = firstUserQuery.get().await()
         val secondResult = secondUserQuery.get().await()
