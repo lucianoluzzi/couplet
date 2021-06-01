@@ -10,8 +10,8 @@ class GetCategoriesUseCaseImpl(
     private val categoriesRepository: CategoryRepository
 ) : GetCategoriesUseCase {
 
-    override fun getCategories(): Flow<List<Category>> = flow {
-        val response = categoriesRepository.getCategories()
+    override fun getCategories(userId: String): Flow<List<Category>> = flow {
+        val response = categoriesRepository.getCategories(userId)
         if (response is Response.Success<*>) {
             emit(response.data as List<Category>)
         } else {

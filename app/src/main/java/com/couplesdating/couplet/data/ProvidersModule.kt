@@ -14,4 +14,6 @@ val providersModule = module {
     single { FirebaseAnalyticsProvider().analytics }
 
     single { FirebaseAuthProvider().firebaseAuth }
+
+    single { ServiceProvider().functions }
 }

@@ -45,7 +45,7 @@ class DashboardViewModel(
         }
 
         viewModelScope.launch {
-            getCategoriesUseCase.getCategories().collect {
+            getCategoriesUseCase.getCategories(currentUser.userId).collect {
                 _uiData.value = DashboardUIState.Success(
                     categories = mapCategoryToUIModel(it),
                     banner = getBanner(currentUser)
