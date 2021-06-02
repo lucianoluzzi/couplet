@@ -71,6 +71,7 @@
                 android:layout_marginStart="@dimen/dimension_24"
                 android:layout_marginEnd="@dimen/dimension_24"
                 android:layout_marginBottom="@dimen/dimension_24"
+                android:layout_marginTop="@dimen/dimension_24"
                 android:text="@string/continu"
                 android:id="@+id/continue_button"
                 app:layout_constraintBottom_toBottomOf="parent"
