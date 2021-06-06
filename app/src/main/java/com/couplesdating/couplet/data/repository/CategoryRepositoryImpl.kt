@@ -1,10 +1,11 @@
 package com.couplesdating.couplet.data.repository
 
 import android.util.Log
-import com.couplesdating.couplet.domain.model.Category
 import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.response.CategoriesIdeasResponse
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.functions.FirebaseFunctions
+import com.squareup.moshi.Moshi
 import kotlinx.coroutines.tasks.await
 
 class CategoryRepositoryImpl(
@@ -13,38 +14,34 @@ class CategoryRepositoryImpl(
 ) : CategoryRepository {
 
     override suspend fun getCategories(userId: String): Response {
-        val categoryResponse = database.collection("category")
-            .get()
-            .await()
-
-        val categories = categoryResponse.documents.map {
-            Category(
-                id = it.get("id").toString(),
-                title = it.get("title").toString(),
-                description = it.get("description").toString(),
-                spiciness = it.getLong("spiciness")?.toInt() ?: 4,
-                isPremium = it.getBoolean("is_premium") ?: true,
-                hasNewIdeas = false
-            )
-        }.sortedBy {
-            it.spiciness
-        }
-
-        getNewIdeas(userId)
-        return Response.Success(categories)
+        return getNewIdeas(userId)
     }
 
-    private suspend fun getNewIdeas(userId: String) {
-        try {
-            val data = hashMapOf(
-                "userId" to userId
-            )
-            val result = service.getHttpsCallable("getIdeas")
-                .call(data)
-                .await()
-            Log.d("GET_NEW_IDEAS", result.data.toString())
+    private suspend fun getNewIdeas(userId: String): Response {
+        return try {
+            val resultJson = doCall(userId)
+            Log.d("GET_NEW_IDEAS", resultJson)
+            val categories = getCategoriesResponseFromJSON(resultJson)
+            return Response.Success(categories?.categoriesIdeas ?: emptyList())
         } catch (exception: Exception) {
             Log.d("GET_NEW_IDEAS", exception.message.toString())
+            Response.Error(exception.message)
         }
+    }
+
+    private fun getCategoriesResponseFromJSON(resultJson: String): CategoriesIdeasResponse? {
+        val moshi = Moshi.Builder().build()
+        val jsonAdapter = moshi.adapter(CategoriesIdeasResponse::class.java)
+        return jsonAdapter.fromJson(resultJson)
+    }
+
+    private suspend fun doCall(userId: String): String {
+        val data = hashMapOf(
+            "userId" to userId
+        )
+        val result = service.getHttpsCallable("getIdeas")
+            .call(data)
+            .await()
+        return result.data.toString()
     }
 }

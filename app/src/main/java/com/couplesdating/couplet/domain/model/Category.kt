@@ -6,5 +6,7 @@ data class Category(
     val description: String,
     val isPremium: Boolean = false,
     val spiciness: Int,
-    val hasNewIdeas: Boolean
-)
+    val newIdeas: List<Idea>
+) {
+    val hasNewIdeas = newIdeas.isNotEmpty()
+}
