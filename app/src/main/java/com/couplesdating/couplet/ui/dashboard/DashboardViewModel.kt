@@ -45,6 +45,7 @@ class DashboardViewModel(
         }
 
         viewModelScope.launch {
+            _uiData.value = DashboardUIState.Loading
             getCategoriesUseCase.getCategories(currentUser.userId).collect {
                 _uiData.value = DashboardUIState.Success(
                     categories = mapCategoryToUIModel(it),
