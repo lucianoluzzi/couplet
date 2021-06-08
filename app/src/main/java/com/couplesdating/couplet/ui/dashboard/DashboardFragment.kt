@@ -116,10 +116,23 @@ class DashboardFragment(
     private fun handleBannerState(banner: Banner?) {
         when (banner) {
             is Banner.PendingInvite -> setPendingInviteBanner(banner)
-            Banner.RegisterPartner -> setRegisterPartnerBanner()
-            Banner.BecomePremium -> binding.becomePremiumBanner.isVisible = true
-            is Banner.NewMatches -> binding.newMatchesBanner.isVisible = true
-            else -> doNothing
+            Banner.RegisterPartner -> setRegisterPartnerBanner(banner)
+            Banner.BecomePremium -> setBecomePremiumBanner(banner)
+            is Banner.NewMatches -> setNewMatchesClicked(banner)
+        }
+    }
+
+    private fun setNewMatchesClicked(banner: Banner.NewMatches) {
+        binding.newMatchesBanner.isVisible = true
+        binding.newMatchesBanner.setOnClickListener {
+            viewModel.onBannerClicked(banner)
+        }
+    }
+
+    private fun setBecomePremiumBanner(banner: Banner) {
+        binding.becomePremiumBanner.isVisible = true
+        binding.becomePremiumBanner.setOnClickListener {
+            viewModel.onBannerClicked(banner)
         }
     }
 
@@ -130,15 +143,21 @@ class DashboardFragment(
             description.text =
                 "${currentUser?.firstName}, you a pending invite from ${banner.invite.inviterDisplayName}"
         }
+        pendingInviteBanner.setOnClickListener {
+            viewModel.onBannerClicked(banner)
+        }
     }
 
-    private fun setRegisterPartnerBanner() = with(binding) {
+    private fun setRegisterPartnerBanner(banner: Banner) = with(binding) {
         registerPartnerBanner.isVisible = true
         val description = registerPartnerBanner.findViewById<TextView>(R.id.description)
         description.text = currentUser?.let {
             "${it.firstName}, we are almost there. Register a partner and get kinky!"
         } ?: run {
             "We are almost there, register a partner and get kinky!"
+        }
+        registerPartnerBanner.setOnClickListener {
+            viewModel.onBannerClicked(banner)
         }
     }
 

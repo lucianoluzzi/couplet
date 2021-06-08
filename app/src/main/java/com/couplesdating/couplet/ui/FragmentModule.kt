@@ -17,7 +17,8 @@ val fragmentModule = module {
             getCategoriesUseCase = get(),
             getReceivedInviteUseCase = get(),
             getSentPairInviteUseCase = get(),
-            getNewMatchesUseCase = get()
+            getNewMatchesUseCase = get(),
+            analytics = get()
         )
         DashboardFragment(dashboardViewModel)
     }

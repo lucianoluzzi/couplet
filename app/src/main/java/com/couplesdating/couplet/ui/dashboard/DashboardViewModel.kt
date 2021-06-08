@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.R
+import com.couplesdating.couplet.analytics.Analytics
+import com.couplesdating.couplet.analytics.events.dashboard.BannerEvents
 import com.couplesdating.couplet.domain.extensions.isNull
 import com.couplesdating.couplet.domain.model.Category
 import com.couplesdating.couplet.domain.model.Match
@@ -28,7 +30,8 @@ class DashboardViewModel(
     private val getCategoriesUseCase: GetCategoriesUseCase,
     private val getReceivedInviteUseCase: GetReceivedInviteUseCase,
     private val getSentPairInviteUseCase: GetSentPairInviteUseCase,
-    private val getNewMatchesUseCase: GetNewMatchesUseCase
+    private val getNewMatchesUseCase: GetNewMatchesUseCase,
+    private val analytics: Analytics
 ) : ViewModel() {
 
     private val _shouldShowSync = MutableLiveData<Boolean>()
@@ -102,5 +105,14 @@ class DashboardViewModel(
 
     fun onSyncShown() {
         setSyncShownUseCase.invoke()
+    }
+
+    fun onBannerClicked(banner: Banner) {
+        when (banner) {
+            Banner.BecomePremium -> analytics.trackEvent(BannerEvents.BecomePremiumClicked)
+            is Banner.NewMatches -> analytics.trackEvent(BannerEvents.NewMatchesClicked)
+            is Banner.PendingInvite -> analytics.trackEvent(BannerEvents.PendingInviteClicked)
+            Banner.RegisterPartner -> analytics.trackEvent(BannerEvents.RegisterPartnerClicked)
+        }
     }
 }
