@@ -9,34 +9,22 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/cloud"
+                android:id="@+id/image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintHeight_default="percent"
+                app:layout_constraintHeight_percent=".475"
+                android:layout_marginHorizontal="@dimen/dimension_16"
+                android:background="@drawable/cloud"
+                android:src="@drawable/couple_dance"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                android:paddingHorizontal="@dimen/dimension_16"
-                android:src="@drawable/cloud"
-                android:layout_width="wrap_content"
-                android:layout_height="280dp" />
-
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="230dp"
-                android:layout_height="230dp"
-                app:layout_constraintHeight_default="percent"
-                android:layout_marginHorizontal="@dimen/dimension_16"
-                android:src="@drawable/couple_dance"
-                app:layout_constraintVertical_bias="1.0"
-                app:layout_constraintTop_toTopOf="@id/cloud"
-                app:layout_constraintStart_toStartOf="@id/cloud"
-                app:layout_constraintEnd_toEndOf="@id/cloud"
-                app:layout_constraintBottom_toBottomOf="@id/cloud" />
-
-            <!-- android:background="@drawable/cloud" -->
+                app:layout_constraintVertical_bias="0.10" />
 
             <TextView
                 style="@style/H1Title"
