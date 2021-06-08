@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.events.dashboard.BannerEvents
+import com.couplesdating.couplet.analytics.events.dashboard.CategoryEvents
 import com.couplesdating.couplet.domain.extensions.isNull
 import com.couplesdating.couplet.domain.model.Category
 import com.couplesdating.couplet.domain.model.Match
@@ -83,6 +84,7 @@ class DashboardViewModel(
     private fun mapCategoryToUIModel(categories: List<Category>): List<CategoryUIModel> {
         return categories.map { category ->
             CategoryUIModel(
+                id = category.id,
                 title = category.title,
                 description = category.description,
                 isPremium = category.isPremium,
@@ -114,5 +116,9 @@ class DashboardViewModel(
             is Banner.PendingInvite -> analytics.trackEvent(BannerEvents.PendingInviteClicked)
             Banner.RegisterPartner -> analytics.trackEvent(BannerEvents.RegisterPartnerClicked)
         }
+    }
+
+    fun onCategoryClicked(categoryId: String) {
+        analytics.trackEvent(CategoryEvents.OnCategoryClicked(categoryId))
     }
 }

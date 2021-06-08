@@ -7,7 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.couplesdating.couplet.databinding.ViewCategoryItemBinding
 
 class CategoryAdapter(
-    private val categories: List<CategoryUIModel>
+    private val categories: List<CategoryUIModel>,
+    private val onCategoryClicked: (categoryId: String) -> Unit
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
@@ -34,6 +35,9 @@ class CategoryAdapter(
             premium.isVisible = category.isPremium
             newIdeas.isVisible = category.hasNewIdeas
             spicinessIndicator.adapter = SpicinessAdapter(category.spiciness)
+            root.setOnClickListener {
+                onCategoryClicked(category.id)
+            }
         }
     }
 }

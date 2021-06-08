@@ -24,6 +24,8 @@ class GetCategoriesUseCaseImpl(
                     spiciness = categoryResponse.spiciness,
                     newIdeas = categoryResponse.ideas
                 )
+            }.sortedBy {
+                it.spiciness
             }
             emit(categoriesWithIdeas)
         } else {

@@ -110,7 +110,9 @@ class DashboardFragment(
     }
 
     private fun setCategories(categories: List<CategoryUIModel>) {
-        binding.categories.adapter = CategoryAdapter(categories)
+        binding.categories.adapter = CategoryAdapter(categories) { categoryClickedId ->
+            viewModel.onCategoryClicked(categoryClickedId)
+        }
     }
 
     private fun handleBannerState(banner: Banner?) {
