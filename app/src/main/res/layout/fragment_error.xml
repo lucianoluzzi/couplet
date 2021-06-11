@@ -73,6 +73,7 @@
                 android:layout_marginBottom="@dimen/dimension_24"
                 android:text="Try again"
                 android:id="@+id/try_again"
+                android:layout_marginTop="@dimen/dimension_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

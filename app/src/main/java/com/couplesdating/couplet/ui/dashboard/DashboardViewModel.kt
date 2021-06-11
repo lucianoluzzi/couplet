@@ -21,8 +21,12 @@ import com.couplesdating.couplet.domain.useCase.pair.SetSyncShownUseCase
 import com.couplesdating.couplet.domain.useCase.pair.ShouldShowSyncUseCase
 import com.couplesdating.couplet.ui.dashboard.adapter.CategoryUIModel
 import com.couplesdating.couplet.ui.dashboard.model.Banner
+import com.couplesdating.couplet.ui.dashboard.model.DashboardRoute
 import com.couplesdating.couplet.ui.dashboard.model.DashboardUIState
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class DashboardViewModel(
@@ -35,16 +39,19 @@ class DashboardViewModel(
     private val analytics: Analytics
 ) : ViewModel() {
 
-    private val _shouldShowSync = MutableLiveData<Boolean>()
-    val shouldShowSync: LiveData<Boolean> = _shouldShowSync
-
     private val _uiData = MutableLiveData<DashboardUIState>()
     val uiData: LiveData<DashboardUIState> = _uiData
+
+    private val navigationChannel = Channel<DashboardRoute>(Channel.CONFLATED)
+    val navigationFlow = navigationChannel.receiveAsFlow().distinctUntilChanged()
 
     fun init(currentUser: User) {
         viewModelScope.launch {
             shouldShowSyncUseCase.invoke(currentUser).collect {
-                _shouldShowSync.value = it
+                if (it) {
+                    onSyncShown()
+                    navigationChannel.send(DashboardRoute.ToSync)
+                }
             }
         }
 
@@ -90,6 +97,7 @@ class DashboardViewModel(
                 isPremium = category.isPremium,
                 spiciness = category.spiciness,
                 hasNewIdeas = category.hasNewIdeas,
+                ideas = category.newIdeas,
                 image = getCategoryImage(category.id)
             )
         }
@@ -105,7 +113,7 @@ class DashboardViewModel(
         }
     }
 
-    fun onSyncShown() {
+    private fun onSyncShown() {
         setSyncShownUseCase.invoke()
     }
 
@@ -118,7 +126,12 @@ class DashboardViewModel(
         }
     }
 
-    fun onCategoryClicked(categoryId: String) {
-        analytics.trackEvent(CategoryEvents.OnCategoryClicked(categoryId))
+    fun onCategoryClicked(category: CategoryUIModel) {
+        analytics.trackEvent(CategoryEvents.OnCategoryClicked(categoryId = category.id))
+        viewModelScope.launch {
+            navigationChannel.send(
+                DashboardRoute.ToIdeas(ideas = category.ideas)
+            )
+        }
     }
 }

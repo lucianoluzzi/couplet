@@ -10,18 +10,26 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentDashboardBindingImpl
+import com.couplesdating.couplet.domain.model.Idea
 import com.couplesdating.couplet.ui.dashboard.adapter.CategoryAdapter
 import com.couplesdating.couplet.ui.dashboard.adapter.CategoryUIModel
 import com.couplesdating.couplet.ui.dashboard.model.Banner
+import com.couplesdating.couplet.ui.dashboard.model.DashboardRoute
 import com.couplesdating.couplet.ui.dashboard.model.DashboardUIState
 import com.couplesdating.couplet.ui.extensions.doNothing
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 
 class DashboardFragment(
     private val viewModel: DashboardViewModel
@@ -40,17 +48,32 @@ class DashboardFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel.shouldShowSync.observe(viewLifecycleOwner) {
-            if (it) {
-                viewModel.onSyncShown()
-                navigateToSync()
-            }
-        }
         viewModel.uiData.observe(viewLifecycleOwner) { uiState ->
             handleUIState(uiState)
         }
+        lifecycleScope.launch {
+            viewModel.navigationFlow
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collect { navigationRoute ->
+                    navigate(navigationRoute)
+                }
+        }
 
         return binding.root
+    }
+
+    private fun navigate(navigationRoute: DashboardRoute) {
+        when (navigationRoute) {
+            is DashboardRoute.ToIdeas -> navigateToIdeas(navigationRoute.ideas)
+            DashboardRoute.ToSync -> navigateToSync()
+        }
+    }
+
+    private fun navigateToIdeas(ideas: List<Idea>) {
+        val toIdeas = DashboardFragmentDirections.actionDashboardFragmentToIdeaListFragment(
+            ideas.toTypedArray()
+        )
+        findNavController().navigate(toIdeas)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
