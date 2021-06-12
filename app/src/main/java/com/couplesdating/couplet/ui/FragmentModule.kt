@@ -4,6 +4,7 @@ import com.couplesdating.couplet.ui.dashboard.DashboardFragment
 import com.couplesdating.couplet.ui.dashboard.DashboardViewModel
 import com.couplesdating.couplet.ui.home.HomeFragment
 import com.couplesdating.couplet.ui.home.HomeViewModel
+import com.couplesdating.couplet.ui.idea.IdeaListFragment
 import com.couplesdating.couplet.ui.invited.InvitedFragment
 import com.couplesdating.couplet.ui.invited.InvitedViewModel
 import org.koin.androidx.fragment.dsl.fragment
@@ -38,4 +39,5 @@ val fragmentModule = module {
         )
         HomeFragment(homeViewModel)
     }
+    fragment { IdeaListFragment() }
 }

@@ -188,7 +188,7 @@
     </fragment>
     <fragment
         android:id="@+id/ideaListFragment"
-        android:name="com.couplesdating.couplet.analytics.events.idea.IdeaListFragment"
+        android:name="com.couplesdating.couplet.ui.idea.IdeaListFragment"
         android:label="IdeaListFragment" >
         <argument
             android:name="ideas"

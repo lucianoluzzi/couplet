@@ -1,16 +1,18 @@
-package com.couplesdating.couplet.analytics.events.idea
+package com.couplesdating.couplet.ui.idea
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.databinding.FragmentIdeaListBindingImpl
-import com.couplesdating.couplet.domain.model.Idea
 
-class IdeaListFragment(
-    private val ideas: List<Idea>
-) : Fragment() {
+class IdeaListFragment : Fragment() {
+    private val navigationArgs by navArgs<IdeaListFragmentArgs>()
+    private val ideas by lazy {
+        navigationArgs.ideas.toList()
+    }
 
     private val binding by lazy {
         val layoutInflater = LayoutInflater.from(requireContext())

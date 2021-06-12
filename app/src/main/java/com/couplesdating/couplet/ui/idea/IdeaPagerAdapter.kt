@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.analytics.events.idea
+package com.couplesdating.couplet.ui.idea
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
