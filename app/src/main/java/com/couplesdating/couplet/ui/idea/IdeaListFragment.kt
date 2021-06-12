@@ -33,6 +33,9 @@ class IdeaListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.pager.adapter = pagerAdapter
+        with(binding.pager) {
+            adapter = pagerAdapter
+            isUserInputEnabled = false
+        }
     }
 }
