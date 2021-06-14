@@ -28,18 +28,21 @@ import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
-class DashboardFragment(
-    private val viewModel: DashboardViewModel
-) : Fragment() {
+class DashboardFragment : Fragment() {
     private val binding by lazy {
         val layoutInflater = LayoutInflater.from(requireContext())
         FragmentDashboardBindingImpl.inflate(layoutInflater)
     }
+    private val viewModel by viewModel<DashboardViewModel> {
+        parametersOf(user)
+    }
+
     private val navigationArgs: DashboardFragmentArgs by navArgs()
-    private val currentUser by lazy {
+    private val user by lazy {
         navigationArgs.user
     }
 
@@ -47,20 +50,7 @@ class DashboardFragment(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        viewModel.uiData.observe(viewLifecycleOwner) { uiState ->
-            handleUIState(uiState)
-        }
-        lifecycleScope.launch {
-            viewModel.navigationFlow
-                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-                .collect { navigationRoute ->
-                    navigate(navigationRoute)
-                }
-        }
-
-        return binding.root
-    }
+    ) = binding.root
 
     private fun navigate(navigationRoute: DashboardRoute) {
         when (navigationRoute) {
@@ -79,17 +69,25 @@ class DashboardFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         decorateTitle()
-        currentUser?.let {
-            viewModel.init(it)
+        viewModel.uiData.observe(viewLifecycleOwner) { uiState ->
+            handleUIState(uiState)
+        }
+        lifecycleScope.launch {
+            viewModel.navigationFlow
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collect { navigationRoute ->
+                    navigate(navigationRoute)
+                }
         }
     }
 
     private fun decorateTitle() {
-        currentUser?.let { user ->
-            if (!user.firstName.isNullOrBlank()) {
-                binding.toCouplet.text = "to Couplet ${user.firstName}"
+        user?.let {
+            if (!it.firstName.isNullOrBlank()) {
+                binding.toCouplet.text = "to Couplet ${it.firstName}"
             }
         }
+
         val titleText = binding.toCouplet.textValue()
         val spannable = SpannableString(titleText)
         val medium = Typeface.create(
@@ -97,13 +95,11 @@ class DashboardFragment(
             Typeface.NORMAL
         )
         val color = requireContext().getColor(R.color.red)
-        val wordToDecorate = currentUser?.let { user ->
-            if (!user.firstName.isNullOrBlank()) {
-                user.firstName
-            } else {
-                "Couplet"
-            }
-        } ?: run { "Couplet" }
+        val wordToDecorate = if (!user?.firstName.isNullOrBlank()) {
+            user?.firstName ?: "Couplet"
+        } else {
+            "Couplet"
+        }
         spannable.setColor(
             color = color,
             wordToDecorate = wordToDecorate,
@@ -164,9 +160,10 @@ class DashboardFragment(
     private fun setPendingInviteBanner(banner: Banner.PendingInvite) = with(binding) {
         pendingInviteBanner.isVisible = true
         val description = pendingInviteBanner.findViewById<TextView>(R.id.description)
-        if (currentUser?.firstName != null && banner.invite.inviterDisplayName.isNotBlank()) {
-            description.text =
-                "${currentUser?.firstName}, you a pending invite from ${banner.invite.inviterDisplayName}"
+        if (banner.invite.inviterDisplayName.isNotBlank()) {
+            description.text = user?.let {
+                "${it.firstName}, you have a pending invite from ${banner.invite.inviterDisplayName}"
+            } ?: "You have a pending invite from ${banner.invite.inviterDisplayName}"
         }
         pendingInviteBanner.setOnClickListener {
             viewModel.onBannerClicked(banner)
@@ -176,11 +173,9 @@ class DashboardFragment(
     private fun setRegisterPartnerBanner(banner: Banner) = with(binding) {
         registerPartnerBanner.isVisible = true
         val description = registerPartnerBanner.findViewById<TextView>(R.id.description)
-        description.text = currentUser?.let {
+        description.text = user?.let {
             "${it.firstName}, we are almost there. Register a partner and get kinky!"
-        } ?: run {
-            "We are almost there, register a partner and get kinky!"
-        }
+        } ?: "We are almost there. Register a partner and get kinky!"
         registerPartnerBanner.setOnClickListener {
             viewModel.onBannerClicked(banner)
         }

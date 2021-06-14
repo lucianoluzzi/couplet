@@ -1,6 +1,8 @@
 package com.couplesdating.couplet
 
+import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.ui.MainViewModel
+import com.couplesdating.couplet.ui.dashboard.DashboardViewModel
 import com.couplesdating.couplet.ui.error.ErrorViewModel
 import com.couplesdating.couplet.ui.invite.InvitePartnerViewModel
 import com.couplesdating.couplet.ui.login.emailLogin.LoginViewModel
@@ -83,6 +85,18 @@ val appModule = module {
             get(),
             get(),
             get()
+        )
+    }
+    viewModel { (user: User) ->
+        DashboardViewModel(
+            shouldShowSyncUseCase = get(),
+            setSyncShownUseCase = get(),
+            getCategoriesUseCase = get(),
+            getReceivedInviteUseCase = get(),
+            getSentPairInviteUseCase = get(),
+            getNewMatchesUseCase = get(),
+            analytics = get(),
+            currentUser = user
         )
     }
 }

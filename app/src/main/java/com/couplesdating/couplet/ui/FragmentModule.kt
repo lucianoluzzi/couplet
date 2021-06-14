@@ -2,7 +2,6 @@ package com.couplesdating.couplet.ui
 
 import com.couplesdating.couplet.domain.model.Idea
 import com.couplesdating.couplet.ui.dashboard.DashboardFragment
-import com.couplesdating.couplet.ui.dashboard.DashboardViewModel
 import com.couplesdating.couplet.ui.home.HomeFragment
 import com.couplesdating.couplet.ui.home.HomeViewModel
 import com.couplesdating.couplet.ui.idea.IdeaFragment
@@ -14,16 +13,7 @@ import org.koin.dsl.module
 
 val fragmentModule = module {
     fragment {
-        val dashboardViewModel = DashboardViewModel(
-            shouldShowSyncUseCase = get(),
-            setSyncShownUseCase = get(),
-            getCategoriesUseCase = get(),
-            getReceivedInviteUseCase = get(),
-            getSentPairInviteUseCase = get(),
-            getNewMatchesUseCase = get(),
-            analytics = get()
-        )
-        DashboardFragment(dashboardViewModel)
+        DashboardFragment()
     }
     fragment {
         val invitedViewModel = InvitedViewModel(
@@ -42,7 +32,7 @@ val fragmentModule = module {
         HomeFragment(homeViewModel)
     }
     fragment { IdeaListFragment() }
-    fragment {
-        (idea: Idea) -> IdeaFragment(idea)
+    fragment { (idea: Idea) ->
+        IdeaFragment(idea)
     }
 }

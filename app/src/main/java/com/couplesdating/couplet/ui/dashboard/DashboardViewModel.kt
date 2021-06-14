@@ -36,7 +36,8 @@ class DashboardViewModel(
     private val getReceivedInviteUseCase: GetReceivedInviteUseCase,
     private val getSentPairInviteUseCase: GetSentPairInviteUseCase,
     private val getNewMatchesUseCase: GetNewMatchesUseCase,
-    private val analytics: Analytics
+    private val analytics: Analytics,
+    private val currentUser: User
 ) : ViewModel() {
 
     private val _uiData = MutableLiveData<DashboardUIState>()
@@ -45,7 +46,7 @@ class DashboardViewModel(
     private val navigationChannel = Channel<DashboardRoute>(Channel.CONFLATED)
     val navigationFlow = navigationChannel.receiveAsFlow().distinctUntilChanged()
 
-    fun init(currentUser: User) {
+    init {
         viewModelScope.launch {
             shouldShowSyncUseCase.invoke(currentUser).collect {
                 if (it) {
