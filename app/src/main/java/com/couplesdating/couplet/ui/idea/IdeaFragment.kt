@@ -9,6 +9,7 @@ import com.couplesdating.couplet.databinding.FragmentIdeaBindingImpl
 import com.couplesdating.couplet.domain.model.Idea
 
 class IdeaFragment(
+    private val categoryName: String,
     private val idea: Idea
 ) : Fragment() {
     private val binding by lazy {
@@ -25,5 +26,10 @@ class IdeaFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.description.text = idea.description
+        setTitle()
+    }
+
+    private fun setTitle() {
+        binding.title.text = categoryName
     }
 }

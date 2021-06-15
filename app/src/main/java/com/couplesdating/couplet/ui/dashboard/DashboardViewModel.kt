@@ -131,7 +131,10 @@ class DashboardViewModel(
         analytics.trackEvent(CategoryEvents.OnCategoryClicked(categoryId = category.id))
         viewModelScope.launch {
             navigationChannel.send(
-                DashboardRoute.ToIdeas(ideas = category.ideas)
+                DashboardRoute.ToIdeas(
+                    categoryName = category.title,
+                    ideas = category.ideas
+                )
             )
         }
     }

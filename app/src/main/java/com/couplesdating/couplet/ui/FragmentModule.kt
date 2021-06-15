@@ -32,7 +32,10 @@ val fragmentModule = module {
         HomeFragment(homeViewModel)
     }
     fragment { IdeaListFragment() }
-    fragment { (idea: Idea) ->
-        IdeaFragment(idea)
+    fragment { (categoryName: String ,idea: Idea) ->
+        IdeaFragment(
+            categoryName = categoryName,
+            idea = idea
+        )
     }
 }

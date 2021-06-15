@@ -13,6 +13,9 @@ class IdeaListFragment : Fragment() {
     private val ideas by lazy {
         navigationArgs.ideas.toList()
     }
+    private val categoryName by lazy {
+        navigationArgs.categoryName
+    }
 
     private val binding by lazy {
         val layoutInflater = LayoutInflater.from(requireContext())
@@ -21,7 +24,8 @@ class IdeaListFragment : Fragment() {
     private val pagerAdapter by lazy {
         IdeaPagerAdapter(
             ideaList = ideas,
-            this
+            categoryName = categoryName,
+            ideaListFragment = this
         )
     }
 

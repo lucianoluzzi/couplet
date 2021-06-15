@@ -54,14 +54,21 @@ class DashboardFragment : Fragment() {
 
     private fun navigate(navigationRoute: DashboardRoute) {
         when (navigationRoute) {
-            is DashboardRoute.ToIdeas -> navigateToIdeas(navigationRoute.ideas)
+            is DashboardRoute.ToIdeas -> navigateToIdeas(
+                categoryName = navigationRoute.categoryName,
+                ideas = navigationRoute.ideas
+            )
             DashboardRoute.ToSync -> navigateToSync()
         }
     }
 
-    private fun navigateToIdeas(ideas: List<Idea>) {
+    private fun navigateToIdeas(
+        categoryName: String,
+        ideas: List<Idea>
+    ) {
         val toIdeas = DashboardFragmentDirections.actionDashboardFragmentToIdeaListFragment(
-            ideas.toTypedArray()
+            ideas = ideas.toTypedArray(),
+            categoryName = categoryName
         )
         findNavController().navigate(toIdeas)
     }
