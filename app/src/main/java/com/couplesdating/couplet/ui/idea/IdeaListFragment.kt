@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.databinding.FragmentIdeaListBindingImpl
@@ -13,8 +14,8 @@ class IdeaListFragment : Fragment() {
     private val ideas by lazy {
         navigationArgs.ideas.toList()
     }
-    private val categoryName by lazy {
-        navigationArgs.categoryName
+    private val category by lazy {
+        navigationArgs.category
     }
     private val binding by lazy {
         val layoutInflater = LayoutInflater.from(requireContext())
@@ -30,7 +31,10 @@ class IdeaListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            title.text = categoryName
+            illustration.setImageDrawable(
+                ContextCompat.getDrawable(requireContext(), category.imageBig)
+            )
+            title.text = category.title
             pager.adapter = IdeaPagerAdapter(
                 ideaList = ideas,
                 ideaListFragment = this@IdeaListFragment

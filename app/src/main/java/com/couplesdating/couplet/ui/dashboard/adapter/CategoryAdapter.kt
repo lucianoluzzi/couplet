@@ -29,7 +29,7 @@ class CategoryAdapter(
     ) : RecyclerView.ViewHolder(itemBinding.root) {
 
         fun bind(category: CategoryUIModel) = with(itemBinding) {
-            illustration.setImageResource(category.image)
+            illustration.setImageResource(category.imageSmall)
             title.text = category.title
             description.text = category.description
             premium.isVisible = category.isPremium

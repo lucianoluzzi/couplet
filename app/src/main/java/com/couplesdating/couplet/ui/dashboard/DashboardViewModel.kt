@@ -90,7 +90,7 @@ class DashboardViewModel(
     }
 
     private fun mapCategoryToUIModel(categories: List<Category>): List<CategoryUIModel> {
-        return categories.map { category ->
+        return categories.mapIndexed { index, category ->
             CategoryUIModel(
                 id = category.id,
                 title = category.title,
@@ -99,18 +99,29 @@ class DashboardViewModel(
                 spiciness = category.spiciness,
                 hasNewIdeas = category.hasNewIdeas,
                 ideas = category.newIdeas,
-                image = getCategoryImage(category.id)
+                imageSmall = getCategorySmallImage(index),
+                imageBig = getCategoryBigImage(index)
             )
         }
     }
 
-    private fun getCategoryImage(categoryId: String): Int {
-        return when (categoryId) {
-            "1" -> R.drawable.ic_category_1
-            "2" -> R.drawable.ic_category_2
-            "3" -> R.drawable.ic_category_3
-            "4" -> R.drawable.ic_category_4
+    private fun getCategorySmallImage(position: Int): Int {
+        return when (position) {
+            0 -> R.drawable.ic_category_1
+            1 -> R.drawable.ic_category_2
+            2 -> R.drawable.ic_category_3
+            3 -> R.drawable.ic_category_4
             else -> R.drawable.ic_category_1
+        }
+    }
+
+    private fun getCategoryBigImage(position: Int): Int {
+        return when (position) {
+            0 -> R.drawable.ic_category_1_big
+            1 -> R.drawable.ic_category_2_big
+            2 -> R.drawable.ic_category_3_big
+            3 -> R.drawable.ic_category_4_big
+            else -> R.drawable.ic_category_1_big
         }
     }
 
@@ -132,7 +143,7 @@ class DashboardViewModel(
         viewModelScope.launch {
             navigationChannel.send(
                 DashboardRoute.ToIdeas(
-                    categoryName = category.title,
+                    category = category,
                     ideas = category.ideas
                 )
             )

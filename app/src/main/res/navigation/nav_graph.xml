@@ -194,8 +194,8 @@
             android:name="ideas"
             app:argType="com.couplesdating.couplet.domain.model.Idea[]" />
         <argument
-            android:name="categoryName"
-            app:argType="string" />
+            android:name="category"
+            app:argType="com.couplesdating.couplet.ui.dashboard.adapter.CategoryUIModel" />
     </fragment>
 
 </navigation>
