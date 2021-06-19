@@ -3,61 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:padding="@dimen/dimension_16">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <TextView
+            style="@style/H2Title"
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/dimension_16"
-            android:clipToPadding="false">
-
-            <TextView
-                android:id="@+id/title"
-                style="@style/H1Title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="@dimen/dimension_8"
-                tools:text="Esquenta Relação" />
-
-            <ImageView
-                android:id="@+id/illustration"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimension_24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title"
-                android:src="@drawable/ic_category_1_big" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/description_container"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/illustration"
-                android:elevation="@dimen/dimension_6"
-                android:layout_width="0dp"
-                android:layout_height="300dp"
-                android:background="@drawable/background_rounded_20"
-                android:backgroundTint="@color/idea_description_background"
-                android:padding="@dimen/dimension_16">
-
-                <TextView
-                    style="@style/H2Title"
-                    android:id="@+id/description"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Idea description" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Idea description" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

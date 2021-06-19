@@ -10,9 +10,6 @@ import com.couplesdating.couplet.databinding.FragmentIdeaBindingImpl
 import com.couplesdating.couplet.domain.model.Idea
 
 class IdeaFragment : Fragment() {
-    private val categoryName by lazy {
-        requireArguments().getString(CATEGORY_NAME)
-    }
     private val idea by lazy<Idea?> {
         requireArguments().getParcelable(IDEA)
     }
@@ -30,26 +27,13 @@ class IdeaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.description.text = idea?.description
-        setTitle()
-    }
-
-    private fun setTitle() {
-        binding.title.text = categoryName
     }
 
     companion object {
-        private const val CATEGORY_NAME = "CATEGORY_NAME"
         private const val IDEA = "IDEA"
 
-        fun newInstance(
-            categoryName: String,
-            idea: Idea
-        ) = IdeaFragment().apply {
-            arguments = bundleOf(
-                CATEGORY_NAME to categoryName,
-                IDEA to idea
-
-            )
+        fun newInstance(idea: Idea) = IdeaFragment().apply {
+            arguments = bundleOf(IDEA to idea)
         }
     }
 }
