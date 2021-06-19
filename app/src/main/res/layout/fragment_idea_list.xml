@@ -11,47 +11,101 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:paddingHorizontal="@dimen/dimension_16">
+            android:paddingHorizontal="@dimen/dimension_16"
+            android:clipChildren="false"
+            android:clipToPadding="false">
 
-            <TextView
-                android:id="@+id/title"
-                style="@style/H1Title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimension_8"
-                app:layout_constraintStart_toStartOf="parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Esquenta Relação" />
-
-            <ImageView
-                android:id="@+id/illustration"
-                android:layout_width="wrap_content"
+                android:id="@+id/content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimension_24"
-                tools:src="@drawable/ic_category_1_big"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:clipChildren="false"
+                android:clipToPadding="false">
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/H1Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimension_8"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Esquenta Relação" />
+
+                <ImageView
+                    android:layout_marginTop="@dimen/dimension_24"
+                    android:id="@+id/illustration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:src="@drawable/ic_category_1_big"
+                    app:layout_constraintTop_toBottomOf="@id/title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:id="@+id/description_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="250dp"
+                    android:background="@drawable/background_rounded_20"
+                    android:backgroundTint="@color/idea_description_background"
+                    android:elevation="@dimen/dimension_6"
+                    app:layout_constraintBottom_toBottomOf="@id/illustration"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title" />
-
-            <LinearLayout
-                android:gravity="center"
-                android:id="@+id/description_container"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:minHeight="250dp"
-                android:background="@drawable/background_rounded_20"
-                android:backgroundTint="@color/idea_description_background"
-                android:elevation="@dimen/dimension_6"
-                app:layout_constraintBottom_toBottomOf="@id/illustration"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
 
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
+                <ImageView
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/maybe"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    android:elevation="@dimen/dimension_6"
+                    android:src="@drawable/ic_btn_no"
+                    android:id="@+id/no"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+                <ImageView
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintEnd_toStartOf="@id/yes"
+                    android:elevation="@dimen/dimension_6"
+                    android:src="@drawable/ic_btn_maybe"
+                    android:id="@+id/maybe"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/no"/>
+
+                <ImageView
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintStart_toEndOf="@id/maybe"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    android:elevation="@dimen/dimension_6"
+                    android:src="@drawable/ic_btn_love"
+                    android:id="@+id/yes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
