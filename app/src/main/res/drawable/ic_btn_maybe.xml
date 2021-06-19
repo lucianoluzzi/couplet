@@ -1,21 +1,17 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
-    android:viewportWidth="155"
-    android:viewportHeight="155"
-    android:width="155dp"
-    android:height="155dp">
+    android:viewportWidth="80"
+    android:viewportHeight="80"
+    android:width="80dp"
+    android:height="80dp">
     <group
-        android:translateX="-168.5"
-        android:translateY="-913.5">
+        android:translateX="-206"
+        android:translateY="-946">
         <group
-            android:translateX="168.5"
-            android:translateY="913.5">
-            <group
-                android:translateX="37.5"
-                android:translateY="32.5">
-                <path
-                    android:pathData="M80 40A40 40 0 0 1 0 40A40 40 0 0 1 80 40Z"
-                    android:fillColor="#46B5D7" />
-            </group>
+            android:translateX="206"
+            android:translateY="946">
+            <path
+                android:pathData="M80 40A40 40 0 0 1 0 40A40 40 0 0 1 80 40Z"
+                android:fillColor="#46B5D7" />
         </group>
         <group
             android:translateX="246"
