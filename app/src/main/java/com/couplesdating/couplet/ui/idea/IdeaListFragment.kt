@@ -35,7 +35,7 @@ class IdeaListFragment : Fragment() {
                 ideaList = ideas,
                 ideaListFragment = this@IdeaListFragment
             )
-            isUserInputEnabled = false
+            pager.isUserInputEnabled = false
         }
     }
 }
