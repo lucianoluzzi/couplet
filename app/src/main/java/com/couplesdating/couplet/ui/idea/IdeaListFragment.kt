@@ -16,17 +16,9 @@ class IdeaListFragment : Fragment() {
     private val categoryName by lazy {
         navigationArgs.categoryName
     }
-
     private val binding by lazy {
         val layoutInflater = LayoutInflater.from(requireContext())
         FragmentIdeaListBindingImpl.inflate(layoutInflater)
-    }
-    private val pagerAdapter by lazy {
-        IdeaPagerAdapter(
-            ideaList = ideas,
-            categoryName = categoryName,
-            ideaListFragment = this
-        )
     }
 
     override fun onCreateView(
@@ -38,7 +30,11 @@ class IdeaListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding.pager) {
-            adapter = pagerAdapter
+            adapter = IdeaPagerAdapter(
+                ideaList = ideas,
+                categoryName = categoryName,
+                ideaListFragment = this@IdeaListFragment
+            )
             isUserInputEnabled = false
         }
     }

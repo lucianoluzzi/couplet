@@ -1,6 +1,5 @@
 package com.couplesdating.couplet.ui
 
-import com.couplesdating.couplet.domain.model.Idea
 import com.couplesdating.couplet.ui.dashboard.DashboardFragment
 import com.couplesdating.couplet.ui.home.HomeFragment
 import com.couplesdating.couplet.ui.home.HomeViewModel
@@ -32,10 +31,5 @@ val fragmentModule = module {
         HomeFragment(homeViewModel)
     }
     fragment { IdeaListFragment() }
-    fragment { (categoryName: String ,idea: Idea) ->
-        IdeaFragment(
-            categoryName = categoryName,
-            idea = idea
-        )
-    }
+    fragment { IdeaFragment() }
 }

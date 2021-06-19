@@ -37,4 +37,6 @@
     <color name="loading_overlay">#33494B71</color>
     <color name="new_cards_text_color">#F25A6C</color>
     <color name="new_cards_background">#ECD7DF</color>
+
+    <color name="idea_description_background">#FFFFFFFF</color>
 </resources>

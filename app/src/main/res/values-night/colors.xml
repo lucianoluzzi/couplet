@@ -16,4 +16,6 @@
     <color name="register_color">@color/grey_blue</color>
     <color name="new_cards_text_color">#FFFFFF</color>
     <color name="new_cards_background">#905774</color>
+
+    <color name="idea_description_background">#2E527C</color>
 </resources>

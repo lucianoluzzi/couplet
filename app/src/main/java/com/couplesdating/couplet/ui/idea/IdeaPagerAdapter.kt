@@ -11,8 +11,10 @@ class IdeaPagerAdapter(
 
     override fun getItemCount() = ideaList.size
 
-    override fun createFragment(position: Int) = IdeaFragment(
+    override fun createFragment(position: Int) = getIdeaFragment(ideaList[position])
+
+    private fun getIdeaFragment(idea: Idea) = IdeaFragment.newInstance(
         categoryName = categoryName,
-        idea = ideaList[position]
+        idea = idea
     )
 }
