@@ -202,4 +202,19 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="Button.No" parent="">
+        <item name="elevation">@dimen/dimension_8</item>
+        <item name="shapeAppearance">@style/CircleImageView</item>
+    </style>
+
+    <style name="Button.Yes" parent="">
+        <item name="elevation">@dimen/dimension_8</item>
+        <item name="shapeAppearance">@style/CircleImageView</item>
+    </style>
+
+    <style name="Button.Maybe" parent="">
+        <item name="elevation">@dimen/dimension_8</item>
+        <item name="shapeAppearance">@style/CircleImageView</item>
+    </style>
 </resources>

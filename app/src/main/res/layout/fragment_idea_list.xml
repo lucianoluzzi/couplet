@@ -16,11 +16,13 @@
             android:clipToPadding="false">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginBottom="@dimen/dimension_16"
+                app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/buttons"
                 android:id="@+id/content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipChildren="false"
+                android:layout_height="0dp"
                 android:clipToPadding="false">
 
                 <TextView
@@ -39,6 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:src="@drawable/ic_category_1_big"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/title"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"/>
@@ -64,49 +67,55 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/buttons"
+                app:layout_constraintTop_toBottomOf="@id/content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/dimension_8"
                 android:layout_marginHorizontal="@dimen/dimension_16"
                 android:layout_marginBottom="@dimen/dimension_24"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    style="@style/CircleImageView"
+                <com.google.android.material.imageview.ShapeableImageView
+                    style="@style/Button.No"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/maybe"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_weight="1"
-                    android:elevation="@dimen/dimension_8"
-                    android:src="@drawable/ic_btn_no"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/drawable_no_button"
                     android:id="@+id/no"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    style="@style/CircleImageView"
+                <com.google.android.material.imageview.ShapeableImageView
+                    style="@style/Button.Maybe"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toEndOf="@id/no"
                     app:layout_constraintEnd_toStartOf="@id/yes"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_weight="1"
-                    android:elevation="@dimen/dimension_8"
-                    android:src="@drawable/ic_btn_maybe"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/drawable_maybe_button"
                     android:id="@+id/maybe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    style="@style/CircleImageView"
+                <com.google.android.material.imageview.ShapeableImageView
+                    style="@style/Button.Yes"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toEndOf="@id/maybe"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_weight="1"
-                    android:elevation="@dimen/dimension_8"
-                    android:src="@drawable/ic_btn_love"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/drawable_button_yes"
                     android:id="@+id/yes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />

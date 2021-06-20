@@ -41,5 +41,7 @@
     <color name="idea_description_background">#FFFFFFFF</color>
 
     <color name="maybe_color">#47B4D8</color>
+    <color name="maybe_over">#3BA7C7</color>
     <color name="no_color">#989CC0</color>
+    <color name="no_over">#878BB1</color>
 </resources>

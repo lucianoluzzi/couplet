@@ -1,0 +1,18 @@
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:color="@color/no_over">
+    <item>
+        <vector
+            android:width="78.857dp"
+            android:height="80dp"
+            android:viewportWidth="78.857"
+            android:viewportHeight="80">
+            <path
+                android:pathData="M0,40a39.429,40 0,1 0,78.858 0a39.429,40 0,1 0,-78.858 0z"
+                android:fillColor="#989cc0"/>
+            <path
+                android:pathData="M42.243,39.909l7.09,-7.09a1.652,1.652 0,0 0,-2.336 -2.336l-7.09,7.091 -7.09,-7.091a1.652,1.652 0,0 0,-2.336 2.336l7.09,7.091 -7.09,7.09a1.652,1.652 0,1 0,2.336 2.336l7.09,-7.091 7.09,7.09a1.651,1.651 0,0 0,2.336 -2.335Z"
+                android:fillColor="#fff"/>
+        </vector>
+    </item>
+</ripple>

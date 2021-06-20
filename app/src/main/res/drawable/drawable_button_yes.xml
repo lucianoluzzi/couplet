@@ -1,0 +1,19 @@
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:color="@color/red_over">
+    <item>
+        <vector
+            android:width="78.857dp"
+            android:height="80dp"
+            android:viewportWidth="78.857"
+            android:viewportHeight="80">
+            <path
+                android:pathData="M0,40a39.429,40 0,1 0,78.858 0a39.429,40 0,1 0,-78.858 0z"
+                android:fillColor="#f25a6c"/>
+            <path
+                android:pathData="M37.999,49.4a1.8,1.8 0,0 0,2.31 0c7.513,-6.253 13.979,-11.151 9.558,-17.237 -1.323,-1.852 -5.107,-3.779 -10.21,0.021a0.849,0.849 0,0 1,-1.01 0c-5.1,-3.8 -8.886,-1.873 -10.21,-0.021C24.017,38.251 30.53,43.148 37.999,49.4Z"
+                android:fillColor="#fff"
+                android:fillType="evenOdd"/>
+        </vector>
+    </item>
+</ripple>
