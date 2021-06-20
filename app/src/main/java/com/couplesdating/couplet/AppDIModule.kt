@@ -4,6 +4,7 @@ import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.ui.MainViewModel
 import com.couplesdating.couplet.ui.dashboard.DashboardViewModel
 import com.couplesdating.couplet.ui.error.ErrorViewModel
+import com.couplesdating.couplet.ui.idea.IdeaViewModel
 import com.couplesdating.couplet.ui.invite.InvitePartnerViewModel
 import com.couplesdating.couplet.ui.login.emailLogin.LoginViewModel
 import com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordViewModel
@@ -98,5 +99,8 @@ val appModule = module {
             analytics = get(),
             currentUser = user
         )
+    }
+    viewModel {
+        IdeaViewModel(get())
     }
 }

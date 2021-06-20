@@ -3,6 +3,8 @@ package com.couplesdating.couplet.domain
 import com.couplesdating.couplet.domain.useCase.auth.*
 import com.couplesdating.couplet.domain.useCase.category.GetCategoriesUseCase
 import com.couplesdating.couplet.domain.useCase.category.GetCategoriesUseCaseImpl
+import com.couplesdating.couplet.domain.useCase.idea.DecorateIdeaUseCase
+import com.couplesdating.couplet.domain.useCase.idea.DecorateIdeaUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.invite.*
 import com.couplesdating.couplet.domain.useCase.match.GetNewMatchesUseCase
 import com.couplesdating.couplet.domain.useCase.match.GetNewMatchesUseCaseImpl
@@ -65,4 +67,6 @@ val useCaseModule = module {
     single<GetSentPairInviteUseCase> { GetSentPairInviteUseCaseImpl(get()) }
 
     single<GetNewMatchesUseCase> { GetNewMatchesUseCaseImpl(get()) }
+
+    single<DecorateIdeaUseCase> { DecorateIdeaUseCaseImpl() }
 }
