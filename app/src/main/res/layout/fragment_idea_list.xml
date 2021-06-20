@@ -8,7 +8,8 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/dimension_16"
@@ -22,8 +23,7 @@
                 app:layout_constraintBottom_toTopOf="@id/buttons"
                 android:id="@+id/content"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:clipToPadding="false">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/title"
@@ -39,8 +39,11 @@
                     android:layout_marginTop="@dimen/dimension_24"
                     android:id="@+id/illustration"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    app:layout_constraintHeight_default="percent"
+                    app:layout_constraintHeight_percent=".87"
                     tools:src="@drawable/ic_category_1_big"
+                    app:layout_constraintVertical_bias="0.0"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/title"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -51,9 +54,9 @@
                     android:id="@+id/description_container"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:minHeight="250dp"
                     android:background="@drawable/background_rounded_20"
                     android:backgroundTint="@color/idea_description_background"
+                    android:paddingVertical="@dimen/dimension_36"
                     android:elevation="@dimen/dimension_6"
                     app:layout_constraintBottom_toBottomOf="@id/illustration"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -72,11 +75,12 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:layout_gravity="bottom"
                 android:layout_marginTop="@dimen/dimension_8"
                 android:layout_marginHorizontal="@dimen/dimension_16"
                 android:layout_marginBottom="@dimen/dimension_24"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     style="@style/Button.No"
@@ -85,6 +89,7 @@
                     app:layout_constraintEnd_toStartOf="@id/maybe"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_weight="1"
+                    android:elevation="@dimen/dimension_8"
                     android:clickable="true"
                     android:focusable="true"
                     android:background="@drawable/drawable_no_button"
@@ -99,6 +104,7 @@
                     app:layout_constraintEnd_toStartOf="@id/yes"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_weight="1"
+                    android:elevation="@dimen/dimension_8"
                     android:clickable="true"
                     android:focusable="true"
                     android:background="@drawable/drawable_maybe_button"
@@ -113,6 +119,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintHorizontal_weight="1"
+                    android:elevation="@dimen/dimension_8"
                     android:clickable="true"
                     android:focusable="true"
                     android:background="@drawable/drawable_button_yes"
@@ -120,6 +127,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 </layout>
