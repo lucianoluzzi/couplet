@@ -45,7 +45,7 @@ class IdeaFragment : Fragment() {
         binding.description.text = idea?.description
 
         lifecycleScope.launch {
-            viewModel.navigationFlow
+            viewModel.uiState
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect { uiModel ->
                     decorate(uiModel)

@@ -13,8 +13,8 @@ class IdeaViewModel(
     private val decorateIdeaUseCase: DecorateIdeaUseCase
 ) : ViewModel() {
     private lateinit var idea: Idea
-    private val navigationChannel = Channel<IdeaUIModel>(Channel.CONFLATED)
-    val navigationFlow = navigationChannel.receiveAsFlow().distinctUntilChanged()
+    private val uiStateChannel = Channel<IdeaUIModel>(Channel.CONFLATED)
+    val uiState = uiStateChannel.receiveAsFlow().distinctUntilChanged()
 
     fun init(idea: Idea) {
         this.idea = idea
@@ -24,7 +24,7 @@ class IdeaViewModel(
     private fun getWordsToDecorate() {
         val wordsToDecorate = decorateIdeaUseCase.getIdeasToDecorate(idea.description)
         viewModelScope.launch {
-            navigationChannel.send(
+            uiStateChannel.send(
                 IdeaUIModel(wordsToDecorate = wordsToDecorate)
             )
         }
