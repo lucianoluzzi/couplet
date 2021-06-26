@@ -2,6 +2,8 @@ package com.couplesdating.couplet.ui.ideaList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.couplesdating.couplet.analytics.Analytics
+import com.couplesdating.couplet.analytics.events.idea.IdeaResponseEvents
 import com.couplesdating.couplet.domain.model.Idea
 import com.couplesdating.couplet.domain.model.UserResponse
 import com.couplesdating.couplet.domain.network.Response
@@ -12,26 +14,54 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class IdeaListViewModel(
-    private val sendIdeaResponseUseCase: SendIdeaResponseUseCase
+    private val sendIdeaResponseUseCase: SendIdeaResponseUseCase,
+    private val analytics: Analytics
 ) : ViewModel() {
     private val uiStateChannel = Channel<IdeaUIState>(Channel.CONFLATED)
     val uiState = uiStateChannel.receiveAsFlow().distinctUntilChanged()
 
-    fun onYesClick(idea: Idea) {
+    fun onYesClick(
+        categoryId: String,
+        idea: Idea
+    ) {
+        analytics.trackEvent(
+            IdeaResponseEvents.OnYesClicked(
+                ideaId = idea.id,
+                categoryId = categoryId
+            )
+        )
         sendResponse(
             ideaId = idea.id,
             userResponse = UserResponse.YES
         )
     }
 
-    fun onNoClick(idea: Idea) {
+    fun onNoClick(
+        categoryId: String,
+        idea: Idea
+    ) {
+        analytics.trackEvent(
+            IdeaResponseEvents.OnNoClicked(
+                ideaId = idea.id,
+                categoryId = categoryId
+            )
+        )
         sendResponse(
             ideaId = idea.id,
             userResponse = UserResponse.NO
         )
     }
 
-    fun onMaybeClick(idea: Idea) {
+    fun onMaybeClick(
+        categoryId: String,
+        idea: Idea
+    ) {
+        analytics.trackEvent(
+            IdeaResponseEvents.OnMaybeClicked(
+                ideaId = idea.id,
+                categoryId = categoryId
+            )
+        )
         sendResponse(
             ideaId = idea.id,
             userResponse = UserResponse.MAYBE

@@ -120,13 +120,22 @@ class IdeaListFragment(
 
     private fun FragmentIdeaListBinding.setButtonsListeners() {
         no.setOnClickListener {
-            viewModel.onNoClick(getCurrentIdea())
+            viewModel.onNoClick(
+                categoryId = category.id,
+                idea = getCurrentIdea()
+            )
         }
         yes.setOnClickListener {
-            viewModel.onYesClick(getCurrentIdea())
+            viewModel.onYesClick(
+                categoryId = category.id,
+                idea = getCurrentIdea()
+            )
         }
         maybe.setOnClickListener {
-            viewModel.onMaybeClick(getCurrentIdea())
+            viewModel.onMaybeClick(
+                categoryId = category.id,
+                idea = getCurrentIdea()
+            )
         }
     }
 
