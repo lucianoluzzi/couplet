@@ -30,6 +30,6 @@ val fragmentModule = module {
         )
         HomeFragment(homeViewModel)
     }
-    fragment { IdeaListFragment() }
+    fragment { IdeaListFragment(get()) }
     fragment { IdeaFragment() }
 }

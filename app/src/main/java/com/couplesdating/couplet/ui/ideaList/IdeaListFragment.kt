@@ -4,13 +4,25 @@ import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.R
+import com.couplesdating.couplet.databinding.FragmentIdeaListBinding
 import com.couplesdating.couplet.databinding.FragmentIdeaListBindingImpl
+import com.couplesdating.couplet.domain.model.Idea
+import com.couplesdating.couplet.ui.extensions.showError
 import com.couplesdating.couplet.ui.utils.CircularOutlineProvider
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-class IdeaListFragment : Fragment() {
+class IdeaListFragment(
+    private val viewModel: IdeaListViewModel
+) : Fragment() {
+
     private val navigationArgs by navArgs<IdeaListFragmentArgs>()
     private val ideas by lazy {
         navigationArgs.ideas.toList()
@@ -29,7 +41,7 @@ class IdeaListFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.ideas_menu, menu);
+        inflater.inflate(R.menu.ideas_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -55,21 +67,38 @@ class IdeaListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setButtonsElevation()
+        lifecycleScope.launch {
+            viewModel.uiState
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collect {
+                    handleUIState(it)
+                }
+        }
         with(binding) {
-            illustration.setImageDrawable(
-                ContextCompat.getDrawable(requireContext(), category.imageBig)
-            )
-            title.text = category.title
-            pager.adapter = IdeaPagerAdapter(
-                ideaList = ideas,
-                ideaListFragment = this@IdeaListFragment
-            )
-            pager.isUserInputEnabled = false
+            setTitleAndIllustration()
+            setButtonsElevation()
+            setButtonsListeners()
+            setIdeasViewPager()
         }
     }
 
-    private fun setButtonsElevation() = with(binding) {
+    private fun FragmentIdeaListBinding.setTitleAndIllustration() {
+        illustration.setImageDrawable(
+            ContextCompat.getDrawable(requireContext(), category.imageBig)
+        )
+        title.text = category.title
+    }
+
+    private fun FragmentIdeaListBinding.setIdeasViewPager() {
+        pager.isSaveEnabled = false
+        pager.adapter = IdeaPagerAdapter(
+            ideaList = ideas,
+            ideaListFragment = this@IdeaListFragment
+        )
+        pager.isUserInputEnabled = false
+    }
+
+    private fun FragmentIdeaListBinding.setButtonsElevation() {
         val outlineProvider = CircularOutlineProvider()
         no.outlineProvider = outlineProvider
         yes.outlineProvider = outlineProvider
@@ -86,6 +115,48 @@ class IdeaListFragment : Fragment() {
                 ContextCompat.getColor(requireContext(), R.color.maybe_color)
             maybe.outlineSpotShadowColor =
                 ContextCompat.getColor(requireContext(), R.color.maybe_color)
+        }
+    }
+
+    private fun FragmentIdeaListBinding.setButtonsListeners() {
+        no.setOnClickListener {
+            viewModel.onNoClick(getCurrentIdea())
+        }
+        yes.setOnClickListener {
+            viewModel.onYesClick(getCurrentIdea())
+        }
+        maybe.setOnClickListener {
+            viewModel.onMaybeClick(getCurrentIdea())
+        }
+    }
+
+    private fun getCurrentIdea(): Idea {
+        val currentItemPosition = binding.pager.currentItem
+        return ideas[currentItemPosition]
+    }
+
+    private fun handleUIState(uiState: IdeaUIState) {
+        when (uiState) {
+            is IdeaUIState.Loading -> showLoading()
+            IdeaUIState.Success -> showNextIdea()
+            is IdeaUIState.Error -> {
+                binding.loadingContainer.isVisible = false
+                showError(uiState.message)
+            }
+        }
+    }
+
+    private fun showLoading() = with(binding) {
+        loadingContainer.isVisible = true
+    }
+
+    private fun showNextIdea() = with(binding) {
+        loadingContainer.isVisible = false
+        val currentItem = pager.currentItem
+        if (currentItem == ideas.size - 1) {
+            // TODO: shows empty list
+        } else {
+            pager.currentItem = currentItem + 1
         }
     }
 }

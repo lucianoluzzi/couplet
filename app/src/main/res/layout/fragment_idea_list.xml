@@ -8,125 +8,168 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/dimension_16"
-            android:clipChildren="false"
-            android:clipToPadding="false">
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/content_container"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="@dimen/dimension_16"
+                android:clipChildren="false"
+                android:clipToPadding="false">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginBottom="@dimen/dimension_16"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/buttons"
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/title"
+                        style="@style/H1Title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimension_8"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Esquenta Relação" />
+
+                    <ImageView
+                        android:layout_marginTop="@dimen/dimension_24"
+                        android:id="@+id/illustration"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        app:layout_constraintHeight_default="percent"
+                        app:layout_constraintHeight_percent=".87"
+                        tools:src="@drawable/ic_category_1_big"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/title"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"/>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:id="@+id/description_container"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/background_rounded_20"
+                        android:backgroundTint="@color/idea_description_background"
+                        android:paddingVertical="@dimen/dimension_36"
+                        android:elevation="@dimen/dimension_6"
+                        app:layout_constraintBottom_toBottomOf="@id/illustration"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/pager"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/buttons"
+                    app:layout_constraintTop_toBottomOf="@id/content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="@dimen/dimension_8"
+                    android:layout_marginHorizontal="@dimen/dimension_16"
+                    android:layout_marginBottom="@dimen/dimension_24"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        style="@style/Button.No"
+                        app:layout_constraintHorizontal_chainStyle="spread"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/maybe"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_weight="1"
+                        android:elevation="@dimen/dimension_8"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="@drawable/drawable_no_button"
+                        android:id="@+id/no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        style="@style/Button.Maybe"
+                        app:layout_constraintHorizontal_chainStyle="spread"
+                        app:layout_constraintStart_toEndOf="@id/no"
+                        app:layout_constraintEnd_toStartOf="@id/yes"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_weight="1"
+                        android:elevation="@dimen/dimension_8"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="@drawable/drawable_maybe_button"
+                        android:id="@+id/maybe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        style="@style/Button.Yes"
+                        app:layout_constraintHorizontal_chainStyle="spread"
+                        app:layout_constraintStart_toEndOf="@id/maybe"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_weight="1"
+                        android:elevation="@dimen/dimension_8"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="@drawable/drawable_button_yes"
+                        android:id="@+id/yes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_marginBottom="@dimen/dimension_16"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/buttons"
-                android:id="@+id/content"
+                android:id="@+id/loading_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/title"
-                    style="@style/H1Title"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dimension_8"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Esquenta Relação" />
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:layout_marginTop="@dimen/dimension_24"
-                    android:id="@+id/illustration"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    app:layout_constraintHeight_default="percent"
-                    app:layout_constraintHeight_percent=".87"
-                    tools:src="@drawable/ic_category_1_big"
-                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"/>
-
-                <LinearLayout
-                    android:gravity="center"
-                    android:id="@+id/description_container"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/background_rounded_20"
-                    android:backgroundTint="@color/idea_description_background"
-                    android:paddingVertical="@dimen/dimension_36"
-                    android:elevation="@dimen/dimension_6"
-                    app:layout_constraintBottom_toBottomOf="@id/illustration"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
-
-                    <androidx.viewpager2.widget.ViewPager2
-                        android:id="@+id/pager"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/buttons"
-                app:layout_constraintTop_toBottomOf="@id/content"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_gravity="bottom"
-                android:layout_marginTop="@dimen/dimension_8"
-                android:layout_marginHorizontal="@dimen/dimension_16"
-                android:layout_marginBottom="@dimen/dimension_24"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    style="@style/Button.No"
-                    app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/maybe"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    android:elevation="@dimen/dimension_8"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/drawable_no_button"
-                    android:id="@+id/no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    style="@style/Button.Maybe"
-                    app:layout_constraintHorizontal_chainStyle="spread"
-                    app:layout_constraintStart_toEndOf="@id/no"
-                    app:layout_constraintEnd_toStartOf="@id/yes"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    android:elevation="@dimen/dimension_8"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/drawable_maybe_button"
-                    android:id="@+id/maybe"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    style="@style/Button.Yes"
-                    app:layout_constraintHorizontal_chainStyle="spread"
-                    app:layout_constraintStart_toEndOf="@id/maybe"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:alpha="0.2"
+                    android:background="@color/grey"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_weight="1"
-                    android:elevation="@dimen/dimension_8"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/drawable_button_yes"
-                    android:id="@+id/yes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/loading"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/loading" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
