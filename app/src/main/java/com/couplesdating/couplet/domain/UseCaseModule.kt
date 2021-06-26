@@ -5,6 +5,8 @@ import com.couplesdating.couplet.domain.useCase.category.GetCategoriesUseCase
 import com.couplesdating.couplet.domain.useCase.category.GetCategoriesUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.idea.DecorateIdeaUseCase
 import com.couplesdating.couplet.domain.useCase.idea.DecorateIdeaUseCaseImpl
+import com.couplesdating.couplet.domain.useCase.idea.SendIdeaResponseUseCase
+import com.couplesdating.couplet.domain.useCase.idea.SendIdeaResponseUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.invite.*
 import com.couplesdating.couplet.domain.useCase.match.GetNewMatchesUseCase
 import com.couplesdating.couplet.domain.useCase.match.GetNewMatchesUseCaseImpl
@@ -69,4 +71,11 @@ val useCaseModule = module {
     single<GetNewMatchesUseCase> { GetNewMatchesUseCaseImpl(get()) }
 
     single<DecorateIdeaUseCase> { DecorateIdeaUseCaseImpl() }
+
+    single<SendIdeaResponseUseCase> {
+        SendIdeaResponseUseCaseImpl(
+            getCurrentUserUseCase = get(),
+            ideaRepository = get()
+        )
+    }
 }

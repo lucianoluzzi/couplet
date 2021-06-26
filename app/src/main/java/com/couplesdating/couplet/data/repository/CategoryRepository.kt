@@ -1,6 +1,6 @@
 package com.couplesdating.couplet.data.repository
 
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 
 interface CategoryRepository {
     suspend fun getCategories(userId: String): Response

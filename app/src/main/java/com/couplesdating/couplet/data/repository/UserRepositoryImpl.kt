@@ -5,7 +5,7 @@ import com.couplesdating.couplet.data.extensions.register
 import com.couplesdating.couplet.data.extensions.resetPassword
 import com.couplesdating.couplet.data.extensions.signIn
 import com.couplesdating.couplet.data.extensions.updateUser
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.model.User
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth

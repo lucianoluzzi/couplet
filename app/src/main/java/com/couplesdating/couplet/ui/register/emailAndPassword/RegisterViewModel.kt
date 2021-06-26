@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.events.login.RegisterEvents
 import com.couplesdating.couplet.data.repository.UserRepository
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.useCase.pair.FormPairUseCase
 import com.couplesdating.couplet.domain.useCase.invite.GetReceivedInviteUseCase
 import com.couplesdating.couplet.ui.utils.LiveDataEvent

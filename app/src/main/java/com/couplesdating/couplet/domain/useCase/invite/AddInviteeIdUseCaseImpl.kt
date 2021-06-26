@@ -2,7 +2,7 @@ package com.couplesdating.couplet.domain.useCase.invite
 
 import com.couplesdating.couplet.data.repository.InviteRepository
 import com.couplesdating.couplet.domain.model.InviteModel
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 
 class AddInviteeIdUseCaseImpl(
     private val inviteRepository: InviteRepository

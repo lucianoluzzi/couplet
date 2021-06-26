@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.events.login.SocialLoginEvents
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.domain.useCase.auth.FacebookSignInUseCase
 import com.couplesdating.couplet.domain.useCase.auth.GoogleSignInUseCase
@@ -14,7 +14,6 @@ import com.couplesdating.couplet.domain.useCase.invite.AddInviteeIdUseCase
 import com.couplesdating.couplet.domain.useCase.invite.DeleteInviteUseCase
 import com.couplesdating.couplet.domain.useCase.invite.GetReceivedInviteUseCase
 import com.couplesdating.couplet.domain.useCase.pair.FormPairUseCase
-import com.couplesdating.couplet.domain.useCase.pair.GetPartnerUseCase
 import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCase
 import com.couplesdating.couplet.ui.extensions.doNothing
 import com.couplesdating.couplet.ui.utils.LiveDataEvent

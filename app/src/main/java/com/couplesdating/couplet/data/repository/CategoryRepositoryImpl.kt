@@ -1,7 +1,7 @@
 package com.couplesdating.couplet.data.repository
 
 import android.util.Log
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.response.CategoriesIdeasResponse
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.functions.FirebaseFunctions

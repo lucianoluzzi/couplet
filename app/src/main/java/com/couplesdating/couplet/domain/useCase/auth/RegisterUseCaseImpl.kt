@@ -1,7 +1,7 @@
 package com.couplesdating.couplet.domain.useCase.auth
 
 import com.couplesdating.couplet.data.repository.UserRepository
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 
 class RegisterUseCaseImpl(
     private val userRepository: UserRepository

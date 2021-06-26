@@ -1,7 +1,7 @@
 package com.couplesdating.couplet.domain.useCase.pair
 
 import com.couplesdating.couplet.data.repository.PairRepository
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 import java.lang.Exception
 
 class GetPartnerUseCaseImpl(

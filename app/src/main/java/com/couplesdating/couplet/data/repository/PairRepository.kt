@@ -1,6 +1,6 @@
 package com.couplesdating.couplet.data.repository
 
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 import kotlinx.coroutines.flow.Flow
 
 interface PairRepository {

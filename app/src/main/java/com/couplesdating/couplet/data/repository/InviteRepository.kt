@@ -1,7 +1,7 @@
 package com.couplesdating.couplet.data.repository
 
 import com.couplesdating.couplet.domain.model.InviteModel
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 
 interface InviteRepository {
     suspend fun saveInvite(inviteModel: InviteModel): Response

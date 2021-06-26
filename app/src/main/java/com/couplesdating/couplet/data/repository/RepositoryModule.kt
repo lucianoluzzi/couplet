@@ -26,4 +26,6 @@ val repositoryModule = module {
     }
 
     single<MatchRepository> { MatchRepositoryImpl(get()) }
+
+    single<IdeaRepository> { IdeaRepositoryImpl(get()) }
 }

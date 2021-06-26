@@ -2,7 +2,7 @@ package com.couplesdating.couplet.data.repository
 
 import com.couplesdating.couplet.domain.model.Idea
 import com.couplesdating.couplet.domain.model.Match
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 

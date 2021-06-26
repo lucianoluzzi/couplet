@@ -3,7 +3,7 @@ package com.couplesdating.couplet.data.repository
 import android.content.SharedPreferences
 import com.couplesdating.couplet.data.extensions.insert
 import com.couplesdating.couplet.data.extensions.observeKey
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.model.User
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow

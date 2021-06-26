@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.events.login.ForgotPasswordEvents
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.useCase.auth.ResetPasswordUseCase
 import kotlinx.coroutines.launch
 

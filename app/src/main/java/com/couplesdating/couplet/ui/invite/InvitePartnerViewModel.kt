@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.events.userPairing.InviteEvents
 import com.couplesdating.couplet.domain.model.InviteModel
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.useCase.invite.CreateInviteUseCase
 import com.couplesdating.couplet.domain.useCase.invite.GenerateInviteLinkUseCase
 import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCase

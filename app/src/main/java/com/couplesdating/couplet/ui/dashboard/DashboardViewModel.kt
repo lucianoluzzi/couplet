@@ -11,7 +11,7 @@ import com.couplesdating.couplet.analytics.events.dashboard.CategoryEvents
 import com.couplesdating.couplet.domain.extensions.isNull
 import com.couplesdating.couplet.domain.model.Category
 import com.couplesdating.couplet.domain.model.Match
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.domain.useCase.category.GetCategoriesUseCase
 import com.couplesdating.couplet.domain.useCase.invite.GetReceivedInviteUseCase

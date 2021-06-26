@@ -2,7 +2,7 @@ package com.couplesdating.couplet.domain.useCase.category
 
 import com.couplesdating.couplet.data.repository.CategoryRepository
 import com.couplesdating.couplet.domain.model.Category
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.response.CategoryResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

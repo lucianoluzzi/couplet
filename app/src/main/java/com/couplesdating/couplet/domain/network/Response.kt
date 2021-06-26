@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.domain.model
+package com.couplesdating.couplet.domain.network
 
 sealed class Response {
     data class Error(val errorMessage: String? = null) : Response()

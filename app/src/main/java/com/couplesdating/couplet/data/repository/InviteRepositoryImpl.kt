@@ -2,13 +2,12 @@ package com.couplesdating.couplet.data.repository
 
 import android.content.SharedPreferences
 import com.couplesdating.couplet.domain.model.InviteModel
-import com.couplesdating.couplet.domain.model.Response
+import com.couplesdating.couplet.domain.network.Response
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.gson.Gson
 import kotlinx.coroutines.tasks.await
-import java.util.*
 
 class InviteRepositoryImpl(
     private val database: FirebaseFirestore,
