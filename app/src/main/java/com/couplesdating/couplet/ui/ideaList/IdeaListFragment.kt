@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.ui.idea
+package com.couplesdating.couplet.ui.ideaList
 
 import android.os.Build
 import android.os.Bundle
