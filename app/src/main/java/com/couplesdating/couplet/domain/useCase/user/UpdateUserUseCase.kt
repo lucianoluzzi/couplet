@@ -4,4 +4,5 @@ import com.couplesdating.couplet.domain.network.Response
 
 interface UpdateUserUseCase {
     suspend fun updateNameAndGender(name: String, gender: String): Response
+    suspend fun updateCloudMessageRegistrationToken(registrationToken: String)
 }

@@ -11,7 +11,8 @@ data class User(
     val name: String? = null,
     val password: String? = null,
     val pairedPartner: User? = null,
-    val isPremium: Boolean = false
+    val isPremium: Boolean = false,
+    val cloudMessageRegistrationToken: String? = null
 ) : Parcelable {
 
     @IgnoredOnParcel

@@ -26,7 +26,9 @@ val fragmentModule = module {
     fragment {
         val homeViewModel = HomeViewModel(
             getCurrentUserUseCase = get(),
-            getReceivedInviteUseCase = get()
+            getReceivedInviteUseCase = get(),
+            getCloudMessagingTokenUseCase = get(),
+            updateUserUseCase = get()
         )
         HomeFragment(homeViewModel)
     }

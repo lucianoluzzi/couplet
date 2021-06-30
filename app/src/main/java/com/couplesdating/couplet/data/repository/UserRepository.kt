@@ -10,5 +10,6 @@ interface UserRepository {
     suspend fun signIn(authCredential: AuthCredential, displayName: String? = null): Response
     suspend fun register(email: String, password: String): Response
     suspend fun updateProfile(userName: String, gender: String? = null): Response
+    suspend fun updateProfile(registrationToken: String? = null)
     suspend fun resetPassword(email: String): Response
 }

@@ -5,12 +5,13 @@ import com.couplesdating.couplet.data.extensions.register
 import com.couplesdating.couplet.data.extensions.resetPassword
 import com.couplesdating.couplet.data.extensions.signIn
 import com.couplesdating.couplet.data.extensions.updateUser
-import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.model.User
+import com.couplesdating.couplet.domain.network.Response
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.tasks.await
 
 class UserRepositoryImpl(
@@ -31,12 +32,16 @@ class UserRepositoryImpl(
             val isPremium = userResponse.map { response ->
                 response.getBoolean("is_premium")
             }.firstOrNull() ?: false
+            val cloudMessageRegistrationToken = userResponse.map { response ->
+                response.getString("cloud_message_registration_token")
+            }.firstOrNull()
 
             return User(
                 userId = userId,
                 name = name,
                 email = email,
-                isPremium = isPremium
+                isPremium = isPremium,
+                cloudMessageRegistrationToken = cloudMessageRegistrationToken
             )
         }
 
@@ -104,6 +109,21 @@ class UserRepositoryImpl(
         }
 
         return Response.Error()
+    }
+
+    override suspend fun updateProfile(registrationToken: String?) {
+        getCurrentUser()?.let { user ->
+            val updateData = hashMapOf(
+                "is_premium" to user.isPremium,
+                "cloud_message_registration_token" to registrationToken,
+                "email" to user.email,
+                "displayName" to user.name
+            )
+            database.collection("users")
+                .document(user.userId)
+                .set(updateData, SetOptions.merge())
+                .await()
+        }
     }
 
     override suspend fun resetPassword(email: String): Response {

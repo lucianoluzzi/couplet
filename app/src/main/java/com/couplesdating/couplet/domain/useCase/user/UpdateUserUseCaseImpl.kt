@@ -13,4 +13,10 @@ class UpdateUserUseCaseImpl(
             gender = gender
         )
     }
+
+    override suspend fun updateCloudMessageRegistrationToken(registrationToken: String) {
+        userRepository.updateProfile(
+            registrationToken = registrationToken
+        )
+    }
 }
