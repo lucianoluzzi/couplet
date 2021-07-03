@@ -10,7 +10,10 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.R
@@ -139,8 +142,14 @@ class DashboardFragment : Fragment() {
     }
 
     private fun setCategories(categories: List<CategoryUIModel>) {
-        binding.categories.adapter = CategoryAdapter(categories) { categoryClickedId ->
-            viewModel.onCategoryClicked(categoryClickedId)
+        binding.categories.adapter = CategoryAdapter(categories) { categoryClicked ->
+            if (categoryClicked.ideas.isNotEmpty()) {
+                viewModel.onCategoryClicked(categoryClicked)
+            } else {
+                val toEmptyList =
+                    DashboardFragmentDirections.actionDashboardFragmentToEmptyListFragment()
+                findNavController().navigate(toEmptyList)
+            }
         }
     }
 

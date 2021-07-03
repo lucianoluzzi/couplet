@@ -185,6 +185,13 @@
         <action
             android:id="@+id/action_dashboardFragment_to_ideaListFragment"
             app:destination="@id/ideaListFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_emptyListFragment"
+            app:destination="@id/emptyListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/ideaListFragment"
@@ -197,5 +204,9 @@
             android:name="category"
             app:argType="com.couplesdating.couplet.ui.dashboard.adapter.CategoryUIModel" />
     </fragment>
+    <fragment
+        android:id="@+id/emptyListFragment"
+        android:name="com.couplesdating.couplet.ui.emptyList.EmptyListFragment"
+        android:label="EmptyListFragment" />
 
 </navigation>
