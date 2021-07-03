@@ -10,9 +10,7 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.R
@@ -76,16 +74,21 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         decorateTitle()
-        viewModel.uiData.observe(viewLifecycleOwner) { uiState ->
-            handleUIState(uiState)
-        }
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.navigationFlow
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect { navigationRoute ->
                     navigate(navigationRoute)
                 }
         }
+        viewModel.uiData.observe(viewLifecycleOwner) { uiState ->
+            handleUIState(uiState)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getIdeas()
     }
 
     private fun decorateTitle() {
