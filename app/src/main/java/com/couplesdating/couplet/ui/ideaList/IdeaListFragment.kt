@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentIdeaListBinding
@@ -163,7 +164,9 @@ class IdeaListFragment(
         loadingContainer.isVisible = false
         val currentItem = pager.currentItem
         if (currentItem == ideas.size - 1) {
-            // TODO: shows empty list
+            val toEmptyList =
+                IdeaListFragmentDirections.actionIdeaListFragmentToEmptyListFragment()
+            findNavController().navigate(toEmptyList)
         } else {
             pager.currentItem = currentItem + 1
         }

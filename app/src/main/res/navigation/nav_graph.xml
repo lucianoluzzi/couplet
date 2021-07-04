@@ -203,6 +203,11 @@
         <argument
             android:name="category"
             app:argType="com.couplesdating.couplet.ui.dashboard.adapter.CategoryUIModel" />
+        <action
+            android:id="@+id/action_ideaListFragment_to_emptyListFragment"
+            app:destination="@id/emptyListFragment"
+            app:popUpTo="@id/ideaListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/emptyListFragment"
