@@ -57,7 +57,9 @@ class IdeaListFragment(
     }
 
     private fun showInfoScreen() {
-        TODO("Not yet implemented")
+        val toInfoFragment =
+            IdeaListFragmentDirections.actionIdeaListFragmentToInfoFragment()
+        findNavController().navigate(toInfoFragment)
     }
 
     override fun onCreateView(

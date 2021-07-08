@@ -208,10 +208,17 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_ideaListFragment_to_infoFragment"
+            app:destination="@id/infoFragment" />
     </fragment>
     <fragment
         android:id="@+id/emptyListFragment"
         android:name="com.couplesdating.couplet.ui.emptyList.EmptyListFragment"
         android:label="EmptyListFragment" />
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.couplesdating.couplet.ui.info.InfoFragment"
+        android:label="InfoFragment" />
 
 </navigation>
