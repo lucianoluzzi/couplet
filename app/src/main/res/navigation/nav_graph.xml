@@ -187,11 +187,7 @@
             app:destination="@id/ideaListFragment" />
         <action
             android:id="@+id/action_dashboardFragment_to_emptyListFragment"
-            app:destination="@id/emptyListFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
+            app:destination="@id/emptyListFragment" />
     </fragment>
     <fragment
         android:id="@+id/ideaListFragment"
@@ -207,7 +203,14 @@
             android:id="@+id/action_ideaListFragment_to_emptyListFragment"
             app:destination="@id/emptyListFragment"
             app:popUpTo="@id/ideaListFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <argument
+            android:name="user"
+            app:argType="com.couplesdating.couplet.domain.model.User" />
     </fragment>
     <fragment
         android:id="@+id/emptyListFragment"
