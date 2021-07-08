@@ -208,9 +208,6 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
-        <argument
-            android:name="user"
-            app:argType="com.couplesdating.couplet.domain.model.User" />
     </fragment>
     <fragment
         android:id="@+id/emptyListFragment"
