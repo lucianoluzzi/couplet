@@ -13,13 +13,13 @@ class CategoryRepositoryImpl(
     private val service: FirebaseFunctions
 ) : CategoryRepository {
 
-    override suspend fun getCategories(userId: String): Response {
-        return getNewIdeas(userId)
+    override suspend fun getCategories(userId: String, timeZone: String): Response {
+        return getNewIdeas(userId, timeZone)
     }
 
-    private suspend fun getNewIdeas(userId: String): Response {
+    private suspend fun getNewIdeas(userId: String, timeZone: String): Response {
         return try {
-            val resultJson = doCall(userId)
+            val resultJson = doCall(userId, timeZone)
             Log.d("GET_NEW_IDEAS", resultJson)
             val categories = getCategoriesResponseFromJSON(resultJson)
             return Response.Success(categories?.categoriesIdeas ?: emptyList())
@@ -35,9 +35,10 @@ class CategoryRepositoryImpl(
         return jsonAdapter.fromJson(resultJson)
     }
 
-    private suspend fun doCall(userId: String): String {
+    private suspend fun doCall(userId: String, timeZone: String): String {
         val data = hashMapOf(
-            "userId" to userId
+            "userId" to userId,
+            "timeZoneId" to timeZone
         )
         val result = service.getHttpsCallable("getIdeas")
             .call(data)

@@ -6,13 +6,15 @@ import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.response.CategoryResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import java.util.*
 
 class GetCategoriesUseCaseImpl(
     private val categoriesRepository: CategoryRepository
 ) : GetCategoriesUseCase {
 
     override fun getCategories(userId: String): Flow<List<Category>> = flow {
-        val response = categoriesRepository.getCategories(userId)
+        val timeZone = TimeZone.getDefault().id
+        val response = categoriesRepository.getCategories(userId, timeZone)
         if (response is Response.Success<*> && response.data is List<*>) {
             val categoryResponse = response.data as List<CategoryResponse>
             val categoriesWithIdeas = categoryResponse.map { categoryResponse ->
