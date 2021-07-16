@@ -1,9 +1,12 @@
 package com.couplesdating.couplet.ui.ideaList
 
+import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
+import android.text.SpannableString
 import android.view.*
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -15,7 +18,10 @@ import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentIdeaListBinding
 import com.couplesdating.couplet.databinding.FragmentIdeaListBindingImpl
 import com.couplesdating.couplet.domain.model.Idea
+import com.couplesdating.couplet.ui.extensions.setColor
+import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.showError
+import com.couplesdating.couplet.ui.extensions.textValue
 import com.couplesdating.couplet.ui.utils.CircularOutlineProvider
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -90,6 +96,31 @@ class IdeaListFragment(
             ContextCompat.getDrawable(requireContext(), category.imageBig)
         )
         title.text = category.title
+        decorateTitle()
+    }
+
+    private fun decorateTitle() {
+        val title = binding.title.textValue()
+        val spannable = SpannableString(title)
+
+        val medium = Typeface.create(
+            ResourcesCompat.getFont(requireContext(), R.font.medium),
+            Typeface.NORMAL
+        )
+        val color = requireContext().getColor(R.color.red)
+        viewModel.getWordsToDecorateInTitle(category.title).forEach { word ->
+            spannable.setFont(
+                typeface = medium,
+                wordToDecorate = word,
+                wholeText = title
+            )
+            spannable.setColor(
+                color = color,
+                wordToDecorate = word,
+                wholeText = title
+            )
+        }
+        binding.title.text = spannable
     }
 
     private fun FragmentIdeaListBinding.setIdeasViewPager() {

@@ -2,9 +2,10 @@ package com.couplesdating.couplet.domain.useCase.idea
 
 class DecorateIdeaUseCaseImpl : DecorateIdeaUseCase {
 
-    override fun getIdeasToDecorate(description: String): List<String>? {
-        return WORDS_TO_DECORATE.filter { word ->
-            description.contains(word)
+    override fun getIdeasToDecorate(description: String): List<String> {
+        val descriptionWords = description.replace(".", "").split(" ")
+        return descriptionWords.filter { word ->
+            WORDS_TO_DECORATE.contains(word.toLowerCase())
         }
     }
 
@@ -20,7 +21,7 @@ class DecorateIdeaUseCaseImpl : DecorateIdeaUseCase {
             "oral",
             "bite",
             "kiss",
-            "niples",
+            "nipples",
             "lick",
             "suck",
             "spank",
@@ -58,12 +59,13 @@ class DecorateIdeaUseCaseImpl : DecorateIdeaUseCase {
             "threesome",
             "foursome",
             "public place",
-            "roleplay",
+            "role-play",
             "forced",
             "truth or dare",
             "strip-poker",
             "penetrate",
-            "penetrated"
+            "penetrated",
+            "slippery"
         )
     }
 }

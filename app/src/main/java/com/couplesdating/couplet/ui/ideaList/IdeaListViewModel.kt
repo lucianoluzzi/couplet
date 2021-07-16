@@ -7,6 +7,7 @@ import com.couplesdating.couplet.analytics.events.idea.IdeaResponseEvents
 import com.couplesdating.couplet.domain.model.Idea
 import com.couplesdating.couplet.domain.model.UserResponse
 import com.couplesdating.couplet.domain.network.Response
+import com.couplesdating.couplet.domain.useCase.idea.DecorateIdeaUseCase
 import com.couplesdating.couplet.domain.useCase.idea.SendIdeaResponseUseCase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -15,6 +16,7 @@ import kotlinx.coroutines.launch
 
 class IdeaListViewModel(
     private val sendIdeaResponseUseCase: SendIdeaResponseUseCase,
+    private val decorateIdeaUseCase: DecorateIdeaUseCase,
     private val analytics: Analytics
 ) : ViewModel() {
     private val uiStateChannel = Channel<IdeaUIState>(Channel.CONFLATED)
@@ -89,4 +91,7 @@ class IdeaListViewModel(
             is Response.Error -> uiStateChannel.send(IdeaUIState.Error(response.errorMessage))
         }
     }
+
+    fun getWordsToDecorateInTitle(title: String): List<String> =
+        decorateIdeaUseCase.getIdeasToDecorate(title)
 }
