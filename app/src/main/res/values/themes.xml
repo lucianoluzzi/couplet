@@ -50,6 +50,12 @@
         <item name="android:textColor">@color/dark</item>
     </style>
 
+    <style name="Match">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/regular</item>
+        <item name="android:textColor">@color/dark_60</item>
+    </style>
+
     <style name="Subtitle">
         <item name="android:textSize">13sp</item>
         <item name="android:fontFamily">@font/regular</item>

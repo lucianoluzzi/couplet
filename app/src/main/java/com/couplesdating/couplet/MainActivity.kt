@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.navigateUp
+import com.couplesdating.couplet.notifications.FirebaseNotificationService
 import com.couplesdating.couplet.ui.MainViewModel
 import org.koin.androidx.fragment.android.setupKoinFragmentFactory
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -16,6 +17,9 @@ import org.koin.core.KoinExperimentalAPI
 @KoinExperimentalAPI
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModel<MainViewModel>()
+    private val navHostFragment by lazy {
+        supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
+    }
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,11 +28,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setUpActionBarNavigation()
+        checkAndShowMatchScreen()
+    }
+
+    private fun checkAndShowMatchScreen() {
+        val shouldShowMatchScreen =
+            intent.getBooleanExtra(FirebaseNotificationService.NOTIFICATION_KEY, false)
+        if (shouldShowMatchScreen) {
+            navHostFragment.navController.navigate(R.id.overlayMatchFragment)
+        }
     }
 
     private fun setUpActionBarNavigation() {
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         val navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(this, navController)

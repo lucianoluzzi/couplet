@@ -220,5 +220,9 @@
         android:id="@+id/infoFragment"
         android:name="com.couplesdating.couplet.ui.info.InfoFragment"
         android:label="InfoFragment" />
+    <fragment
+        android:id="@+id/overlayMatchFragment"
+        android:name="com.couplesdating.couplet.ui.match.OverlayMatchFragment"
+        android:label="OverlayMatchFragment" />
 
 </navigation>
