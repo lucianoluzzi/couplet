@@ -1,7 +1,9 @@
 package com.couplesdating.couplet.notifications
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.util.Log
+import com.couplesdating.couplet.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -19,14 +21,22 @@ class FirebaseNotificationService : FirebaseMessagingService() {
                 putExtra(NOTIFICATION_KEY, true)
             }
             intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK)
-            applicationContext.startActivity(intent)
+            applicationContext.startActivity(
+                intent,
+                ActivityOptions.makeCustomAnimation(
+                    applicationContext,
+                    R.anim.slide_in_bottom,
+                    R.anim.slide_out_bottom
+                ).toBundle()
+            )
         } catch (exception: Exception) {
             Log.e("NotificationService", exception.message ?: exception.toString())
         }
     }
 
     companion object {
-        private const val ACTIVITY_TO_SHOW = "com.couplesdating.couplet.ui.match.OverlayMatchActivity"
+        private const val ACTIVITY_TO_SHOW =
+            "com.couplesdating.couplet.ui.match.OverlayMatchActivity"
         const val NOTIFICATION_KEY = "NOTIFICATION"
     }
 }
