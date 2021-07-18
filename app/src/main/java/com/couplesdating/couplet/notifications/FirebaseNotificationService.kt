@@ -26,7 +26,7 @@ class FirebaseNotificationService : FirebaseMessagingService() {
                 ActivityOptions.makeCustomAnimation(
                     applicationContext,
                     R.anim.slide_in_bottom,
-                    R.anim.slide_out_bottom
+                    android.R.anim.fade_out
                 ).toBundle()
             )
         } catch (exception: Exception) {
