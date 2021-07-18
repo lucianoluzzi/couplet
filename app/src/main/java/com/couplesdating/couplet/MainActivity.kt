@@ -28,15 +28,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setUpActionBarNavigation()
-        checkAndShowMatchScreen()
-    }
-
-    private fun checkAndShowMatchScreen() {
-        val shouldShowMatchScreen =
-            intent.getBooleanExtra(FirebaseNotificationService.NOTIFICATION_KEY, false)
-        if (shouldShowMatchScreen) {
-            navHostFragment.navController.navigate(R.id.overlayMatchFragment)
-        }
     }
 
     private fun setUpActionBarNavigation() {
