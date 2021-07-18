@@ -23,6 +23,11 @@
         <item name="displayOptions">showHome|useLogo</item>
     </style>
 
+    <style name="OverlayMatchTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/black_50</item>
+    </style>
+
     <style name="SplashScreenTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:statusBarColor" tools:targetApi="l">@color/background</item>
         <item name="android:windowLightStatusBar">true</item>
