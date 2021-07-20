@@ -4,7 +4,6 @@
     android:layout_height="match_parent">
 
     <androidx.fragment.app.FragmentContainerView
-        android:name="com.couplesdating.couplet.ui.match.OverlayMatchFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragment_container_view" />

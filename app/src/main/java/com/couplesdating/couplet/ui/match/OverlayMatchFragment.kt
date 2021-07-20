@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.couplesdating.couplet.databinding.FragmentOverlayMatchBinding
+import com.couplesdating.couplet.notifications.FirebaseNotificationService.Companion.NOTIFICATION_MESSAGE
 
 class OverlayMatchFragment : Fragment() {
 
@@ -24,6 +25,9 @@ class OverlayMatchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.continueButton.setOnClickListener {
             requireActivity().finish()
+        }
+        requireArguments().getString(NOTIFICATION_MESSAGE)?.let {
+            binding.matchText.text = it
         }
     }
 }

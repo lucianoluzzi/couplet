@@ -16,19 +16,26 @@ class FirebaseNotificationService : FirebaseMessagingService() {
 
     private fun showMatchActivity(message: RemoteMessage) {
         try {
-            val activityToStart = Class.forName(ACTIVITY_TO_SHOW)
-            val intent = Intent(applicationContext, activityToStart).apply {
-                putExtra(NOTIFICATION_KEY, true)
+            Log.d("NOTIFICATION", "Remote message data: ${message.data}")
+            val messageType = message.data["type"]
+            Log.d("NOTIFICATION", "Message type: $messageType")
+            if (messageType != null && messageType == "MATCH") {
+                Log.d("NOTIFICATION", "Message body: ${message.notification?.body}")
+                val messageBody = message.notification?.body ?: "Seems both of you are into this idea \uD83D\uDE08"
+                val activityToStart = Class.forName(ACTIVITY_TO_SHOW)
+                val intent = Intent(applicationContext, activityToStart).apply {
+                    putExtra(NOTIFICATION_MESSAGE, messageBody)
+                }
+                intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK)
+                applicationContext.startActivity(
+                    intent,
+                    ActivityOptions.makeCustomAnimation(
+                        applicationContext,
+                        R.anim.slide_in_bottom,
+                        android.R.anim.fade_out
+                    ).toBundle()
+                )
             }
-            intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK)
-            applicationContext.startActivity(
-                intent,
-                ActivityOptions.makeCustomAnimation(
-                    applicationContext,
-                    R.anim.slide_in_bottom,
-                    android.R.anim.fade_out
-                ).toBundle()
-            )
         } catch (exception: Exception) {
             Log.e("NotificationService", exception.message ?: exception.toString())
         }
@@ -37,6 +44,6 @@ class FirebaseNotificationService : FirebaseMessagingService() {
     companion object {
         private const val ACTIVITY_TO_SHOW =
             "com.couplesdating.couplet.ui.match.OverlayMatchActivity"
-        const val NOTIFICATION_KEY = "NOTIFICATION"
+        const val NOTIFICATION_MESSAGE = "NOTIFICATION_MESSAGE"
     }
 }

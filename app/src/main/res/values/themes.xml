@@ -58,7 +58,7 @@
     <style name="Match">
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/regular</item>
-        <item name="android:textColor">@color/dark_60</item>
+        <item name="android:textColor">@color/dark</item>
     </style>
 
     <style name="Subtitle">
