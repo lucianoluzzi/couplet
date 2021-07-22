@@ -89,11 +89,6 @@ class DashboardFragment : Fragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.getIdeas()
-    }
-
     private fun decorateTitle() {
         user?.let {
             if (!it.firstName.isNullOrBlank()) {

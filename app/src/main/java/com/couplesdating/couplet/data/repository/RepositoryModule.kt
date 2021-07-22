@@ -20,8 +20,8 @@ val repositoryModule = module {
 
     single<CategoryRepository> {
         CategoryRepositoryImpl(
-            database = get(),
-            service = get()
+            remoteDataSource = get(),
+            localDataSource = get()
         )
     }
 

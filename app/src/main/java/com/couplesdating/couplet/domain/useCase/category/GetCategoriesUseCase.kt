@@ -4,5 +4,5 @@ import com.couplesdating.couplet.domain.model.Category
 import kotlinx.coroutines.flow.Flow
 
 interface GetCategoriesUseCase {
-    fun getCategories(userId: String): Flow<List<Category>>
+    suspend fun getCategories(userId: String): Flow<List<Category>>
 }

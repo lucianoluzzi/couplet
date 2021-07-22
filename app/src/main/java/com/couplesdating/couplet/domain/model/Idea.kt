@@ -8,6 +8,6 @@ import kotlinx.parcelize.Parcelize
 @JsonClass(generateAdapter = true)
 data class Idea(
     val id: String,
-    val title: String,
+    val title: String? = null,
     val description: String
 ) : Parcelable

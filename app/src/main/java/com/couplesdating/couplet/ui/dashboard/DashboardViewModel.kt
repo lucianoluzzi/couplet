@@ -55,9 +55,6 @@ class DashboardViewModel(
                 }
             }
         }
-    }
-
-    fun getIdeas() {
         viewModelScope.launch {
             _uiData.value = DashboardUIState.Loading
             getCategoriesUseCase.getCategories(currentUser.userId).collect {

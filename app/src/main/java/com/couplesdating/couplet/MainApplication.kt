@@ -1,7 +1,8 @@
 package com.couplesdating.couplet
 
 import android.app.Application
-import com.couplesdating.couplet.data.providersModule
+import com.couplesdating.couplet.data.dataSource.dataSourceModule
+import com.couplesdating.couplet.data.database.dao.daoModule
 import com.couplesdating.couplet.data.repository.repositoryModule
 import com.couplesdating.couplet.domain.useCaseModule
 import com.couplesdating.couplet.ui.fragmentModule
@@ -25,6 +26,8 @@ class MainApplication : Application() {
                 providersModule,
                 useCaseModule,
                 fragmentModule,
+                dataSourceModule,
+                daoModule,
                 appModule
             )
         }
