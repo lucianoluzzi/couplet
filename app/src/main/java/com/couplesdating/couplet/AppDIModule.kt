@@ -108,6 +108,7 @@ val appModule = module {
         IdeaListViewModel(
             sendIdeaResponseUseCase = get(),
             decorateIdeaUseCase = get(),
+            removeIdeaUseCase = get(),
             analytics = get()
         )
     }

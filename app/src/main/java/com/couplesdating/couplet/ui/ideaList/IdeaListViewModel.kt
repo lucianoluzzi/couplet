@@ -8,6 +8,7 @@ import com.couplesdating.couplet.domain.model.Idea
 import com.couplesdating.couplet.domain.model.UserResponse
 import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.useCase.idea.DecorateIdeaUseCase
+import com.couplesdating.couplet.domain.useCase.idea.RemoveIdeaUseCase
 import com.couplesdating.couplet.domain.useCase.idea.SendIdeaResponseUseCase
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
 
 class IdeaListViewModel(
     private val sendIdeaResponseUseCase: SendIdeaResponseUseCase,
+    private val removeIdeaUseCase: RemoveIdeaUseCase,
     private val decorateIdeaUseCase: DecorateIdeaUseCase,
     private val analytics: Analytics
 ) : ViewModel() {
@@ -36,6 +38,10 @@ class IdeaListViewModel(
             ideaId = idea.id,
             userResponse = UserResponse.YES
         )
+        removeIdea(
+            idea = idea,
+            categoryId = categoryId
+        )
     }
 
     fun onNoClick(
@@ -51,6 +57,10 @@ class IdeaListViewModel(
         sendResponse(
             ideaId = idea.id,
             userResponse = UserResponse.NO
+        )
+        removeIdea(
+            idea = idea,
+            categoryId = categoryId
         )
     }
 
@@ -68,6 +78,10 @@ class IdeaListViewModel(
             ideaId = idea.id,
             userResponse = UserResponse.MAYBE
         )
+        removeIdea(
+            idea = idea,
+            categoryId = categoryId
+        )
     }
 
     private fun sendResponse(
@@ -81,6 +95,15 @@ class IdeaListViewModel(
                 userResponse = userResponse
             )
             emitResponse(response)
+        }
+    }
+
+    private fun removeIdea(idea: Idea, categoryId: String) {
+        viewModelScope.launch {
+            removeIdeaUseCase.removeIdea(
+                idea = idea,
+                categoryId = categoryId
+            )
         }
     }
 
