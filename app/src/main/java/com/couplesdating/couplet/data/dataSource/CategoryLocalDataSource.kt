@@ -15,8 +15,9 @@ class CategoryLocalDataSource(
     private val categoryDao: CategoryDao,
     private val ideaDao: IdeaDao
 ) {
-    fun getCategories(): Flow<List<CategoryWithIdeasEntity>> =
-        categoryWithIdeasDao.getCategoriesWithIdeas()
+    suspend fun getCategories(): Flow<List<CategoryWithIdeasEntity>> = withContext(Dispatchers.IO) {
+        return@withContext categoryWithIdeasDao.getCategoriesWithIdeas()
+    }
 
     suspend fun insert(categories: List<CategoryWithIdeasEntity>) = withContext(Dispatchers.IO) {
         categories.map { categoryWithIdeasEntity ->
