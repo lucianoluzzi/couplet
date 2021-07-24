@@ -105,7 +105,9 @@
         android:label="NameAndGenderFragment">
         <action
             android:id="@+id/action_nameAndGenderFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
