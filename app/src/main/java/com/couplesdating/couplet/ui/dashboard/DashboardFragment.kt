@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.R
@@ -84,9 +83,14 @@ class DashboardFragment : Fragment() {
                     navigate(navigationRoute)
                 }
         }
-        viewModel.uiData.observe(viewLifecycleOwner) { uiState ->
+        viewModel.uiDataMediator.observe(viewLifecycleOwner) { uiState ->
             handleUIState(uiState)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchBanner()
     }
 
     private fun decorateTitle() {
@@ -151,27 +155,36 @@ class DashboardFragment : Fragment() {
     private fun handleBannerState(banner: Banner?) {
         when (banner) {
             is Banner.PendingInvite -> setPendingInviteBanner(banner)
-            Banner.RegisterPartner -> setRegisterPartnerBanner(banner)
-            Banner.BecomePremium -> setBecomePremiumBanner(banner)
+            is Banner.RegisterPartner -> setRegisterPartnerBanner(banner)
+            is Banner.BecomePremium -> setBecomePremiumBanner(banner)
             is Banner.NewMatches -> setNewMatchesClicked(banner)
         }
     }
 
-    private fun setNewMatchesClicked(banner: Banner.NewMatches) {
+    private fun setNewMatchesClicked(banner: Banner.NewMatches) = with(binding) {
+        registerPartnerBanner.isVisible = false
+        pendingInviteBanner.isVisible = false
+        becomePremiumBanner.isVisible = false
         binding.newMatchesBanner.isVisible = true
         binding.newMatchesBanner.setOnClickListener {
             viewModel.onBannerClicked(banner)
         }
     }
 
-    private fun setBecomePremiumBanner(banner: Banner) {
-        binding.becomePremiumBanner.isVisible = true
-        binding.becomePremiumBanner.setOnClickListener {
+    private fun setBecomePremiumBanner(banner: Banner) = with(binding) {
+        registerPartnerBanner.isVisible = false
+        pendingInviteBanner.isVisible = false
+        newMatchesBanner.isVisible = false
+        becomePremiumBanner.isVisible = true
+        becomePremiumBanner.setOnClickListener {
             viewModel.onBannerClicked(banner)
         }
     }
 
     private fun setPendingInviteBanner(banner: Banner.PendingInvite) = with(binding) {
+        newMatchesBanner.isVisible = false
+        registerPartnerBanner.isVisible = false
+        becomePremiumBanner.isVisible = false
         pendingInviteBanner.isVisible = true
         val description = pendingInviteBanner.findViewById<TextView>(R.id.description)
         if (banner.invite.inviterDisplayName.isNotBlank()) {
@@ -185,6 +198,9 @@ class DashboardFragment : Fragment() {
     }
 
     private fun setRegisterPartnerBanner(banner: Banner) = with(binding) {
+        newMatchesBanner.isVisible = false
+        becomePremiumBanner.isVisible = false
+        pendingInviteBanner.isVisible = false
         registerPartnerBanner.isVisible = true
         val description = registerPartnerBanner.findViewById<TextView>(R.id.description)
         description.text = user?.let {

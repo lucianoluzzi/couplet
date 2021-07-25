@@ -14,9 +14,8 @@ class GetCategoriesUseCaseImpl(
     private val categoriesRepository: CategoryRepository
 ) : GetCategoriesUseCase {
 
-    override suspend fun getCategories(userId: String): Flow<List<Category>> {
-        val timeZone = TimeZone.getDefault().id
-        return categoriesRepository.getCategories(userId, timeZone).map { categories ->
+    override suspend fun getCategories(): Flow<List<Category>> {
+        return categoriesRepository.getCategories().map { categories ->
             categories.sortedBy { it.spiciness }
         }
     }

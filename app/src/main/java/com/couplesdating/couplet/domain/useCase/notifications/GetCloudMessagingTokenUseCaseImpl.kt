@@ -3,7 +3,6 @@ package com.couplesdating.couplet.domain.useCase.notifications
 import android.util.Log
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.tasks.await
-import java.lang.Exception
 
 class GetCloudMessagingTokenUseCaseImpl(
     private val messagingService: FirebaseMessaging
@@ -14,7 +13,7 @@ class GetCloudMessagingTokenUseCaseImpl(
             messagingService.token.await()
         } catch (exception: Exception) {
             Log.e("CLOUD_MESSAGE", exception.message ?: "Error generating token")
-             null
+            null
         }
     }
 }

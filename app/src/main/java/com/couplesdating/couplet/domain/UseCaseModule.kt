@@ -3,6 +3,8 @@ package com.couplesdating.couplet.domain
 import com.couplesdating.couplet.domain.useCase.auth.*
 import com.couplesdating.couplet.domain.useCase.category.GetCategoriesUseCase
 import com.couplesdating.couplet.domain.useCase.category.GetCategoriesUseCaseImpl
+import com.couplesdating.couplet.domain.useCase.category.RefreshCategoriesUseCase
+import com.couplesdating.couplet.domain.useCase.category.RefreshCategoriesUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.idea.*
 import com.couplesdating.couplet.domain.useCase.invite.*
 import com.couplesdating.couplet.domain.useCase.match.GetNewMatchesUseCase
@@ -63,6 +65,8 @@ val useCaseModule = module {
 
     single<GetCategoriesUseCase> { GetCategoriesUseCaseImpl(get()) }
 
+    single<RefreshCategoriesUseCase> { RefreshCategoriesUseCaseImpl(get()) }
+
     single<AddInviteeIdUseCase> { AddInviteeIdUseCaseImpl(get()) }
 
     single<GetSentPairInviteUseCase> { GetSentPairInviteUseCaseImpl(get()) }
@@ -80,5 +84,9 @@ val useCaseModule = module {
 
     single<RemoveIdeaUseCase> { RemoveIdeaUseCaseImpl(get()) }
 
-    single<GetCloudMessagingTokenUseCase> { GetCloudMessagingTokenUseCaseImpl(get()) }
+    single<GetCloudMessagingTokenUseCase> {
+        GetCloudMessagingTokenUseCaseImpl(
+            messagingService = get()
+        )
+    }
 }

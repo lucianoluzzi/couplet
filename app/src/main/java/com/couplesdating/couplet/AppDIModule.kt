@@ -94,6 +94,7 @@ val appModule = module {
             shouldShowSyncUseCase = get(),
             setSyncShownUseCase = get(),
             getCategoriesUseCase = get(),
+            refreshCategoriesUseCase = get(),
             getReceivedInviteUseCase = get(),
             getSentPairInviteUseCase = get(),
             getNewMatchesUseCase = get(),

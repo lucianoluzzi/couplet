@@ -9,5 +9,5 @@ import com.couplesdating.couplet.data.database.entities.CategoryEntity
 interface CategoryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg categories: CategoryEntity)
+    suspend fun insertAll(vararg categories: CategoryEntity)
 }

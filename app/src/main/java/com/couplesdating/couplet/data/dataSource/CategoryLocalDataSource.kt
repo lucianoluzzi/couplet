@@ -19,7 +19,7 @@ class CategoryLocalDataSource(
         return@withContext categoryWithIdeasDao.getCategoriesWithIdeas()
     }
 
-    suspend fun insert(categories: List<CategoryWithIdeasEntity>) = withContext(Dispatchers.IO) {
+    suspend fun insert(categories: List<CategoryWithIdeasEntity>) {
         categories.map { categoryWithIdeasEntity ->
             categoryDao.insertAll(categoryWithIdeasEntity.category)
             ideaDao.insertAll(categoryWithIdeasEntity.ideas)

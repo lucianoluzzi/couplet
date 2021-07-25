@@ -1,6 +1,6 @@
 package com.couplesdating.couplet.ui.dashboard
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,9 +11,10 @@ import com.couplesdating.couplet.analytics.events.dashboard.CategoryEvents
 import com.couplesdating.couplet.domain.extensions.isNull
 import com.couplesdating.couplet.domain.model.Category
 import com.couplesdating.couplet.domain.model.Match
-import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.model.User
+import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.useCase.category.GetCategoriesUseCase
+import com.couplesdating.couplet.domain.useCase.category.RefreshCategoriesUseCase
 import com.couplesdating.couplet.domain.useCase.invite.GetReceivedInviteUseCase
 import com.couplesdating.couplet.domain.useCase.invite.GetSentPairInviteUseCase
 import com.couplesdating.couplet.domain.useCase.match.GetNewMatchesUseCase
@@ -33,6 +34,7 @@ class DashboardViewModel(
     private val shouldShowSyncUseCase: ShouldShowSyncUseCase,
     private val setSyncShownUseCase: SetSyncShownUseCase,
     private val getCategoriesUseCase: GetCategoriesUseCase,
+    private val refreshCategoriesUseCase: RefreshCategoriesUseCase,
     private val getReceivedInviteUseCase: GetReceivedInviteUseCase,
     private val getSentPairInviteUseCase: GetSentPairInviteUseCase,
     private val getNewMatchesUseCase: GetNewMatchesUseCase,
@@ -40,13 +42,47 @@ class DashboardViewModel(
     private val currentUser: User
 ) : ViewModel() {
 
-    private val _uiData = MutableLiveData<DashboardUIState>()
-    val uiData: LiveData<DashboardUIState> = _uiData
+    private val categoriesLiveData = MutableLiveData<List<Category>>()
+    private val bannerLiveData = MutableLiveData<Banner?>()
+    val uiDataMediator = MediatorLiveData<DashboardUIState>()
 
     private val navigationChannel = Channel<DashboardRoute>(Channel.CONFLATED)
     val navigationFlow = navigationChannel.receiveAsFlow().distinctUntilChanged()
 
     init {
+        uiDataMediator.addSource(categoriesLiveData) { categories ->
+            val currentUiData = uiDataMediator.value
+            if (currentUiData is DashboardUIState.Success) {
+                uiDataMediator.value = DashboardUIState.Success(
+                    categories = mapCategoryToUIModel(categories),
+                    banner = currentUiData.banner
+                )
+            } else {
+                val currentBanner = bannerLiveData.value
+                uiDataMediator.value = DashboardUIState.Success(
+                    categories = mapCategoryToUIModel(categories),
+                    banner = currentBanner
+                )
+            }
+        }
+        uiDataMediator.addSource(bannerLiveData) { banner ->
+            val currentUiData = uiDataMediator.value
+            if (currentUiData is DashboardUIState.Success) {
+                uiDataMediator.value = DashboardUIState.Success(
+                    categories = currentUiData.categories,
+                    banner = banner
+                )
+            } else {
+                val currentCategories = categoriesLiveData.value
+                currentCategories?.let {
+                    uiDataMediator.value = DashboardUIState.Success(
+                        categories = mapCategoryToUIModel(it),
+                        banner = banner
+                    )
+                }
+            }
+        }
+
         viewModelScope.launch {
             shouldShowSyncUseCase.invoke(currentUser).collect {
                 if (it) {
@@ -56,13 +92,20 @@ class DashboardViewModel(
             }
         }
         viewModelScope.launch {
-            _uiData.value = DashboardUIState.Loading
-            getCategoriesUseCase.getCategories(currentUser.userId).collect {
-                _uiData.value = DashboardUIState.Success(
-                    categories = mapCategoryToUIModel(it),
-                    banner = getBanner(currentUser)
-                )
+            uiDataMediator.value = DashboardUIState.Loading
+            getCategoriesUseCase.getCategories().collect {
+                categoriesLiveData.value = it
             }
+        }
+        viewModelScope.launch {
+            refreshCategoriesUseCase.refreshCategories(currentUser.userId)
+        }
+    }
+
+    fun fetchBanner() {
+        viewModelScope.launch {
+            val banner = getBanner(currentUser)
+            bannerLiveData.value = banner
         }
     }
 

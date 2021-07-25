@@ -10,8 +10,8 @@ import com.couplesdating.couplet.data.database.entities.IdeaEntity
 interface IdeaDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(ideas: List<IdeaEntity>)
+    suspend fun insertAll(ideas: List<IdeaEntity>)
 
     @Delete
-    fun delete(idea: IdeaEntity)
+    suspend fun delete(idea: IdeaEntity)
 }
