@@ -208,6 +208,7 @@ class DashboardFragment : Fragment() {
         } ?: "We are almost there. Register a partner and get kinky!"
         registerPartnerBanner.setOnClickListener {
             viewModel.onBannerClicked(banner)
+            navigateToSync()
         }
     }
 
