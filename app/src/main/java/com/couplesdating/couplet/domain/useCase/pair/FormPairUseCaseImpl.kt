@@ -13,8 +13,8 @@ class FormPairUseCaseImpl(
         val currentUser = getCurrentUserUseCase.getCurrentUser()
         currentUser?.let {
             return pairRepository.formPair(
-                firstUserId = partnerId,
-                secondUserId = it.userId
+                inviterId = partnerId,
+                currentUserId = it.userId
             )
         }
 

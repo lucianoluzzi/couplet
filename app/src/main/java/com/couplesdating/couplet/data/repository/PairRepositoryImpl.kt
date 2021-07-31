@@ -1,17 +1,20 @@
 package com.couplesdating.couplet.data.repository
 
 import android.content.SharedPreferences
-import com.couplesdating.couplet.data.extensions.insert
 import com.couplesdating.couplet.data.extensions.observeKey
-import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.model.User
+import com.couplesdating.couplet.domain.network.Response
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.functions.FirebaseFunctions
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class PairRepositoryImpl(
     private val database: FirebaseFirestore,
-    private val preferences: SharedPreferences
+    private val preferences: SharedPreferences,
+    private val service: FirebaseFunctions
 ) : PairRepository {
 
     override fun shouldShowSync(): Flow<Boolean> = preferences.observeKey(SHOULD_SHOW_SYNC, true)
@@ -24,23 +27,22 @@ class PairRepositoryImpl(
     }
 
     override suspend fun formPair(
-        firstUserId: String,
-        secondUserId: String
-    ): Response {
+        inviterId: String,
+        currentUserId: String
+    ): Response = withContext(Dispatchers.IO) {
         val pairMap = hashMapOf(
-            "user_1" to firstUserId,
-            "user_2" to secondUserId
+            "inviterId" to inviterId,
+            "inviteeId" to currentUserId
         )
 
-        val taskResponse = database
-            .collection("pair")
-            .insert(pairMap)
-
-        if (taskResponse.isSuccessful) {
-            return Response.Completed
+        return@withContext try {
+            service.getHttpsCallable("formPair")
+                .call(pairMap)
+                .await()
+            Response.Success<Unit>()
+        } catch (exception: Exception) {
+            Response.Error(exception.message)
         }
-
-        return Response.Error(taskResponse.exception?.message)
     }
 
     override suspend fun getPartner(currentUserId: String): Response {

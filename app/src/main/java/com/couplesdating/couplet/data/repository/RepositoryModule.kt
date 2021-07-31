@@ -14,7 +14,13 @@ val repositoryModule = module {
         )
     }
 
-    single<PairRepository> { PairRepositoryImpl(get(), get()) }
+    single<PairRepository> {
+        PairRepositoryImpl(
+            database = get(),
+            preferences = get(),
+            service = get()
+        )
+    }
 
     single<InviteRepository> { InviteRepositoryImpl(get(), get()) }
 
