@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentNameAndGenderBinding
+import com.couplesdating.couplet.ui.extensions.hideKeyboard
 import com.couplesdating.couplet.ui.extensions.onGetFocus
 import com.couplesdating.couplet.ui.extensions.textValue
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -92,8 +93,8 @@ class NameAndGenderFragment : Fragment() {
                 viewModel.onNameClick()
             }
             gender.onGetFocus {
-                Log.d("GENDER", "gender clicked")
                 viewModel.onGenderClick()
+                hideKeyboard()
             }
             otherGender.onGetFocus {
                 viewModel.onOtherGenderClick()
