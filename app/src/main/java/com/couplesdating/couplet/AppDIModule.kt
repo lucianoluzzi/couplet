@@ -99,6 +99,7 @@ val appModule = module {
             getReceivedInviteUseCase = get(),
             getSentPairInviteUseCase = get(),
             getNewMatchesUseCase = get(),
+            getPartnerUseCase = get(),
             analytics = get(),
             currentUser = user
         )

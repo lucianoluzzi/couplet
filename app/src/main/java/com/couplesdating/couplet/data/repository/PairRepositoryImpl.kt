@@ -74,7 +74,7 @@ class PairRepositoryImpl(
             return Response.Success(partner)
         }
 
-        return Response.Error("No partner found")
+        return Response.Error("No partner found.")
     }
 
     private companion object {

@@ -18,6 +18,7 @@ import com.couplesdating.couplet.domain.useCase.category.RefreshCategoriesUseCas
 import com.couplesdating.couplet.domain.useCase.invite.GetReceivedInviteUseCase
 import com.couplesdating.couplet.domain.useCase.invite.GetSentPairInviteUseCase
 import com.couplesdating.couplet.domain.useCase.match.GetNewMatchesUseCase
+import com.couplesdating.couplet.domain.useCase.pair.GetPartnerUseCase
 import com.couplesdating.couplet.domain.useCase.pair.SetSyncShownUseCase
 import com.couplesdating.couplet.domain.useCase.pair.ShouldShowSyncUseCase
 import com.couplesdating.couplet.ui.dashboard.adapter.CategoryUIModel
@@ -38,6 +39,7 @@ class DashboardViewModel(
     private val getReceivedInviteUseCase: GetReceivedInviteUseCase,
     private val getSentPairInviteUseCase: GetSentPairInviteUseCase,
     private val getNewMatchesUseCase: GetNewMatchesUseCase,
+    private val getPartnerUseCase: GetPartnerUseCase,
     private val analytics: Analytics,
     private val currentUser: User
 ) : ViewModel() {
@@ -113,10 +115,16 @@ class DashboardViewModel(
         val pendingInvite = getReceivedInviteUseCase.getReceivedInvite(currentUser.userId)
         val receivedInvite = getSentPairInviteUseCase.getSentPairInvite(currentUser.userId)
         val newMatches = getNewMatchesUseCase.getNewMatches(currentUser.userId)
+        val partnerResponse = getPartnerUseCase.getPartner(currentUser.userId)
+        val partner = if (partnerResponse is Response.Success<*>) {
+            (partnerResponse as Response.Success<User>).data
+        } else {
+            null
+        }
         if (pendingInvite != null) {
             return Banner.PendingInvite(pendingInvite)
         }
-        if (currentUser.pairedPartner.isNull() && receivedInvite.isNull()) {
+        if (partner.isNull() && receivedInvite.isNull()) {
             return Banner.RegisterPartner
         }
         if (newMatches is Response.Success<*>) {
