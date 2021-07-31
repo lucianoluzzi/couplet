@@ -63,10 +63,11 @@ val appModule = module {
     }
     viewModel {
         RegisterViewModel(
-            get(),
-            get(),
-            get(),
-            get()
+            userRepository = get(),
+            getReceivedInviteUseCase = get(),
+            formPairUseCase = get(),
+            deleteInviteUseCase = get(),
+            analytics = get()
         )
     }
     viewModel {

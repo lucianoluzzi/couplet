@@ -8,6 +8,7 @@ import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.events.login.RegisterEvents
 import com.couplesdating.couplet.data.repository.UserRepository
 import com.couplesdating.couplet.domain.network.Response
+import com.couplesdating.couplet.domain.useCase.invite.DeleteInviteUseCase
 import com.couplesdating.couplet.domain.useCase.pair.FormPairUseCase
 import com.couplesdating.couplet.domain.useCase.invite.GetReceivedInviteUseCase
 import com.couplesdating.couplet.ui.utils.LiveDataEvent
@@ -18,6 +19,7 @@ class RegisterViewModel(
     private val userRepository: UserRepository,
     private val getReceivedInviteUseCase: GetReceivedInviteUseCase,
     private val formPairUseCase: FormPairUseCase,
+    private val deleteInviteUseCase: DeleteInviteUseCase,
     private val analytics: Analytics
 ) : ViewModel() {
 
@@ -89,6 +91,7 @@ class RegisterViewModel(
         val acceptedInviteUserId = getReceivedInviteUseCase.getReceivedInvite()
         acceptedInviteUserId?.let {
             formPairUseCase.formPair(it.inviterId)
+            deleteInviteUseCase.deleteInvite(it)
         }
     }
 
