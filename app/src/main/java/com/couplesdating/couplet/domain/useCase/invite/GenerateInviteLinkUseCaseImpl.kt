@@ -16,6 +16,9 @@ class GenerateInviteLinkUseCaseImpl(
             if (!inviteModel.note.isNullOrBlank()) {
                 put("note", inviteModel.note)
             }
+            inviteModel.timestamp?.let {
+                put("timestamp", it.toString())
+            }
         }
 
         return dynamicLinkProvider.generateUri(

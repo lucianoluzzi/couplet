@@ -24,7 +24,8 @@ class InvitedViewModel(
         inviteId: String,
         inviterId: String,
         inviterDisplayName: String?,
-        note: String?
+        note: String?,
+        timestamp: String?
     ) {
         viewModelScope.launch {
             val inviteExists = inviteExistsUseCase.inviteExists(inviteId)
@@ -37,7 +38,8 @@ class InvitedViewModel(
                     inviteId = inviteId,
                     inviterId = inviterId,
                     inviterDisplayName = inviterDisplayName,
-                    note = note
+                    note = note,
+                    timestamp = timestamp
                 )
                 _uiState.value = InvitedUIState.InviteExists(inviteExists)
             }
@@ -48,14 +50,16 @@ class InvitedViewModel(
         inviteId: String,
         inviterId: String,
         inviterDisplayName: String?,
-        note: String?
+        note: String?,
+        timestamp: String?
     ) {
         savePairInviteUseCase.savePairInvite(
             inviteId,
             inviterId,
             inviterDisplayName,
             note,
-            false
+            false,
+            timestamp
         )
     }
 
@@ -63,7 +67,8 @@ class InvitedViewModel(
         inviteId: String,
         inviterId: String,
         inviterDisplayName: String?,
-        note: String?
+        note: String?,
+        timestamp: String?
     ) {
         analytics.trackEvent(InvitedEvents.AcceptInviteClicked)
         savePairInviteUseCase.savePairInvite(
@@ -71,7 +76,8 @@ class InvitedViewModel(
             inviterId = inviterId,
             inviterDisplayName = inviterDisplayName,
             note = note,
-            hasAccepted = true
+            hasAccepted = true,
+            timestamp = timestamp
         )
         _uiState.value = InvitedUIState.AcceptedInvite
     }

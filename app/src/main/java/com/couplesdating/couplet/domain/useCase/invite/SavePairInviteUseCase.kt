@@ -6,6 +6,7 @@ interface SavePairInviteUseCase {
         inviterId: String,
         inviterDisplayName: String?,
         note: String?,
-        hasAccepted: Boolean
+        hasAccepted: Boolean,
+        timestamp: String?
     )
 }

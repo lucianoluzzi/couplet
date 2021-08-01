@@ -43,7 +43,8 @@ class InvitedFragment(
             inviteId = navigationArguments.inviteId,
             inviterId = navigationArguments.inviterId,
             inviterDisplayName = navigationArguments.inviterDisplayName,
-            note = navigationArguments.note
+            note = navigationArguments.note,
+            timestamp = navigationArguments.timestamp
         )
         setUpTexts()
         setUpButtonsClick()
@@ -123,7 +124,8 @@ class InvitedFragment(
                 inviterId = navigationArguments.inviterId,
                 inviteId = navigationArguments.inviteId,
                 inviterDisplayName = navigationArguments.inviterDisplayName,
-                note = navigationArguments.note
+                note = navigationArguments.note,
+                timestamp = navigationArguments.timestamp
             )
         }
         binding.close.setOnClickListener {

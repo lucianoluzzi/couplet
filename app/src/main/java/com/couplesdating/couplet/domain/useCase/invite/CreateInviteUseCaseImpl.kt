@@ -20,7 +20,7 @@ class CreateInviteUseCaseImpl(
             !currentUser.email.isNullOrBlank() -> currentUser.email
             else -> ""
         }
-        val inviterDisplayName = InviteModel(
+        val inviteModel = InviteModel(
             inviterId = currentUser.userId,
             inviterDisplayName = currentUserDisplayName,
             inputInviteeDisplayName = inviteeDisplayName,
@@ -30,8 +30,8 @@ class CreateInviteUseCaseImpl(
         )
 
         return try {
-            inviteRepository.saveInvite(inviterDisplayName)
-            Response.Success(inviterDisplayName)
+            inviteRepository.saveInvite(inviteModel)
+            Response.Success(inviteModel)
         } catch (exception: Exception) {
             Response.Error(exception.message)
         }

@@ -8,3 +8,8 @@ fun Date.getMediumFormatString(context: Context): String {
     val mediumDateFormatter = DateFormat.getMediumDateFormat(context)
     return mediumDateFormatter.format(this)
 }
+
+fun String.getDateFromTimestamp(context: Context): Date? {
+    val mediumDateFormatter = DateFormat.getMediumDateFormat(context)
+    return mediumDateFormatter.parse(this)
+}
