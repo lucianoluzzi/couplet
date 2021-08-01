@@ -67,11 +67,11 @@ class InvitedViewModel(
     ) {
         analytics.trackEvent(InvitedEvents.AcceptInviteClicked)
         savePairInviteUseCase.savePairInvite(
-            inviteId,
-            inviterId,
-            inviterDisplayName,
-            note,
-            true
+            inviteId = inviteId,
+            inviterId = inviterId,
+            inviterDisplayName = inviterDisplayName,
+            note = note,
+            hasAccepted = true
         )
         _uiState.value = InvitedUIState.AcceptedInvite
     }

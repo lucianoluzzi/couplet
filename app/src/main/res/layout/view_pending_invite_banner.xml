@@ -24,6 +24,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimension_20"
+        android:layout_marginEnd="@dimen/dimension_6"
         app:layout_constraintStart_toEndOf="@id/illustration"
         app:layout_constraintEnd_toStartOf="@id/next"
         app:layout_constraintBottom_toBottomOf="parent"

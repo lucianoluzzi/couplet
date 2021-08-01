@@ -190,6 +190,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_emptyListFragment"
             app:destination="@id/emptyListFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_pendingInviteFragment"
+            app:destination="@id/pendingInviteFragment" />
     </fragment>
     <fragment
         android:id="@+id/ideaListFragment"
@@ -226,5 +229,16 @@
         android:id="@+id/overlayMatchFragment"
         android:name="com.couplesdating.couplet.ui.match.OverlayMatchFragment"
         android:label="OverlayMatchFragment" />
+    <fragment
+        android:id="@+id/pendingInviteFragment"
+        android:name="com.couplesdating.couplet.ui.pendingInvite.PendingInviteFragment"
+        android:label="PendingInviteFragment" >
+        <argument
+            android:name="invite"
+            app:argType="com.couplesdating.couplet.domain.model.InviteModel" />
+        <argument
+            android:name="user"
+            app:argType="com.couplesdating.couplet.domain.model.User" />
+    </fragment>
 
 </navigation>

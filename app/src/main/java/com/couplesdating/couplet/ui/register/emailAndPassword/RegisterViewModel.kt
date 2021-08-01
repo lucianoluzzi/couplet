@@ -90,8 +90,10 @@ class RegisterViewModel(
     private suspend fun formPairIfInviteAccepted() {
         val acceptedInviteUserId = getReceivedInviteUseCase.getReceivedInvite()
         acceptedInviteUserId?.let {
-            formPairUseCase.formPair(it.inviterId)
-            deleteInviteUseCase.deleteInvite(it)
+            if (it.hasAccepted) {
+                formPairUseCase.formPair(it.inviterId)
+                deleteInviteUseCase.deleteInvite(it)
+            }
         }
     }
 

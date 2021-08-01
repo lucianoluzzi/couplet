@@ -194,6 +194,14 @@ class DashboardFragment : Fragment() {
         }
         pendingInviteBanner.setOnClickListener {
             viewModel.onBannerClicked(banner)
+            user?.let { user ->
+                val toPendingInvite =
+                    DashboardFragmentDirections.actionDashboardFragmentToPendingInviteFragment(
+                        invite = banner.invite,
+                        user = user
+                    )
+                findNavController().navigate(toPendingInvite)
+            }
         }
     }
 
