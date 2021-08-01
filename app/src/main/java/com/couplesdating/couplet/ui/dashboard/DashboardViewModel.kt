@@ -113,7 +113,7 @@ class DashboardViewModel(
 
     private suspend fun getBanner(currentUser: User): Banner? {
         val pendingInvite = getReceivedInviteUseCase.getReceivedInvite(currentUser.userId)
-        val receivedInvite = getSentPairInviteUseCase.getSentPairInvite(currentUser.userId)
+        val sentInvite = getSentPairInviteUseCase.getSentPairInvite(currentUser.userId)
         val newMatches = getNewMatchesUseCase.getNewMatches(currentUser.userId)
         val partnerResponse = getPartnerUseCase.getPartner(currentUser.userId)
         val partner = if (partnerResponse is Response.Success<*>) {
@@ -124,7 +124,7 @@ class DashboardViewModel(
         if (pendingInvite != null) {
             return Banner.PendingInvite(pendingInvite)
         }
-        if (partner.isNull() && receivedInvite.isNull()) {
+        if (partner.isNull() && sentInvite.isNull()) {
             return Banner.RegisterPartner
         }
         if (newMatches is Response.Success<*>) {
