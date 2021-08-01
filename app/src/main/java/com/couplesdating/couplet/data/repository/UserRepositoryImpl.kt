@@ -90,7 +90,9 @@ class UserRepositoryImpl(
             email = email, password = password
         )
         return if (authResult.isSuccessful) {
-            Response.Completed
+            getCurrentUser()?.let {
+                Response.Success(it)
+            } ?: Response.Completed
         } else {
             Response.Error(authResult.exception?.message)
         }

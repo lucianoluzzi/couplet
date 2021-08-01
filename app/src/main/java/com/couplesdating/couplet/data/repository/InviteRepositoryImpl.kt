@@ -80,10 +80,12 @@ class InviteRepositoryImpl(
     }
 
     override suspend fun saveInvite(inviteModel: InviteModel): Response {
-        val pairMap = hashMapOf<String, Any>(
+        val pairMap = hashMapOf<String, Any?>(
             "inviter_id" to inviteModel.inviterId,
             "invite_id" to inviteModel.inviteId,
             "inviter_display_name" to inviteModel.inviterDisplayName,
+            "invitee_id" to inviteModel.inviteeId,
+            "timestamp" to inviteModel.timestamp
         )
         inviteModel.note?.let {
             pairMap.put("note", inviteModel.note)

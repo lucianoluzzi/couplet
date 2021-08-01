@@ -7,10 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.events.login.RegisterEvents
 import com.couplesdating.couplet.data.repository.UserRepository
+import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.domain.network.Response
+import com.couplesdating.couplet.domain.useCase.invite.AddInviteeIdUseCase
 import com.couplesdating.couplet.domain.useCase.invite.DeleteInviteUseCase
-import com.couplesdating.couplet.domain.useCase.pair.FormPairUseCase
 import com.couplesdating.couplet.domain.useCase.invite.GetReceivedInviteUseCase
+import com.couplesdating.couplet.domain.useCase.pair.FormPairUseCase
 import com.couplesdating.couplet.ui.utils.LiveDataEvent
 import com.couplesdating.couplet.ui.utils.asLiveDataEvent
 import kotlinx.coroutines.launch
@@ -19,6 +21,7 @@ class RegisterViewModel(
     private val userRepository: UserRepository,
     private val getReceivedInviteUseCase: GetReceivedInviteUseCase,
     private val formPairUseCase: FormPairUseCase,
+    private val addInviteeIdUseCase: AddInviteeIdUseCase,
     private val deleteInviteUseCase: DeleteInviteUseCase,
     private val analytics: Analytics
 ) : ViewModel() {
@@ -80,19 +83,33 @@ class RegisterViewModel(
                     )
                 )
             } else {
-                formPairIfInviteAccepted()
+                val currentUserId = if (registerResponse is Response.Success<*>) {
+                    val user = (registerResponse as Response.Success<User>).data
+                    user?.userId
+                } else null
+                formPairIfInviteAccepted(currentUserId)
                 analytics.trackEvent(RegisterEvents.RegisterSuccess)
                 setLiveDataValue(EmailScreenUIState.Success)
             }
         }
     }
 
-    private suspend fun formPairIfInviteAccepted() {
+    private suspend fun formPairIfInviteAccepted(currentUserId: String?) {
         val acceptedInviteUserId = getReceivedInviteUseCase.getReceivedInvite()
-        acceptedInviteUserId?.let {
-            if (it.hasAccepted) {
-                formPairUseCase.formPair(it.inviterId)
-                deleteInviteUseCase.deleteInvite(it)
+        acceptedInviteUserId?.let { invite ->
+            if (invite.hasAccepted) {
+                formPairUseCase.formPair(invite.inviterId)
+                deleteInviteUseCase.deleteInvite(invite)
+            } else {
+                currentUserId?.let {
+                    addInviteeIdUseCase.addInviteeId(
+                        inviteeId = it,
+                        inviteId = invite.inviteId,
+                        inviterId = invite.inviterId,
+                        inviterDisplayName = invite.inviterDisplayName,
+                        note = invite.note
+                    )
+                }
             }
         }
     }

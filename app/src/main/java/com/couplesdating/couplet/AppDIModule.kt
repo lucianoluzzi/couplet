@@ -57,8 +57,12 @@ val appModule = module {
     }
     viewModel {
         LoginViewModel(
-            get(),
-            get()
+            signInUseCase = get(),
+            getReceivedInviteUseCase = get(),
+            deleteInviteUseCase = get(),
+            formPairUseCase = get(),
+            addInviteeIdUseCase = get(),
+            analytics = get()
         )
     }
     viewModel {
@@ -66,6 +70,7 @@ val appModule = module {
             userRepository = get(),
             getReceivedInviteUseCase = get(),
             formPairUseCase = get(),
+            addInviteeIdUseCase = get(),
             deleteInviteUseCase = get(),
             analytics = get()
         )
