@@ -18,5 +18,7 @@
     <string name="lets_start">Let\'s start</string>
     <string name="continu">Continue</string>
     <string name="hell_yeah">Hell yeah!</string>
+    <string name="pending_invite_title">%s, you have a pending invite:</string>
+    <string name="pending_invite_title_no_name">You have a pending invite:</string>
 </resources>
 

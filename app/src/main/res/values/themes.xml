@@ -169,6 +169,30 @@
         <item name="android:insetBottom">0dp</item>
     </style>
 
+    <style name="Button.Outlined.Transparent" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="shapeAppearanceOverlay">@style/RoundCorners.16</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="android:textAppearance">@style/Body.Highlight</item>
+        <item name="android:textColor">@color/blue_accent</item>
+        <item name="android:height">60dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:paddingBottom">20dp</item>
+        <item name="strokeColor">@color/blue_accent</item>
+        <item name="rippleColor">@color/outlined_button_ripple</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+    </style>
+
+    <style name="Button.Outlined.Transparent.Inline" parent="Button.Outlined.Transparent">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:insetTop">10dp</item>
+        <item name="android:insetBottom">10dp</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
     <style name="TextField" />
 
     <style name="TextInputLayout.Outlined" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
