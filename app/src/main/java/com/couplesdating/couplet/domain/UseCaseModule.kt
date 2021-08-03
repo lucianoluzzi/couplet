@@ -16,6 +16,7 @@ import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCase
 import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.user.UpdateUserUseCase
 import com.couplesdating.couplet.domain.useCase.user.UpdateUserUseCaseImpl
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val useCaseModule = module {
@@ -38,9 +39,19 @@ val useCaseModule = module {
 
     single<FacebookSignInUseCase> { FacebookSignInUseCaseImpl(get()) }
 
-    single<GenerateInviteLinkUseCase> { GenerateInviteLinkUseCaseImpl(get()) }
+    single<GenerateInviteLinkUseCase> {
+        GenerateInviteLinkUseCaseImpl(
+            dynamicLinkProvider = get(),
+            context = androidContext()
+        )
+    }
 
-    single<SavePairInviteUseCase> { SavePairInviteUseCaseImpl(get()) }
+    single<SavePairInviteUseCase> {
+        SavePairInviteUseCaseImpl(
+            inviteRepository = get(),
+            context = androidContext()
+        )
+    }
 
     single<GetReceivedInviteUseCase> { GetReceivedInviteUseCaseImpl(get()) }
 
