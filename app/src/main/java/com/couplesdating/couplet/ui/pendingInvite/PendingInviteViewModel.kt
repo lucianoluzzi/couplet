@@ -24,6 +24,7 @@ class PendingInviteViewModel(
         analytics.trackEvent(PendingInviteEvents.AcceptInviteClicked)
         viewModelScope.launch {
             val errorMessage = "Damn, I'm having some trouble here. Mind to try it again?"
+            _uiState.value = PendingInviteUIState.Loading
             try {
                 val formPairResponse = formPairUseCase.formPair(inviteModel.inviterId)
                 if (formPairResponse is Response.Success<*>) {
@@ -42,6 +43,7 @@ class PendingInviteViewModel(
         analytics.trackEvent(PendingInviteEvents.RejectInviteClicked)
         viewModelScope.launch {
             val errorMessage = "Damn, I'm having some trouble here. Mind to try it again?"
+            _uiState.value = PendingInviteUIState.Loading
             try {
                 deleteInviteUseCase.deleteInvite(inviteModel)
                 _uiState.value = PendingInviteUIState.Reject
