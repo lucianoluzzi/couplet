@@ -21,5 +21,6 @@
     <string name="pending_invite_title">%s, you have a pending invite:</string>
     <string name="pending_invite_title_no_name">You have a pending invite:</string>
     <string name="accepted_invite_title">%1$s, you accepted %2$s\'s invite!</string>
+    <string name="rejected_invite_title">%1$s, you rejected %2$s\'s invite!</string>
 </resources>
 

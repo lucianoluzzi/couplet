@@ -248,6 +248,11 @@
             app:destination="@id/acceptedInviteFragment"
             app:popUpTo="@id/dashboardFragment"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_pendingInviteFragment_to_rejectedInviteFragment"
+            app:destination="@id/rejectedInviteFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/acceptedInviteFragment"
@@ -259,6 +264,17 @@
         <argument
             android:name="user"
             app:argType="com.couplesdating.couplet.domain.model.User" />
+    </fragment>
+    <fragment
+        android:id="@+id/rejectedInviteFragment"
+        android:name="com.couplesdating.couplet.ui.rejectedInvite.RejectedInviteFragment"
+        android:label="RejectedInviteFragment" >
+        <argument
+            android:name="user"
+            app:argType="com.couplesdating.couplet.domain.model.User" />
+        <argument
+            android:name="invite"
+            app:argType="com.couplesdating.couplet.domain.model.InviteModel" />
     </fragment>
 
 </navigation>

@@ -57,7 +57,12 @@ class PendingInviteFragment(
     }
 
     private fun showRejectedInvite(invite: InviteModel) {
-        TODO("Not yet implemented")
+        val toRejectedInvite =
+            PendingInviteFragmentDirections.actionPendingInviteFragmentToRejectedInviteFragment(
+                invite = invite,
+                user = user
+            )
+        findNavController().navigate(toRejectedInvite)
     }
 
     private fun showAcceptedInvite(invite: InviteModel) {

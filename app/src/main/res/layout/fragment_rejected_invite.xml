@@ -18,14 +18,14 @@
                 style="@style/H1Title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/accepted_invite_title"
-                tools:text="Jonas, you accepted Julia's invite!"
+                android:text="@string/rejected_invite_title"
+                tools:text="Jonas, you rejected Julia's invite!"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/illustration"
-                android:src="@drawable/ic_accepted_invite"
+                android:src="@drawable/ic_rejected_invite"
                 android:layout_marginTop="@dimen/dimension_24"
                 app:layout_constraintTop_toBottomOf="@id/title"
                 app:layout_constraintStart_toStartOf="parent"
@@ -41,19 +41,19 @@
                 android:layout_marginTop="@dimen/dimension_32"
                 android:layout_marginHorizontal="@dimen/dimension_16"
                 android:gravity="center"
-                android:text="Now you can discover new ideas together and get intimate. 😉"
+                android:text="It seems you are not getting to know each other better, but that's ok.\nYou can already take a look on the ideas for your future special other. 😉"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/illustration" />
 
             <Button
-                android:id="@+id/get_kinky"
+                android:id="@+id/back"
                 style="@style/Button.Highlight"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="@dimen/dimension_32"
-                android:text="Get kinky"
+                android:text="Go back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
