@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -19,10 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentSocialLoginBinding
 import com.couplesdating.couplet.domain.model.User
-import com.couplesdating.couplet.ui.extensions.setColor
-import com.couplesdating.couplet.ui.extensions.setFont
-import com.couplesdating.couplet.ui.extensions.setUnderline
-import com.couplesdating.couplet.ui.extensions.textValue
+import com.couplesdating.couplet.ui.extensions.*
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -61,7 +57,7 @@ class SocialLoginFragment : Fragment() {
                 } catch (e: ApiException) {
                     if (e.statusCode != SIGN_IN_CANCELLED) {
                         binding.loadingContainer.isVisible = false
-                        goToError(e.cause?.message)
+                        showError(e.cause?.message)
                     }
                 }
             }
@@ -119,7 +115,7 @@ class SocialLoginFragment : Fragment() {
             }
             is SocialLoginUIState.AuthError -> {
                 binding.loadingContainer.isVisible = false
-                goToError(uiState.error)
+                showError(uiState.error)
             }
             SocialLoginUIState.Loading -> {
                 binding.loadingContainer.isVisible = true
@@ -162,7 +158,7 @@ class SocialLoginFragment : Fragment() {
 
                 override fun onError(exception: FacebookException) {
                     binding.loadingContainer.isVisible = false
-                    goToError(exception.message)
+                    showError(exception.message)
                 }
             }
         )
@@ -216,13 +212,6 @@ class SocialLoginFragment : Fragment() {
         val browserIntent =
             Intent(Intent.ACTION_VIEW, Uri.parse("https://couplet.flycricket.io/privacy.html"))
         startActivity(browserIntent)
-    }
-
-    private fun goToError(errorMessage: String? = null) {
-        val bundle = errorMessage?.let {
-            bundleOf("error" to errorMessage)
-        }
-        findNavController().navigate(R.id.errorFragment, bundle)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

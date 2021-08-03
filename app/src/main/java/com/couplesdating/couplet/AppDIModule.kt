@@ -1,5 +1,6 @@
 package com.couplesdating.couplet
 
+import com.couplesdating.couplet.analytics.events.pendingInvite.PendingInviteEvents
 import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.ui.MainViewModel
 import com.couplesdating.couplet.ui.dashboard.DashboardViewModel
@@ -15,6 +16,7 @@ import com.couplesdating.couplet.ui.onboarding.learnFromProfessionals.LearnFromP
 import com.couplesdating.couplet.ui.onboarding.letsStart.LetsStartViewModel
 import com.couplesdating.couplet.ui.onboarding.mildToWild.MildToWildViewModel
 import com.couplesdating.couplet.ui.onboarding.privacy.PrivacyViewModel
+import com.couplesdating.couplet.ui.pendingInvite.PendingInviteViewModel
 import com.couplesdating.couplet.ui.register.emailAndPassword.RegisterViewModel
 import com.couplesdating.couplet.ui.register.nameAndGender.NameAndGenderViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -117,6 +119,13 @@ val appModule = module {
             sendIdeaResponseUseCase = get(),
             decorateIdeaUseCase = get(),
             removeIdeaUseCase = get(),
+            analytics = get()
+        )
+    }
+    viewModel {
+        PendingInviteViewModel(
+            formPairUseCase = get(),
+            deleteInviteUseCase = get(),
             analytics = get()
         )
     }

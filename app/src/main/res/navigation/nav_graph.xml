@@ -243,6 +243,22 @@
         <argument
             android:name="user"
             app:argType="com.couplesdating.couplet.domain.model.User" />
+        <action
+            android:id="@+id/action_pendingInviteFragment_to_acceptedInviteFragment"
+            app:destination="@id/acceptedInviteFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/acceptedInviteFragment"
+        android:name="com.couplesdating.couplet.ui.acceptedInvite.AcceptedInviteFragment"
+        android:label="AcceptedInviteFragment" >
+        <argument
+            android:name="invite"
+            app:argType="com.couplesdating.couplet.domain.model.InviteModel" />
+        <argument
+            android:name="user"
+            app:argType="com.couplesdating.couplet.domain.model.User" />
     </fragment>
 
 </navigation>

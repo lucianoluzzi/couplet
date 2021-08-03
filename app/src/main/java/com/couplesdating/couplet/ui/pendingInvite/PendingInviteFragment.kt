@@ -9,15 +9,16 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentPendingInviteBinding
-import com.couplesdating.couplet.ui.extensions.getMediumFormatString
-import com.couplesdating.couplet.ui.extensions.setColor
-import com.couplesdating.couplet.ui.extensions.setFont
-import com.couplesdating.couplet.ui.extensions.textValue
+import com.couplesdating.couplet.domain.model.InviteModel
+import com.couplesdating.couplet.ui.extensions.*
 
-class PendingInviteFragment : Fragment() {
+class PendingInviteFragment(
+    private val viewModel: PendingInviteViewModel
+) : Fragment() {
     private val binding by lazy {
         val layoutInflater = LayoutInflater.from(requireContext())
         FragmentPendingInviteBinding.inflate(layoutInflater)
@@ -40,6 +41,32 @@ class PendingInviteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setTitle()
         setInviteContent()
+        setButtons()
+        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
+            handleUIState(uiState)
+        }
+    }
+
+    private fun handleUIState(uiState: PendingInviteUIState) {
+        when (uiState) {
+            is PendingInviteUIState.Error -> showError(uiState.errorMessage)
+            PendingInviteUIState.Loading -> binding.loadingContainer.isVisible = true
+            PendingInviteUIState.Accepted -> showAcceptedInvite(invite)
+            PendingInviteUIState.Reject -> showRejectedInvite(invite)
+        }
+    }
+
+    private fun showRejectedInvite(invite: InviteModel) {
+        TODO("Not yet implemented")
+    }
+
+    private fun showAcceptedInvite(invite: InviteModel) {
+        val toAcceptedInvite =
+            PendingInviteFragmentDirections.actionPendingInviteFragmentToAcceptedInviteFragment(
+                invite = invite,
+                user = user
+            )
+        findNavController().navigate(toAcceptedInvite)
     }
 
     private fun setTitle() = with(binding) {
@@ -75,6 +102,15 @@ class PendingInviteFragment : Fragment() {
         invite.note?.let {
             note.isVisible = true
             note.text = it
+        }
+    }
+
+    private fun setButtons() = with(binding) {
+        rejectInvite.setOnClickListener {
+            viewModel.onRejectInvite(invite)
+        }
+        acceptInvite.setOnClickListener {
+            viewModel.onAcceptInvite(invite)
         }
     }
 }

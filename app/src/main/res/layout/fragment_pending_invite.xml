@@ -5,87 +5,117 @@
     <ScrollView
         android:fillViewport="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/dimension_24">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/title"
-                style="@style/H1Title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                tools:text="@string/pending_invite_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
-                app:layout_constraintTop_toBottomOf="@id/title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:padding="@dimen/dimension_16"
-                android:background="@drawable/background_rounded_20"
-                android:backgroundTint="@color/blue_background"
-                android:layout_marginTop="@dimen/dimension_52"
-                android:id="@+id/invite_container"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:paddingHorizontal="@dimen/dimension_24"
+                android:id="@+id/content_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
                 <TextView
-                    style="@style/H3Title"
+                    android:id="@+id/title"
+                    style="@style/H1Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/pending_invite_title"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:id="@+id/inviter_name"
-                    tools:text="Luciano Luzzi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    style="@style/Subtitle2"
-                    app:layout_constraintStart_toStartOf="@id/inviter_name"
-                    app:layout_constraintTop_toBottomOf="@id/inviter_name"
-                    android:id="@+id/note"
-                    android:textStyle="italic"
-                    android:layout_marginTop="@dimen/dimension_8"
-                    tools:text="Babe, let's get into it!"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    app:layout_constraintTop_toBottomOf="@id/title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:padding="@dimen/dimension_16"
+                    android:background="@drawable/background_rounded_20"
+                    android:backgroundTint="@color/blue_background"
+                    android:layout_marginTop="@dimen/dimension_52"
+                    android:id="@+id/invite_container"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    style="@style/Subtitle2"
-                    app:layout_constraintStart_toStartOf="@id/note"
-                    app:layout_constraintTop_toBottomOf="@id/note"
-                    android:layout_marginTop="@dimen/dimension_2"
-                    android:id="@+id/date"
-                    tools:text="Send at Jun 25 2021"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <TextView
+                        style="@style/H3Title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/inviter_name"
+                        tools:text="Luciano Luzzi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        style="@style/Subtitle2"
+                        app:layout_constraintStart_toStartOf="@id/inviter_name"
+                        app:layout_constraintTop_toBottomOf="@id/inviter_name"
+                        android:id="@+id/note"
+                        android:textStyle="italic"
+                        android:layout_marginTop="@dimen/dimension_8"
+                        tools:text="Babe, let's get into it!"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        style="@style/Subtitle2"
+                        app:layout_constraintStart_toStartOf="@id/note"
+                        app:layout_constraintTop_toBottomOf="@id/note"
+                        android:layout_marginTop="@dimen/dimension_2"
+                        android:id="@+id/date"
+                        tools:text="Send at Jun 25 2021"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:id="@+id/reject_invite"
+                        style="@style/Button.Outlined.Transparent.Inline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Decline invite"
+                        android:layout_marginTop="@dimen/dimension_6"
+                        app:layout_constraintTop_toBottomOf="@id/date"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
-                    android:id="@+id/reject_invite"
-                    style="@style/Button.Outlined.Transparent.Inline"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/acceptInvite"
+                    style="@style/Button.Highlight"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Decline invite"
-                    android:layout_marginTop="@dimen/dimension_6"
-                    app:layout_constraintTop_toBottomOf="@id/date"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="@dimen/dimension_32"
+                    android:text="Accept invite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="1.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
-                android:id="@+id/register"
-                style="@style/Button.Highlight"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="@dimen/dimension_32"
-                android:text="Accept invite"
+            <LinearLayout
+                android:id="@+id/loading_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.2"
+                android:background="@color/grey"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/loading"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/loading" />
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
