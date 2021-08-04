@@ -72,6 +72,7 @@
                         android:elevation="@dimen/dimension_6"
                         android:gravity="center"
                         android:paddingVertical="@dimen/dimension_36"
+                        android:maxHeight="250dp"
                         app:layout_constraintBottom_toBottomOf="@id/illustration"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
