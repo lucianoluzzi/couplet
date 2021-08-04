@@ -10,4 +10,8 @@ class DeleteInviteUseCaseImpl(
     override suspend fun deleteInvite(invite: InviteModel) {
         inviteRepository.deletePairInvite(invite.inviteId)
     }
+
+    override suspend fun deleteInvite(inviteId: String) {
+        inviteRepository.deletePairInvite(inviteId)
+    }
 }

@@ -6,14 +6,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.events.userPairing.InvitedEvents
+import com.couplesdating.couplet.domain.model.InviteModel
+import com.couplesdating.couplet.domain.network.Response
+import com.couplesdating.couplet.domain.useCase.invite.DeleteInviteUseCase
 import com.couplesdating.couplet.domain.useCase.invite.InviteExistsUseCase
 import com.couplesdating.couplet.domain.useCase.invite.SavePairInviteUseCase
+import com.couplesdating.couplet.domain.useCase.pair.FormPairUseCase
 import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCase
 import kotlinx.coroutines.launch
+import java.util.*
 
 class InvitedViewModel(
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
     private val savePairInviteUseCase: SavePairInviteUseCase,
+    private val formPairUseCase: FormPairUseCase,
+    private val deleteInviteUseCase: DeleteInviteUseCase,
     private val inviteExistsUseCase: InviteExistsUseCase,
     private val analytics: Analytics
 ) : ViewModel() {
@@ -71,15 +78,26 @@ class InvitedViewModel(
         timestamp: String?
     ) {
         analytics.trackEvent(InvitedEvents.AcceptInviteClicked)
-        savePairInviteUseCase.savePairInvite(
-            inviteId = inviteId,
-            inviterId = inviterId,
-            inviterDisplayName = inviterDisplayName,
-            note = note,
-            hasAccepted = true,
-            timestamp = timestamp
-        )
-        _uiState.value = InvitedUIState.AcceptedInvite
+        viewModelScope.launch {
+            _uiState.value = InvitedUIState.Loading
+            val currentUser = getCurrentUserUseCase.getCurrentUser()
+            currentUser?.let {
+                val formPairResponse = formPairUseCase.formPair(inviterId)
+                if (formPairResponse is Response.Success<*>) {
+                    deleteInviteUseCase.deleteInvite(inviteId)
+                }
+            } ?: run {
+                savePairInviteUseCase.savePairInvite(
+                    inviteId = inviteId,
+                    inviterId = inviterId,
+                    inviterDisplayName = inviterDisplayName,
+                    note = note,
+                    hasAccepted = true,
+                    timestamp = timestamp
+                )
+            }
+            _uiState.value = InvitedUIState.AcceptedInvite
+        }
     }
 
     fun onInviteRejected() {

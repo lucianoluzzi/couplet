@@ -63,6 +63,10 @@ class InvitedFragment(
                 }
             }
             InvitedUIState.SameUser -> findNavController().popBackStack()
+            InvitedUIState.Loading -> {
+                binding.loadingContainer.isVisible = true
+                binding.contentContainer.isVisible = false
+            }
         }
     }
 

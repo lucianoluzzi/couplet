@@ -23,6 +23,8 @@ val fragmentModule = module {
             getCurrentUserUseCase = get(),
             savePairInviteUseCase = get(),
             inviteExistsUseCase = get(),
+            formPairUseCase = get(),
+            deleteInviteUseCase = get(),
             analytics = get()
         )
         InvitedFragment(invitedViewModel)
