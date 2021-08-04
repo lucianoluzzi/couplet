@@ -4,6 +4,7 @@ import com.couplesdating.couplet.domain.model.Idea
 import com.couplesdating.couplet.domain.model.Match
 import com.couplesdating.couplet.domain.network.Response
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.coroutines.tasks.await
 
 class MatchRepositoryImpl(
@@ -13,9 +14,11 @@ class MatchRepositoryImpl(
     override suspend fun getNewMatches(currentUserId: String): Response {
         val firstUserQuery = database.collection("match")
             .whereEqualTo("user_1_id", currentUserId)
+            .orderBy("creation_date", Query.Direction.DESCENDING)
 
         val secondUserQuery = database.collection("match")
             .whereEqualTo("user_2_id", currentUserId)
+            .orderBy("creation_date", Query.Direction.DESCENDING)
 
         val firstResult = firstUserQuery.get().await()
         val secondResult = secondUserQuery.get().await()
