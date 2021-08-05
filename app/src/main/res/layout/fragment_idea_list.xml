@@ -72,7 +72,6 @@
                         android:elevation="@dimen/dimension_6"
                         android:gravity="center"
                         android:paddingVertical="@dimen/dimension_36"
-                        android:maxHeight="250dp"
                         app:layout_constraintBottom_toBottomOf="@id/illustration"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +81,7 @@
                         <androidx.viewpager2.widget.ViewPager2
                             android:id="@+id/pager"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
+                            android:layout_height="wrap_content" />
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>

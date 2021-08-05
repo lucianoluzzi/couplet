@@ -23,6 +23,7 @@ import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.showError
 import com.couplesdating.couplet.ui.extensions.textValue
 import com.couplesdating.couplet.ui.utils.CircularOutlineProvider
+import com.couplesdating.couplet.ui.widgets.ViewPager2ViewHeightAnimator
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -125,11 +126,14 @@ class IdeaListFragment(
 
     private fun FragmentIdeaListBinding.setIdeasViewPager() {
         pager.isSaveEnabled = false
-        pager.adapter = IdeaPagerAdapter(
+        val ideaPagerAdapter = IdeaPagerAdapter(
             ideaList = ideas,
             ideaListFragment = this@IdeaListFragment
         )
+        pager.adapter = ideaPagerAdapter
         pager.isUserInputEnabled = false
+        val viewPager2ViewHeightAnimator = ViewPager2ViewHeightAnimator()
+        viewPager2ViewHeightAnimator.viewPager2 = pager
     }
 
     private fun FragmentIdeaListBinding.setButtonsElevation() {
