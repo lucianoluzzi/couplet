@@ -197,6 +197,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_pendingInviteFragment"
             app:destination="@id/pendingInviteFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_matchesFragment"
+            app:destination="@id/matchesFragment" />
     </fragment>
     <fragment
         android:id="@+id/ideaListFragment"
@@ -275,6 +278,17 @@
         <argument
             android:name="invite"
             app:argType="com.couplesdating.couplet.domain.model.InviteModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/matchesFragment"
+        android:name="com.couplesdating.couplet.ui.matches.MatchesFragment"
+        android:label="MatchesFragment" >
+        <argument
+            android:name="matches"
+            app:argType="com.couplesdating.couplet.domain.model.Match[]" />
+        <argument
+            android:name="user"
+            app:argType="com.couplesdating.couplet.domain.model.User" />
     </fragment>
 
 </navigation>

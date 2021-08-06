@@ -18,6 +18,7 @@ import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentDashboardBindingImpl
 import com.couplesdating.couplet.domain.model.Idea
+import com.couplesdating.couplet.domain.model.Match
 import com.couplesdating.couplet.ui.dashboard.adapter.CategoryAdapter
 import com.couplesdating.couplet.ui.dashboard.adapter.CategoryUIModel
 import com.couplesdating.couplet.ui.dashboard.model.Banner
@@ -168,6 +169,18 @@ class DashboardFragment : Fragment() {
         binding.newMatchesBanner.isVisible = true
         binding.newMatchesBanner.setOnClickListener {
             viewModel.onBannerClicked(banner)
+            navigateToMatches(banner.newMatches)
+        }
+    }
+
+    private fun navigateToMatches(newMatches: List<Match>) {
+        user?.let {
+            val toMatches =
+                DashboardFragmentDirections.actionDashboardFragmentToMatchesFragment(
+                    newMatches.toTypedArray(),
+                    it
+                )
+            findNavController().navigate(toMatches)
         }
     }
 

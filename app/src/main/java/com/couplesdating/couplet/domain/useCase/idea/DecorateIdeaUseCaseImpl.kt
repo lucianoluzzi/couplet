@@ -26,13 +26,13 @@ class DecorateIdeaUseCaseImpl : DecorateIdeaUseCase {
             "suck",
             "spank",
             "suffocate",
-            "tie up",
+            "tie-up",
             "butthole",
             "genitals",
             "jerk off",
             "dildo",
             "strip-tease",
-            "golden shower",
+            "shower",
             "cunnilingus",
             "tongue",
             "lips",
@@ -65,7 +65,10 @@ class DecorateIdeaUseCaseImpl : DecorateIdeaUseCase {
             "strip-poker",
             "penetrate",
             "penetrated",
-            "slippery"
+            "slippery",
+            "virgin",
+            "time",
+            "place"
         )
     }
 }
