@@ -3,9 +3,7 @@ package com.couplesdating.couplet.ui.matches
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
@@ -30,6 +28,30 @@ class MatchesFragment(
     }
     private val user by lazy {
         navigationArgs.user
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.matches_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.delete_all -> {
+                showDeleteAllDialog()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun showDeleteAllDialog() {
+        viewModel.onDeleteAllClicked(user)
     }
 
     override fun onCreateView(
