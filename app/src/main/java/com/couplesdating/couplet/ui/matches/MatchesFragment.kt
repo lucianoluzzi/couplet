@@ -11,6 +11,7 @@ import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentMatchesBindingImpl
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
+import com.couplesdating.couplet.ui.extensions.showAlertDialog
 import com.couplesdating.couplet.ui.extensions.textValue
 import com.couplesdating.couplet.ui.matches.adapter.MatchAdapter
 import com.couplesdating.couplet.ui.widgets.ItemMarginDecorator
@@ -51,7 +52,18 @@ class MatchesFragment(
     }
 
     private fun showDeleteAllDialog() {
-        viewModel.onDeleteAllClicked(user)
+        viewModel.onDeleteAllClicked()
+        showAlertDialog(
+            title = "Delete all matches?",
+            message = "This cannot be undone.",
+            negativeButtonClickAction = {
+                viewModel.onDeleteCancel()
+            },
+            positiveButtonClickAction = {
+                viewModel.onDeleteAll(user)
+            },
+            positiveButtonText = "Confirm"
+        )
     }
 
     override fun onCreateView(

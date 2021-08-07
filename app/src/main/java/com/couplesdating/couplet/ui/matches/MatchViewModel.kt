@@ -13,7 +13,15 @@ class MatchViewModel(
         analytics.trackEvent(MatchesEvents.MatchClick)
     }
 
-    fun onDeleteAllClicked(user: User) {
+    fun onDeleteAllClicked() {
         analytics.trackEvent(MatchesEvents.DeleteAllClick)
+    }
+
+    fun onDeleteAll(user: User) {
+        analytics.trackEvent(MatchesEvents.DeleteAllConfirmClick)
+    }
+
+    fun onDeleteCancel() {
+        analytics.trackEvent(MatchesEvents.DeleteAllCancelClick)
     }
 }
