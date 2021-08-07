@@ -9,6 +9,7 @@ import com.couplesdating.couplet.ui.ideaList.IdeaListFragment
 import com.couplesdating.couplet.ui.info.InfoFragment
 import com.couplesdating.couplet.ui.invited.InvitedFragment
 import com.couplesdating.couplet.ui.invited.InvitedViewModel
+import com.couplesdating.couplet.ui.matches.MatchesFragment
 import com.couplesdating.couplet.ui.pendingInvite.PendingInviteFragment
 import com.couplesdating.couplet.ui.rejectedInvite.RejectedInviteFragment
 import org.koin.androidx.fragment.dsl.fragment
@@ -44,4 +45,9 @@ val fragmentModule = module {
     fragment { PendingInviteFragment(get()) }
     fragment { AcceptedInviteFragment() }
     fragment { RejectedInviteFragment() }
+    fragment {
+        MatchesFragment(
+            viewModel = get()
+        )
+    }
 }

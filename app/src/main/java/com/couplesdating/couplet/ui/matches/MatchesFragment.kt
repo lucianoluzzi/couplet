@@ -17,7 +17,9 @@ import com.couplesdating.couplet.ui.extensions.textValue
 import com.couplesdating.couplet.ui.matches.adapter.MatchAdapter
 import com.couplesdating.couplet.ui.widgets.ItemMarginDecorator
 
-class MatchesFragment : Fragment() {
+class MatchesFragment(
+    private val viewModel: MatchViewModel
+) : Fragment() {
     private val binding by lazy {
         val layoutInflater = LayoutInflater.from(requireContext())
         FragmentMatchesBindingImpl.inflate(layoutInflater)
@@ -67,11 +69,11 @@ class MatchesFragment : Fragment() {
 
     private fun setMatches() {
         val matchAdapter = MatchAdapter(matches) {
-
+            viewModel.onMatchClicked()
         }
         binding.categories.adapter = matchAdapter
         binding.categories.addItemDecoration(
-            ItemMarginDecorator(4)
+            ItemMarginDecorator(6)
         )
     }
 

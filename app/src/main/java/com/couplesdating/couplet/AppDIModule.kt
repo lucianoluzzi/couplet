@@ -11,6 +11,7 @@ import com.couplesdating.couplet.ui.invite.InvitePartnerViewModel
 import com.couplesdating.couplet.ui.login.emailLogin.LoginViewModel
 import com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordViewModel
 import com.couplesdating.couplet.ui.login.socialLogin.SocialLoginViewModel
+import com.couplesdating.couplet.ui.matches.MatchViewModel
 import com.couplesdating.couplet.ui.onboarding.intimate.IntimateOnboardingViewModel
 import com.couplesdating.couplet.ui.onboarding.learnFromProfessionals.LearnFromProfessionalsViewModel
 import com.couplesdating.couplet.ui.onboarding.letsStart.LetsStartViewModel
@@ -126,6 +127,11 @@ val appModule = module {
         PendingInviteViewModel(
             formPairUseCase = get(),
             deleteInviteUseCase = get(),
+            analytics = get()
+        )
+    }
+    viewModel {
+        MatchViewModel(
             analytics = get()
         )
     }
