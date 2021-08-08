@@ -3,17 +3,17 @@ package com.couplesdating.couplet.ui.matches
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
+import android.util.Log
 import android.view.*
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentMatchesBindingImpl
-import com.couplesdating.couplet.ui.extensions.setColor
-import com.couplesdating.couplet.ui.extensions.setFont
-import com.couplesdating.couplet.ui.extensions.showAlertDialog
-import com.couplesdating.couplet.ui.extensions.textValue
+import com.couplesdating.couplet.ui.extensions.*
 import com.couplesdating.couplet.ui.matches.adapter.MatchAdapter
+import com.couplesdating.couplet.ui.utils.LiveDataEvent
 import com.couplesdating.couplet.ui.widgets.ItemMarginDecorator
 
 class MatchesFragment(
@@ -60,7 +60,7 @@ class MatchesFragment(
                 viewModel.onDeleteCancel()
             },
             positiveButtonClickAction = {
-                viewModel.onDeleteAll(user)
+                viewModel.onDeleteAllConfirm(user)
             },
             positiveButtonText = "Confirm"
         )
@@ -77,6 +77,22 @@ class MatchesFragment(
         decorateTitle()
         setMatches()
         setLabel()
+        viewModel.uiState.observe(viewLifecycleOwner) { liveDataEvent ->
+            handleUIState(liveDataEvent)
+        }
+    }
+
+    private fun handleUIState(liveDataEvent: LiveDataEvent<MatchesUIState>?) {
+        liveDataEvent?.getContentIfNotHandled()?.let {
+            when (it) {
+                MatchesUIState.DeletedMatches -> {
+                    binding.loadingContainer.isVisible = false
+                    Log.d("DELETE", "Deleted all right")
+                }
+                is MatchesUIState.Error -> showError(it.errorMessage)
+                MatchesUIState.Loading -> binding.loadingContainer.isVisible = true
+            }
+        }
     }
 
     private fun decorateTitle() {

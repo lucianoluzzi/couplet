@@ -44,6 +44,28 @@ class MatchRepositoryImpl(
         return Response.Success(mergedResults)
     }
 
+    override suspend fun deleteAllMatches(currentUserId: String): Response {
+        try {
+            val firstUserQuery = database.collection("match")
+                .whereEqualTo("user_1_id", currentUserId)
+            val secondUserQuery = database.collection("match")
+                .whereEqualTo("user_2_id", currentUserId)
+
+            val firstResult = firstUserQuery.get().await()
+            val secondResult = secondUserQuery.get().await()
+
+            val writeBatch = database.batch()
+            val mergedResults = firstResult.documents + secondResult.documents
+            mergedResults.forEach { documentSnapshot ->
+                writeBatch.delete(documentSnapshot.reference)
+            }
+            writeBatch.commit().await()
+            return Response.Completed
+        } catch (exception: Exception) {
+            return Response.Error(exception.toString())
+        }
+    }
+
     private suspend fun getIdea(ideaId: String): Idea? {
         val ideaResponse = database.collection("idea")
             .whereEqualTo("id", ideaId)

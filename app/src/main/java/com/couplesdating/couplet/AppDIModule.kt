@@ -1,6 +1,5 @@
 package com.couplesdating.couplet
 
-import com.couplesdating.couplet.analytics.events.pendingInvite.PendingInviteEvents
 import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.ui.MainViewModel
 import com.couplesdating.couplet.ui.dashboard.DashboardViewModel
@@ -132,6 +131,7 @@ val appModule = module {
     }
     viewModel {
         MatchViewModel(
+            deleteAllMatchesUseCase = get(),
             analytics = get()
         )
     }
