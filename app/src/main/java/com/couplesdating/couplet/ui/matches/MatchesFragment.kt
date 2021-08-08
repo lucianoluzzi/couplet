@@ -129,6 +129,7 @@ class MatchesFragment(
     private fun setMatches() {
         val matchAdapter = MatchAdapter(matches) {
             viewModel.onMatchClicked()
+            navigateToMatchesDetailList(it)
         }
         binding.categories.adapter = matchAdapter
         binding.categories.addItemDecoration(
@@ -140,5 +141,15 @@ class MatchesFragment(
         user.pairedPartner?.let {
             binding.label.text = getString(R.string.matches_label, user.firstName, it.firstName)
         }
+    }
+
+    private fun navigateToMatchesDetailList(matchPosition: Int) {
+        val toMatchDetailsList =
+            MatchesFragmentDirections.actionMatchesFragmentToMatchDetailFragment(
+                matches = matches.toTypedArray(),
+                user = user,
+                matchPosition = matchPosition
+            )
+        findNavController().navigate(toMatchDetailsList)
     }
 }
