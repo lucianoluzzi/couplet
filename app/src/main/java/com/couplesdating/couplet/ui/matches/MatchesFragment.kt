@@ -3,14 +3,15 @@ package com.couplesdating.couplet.ui.matches
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
-import android.util.Log
 import android.view.*
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentMatchesBindingImpl
+import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.ui.extensions.*
 import com.couplesdating.couplet.ui.matches.adapter.MatchAdapter
 import com.couplesdating.couplet.ui.utils.LiveDataEvent
@@ -87,12 +88,20 @@ class MatchesFragment(
             when (it) {
                 MatchesUIState.DeletedMatches -> {
                     binding.loadingContainer.isVisible = false
-                    Log.d("DELETE", "Deleted all right")
+                    navigateToEmptyMatches(user)
                 }
                 is MatchesUIState.Error -> showError(it.errorMessage)
                 MatchesUIState.Loading -> binding.loadingContainer.isVisible = true
             }
         }
+    }
+
+    private fun navigateToEmptyMatches(user: User) {
+        val toEmptyMatches =
+            MatchesFragmentDirections.actionMatchesFragmentToEmptyMatchesFragment(
+                user = user
+            )
+        findNavController().navigate(toEmptyMatches)
     }
 
     private fun decorateTitle() {

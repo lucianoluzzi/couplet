@@ -289,6 +289,19 @@
         <argument
             android:name="user"
             app:argType="com.couplesdating.couplet.domain.model.User" />
+        <action
+            android:id="@+id/action_matchesFragment_to_emptyMatchesFragment"
+            app:destination="@id/emptyMatchesFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/emptyMatchesFragment"
+        android:name="com.couplesdating.couplet.ui.matches.EmptyMatchesFragment"
+        android:label="EmptyMatchesFragment" >
+        <argument
+            android:name="user"
+            app:argType="com.couplesdating.couplet.domain.model.User" />
     </fragment>
 
 </navigation>
