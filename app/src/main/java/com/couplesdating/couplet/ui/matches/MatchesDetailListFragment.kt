@@ -6,7 +6,6 @@ import android.text.SpannableString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewOutlineProvider
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
@@ -69,16 +68,17 @@ class MatchesDetailListFragment : Fragment() {
         binding.title.text = spannable
     }
 
-    private fun setMatchesPager() {
+    private fun setMatchesPager() = with(binding) {
         user.pairedPartner?.firstName?.let {
             val matchDetailAdapter = MatchDetailAdapter(
                 partnerName = it,
                 matches = matches.toList(),
-                matchesDetailListFragment = this
+                matchesDetailListFragment = this@MatchesDetailListFragment
             )
-            binding.matchesPager.adapter = matchDetailAdapter
+            matchesPager.adapter = matchDetailAdapter
+            matchesPager.offscreenPageLimit = 3
             val viewPager2ViewHeightAnimator = ViewPager2ViewHeightAnimator()
-            viewPager2ViewHeightAnimator.viewPager2 = binding.matchesPager
+            viewPager2ViewHeightAnimator.viewPager2 = matchesPager
         }
     }
 }

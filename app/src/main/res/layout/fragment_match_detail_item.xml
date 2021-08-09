@@ -8,8 +8,8 @@
         android:clipChildren="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/dimension_12"
-        android:layout_marginBottom="@dimen/dimension_12"
+        android:paddingHorizontal="@dimen/dimension_4"
+        android:paddingVertical="@dimen/dimension_6"
         android:background="@drawable/background_rounded_20">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:elevation="@dimen/dimension_6"
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            android:elevation="@dimen/dimension_4"
             android:background="@drawable/background_rounded_20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
