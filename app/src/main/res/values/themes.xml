@@ -76,7 +76,7 @@
     <style name="Subtitle2">
         <item name="android:textSize">13sp</item>
         <item name="android:fontFamily">@font/regular</item>
-        <item name="android:textColor">@color/dark</item>
+        <item name="android:textColor">@color/dark_50</item>
     </style>
 
     <style name="Label">

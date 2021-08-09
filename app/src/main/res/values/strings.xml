@@ -24,6 +24,6 @@
     <string name="rejected_invite_title">%1$s, you rejected %2$s\'s invite!</string>
     <string name="matches_label">%1$s, here\'s what both of you and %2$s are into.\nCheck it out:</string>
     <string name="empty_matches_label">%1$s, you guys still haven\'t had any matches.\nBut worry not! Keep playing and I\'m sure soon you will have some new stuff to try 😉</string>
-    <string name="partner_response">%1$s response</string>
+    <string name="partner_response">%1$s\'s response:</string>
 </resources>
 
