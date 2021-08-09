@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import androidx.viewpager2.widget.ViewPager2
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentMatchesDetailListBinding
 import com.couplesdating.couplet.ui.extensions.setColor
@@ -41,12 +42,12 @@ class MatchesDetailListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        decorateTitle(initialIdeaPosition)
         setMatchesPager()
     }
 
     private fun decorateTitle(matchPosition: Int) {
-        binding.title.text = "Idea $matchPosition"
+        val matchNumber = matchPosition + 1
+        binding.title.text = "Match $matchNumber"
         val titleText = binding.title.textValue()
         val spannable = SpannableString(titleText)
         val medium = Typeface.create(
@@ -56,12 +57,12 @@ class MatchesDetailListFragment : Fragment() {
         val color = requireContext().getColor(R.color.red)
         spannable.setColor(
             color = color,
-            wordToDecorate = initialIdeaPosition.toString(),
+            wordToDecorate = matchNumber.toString(),
             wholeText = titleText
         )
         spannable.setFont(
             typeface = medium,
-            wordToDecorate = initialIdeaPosition.toString(),
+            wordToDecorate = matchNumber.toString(),
             wholeText = titleText
         )
 
@@ -79,6 +80,13 @@ class MatchesDetailListFragment : Fragment() {
             matchesPager.offscreenPageLimit = 3
             val viewPager2ViewHeightAnimator = ViewPager2ViewHeightAnimator()
             viewPager2ViewHeightAnimator.viewPager2 = matchesPager
+
+            matchesPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    decorateTitle(position)
+                }
+            })
         }
     }
 }
