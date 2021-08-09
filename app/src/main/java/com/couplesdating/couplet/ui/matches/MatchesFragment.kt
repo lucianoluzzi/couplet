@@ -126,15 +126,18 @@ class MatchesFragment(
         binding.title.text = spannable
     }
 
-    private fun setMatches() {
+    private fun setMatches() = with(binding) {
         val matchAdapter = MatchAdapter(matches) {
             viewModel.onMatchClicked()
             navigateToMatchesDetailList(it)
         }
-        binding.categories.adapter = matchAdapter
-        binding.categories.addItemDecoration(
-            ItemMarginDecorator(6)
-        )
+        categories.adapter = matchAdapter
+        val itemDecorationCount = categories.itemDecorationCount
+        if (itemDecorationCount == 0) {
+            categories.addItemDecoration(
+                ItemMarginDecorator(6)
+            )
+        }
     }
 
     private fun setLabel() {
