@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.couplesdating.couplet.R
@@ -80,6 +81,9 @@ class MatchesDetailListFragment : Fragment() {
             matchesPager.offscreenPageLimit = 3
             val viewPager2ViewHeightAnimator = ViewPager2ViewHeightAnimator()
             viewPager2ViewHeightAnimator.viewPager2 = matchesPager
+            matchesPager.post {
+                matchesPager.currentItem = initialIdeaPosition
+            }
 
             matchesPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {

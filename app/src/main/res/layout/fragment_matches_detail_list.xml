@@ -41,7 +41,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/title"
-                    android:paddingHorizontal="@dimen/dimension_20"
+                    android:paddingHorizontal="@dimen/dimension_28"
                     android:clipToPadding="false"
                     android:clipChildren="false"
                     android:layout_marginTop="@dimen/dimension_48"
