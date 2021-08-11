@@ -15,10 +15,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentMatchesDetailListBinding
 import com.couplesdating.couplet.domain.model.Match
-import com.couplesdating.couplet.ui.extensions.setColor
-import com.couplesdating.couplet.ui.extensions.setFont
-import com.couplesdating.couplet.ui.extensions.showError
-import com.couplesdating.couplet.ui.extensions.textValue
+import com.couplesdating.couplet.ui.extensions.*
 import com.couplesdating.couplet.ui.matches.adapter.MatchDetailAdapter
 import com.couplesdating.couplet.ui.widgets.ViewPager2ViewHeightAnimator
 
@@ -108,8 +105,19 @@ class MatchesDetailListFragment(
 
     private fun setDeleteButton() {
         binding.delete.setOnClickListener {
-            val currentItemIndex = binding.matchesPager.currentItem
-            viewModel.onDeleteClick(matches[currentItemIndex])
+            viewModel.onDeleteClick()
+            showAlertDialog(
+                title = "Delete match?",
+                message = "This action can't be undone.",
+                positiveButtonText = "Confirm",
+                positiveButtonClickAction = {
+                    val currentItemIndex = binding.matchesPager.currentItem
+                    viewModel.onConfirmDeleteClick(matches[currentItemIndex])
+                },
+                negativeButtonClickAction = {
+                    viewModel.onCancelDeleteClick()
+                }
+            )
         }
     }
 

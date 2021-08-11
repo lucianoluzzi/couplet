@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.analytics.Analytics
+import com.couplesdating.couplet.analytics.events.matches.MatchDetailEvents
 import com.couplesdating.couplet.domain.model.Match
 import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.useCase.match.DeleteMatchUseCase
@@ -17,7 +18,12 @@ class MatchesDetailListViewModel(
     private val _uiState = MutableLiveData<MatchesDetailListUIState>()
     val uiState: LiveData<MatchesDetailListUIState> = _uiState
 
-    fun onDeleteClick(match: Match) {
+    fun onDeleteClick() {
+        analytics.trackEvent(MatchDetailEvents.OnDeleteClick)
+    }
+
+    fun onConfirmDeleteClick(match: Match) {
+        analytics.trackEvent(MatchDetailEvents.OnDeleteConfirmClick)
         viewModelScope.launch {
             _uiState.value = MatchesDetailListUIState.Loading
             when (val deleteResponse = deleteMatchUseCase.deleteMatch(match)) {
@@ -32,5 +38,9 @@ class MatchesDetailListViewModel(
         val errorMessage =
             error.errorMessage ?: "An error just occurred... Would you mind to try it again?"
         _uiState.value = MatchesDetailListUIState.Error(errorMessage)
+    }
+
+    fun onCancelDeleteClick() {
+        analytics.trackEvent(MatchDetailEvents.OnDeleteCancelClick)
     }
 }
