@@ -2,8 +2,8 @@ package com.couplesdating.couplet.ui.matches.adapter
 
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.couplesdating.couplet.domain.model.Match
-import com.couplesdating.couplet.ui.matches.MatchDetailFragment
-import com.couplesdating.couplet.ui.matches.MatchesDetailListFragment
+import com.couplesdating.couplet.ui.matches.matchesDetailList.MatchDetailFragment
+import com.couplesdating.couplet.ui.matches.matchesDetailList.MatchesDetailListFragment
 
 class MatchDetailAdapter(
     private val partnerName: String,

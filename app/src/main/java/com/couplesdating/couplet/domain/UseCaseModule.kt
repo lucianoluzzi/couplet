@@ -7,10 +7,7 @@ import com.couplesdating.couplet.domain.useCase.category.RefreshCategoriesUseCas
 import com.couplesdating.couplet.domain.useCase.category.RefreshCategoriesUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.idea.*
 import com.couplesdating.couplet.domain.useCase.invite.*
-import com.couplesdating.couplet.domain.useCase.match.DeleteAllMatchesUseCase
-import com.couplesdating.couplet.domain.useCase.match.DeleteAllMatchesUseCaseImpl
-import com.couplesdating.couplet.domain.useCase.match.GetNewMatchesUseCase
-import com.couplesdating.couplet.domain.useCase.match.GetNewMatchesUseCaseImpl
+import com.couplesdating.couplet.domain.useCase.match.*
 import com.couplesdating.couplet.domain.useCase.notifications.GetCloudMessagingTokenUseCase
 import com.couplesdating.couplet.domain.useCase.notifications.GetCloudMessagingTokenUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.pair.*
@@ -99,6 +96,12 @@ val useCaseModule = module {
 
     single<DeleteAllMatchesUseCase> {
         DeleteAllMatchesUseCaseImpl(
+            matchRepository = get()
+        )
+    }
+
+    single<DeleteMatchUseCase> {
+        DeleteMatchUseCaseImpl(
             matchRepository = get()
         )
     }

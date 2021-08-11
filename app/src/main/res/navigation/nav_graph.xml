@@ -281,7 +281,7 @@
     </fragment>
     <fragment
         android:id="@+id/matchesFragment"
-        android:name="com.couplesdating.couplet.ui.matches.MatchesFragment"
+        android:name="com.couplesdating.couplet.ui.matches.matchesList.MatchesFragment"
         android:label="MatchesFragment" >
         <argument
             android:name="matches"
@@ -300,7 +300,7 @@
     </fragment>
     <fragment
         android:id="@+id/emptyMatchesFragment"
-        android:name="com.couplesdating.couplet.ui.matches.EmptyMatchesFragment"
+        android:name="com.couplesdating.couplet.ui.matches.emptyMatches.EmptyMatchesFragment"
         android:label="EmptyMatchesFragment" >
         <argument
             android:name="user"
@@ -308,7 +308,7 @@
     </fragment>
     <fragment
         android:id="@+id/matchDetailFragment"
-        android:name="com.couplesdating.couplet.ui.matches.MatchesDetailListFragment"
+        android:name="com.couplesdating.couplet.ui.matches.matchesDetailList.MatchesDetailListFragment"
         android:label="MatchDetailFragment" >
         <argument
             android:name="matches"
@@ -319,6 +319,11 @@
         <argument
             android:name="match_position"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_matchDetailFragment_to_emptyMatchesFragment"
+            app:destination="@id/emptyMatchesFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 
 </navigation>

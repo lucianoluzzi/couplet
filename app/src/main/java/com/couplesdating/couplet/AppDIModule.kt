@@ -10,7 +10,8 @@ import com.couplesdating.couplet.ui.invite.InvitePartnerViewModel
 import com.couplesdating.couplet.ui.login.emailLogin.LoginViewModel
 import com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordViewModel
 import com.couplesdating.couplet.ui.login.socialLogin.SocialLoginViewModel
-import com.couplesdating.couplet.ui.matches.MatchViewModel
+import com.couplesdating.couplet.ui.matches.matchesDetailList.MatchesDetailListViewModel
+import com.couplesdating.couplet.ui.matches.matchesList.MatchesViewModel
 import com.couplesdating.couplet.ui.onboarding.intimate.IntimateOnboardingViewModel
 import com.couplesdating.couplet.ui.onboarding.learnFromProfessionals.LearnFromProfessionalsViewModel
 import com.couplesdating.couplet.ui.onboarding.letsStart.LetsStartViewModel
@@ -130,8 +131,14 @@ val appModule = module {
         )
     }
     viewModel {
-        MatchViewModel(
+        MatchesViewModel(
             deleteAllMatchesUseCase = get(),
+            analytics = get()
+        )
+    }
+    viewModel {
+        MatchesDetailListViewModel(
+            deleteMatchUseCase = get(),
             analytics = get()
         )
     }

@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.ui.matches
+package com.couplesdating.couplet.ui.matches.matchesDetailList
 
 import android.os.Bundle
 import android.view.LayoutInflater

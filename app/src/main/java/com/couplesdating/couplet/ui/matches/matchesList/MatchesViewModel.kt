@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.ui.matches
+package com.couplesdating.couplet.ui.matches.matchesList
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +13,7 @@ import com.couplesdating.couplet.ui.utils.LiveDataEvent
 import com.couplesdating.couplet.ui.utils.asLiveDataEvent
 import kotlinx.coroutines.launch
 
-class MatchViewModel(
+class MatchesViewModel(
     private val deleteAllMatchesUseCase: DeleteAllMatchesUseCase,
     private val analytics: Analytics
 ) : ViewModel() {

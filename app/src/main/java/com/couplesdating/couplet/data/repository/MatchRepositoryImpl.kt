@@ -66,6 +66,24 @@ class MatchRepositoryImpl(
         }
     }
 
+    override suspend fun deleteMatch(matchId: String): Response {
+        return try {
+            val result = database.collection("match")
+                .whereEqualTo("id", matchId)
+                .get()
+                .await()
+            result.documents.firstOrNull()?.let {
+                database.collection("match")
+                    .document(it.id)
+                    .delete()
+                    .await()
+            }
+            Response.Completed
+        } catch (exception: Exception) {
+            Response.Error(exception.toString())
+        }
+    }
+
     private suspend fun getIdea(ideaId: String): Idea? {
         val ideaResponse = database.collection("idea")
             .whereEqualTo("id", ideaId)

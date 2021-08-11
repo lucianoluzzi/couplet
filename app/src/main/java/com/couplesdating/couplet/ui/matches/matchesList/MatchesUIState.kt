@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.ui.matches
+package com.couplesdating.couplet.ui.matches.matchesList
 
 sealed class MatchesUIState {
     object Loading : MatchesUIState()

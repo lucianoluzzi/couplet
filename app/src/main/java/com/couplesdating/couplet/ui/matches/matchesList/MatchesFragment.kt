@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.ui.matches
+package com.couplesdating.couplet.ui.matches.matchesList
 
 import android.graphics.Typeface
 import android.os.Bundle
@@ -18,7 +18,7 @@ import com.couplesdating.couplet.ui.utils.LiveDataEvent
 import com.couplesdating.couplet.ui.widgets.ItemMarginDecorator
 
 class MatchesFragment(
-    private val viewModel: MatchViewModel
+    private val viewModel: MatchesViewModel
 ) : Fragment() {
     private val binding by lazy {
         val layoutInflater = LayoutInflater.from(requireContext())
