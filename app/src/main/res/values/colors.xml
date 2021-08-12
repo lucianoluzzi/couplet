@@ -9,8 +9,6 @@
     <color name="blue">#46B5D7</color>
     <color name="dark_blue">#4A4B72</color>
     <color name="blue_background">#ECF7FB</color>
-    <color name="match_detail_blue_background">#ECF7FB</color>
-    <color name="match_detail_background">@color/white</color>
 
     <color name="red_over">#D84758</color>
     <color name="green">#2DCA73</color>
@@ -42,6 +40,9 @@
     <color name="loading_overlay">#33494B71</color>
     <color name="new_cards_text_color">#F25A6C</color>
     <color name="new_cards_background">#ECD7DF</color>
+    <color name="match_detail_blue_background">#ECF7FB</color>
+    <color name="match_detail_background">@color/white</color>
+    <color name="match_detail_number">#801E113F</color>
 
     <color name="idea_description_background">#FFFFFFFF</color>
 
