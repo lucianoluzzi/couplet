@@ -74,6 +74,7 @@ class MatchesDetailListFragment(
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     decorateTitle(position)
+                    matchNumber.text = "${position + 1}/${matches.size}"
                 }
             })
         }

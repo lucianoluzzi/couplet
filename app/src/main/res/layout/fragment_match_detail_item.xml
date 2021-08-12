@@ -9,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/dimension_8"
-        android:paddingVertical="@dimen/dimension_12"
-        android:background="@drawable/background_rounded_20">
+        android:paddingVertical="@dimen/dimension_12">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             app:layout_constraintTop_toTopOf="parent"
@@ -21,6 +20,7 @@
             android:clipChildren="false"
             android:elevation="@dimen/dimension_8"
             android:background="@drawable/background_rounded_20"
+            android:backgroundTint="@color/match_detail_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/dimension_28">
@@ -57,7 +57,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/dimension_6"
                 android:background="@drawable/background_rounded_20"
-                android:backgroundTint="@color/blue_background"
+                android:backgroundTint="@color/match_detail_blue_background"
                 android:paddingHorizontal="@dimen/dimension_16"
                 android:paddingVertical="@dimen/dimension_8">
 
@@ -109,7 +109,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_rounded_20"
-                android:backgroundTint="@color/blue_background"
+                android:backgroundTint="@color/match_detail_blue_background"
                 android:paddingHorizontal="@dimen/dimension_16"
                 android:paddingVertical="@dimen/dimension_8">
 
@@ -161,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dimension_6"
                 android:background="@drawable/background_rounded_20"
-                android:backgroundTint="@color/blue_background"
+                android:backgroundTint="@color/match_detail_blue_background"
                 android:paddingHorizontal="@dimen/dimension_16"
                 android:paddingVertical="@dimen/dimension_8">
 
