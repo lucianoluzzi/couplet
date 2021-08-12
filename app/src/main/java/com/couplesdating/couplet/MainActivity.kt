@@ -1,6 +1,10 @@
 package com.couplesdating.couplet
 
+import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
@@ -8,7 +12,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.navigateUp
-import com.couplesdating.couplet.notifications.FirebaseNotificationService
 import com.couplesdating.couplet.ui.MainViewModel
 import org.koin.androidx.fragment.android.setupKoinFragmentFactory
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -26,7 +29,6 @@ class MainActivity : AppCompatActivity() {
         setupKoinFragmentFactory()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setUpActionBarNavigation()
     }
 
