@@ -1,7 +1,5 @@
 package com.couplesdating.couplet.ui.matches.matchesList
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.analytics.Analytics
@@ -9,17 +7,29 @@ import com.couplesdating.couplet.analytics.events.matches.MatchesEvents
 import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.useCase.match.DeleteAllMatchesUseCase
-import com.couplesdating.couplet.ui.utils.LiveDataEvent
-import com.couplesdating.couplet.ui.utils.asLiveDataEvent
+import com.couplesdating.couplet.domain.useCase.match.GetNewMatchesUseCase
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MatchesViewModel(
     private val deleteAllMatchesUseCase: DeleteAllMatchesUseCase,
+    private val getNewMatchesUseCase: GetNewMatchesUseCase,
     private val analytics: Analytics
 ) : ViewModel() {
 
-    private val _uiState = MutableLiveData<LiveDataEvent<MatchesUIState>>()
-    val uiState: LiveData<LiveDataEvent<MatchesUIState>> = _uiState
+    private val _uiStateFlow: MutableStateFlow<MatchesUIState> =
+        MutableStateFlow(MatchesUIState.Loading)
+    val uiStateFlow: StateFlow<MatchesUIState> = _uiStateFlow
+
+    init {
+        viewModelScope.launch {
+            getNewMatchesUseCase.listenToMatches().collect { matches ->
+                _uiStateFlow.value = MatchesUIState.Success(matches)
+            }
+        }
+    }
 
     fun onMatchClicked() {
         analytics.trackEvent(MatchesEvents.MatchClick)
@@ -32,12 +42,13 @@ class MatchesViewModel(
     fun onDeleteAllConfirm(user: User) {
         analytics.trackEvent(MatchesEvents.DeleteAllConfirmClick)
         viewModelScope.launch {
-            _uiState.value = MatchesUIState.Loading.asLiveDataEvent
+            _uiStateFlow.value = MatchesUIState.Loading
             val response = deleteAllMatchesUseCase.deleteAllMatches(user)
             if (response is Response.Completed || response is Response.Success<*>) {
-                _uiState.value = MatchesUIState.DeletedMatches.asLiveDataEvent
+                _uiStateFlow.value = MatchesUIState.DeletedMatches
             } else {
-                _uiState.value = MatchesUIState.Error("Ops, something went wrong. Sorry about that!").asLiveDataEvent
+                _uiStateFlow.value =
+                    MatchesUIState.Error("Ops, something went wrong. Sorry about that!")
             }
         }
     }

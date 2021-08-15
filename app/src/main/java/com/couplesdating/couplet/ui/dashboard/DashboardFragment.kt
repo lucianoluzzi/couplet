@@ -176,10 +176,7 @@ class DashboardFragment : Fragment() {
     private fun navigateToMatches(newMatches: List<Match>) {
         user?.let {
             val toMatches =
-                DashboardFragmentDirections.actionDashboardFragmentToMatchesFragment(
-                    newMatches.toTypedArray(),
-                    it
-                )
+                DashboardFragmentDirections.actionDashboardFragmentToMatchesFragment(it)
             findNavController().navigate(toMatches)
         }
     }

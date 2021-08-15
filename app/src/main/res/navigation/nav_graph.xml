@@ -284,9 +284,6 @@
         android:name="com.couplesdating.couplet.ui.matches.matchesList.MatchesFragment"
         android:label="MatchesFragment" >
         <argument
-            android:name="matches"
-            app:argType="com.couplesdating.couplet.domain.model.Match[]" />
-        <argument
             android:name="user"
             app:argType="com.couplesdating.couplet.domain.model.User" />
         <action
@@ -310,9 +307,6 @@
         android:id="@+id/matchDetailFragment"
         android:name="com.couplesdating.couplet.ui.matches.matchesDetailList.MatchesDetailListFragment"
         android:label="MatchDetailFragment" >
-        <argument
-            android:name="matches"
-            app:argType="com.couplesdating.couplet.domain.model.Match[]" />
         <argument
             android:name="user"
             app:argType="com.couplesdating.couplet.domain.model.User" />

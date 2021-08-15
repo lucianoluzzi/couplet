@@ -7,15 +7,20 @@ import android.view.*
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentMatchesBindingImpl
+import com.couplesdating.couplet.domain.model.Match
 import com.couplesdating.couplet.domain.model.User
 import com.couplesdating.couplet.ui.extensions.*
 import com.couplesdating.couplet.ui.matches.adapter.MatchAdapter
-import com.couplesdating.couplet.ui.utils.LiveDataEvent
 import com.couplesdating.couplet.ui.widgets.ItemMarginDecorator
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class MatchesFragment(
     private val viewModel: MatchesViewModel
@@ -25,9 +30,6 @@ class MatchesFragment(
         FragmentMatchesBindingImpl.inflate(layoutInflater)
     }
     private val navigationArgs by navArgs<MatchesFragmentArgs>()
-    private val matches by lazy {
-        navigationArgs.matches.toList()
-    }
     private val user by lazy {
         navigationArgs.user
     }
@@ -76,22 +78,30 @@ class MatchesFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         decorateTitle()
-        setMatches()
         setLabel()
-        viewModel.uiState.observe(viewLifecycleOwner) { liveDataEvent ->
-            handleUIState(liveDataEvent)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiStateFlow.collect { matchesUIState ->
+                    handleUIState(matchesUIState)
+                }
+            }
         }
     }
 
-    private fun handleUIState(liveDataEvent: LiveDataEvent<MatchesUIState>?) {
-        liveDataEvent?.getContentIfNotHandled()?.let {
-            when (it) {
-                MatchesUIState.DeletedMatches -> {
-                    binding.loadingContainer.isVisible = false
-                    navigateToEmptyMatches(user)
-                }
-                is MatchesUIState.Error -> showError(it.errorMessage)
-                MatchesUIState.Loading -> binding.loadingContainer.isVisible = true
+    private fun handleUIState(matchesUIState: MatchesUIState) {
+        when (matchesUIState) {
+            MatchesUIState.DeletedMatches -> {
+                binding.loadingContainer.isVisible = false
+                navigateToEmptyMatches(user)
+            }
+            is MatchesUIState.Error -> {
+                binding.loadingContainer.isVisible = false
+                showError(matchesUIState.errorMessage)
+            }
+            MatchesUIState.Loading -> binding.loadingContainer.isVisible = true
+            is MatchesUIState.Success -> {
+                binding.loadingContainer.isVisible = false
+                setMatches(matchesUIState.matches)
             }
         }
     }
@@ -126,7 +136,7 @@ class MatchesFragment(
         binding.title.text = spannable
     }
 
-    private fun setMatches() = with(binding) {
+    private fun setMatches(matches: List<Match>) = with(binding) {
         val matchAdapter = MatchAdapter(matches) {
             viewModel.onMatchClicked()
             navigateToMatchesDetailList(it)
@@ -149,7 +159,6 @@ class MatchesFragment(
     private fun navigateToMatchesDetailList(matchPosition: Int) {
         val toMatchDetailsList =
             MatchesFragmentDirections.actionMatchesFragmentToMatchDetailFragment(
-                matches = matches.toTypedArray(),
                 user = user,
                 matchPosition = matchPosition
             )

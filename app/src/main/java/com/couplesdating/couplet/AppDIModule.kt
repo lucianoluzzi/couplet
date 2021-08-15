@@ -133,12 +133,14 @@ val appModule = module {
     viewModel {
         MatchesViewModel(
             deleteAllMatchesUseCase = get(),
+            getNewMatchesUseCase = get(),
             analytics = get()
         )
     }
     viewModel {
         MatchesDetailListViewModel(
             deleteMatchUseCase = get(),
+            getNewMatchesUseCase = get(),
             analytics = get()
         )
     }

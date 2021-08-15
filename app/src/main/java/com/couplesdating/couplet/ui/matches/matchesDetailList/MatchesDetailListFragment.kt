@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
@@ -18,6 +21,8 @@ import com.couplesdating.couplet.domain.model.Match
 import com.couplesdating.couplet.ui.extensions.*
 import com.couplesdating.couplet.ui.matches.adapter.MatchDetailAdapter
 import com.couplesdating.couplet.ui.widgets.ViewPager2ViewHeightAnimator
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class MatchesDetailListFragment(
     private val viewModel: MatchesDetailListViewModel
@@ -31,10 +36,8 @@ class MatchesDetailListFragment(
     private val user by lazy {
         navigationArgs.user
     }
-    private val initialIdeaPosition by lazy {
-        navigationArgs.matchPosition
-    }
-    private val matches = mutableListOf<Match>()
+    private var ideaPosition = 0
+    private var matches = mutableListOf<Match>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,13 +47,14 @@ class MatchesDetailListFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (matches.isEmpty()) {
-            matches.addAll(navigationArgs.matches)
-        }
-        setMatchesPager(initialIdeaPosition)
+        ideaPosition = navigationArgs.matchPosition
         setDeleteButton()
-        viewModel.uiState.observe(viewLifecycleOwner) {
-            handleUIState(it)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiStateFlow.collect { matchesUIState ->
+                    handleUIState(matchesUIState)
+                }
+            }
         }
     }
 
@@ -125,11 +129,22 @@ class MatchesDetailListFragment(
     private fun handleUIState(uiState: MatchesDetailListUIState) = with(binding) {
         when (uiState) {
             MatchesDetailListUIState.Loading -> loadingContainer.isVisible = true
-            is MatchesDetailListUIState.Error -> showError(uiState.errorMessage)
-            is MatchesDetailListUIState.Success -> {
+            is MatchesDetailListUIState.Error -> {
+                loadingContainer.isVisible = false
+                showError(uiState.errorMessage)
+            }
+            is MatchesDetailListUIState.DeletedMatch -> {
                 loadingContainer.isVisible = false
                 content.isVisible = true
                 handleRemainingList(uiState.deletedMatch)
+            }
+            is MatchesDetailListUIState.Success -> {
+                matches.clear()
+                matches.addAll(uiState.matches)
+                loadingContainer.isVisible = false
+                setMatchesPager(
+                    positionToShow = ideaPosition
+                )
             }
         }
     }
@@ -139,7 +154,8 @@ class MatchesDetailListFragment(
         if (matches.isEmpty()) {
             navigateToEmptyList()
         } else {
-            setMatchesPager(0)
+            ideaPosition = 0
+            setMatchesPager(ideaPosition)
         }
     }
 

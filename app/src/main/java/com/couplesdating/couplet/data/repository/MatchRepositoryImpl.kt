@@ -13,7 +13,7 @@ class MatchRepositoryImpl(
     private val remoteDataSource: MatchRemoteDataSource
 ) : MatchRepository {
 
-    override suspend fun getNewMatches(currentUserId: String): Flow<List<Match>> {
+    override suspend fun getNewMatches(): Flow<List<Match>> {
         return localDataSource.getMatches().map { matchWithIdeaEntity ->
             MatchMapper().matchWithIdeaEntityListToMatchList(matchWithIdeaEntity)
         }
