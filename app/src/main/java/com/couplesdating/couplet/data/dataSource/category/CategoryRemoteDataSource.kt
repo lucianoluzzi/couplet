@@ -1,8 +1,12 @@
-package com.couplesdating.couplet.data.dataSource
+package com.couplesdating.couplet.data.dataSource.category
 
 import android.util.Log
+import com.couplesdating.couplet.domain.model.Idea
+import com.couplesdating.couplet.domain.model.Match
 import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.response.CategoriesIdeasResponse
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.functions.FirebaseFunctions
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.Dispatchers

@@ -9,6 +9,6 @@ class DeleteMatchUseCaseImpl(
 ) : DeleteMatchUseCase {
 
     override suspend fun deleteMatch(match: Match): Response {
-        return matchRepository.deleteMatch(match.id)
+        return matchRepository.deleteMatch(match)
     }
 }

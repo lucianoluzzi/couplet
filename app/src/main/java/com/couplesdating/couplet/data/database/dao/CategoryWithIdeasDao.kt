@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface CategoryWithIdeasDao {
 
+
     @Transaction
     @Query("SELECT * FROM category")
     fun getCategoriesWithIdeas(): Flow<List<CategoryWithIdeasEntity>>

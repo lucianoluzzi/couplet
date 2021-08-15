@@ -15,4 +15,16 @@ val daoModule = module {
     single {
         get<CoupletDatabase>().ideaDao()
     }
+
+    single {
+        get<CoupletDatabase>().matchIdeaDao()
+    }
+
+    single {
+        get<CoupletDatabase>().matchDao()
+    }
+
+    single {
+        get<CoupletDatabase>().matchesWithIdeasDao()
+    }
 }

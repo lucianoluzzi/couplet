@@ -22,7 +22,10 @@ class CategoryMapper {
             isPremium = category.isPremium,
             spiciness = category.spiciness,
             newIdeas = categoryWithIdeasEntity.ideas.map {
-                IdeaMapper().ideaEntityToIdea(it)
+                IdeaMapper().ideaEntityToIdea(
+                    ideaEntity = it,
+                    categoryId = category.id
+                )
             }
         )
     }
@@ -32,8 +35,7 @@ class CategoryMapper {
             CategoryWithIdeasEntity(
                 ideas = categoryResponse.ideas.map {
                     IdeaMapper().ideaToEntity(
-                        idea = it,
-                        categoryId = categoryResponse.id
+                        idea = it
                     )
                 },
                 category = CategoryEntity(

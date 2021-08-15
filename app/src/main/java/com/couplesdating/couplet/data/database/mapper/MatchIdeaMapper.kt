@@ -1,18 +1,17 @@
 package com.couplesdating.couplet.data.database.mapper
 
-import com.couplesdating.couplet.data.database.entities.IdeaEntity
+import com.couplesdating.couplet.data.database.entities.MatchIdeaEntity
 import com.couplesdating.couplet.domain.model.Idea
 
-class IdeaMapper {
-
-    fun ideaToEntity(idea: Idea) = IdeaEntity(
+class MatchIdeaMapper {
+    fun ideaToEntity(idea: Idea) = MatchIdeaEntity(
         id = idea.id,
         description = idea.description,
         categoryId = idea.categoryId
     )
 
     fun ideaEntityToIdea(
-        ideaEntity: IdeaEntity,
+        ideaEntity: MatchIdeaEntity,
         categoryId: String,
     ) = Idea(
         id = ideaEntity.id,

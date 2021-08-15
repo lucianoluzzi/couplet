@@ -1,7 +1,9 @@
 package com.couplesdating.couplet.domain.useCase.match
 
+import android.util.Log
 import com.couplesdating.couplet.data.repository.MatchRepository
 import com.couplesdating.couplet.domain.network.Response
+import kotlinx.coroutines.flow.firstOrNull
 
 class GetNewMatchesUseCaseImpl(
     private val matchRepository: MatchRepository
@@ -9,8 +11,11 @@ class GetNewMatchesUseCaseImpl(
 
     override suspend fun getNewMatches(currentUserId: String): Response {
         return try {
-            matchRepository.getNewMatches(currentUserId)
+            matchRepository.refreshMatches(currentUserId)
+            val matches = matchRepository.getNewMatches(currentUserId).firstOrNull()
+            Response.Success(matches)
         } catch (exception: Exception) {
+            Log.e("MATCH", exception.toString())
             Response.Error(exception.message)
         }
     }

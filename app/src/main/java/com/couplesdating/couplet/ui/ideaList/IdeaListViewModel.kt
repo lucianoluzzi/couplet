@@ -39,8 +39,7 @@ class IdeaListViewModel(
             userResponse = UserResponse.YES
         )
         removeIdea(
-            idea = idea,
-            categoryId = categoryId
+            idea = idea
         )
     }
 
@@ -59,8 +58,7 @@ class IdeaListViewModel(
             userResponse = UserResponse.NO
         )
         removeIdea(
-            idea = idea,
-            categoryId = categoryId
+            idea = idea
         )
     }
 
@@ -79,8 +77,7 @@ class IdeaListViewModel(
             userResponse = UserResponse.MAYBE
         )
         removeIdea(
-            idea = idea,
-            categoryId = categoryId
+            idea = idea
         )
     }
 
@@ -98,11 +95,10 @@ class IdeaListViewModel(
         }
     }
 
-    private fun removeIdea(idea: Idea, categoryId: String) {
+    private fun removeIdea(idea: Idea) {
         viewModelScope.launch {
             removeIdeaUseCase.removeIdea(
-                idea = idea,
-                categoryId = categoryId
+                idea = idea
             )
         }
     }

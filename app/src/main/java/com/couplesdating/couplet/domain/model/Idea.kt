@@ -1,6 +1,7 @@
 package com.couplesdating.couplet.domain.model
 
 import android.os.Parcelable
+import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.parcelize.Parcelize
 
@@ -9,5 +10,6 @@ import kotlinx.parcelize.Parcelize
 data class Idea(
     val id: String,
     val title: String? = null,
-    val description: String
+    val description: String,
+    @Json(name = "category_id") val categoryId: String
 ) : Parcelable

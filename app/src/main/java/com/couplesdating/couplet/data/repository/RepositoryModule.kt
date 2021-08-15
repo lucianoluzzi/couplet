@@ -31,7 +31,12 @@ val repositoryModule = module {
         )
     }
 
-    single<MatchRepository> { MatchRepositoryImpl(get()) }
+    single<MatchRepository> {
+        MatchRepositoryImpl(
+            localDataSource = get(),
+            remoteDataSource = get()
+        )
+    }
 
     single<IdeaRepository> { IdeaRepositoryImpl(get()) }
 }
