@@ -84,6 +84,10 @@ class DashboardFragment : Fragment() {
                     navigate(navigationRoute)
                 }
         }
+
+        viewModel.loadingLiveData.observe(viewLifecycleOwner) { isLoading ->
+            binding.loadingContainer.isVisible = isLoading
+        }
         viewModel.uiDataMediator.observe(viewLifecycleOwner) { uiState ->
             handleUIState(uiState)
         }
@@ -130,12 +134,8 @@ class DashboardFragment : Fragment() {
     private fun handleUIState(uiState: DashboardUIState?) {
         when (uiState) {
             is DashboardUIState.Success -> {
-                binding.loadingContainer.isVisible = false
                 setCategories(uiState.categories)
                 handleBannerState(uiState.banner)
-            }
-            DashboardUIState.Loading -> {
-                binding.loadingContainer.isVisible = true
             }
             null -> doNothing
         }

@@ -1,9 +1,6 @@
 package com.couplesdating.couplet.ui.dashboard
 
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.events.dashboard.BannerEvents
@@ -25,6 +22,7 @@ import com.couplesdating.couplet.ui.dashboard.adapter.CategoryUIModel
 import com.couplesdating.couplet.ui.dashboard.model.Banner
 import com.couplesdating.couplet.ui.dashboard.model.DashboardRoute
 import com.couplesdating.couplet.ui.dashboard.model.DashboardUIState
+import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -43,6 +41,9 @@ class DashboardViewModel(
     private val analytics: Analytics,
     private val currentUser: User
 ) : ViewModel() {
+
+    private val _loadingLiveData = MutableLiveData<Boolean>()
+    val loadingLiveData: LiveData<Boolean> = _loadingLiveData
 
     private val categoriesLiveData = MutableLiveData<List<Category>>()
     private val bannerLiveData = MutableLiveData<Banner?>()
@@ -94,13 +95,15 @@ class DashboardViewModel(
             }
         }
         viewModelScope.launch {
-            uiDataMediator.value = DashboardUIState.Loading
             getCategoriesUseCase.getCategories().collect {
                 categoriesLiveData.value = it
             }
         }
         viewModelScope.launch {
-            refreshCategoriesUseCase.refreshCategories(currentUser.userId)
+            _loadingLiveData.value = true
+            val refreshTask = async { refreshCategoriesUseCase.refreshCategories(currentUser.userId) }
+            refreshTask.await()
+            _loadingLiveData.value = false
         }
     }
 
