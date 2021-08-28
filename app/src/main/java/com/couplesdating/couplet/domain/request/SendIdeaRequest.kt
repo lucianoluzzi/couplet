@@ -8,6 +8,8 @@ import com.squareup.moshi.JsonClass
 data class SendIdeaRequest(
     @Json(name = "idea_id")
     val ideaId: String,
+    @Json(name = "idea_description")
+    val ideaDescription: String,
     @Json(name = "user_id")
     val userId: String,
     @Json(name = "user_response")

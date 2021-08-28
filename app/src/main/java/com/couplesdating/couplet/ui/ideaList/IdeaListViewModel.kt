@@ -10,9 +10,7 @@ import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.useCase.idea.DecorateIdeaUseCase
 import com.couplesdating.couplet.domain.useCase.idea.RemoveIdeaUseCase
 import com.couplesdating.couplet.domain.useCase.idea.SendIdeaResponseUseCase
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.receiveAsFlow
+import com.couplesdating.couplet.ui.extensions.doNothing
 import kotlinx.coroutines.launch
 
 class IdeaListViewModel(
@@ -21,8 +19,6 @@ class IdeaListViewModel(
     private val decorateIdeaUseCase: DecorateIdeaUseCase,
     private val analytics: Analytics
 ) : ViewModel() {
-    private val uiStateChannel = Channel<IdeaUIState>(Channel.CONFLATED)
-    val uiState = uiStateChannel.receiveAsFlow().distinctUntilChanged()
 
     fun onYesClick(
         categoryId: String,
@@ -35,7 +31,7 @@ class IdeaListViewModel(
             )
         )
         sendResponse(
-            ideaId = idea.id,
+            idea = idea,
             userResponse = UserResponse.YES
         )
         removeIdea(
@@ -54,7 +50,7 @@ class IdeaListViewModel(
             )
         )
         sendResponse(
-            ideaId = idea.id,
+            idea = idea,
             userResponse = UserResponse.NO
         )
         removeIdea(
@@ -73,7 +69,7 @@ class IdeaListViewModel(
             )
         )
         sendResponse(
-            ideaId = idea.id,
+            idea = idea,
             userResponse = UserResponse.MAYBE
         )
         removeIdea(
@@ -82,16 +78,18 @@ class IdeaListViewModel(
     }
 
     private fun sendResponse(
-        ideaId: String,
+        idea: Idea,
         userResponse: UserResponse
     ) {
         viewModelScope.launch {
-            uiStateChannel.send(IdeaUIState.Loading)
             val response = sendIdeaResponseUseCase.sendIdeaResponse(
-                ideaId = ideaId,
+                idea = idea,
                 userResponse = userResponse
             )
-            emitResponse(response)
+            deleteIdeaIfSuccess(
+                response = response,
+                idea = idea
+            )
         }
     }
 
@@ -103,11 +101,11 @@ class IdeaListViewModel(
         }
     }
 
-    private suspend fun emitResponse(response: Response) {
+    private suspend fun deleteIdeaIfSuccess(response: Response, idea: Idea) {
         when (response) {
             is Response.Success<*>,
-            Response.Completed -> uiStateChannel.send(IdeaUIState.Success)
-            is Response.Error -> uiStateChannel.send(IdeaUIState.Error(response.errorMessage))
+            Response.Completed -> removeIdeaUseCase.removeIdea(idea)
+            is Response.Error -> doNothing
         }
     }
 

@@ -1,6 +1,7 @@
 package com.couplesdating.couplet.domain.useCase.idea
 
 import com.couplesdating.couplet.data.repository.IdeaRepository
+import com.couplesdating.couplet.domain.model.Idea
 import com.couplesdating.couplet.domain.model.UserResponse
 import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.request.SendIdeaRequest
@@ -11,11 +12,12 @@ class SendIdeaResponseUseCaseImpl(
     private val ideaRepository: IdeaRepository
 ) : SendIdeaResponseUseCase {
 
-    override suspend fun sendIdeaResponse(ideaId: String, userResponse: UserResponse): Response {
+    override suspend fun sendIdeaResponse(idea: Idea, userResponse: UserResponse): Response {
         val currentUser = getCurrentUserUseCase.getCurrentUser()
         currentUser?.let {
             val request = SendIdeaRequest(
-                ideaId = ideaId,
+                ideaId = idea.id,
+                ideaDescription = idea.description,
                 userId = currentUser.userId,
                 userResponse = userResponse
             )

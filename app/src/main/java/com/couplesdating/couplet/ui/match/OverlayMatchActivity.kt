@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import com.couplesdating.couplet.R
-import com.couplesdating.couplet.notifications.FirebaseNotificationService
+import com.couplesdating.couplet.notifications.FirebaseNotificationService.Companion.MESSAGE_LABEL
+import com.couplesdating.couplet.notifications.FirebaseNotificationService.Companion.NOTIFICATION_MESSAGE
 
 class OverlayMatchActivity : AppCompatActivity() {
 
@@ -15,12 +16,13 @@ class OverlayMatchActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val notificationMessage =
-            intent.getStringExtra(FirebaseNotificationService.NOTIFICATION_MESSAGE)
+        val notificationMessage = intent.getStringExtra(NOTIFICATION_MESSAGE)
+        val notificationLabel = intent.getStringExtra(MESSAGE_LABEL)
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container_view, OverlayMatchFragment().apply {
                 arguments = bundleOf(
-                    FirebaseNotificationService.NOTIFICATION_MESSAGE to notificationMessage
+                    NOTIFICATION_MESSAGE to notificationMessage,
+                    MESSAGE_LABEL to notificationLabel
                 )
             })
             .commit()

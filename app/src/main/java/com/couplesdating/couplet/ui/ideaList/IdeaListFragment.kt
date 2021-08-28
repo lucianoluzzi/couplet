@@ -77,13 +77,6 @@ class IdeaListFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.uiState
-                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-                .collect {
-                    handleUIState(it)
-                }
-        }
         with(binding) {
             setTitleAndIllustration()
             setButtonsElevation()
@@ -162,39 +155,27 @@ class IdeaListFragment(
                 categoryId = category.id,
                 idea = getCurrentIdea()
             )
+            showNextIdea()
         }
         yes.setOnClickListener {
             viewModel.onYesClick(
                 categoryId = category.id,
                 idea = getCurrentIdea()
             )
+            showNextIdea()
         }
         maybe.setOnClickListener {
             viewModel.onMaybeClick(
                 categoryId = category.id,
                 idea = getCurrentIdea()
             )
+            showNextIdea()
         }
     }
 
     private fun getCurrentIdea(): Idea {
         val currentItemPosition = binding.pager.currentItem
         return ideas[currentItemPosition]
-    }
-
-    private fun handleUIState(uiState: IdeaUIState) {
-        when (uiState) {
-            is IdeaUIState.Loading -> showLoading()
-            IdeaUIState.Success -> showNextIdea()
-            is IdeaUIState.Error -> {
-                binding.loadingContainer.isVisible = false
-                showError(uiState.message)
-            }
-        }
-    }
-
-    private fun showLoading() = with(binding) {
-        loadingContainer.isVisible = true
     }
 
     private fun showNextIdea() = with(binding) {
