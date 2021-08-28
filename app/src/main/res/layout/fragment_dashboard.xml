@@ -51,6 +51,7 @@
                     android:focusable="true"
                     android:padding="@dimen/dimension_12"
                     android:src="@drawable/ic_more_options"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@id/welcome"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/welcome"

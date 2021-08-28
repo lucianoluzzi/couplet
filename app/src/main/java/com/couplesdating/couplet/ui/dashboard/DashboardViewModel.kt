@@ -132,9 +132,9 @@ class DashboardViewModel(
                 return Banner.NewMatches(newMatches.data as List<Match>)
             }
         }
-        if (currentUser.isPremium.not()) {
-            return Banner.BecomePremium
-        }
+//        if (currentUser.isPremium.not()) {
+//            return Banner.BecomePremium
+//        }
 
         return null
     }
