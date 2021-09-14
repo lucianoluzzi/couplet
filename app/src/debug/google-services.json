@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:207402731317:android:3e6b3adc43a9399c5f2e7c",
+        "mobilesdk_app_id": "1:207402731317:android:9a8d1f1d045eff005f2e7c",
         "android_client_info": {
-          "package_name": "com.couplesdating.couplet"
+          "package_name": "com.couplesdating.couplet.debug"
         }
       },
       "oauth_client": [
         {
-          "client_id": "207402731317-g9rvttmce1r2cmh40fvsbv0hs51778l9.apps.googleusercontent.com",
+          "client_id": "207402731317-1qp3qe3ebga9onke3i71truhqipnuiu7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.couplesdating.couplet",
-            "certificate_hash": "4462053f2e5252b5fbb9fc1226e0af98bc7aa9a6"
+            "package_name": "com.couplesdating.couplet.debug",
+            "certificate_hash": "4608239445981ce7847f3c2626b3a6cee755c6e8"
           }
         },
         {
