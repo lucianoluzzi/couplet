@@ -101,17 +101,15 @@ class UserRepositoryImpl(
 
     override suspend fun updateProfile(userName: String, gender: String?): Response {
         authenticator.currentUser?.let { currentUser ->
-            setNameAndGenderInDatabase(
-                userId = currentUser.uid,
-                name = userName,
-                gender = gender
-            )
             val userProfileChangeRequest = UserProfileChangeRequest.Builder()
                 .setDisplayName(userName)
                 .build()
 
             val updateResult = currentUser.updateUser(userProfileChangeRequest)
             if (updateResult.isSuccessful) {
+                gender?.let {
+                    setGenderInDatabase(it)
+                }
                 return Response.Completed
             }
         }
@@ -119,19 +117,13 @@ class UserRepositoryImpl(
         return Response.Error()
     }
 
-    private suspend fun setNameAndGenderInDatabase(
-        userId: String,
-        name: String,
-        gender: String?
-    ) {
-        val updateData = hashMapOf(
-            "displayName" to name,
-            "gender" to gender
-        )
-        database.collection("users")
-            .document(userId)
-            .set(updateData, SetOptions.merge())
-            .await()
+    private suspend fun setGenderInDatabase(gender: String) {
+        getCurrentUser()?.let { user ->
+            database.collection("users")
+                .document(user.userId)
+                .update("gender", gender)
+                .await()
+        }
     }
 
     override suspend fun updateProfile(registrationToken: String?) {
