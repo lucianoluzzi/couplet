@@ -28,6 +28,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes.SIGN_IN_CANCELLED
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SocialLoginFragment : Fragment() {
@@ -55,6 +56,7 @@ class SocialLoginFragment : Fragment() {
                         }
                     }
                 } catch (e: ApiException) {
+                    FirebaseCrashlytics.getInstance().recordException(e)
                     if (e.statusCode != SIGN_IN_CANCELLED) {
                         binding.loadingContainer.isVisible = false
                         showError(e.cause?.message)
@@ -157,6 +159,7 @@ class SocialLoginFragment : Fragment() {
                 }
 
                 override fun onError(exception: FacebookException) {
+                    FirebaseCrashlytics.getInstance().recordException(exception)
                     binding.loadingContainer.isVisible = false
                     showError(exception.message)
                 }
