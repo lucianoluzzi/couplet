@@ -176,19 +176,19 @@ class SocialLoginFragment : Fragment() {
     }
 
     private fun decorateWelcome() {
-        val backText = binding.back.textValue()
+        val welcomeText = binding.welcome.textValue()
 
-        val spannable = SpannableString(backText)
+        val spannable = SpannableString(welcomeText)
         val medium = Typeface.create(
             ResourcesCompat.getFont(requireContext(), R.font.medium),
             Typeface.NORMAL
         )
         val color = requireContext().getColor(R.color.red)
         val wordToDecorate = ":)"
-        spannable.setColor(color, wordToDecorate, backText)
-        spannable.setFont(medium, wordToDecorate, backText)
+        spannable.setColor(color, wordToDecorate, welcomeText)
+        spannable.setFont(medium, wordToDecorate, welcomeText)
 
-        binding.back.text = spannable
+        binding.welcome.text = spannable
     }
 
     private fun decorateTermsOfUsage() {
