@@ -4,7 +4,6 @@ import androidx.room.Room
 import com.couplesdating.couplet.analytics.FirebaseAnalyticsProvider
 import com.couplesdating.couplet.data.*
 import com.couplesdating.couplet.data.database.CoupletDatabase
-import com.couplesdating.couplet.notifications.AppLifecycleObserver
 import com.couplesdating.couplet.notifications.NotificationServiceProvider
 import com.couplesdating.couplet.ui.AppLifecycleObserverProvider
 import org.koin.android.ext.koin.androidContext
@@ -13,7 +12,9 @@ import org.koin.dsl.module
 val providersModule = module {
     single { SharedPreferencesProvider(androidContext()).preferences }
 
-    single { DynamicLinkProvider() }
+    single {
+        DynamicLinkProvider(androidContext())
+    }
 
     single { FirestoreProvider().firestoreDatabase }
 

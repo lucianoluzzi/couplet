@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Couplet</string>
+    <string name="dynamic_link_url">https://couplet.love</string>
     <string name="facebook_app_id">431510494835122</string> <string name="fb_login_protocol_scheme">fb431510494835122</string>
     <string name="server_client_id">326813715144-t3ek5mrmb8lhg5qq9unvugn06jqvfnmo.apps.googleusercontent.com</string>
     <string name="has_shown_onboarding_key">has_shown_onboarding_key</string>
