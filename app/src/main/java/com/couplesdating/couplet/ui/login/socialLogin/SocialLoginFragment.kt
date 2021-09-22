@@ -28,6 +28,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes.SIGN_IN_CANCELLED
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SocialLoginFragment : Fragment() {
@@ -55,6 +56,7 @@ class SocialLoginFragment : Fragment() {
                         }
                     }
                 } catch (e: ApiException) {
+                    FirebaseCrashlytics.getInstance().recordException(e)
                     if (e.statusCode != SIGN_IN_CANCELLED) {
                         binding.loadingContainer.isVisible = false
                         showError(e.cause?.message)
@@ -157,6 +159,7 @@ class SocialLoginFragment : Fragment() {
                 }
 
                 override fun onError(exception: FacebookException) {
+                    FirebaseCrashlytics.getInstance().recordException(exception)
                     binding.loadingContainer.isVisible = false
                     showError(exception.message)
                 }
@@ -173,19 +176,19 @@ class SocialLoginFragment : Fragment() {
     }
 
     private fun decorateWelcome() {
-        val backText = binding.back.textValue()
+        val welcomeText = binding.welcome.textValue()
 
-        val spannable = SpannableString(backText)
+        val spannable = SpannableString(welcomeText)
         val medium = Typeface.create(
             ResourcesCompat.getFont(requireContext(), R.font.medium),
             Typeface.NORMAL
         )
         val color = requireContext().getColor(R.color.red)
         val wordToDecorate = ":)"
-        spannable.setColor(color, wordToDecorate, backText)
-        spannable.setFont(medium, wordToDecorate, backText)
+        spannable.setColor(color, wordToDecorate, welcomeText)
+        spannable.setFont(medium, wordToDecorate, welcomeText)
 
-        binding.back.text = spannable
+        binding.welcome.text = spannable
     }
 
     private fun decorateTermsOfUsage() {

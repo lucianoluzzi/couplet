@@ -159,6 +159,14 @@ class DashboardFragment : Fragment() {
             is Banner.RegisterPartner -> setRegisterPartnerBanner(banner)
             is Banner.BecomePremium -> setBecomePremiumBanner(banner)
             is Banner.NewMatches -> setNewMatchesClicked(banner)
+            null -> {
+                with(binding) {
+                    registerPartnerBanner.isVisible = false
+                    pendingInviteBanner.isVisible = false
+                    becomePremiumBanner.isVisible = false
+                    binding.newMatchesBanner.isVisible = false
+                }
+            }
         }
     }
 

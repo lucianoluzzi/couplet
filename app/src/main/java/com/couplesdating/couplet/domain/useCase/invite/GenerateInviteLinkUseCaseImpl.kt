@@ -5,7 +5,7 @@ import android.net.Uri
 import com.couplesdating.couplet.data.DynamicLinkProvider
 import com.couplesdating.couplet.domain.model.InviteModel
 import com.couplesdating.couplet.ui.extensions.getMediumFormatString
-import com.google.firebase.Timestamp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 class GenerateInviteLinkUseCaseImpl(
     private val dynamicLinkProvider: DynamicLinkProvider,
@@ -20,8 +20,12 @@ class GenerateInviteLinkUseCaseImpl(
             if (!inviteModel.note.isNullOrBlank()) {
                 put("note", inviteModel.note)
             }
-            inviteModel.timestamp?.let {
-                put("timestamp", it.getMediumFormatString(context))
+            try {
+                inviteModel.timestamp?.let {
+                    put("timestamp", it.getMediumFormatString(context))
+                }
+            } catch (exception: Exception) {
+                FirebaseCrashlytics.getInstance().recordException(exception)
             }
         }
 

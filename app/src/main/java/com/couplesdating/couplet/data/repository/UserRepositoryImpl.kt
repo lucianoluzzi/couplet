@@ -87,7 +87,8 @@ class UserRepositoryImpl(
 
     override suspend fun register(email: String, password: String): Response {
         val authResult = authenticator.register(
-            email = email, password = password
+            email = email,
+            password = password
         )
         return if (authResult.isSuccessful) {
             getCurrentUser()?.let {
@@ -106,11 +107,23 @@ class UserRepositoryImpl(
 
             val updateResult = currentUser.updateUser(userProfileChangeRequest)
             if (updateResult.isSuccessful) {
+                gender?.let {
+                    setGenderInDatabase(it)
+                }
                 return Response.Completed
             }
         }
 
         return Response.Error()
+    }
+
+    private suspend fun setGenderInDatabase(gender: String) {
+        getCurrentUser()?.let { user ->
+            database.collection("users")
+                .document(user.userId)
+                .update("gender", gender)
+                .await()
+        }
     }
 
     override suspend fun updateProfile(registrationToken: String?) {
