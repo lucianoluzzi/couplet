@@ -31,20 +31,17 @@ class DynamicLinkProvider(
         domain: String,
         uriLink: String
     ): Uri {
+        val packageName = context.getString(R.string.app_package)
         return Firebase.dynamicLinks.generateShortenedUri(
             domain = domain,
             uriLink = uriLink,
-            packageName = PACKAGE_NAME
+            packageName = packageName
         ) ?: run {
             Firebase.dynamicLinks.dynamicLink {
                 link = Uri.parse(uriLink)
                 domainUriPrefix = domain
-                androidParameters("com.couplesdating.couplet") { }
+                androidParameters(packageName) { }
             }.uri
         }
-    }
-
-    companion object {
-        private const val PACKAGE_NAME = "com.couplesdating.couplet"
     }
 }

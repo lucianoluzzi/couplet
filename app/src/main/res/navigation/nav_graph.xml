@@ -149,9 +149,10 @@
         android:name="com.couplesdating.couplet.ui.invited.InvitedFragment"
         android:label="InvitedFragment">
         <deepLink
-            android:id="@+id/deepLink"
             android:autoVerify="true"
             app:uri="https://couplet.love/partner?inviterId={inviterId}&amp;inviteId={inviteId}&amp;inviterDisplayName={inviterDisplayName}&amp;note={note}&amp;timestamp={timestamp}" />
+        <deepLink
+            app:uri="https://couplet.page.link/partner?inviterId={inviterId}&amp;inviteId={inviteId}&amp;inviterDisplayName={inviterDisplayName}&amp;note={note}&amp;timestamp={timestamp}" />
         <argument
             android:name="inviterId"
             app:argType="string" />

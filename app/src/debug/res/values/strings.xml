@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Couplet - DEV</string>
     <string name="dynamic_link_url">https://couplet.page.link</string>
+    <string name="app_package">com.couplesdating.couplet.debug</string>
 </resources>
