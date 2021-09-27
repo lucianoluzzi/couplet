@@ -16,7 +16,9 @@ import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
 
-class SafetyWarningFragment : Fragment() {
+class SafetyWarningFragment(
+    private val viewModel: SafetyWarningViewModel
+) : Fragment() {
 
     private val binding by lazy {
         val layoutInflater = LayoutInflater.from(requireContext())
@@ -66,11 +68,11 @@ class SafetyWarningFragment : Fragment() {
 
     private fun setButtons() = with(binding) {
         goBackButton.setOnClickListener {
-            // should track first
+            viewModel.onGoBackClicked()
             findNavController().popBackStack()
         }
         continueButton.setOnClickListener {
-            // should track first
+            viewModel.onContinueClicked()
             val toIdeaList =
                 SafetyWarningFragmentDirections.actionSafetyWarningFragmentToIdeaListFragment(
                     ideas = navigationArgs.ideas,

@@ -25,7 +25,7 @@
             <ImageView
                 android:id="@+id/illustration"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="@dimen/dimension_24"
                 android:src="@drawable/couple_dance"
                 android:layout_marginBottom="@dimen/dimension_12"
@@ -43,7 +43,7 @@
                 android:layout_marginTop="@dimen/dimension_32"
                 android:layout_marginBottom="@dimen/dimension_12"
                 android:gravity="center"
-                android:text="Some of the ideas you will find ahead are not for everyone, and things are only fun if both of you are feeling safe and at ease.\nThat said, if you are kinky enough, go ahead!"
+                android:text="Some of the ideas you will find ahead are not for everyone, and things are only fun if both of you are feeling safe and at ease.\nI won't show you this message again.\nThat said, if you are kinky enough, go ahead!"
                 app:layout_constraintBottom_toTopOf="@id/go_back_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
