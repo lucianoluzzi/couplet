@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/dimension_24">
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/H1Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Fun and safety first"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/illustration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimension_24"
+                android:src="@drawable/couple_dance"
+                android:layout_marginBottom="@dimen/dimension_12"
+                app:layout_constraintBottom_toTopOf="@id/label"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title" />
+
+            <TextView
+                android:id="@+id/label"
+                style="@style/Body"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimension_16"
+                android:layout_marginTop="@dimen/dimension_32"
+                android:layout_marginBottom="@dimen/dimension_12"
+                android:gravity="center"
+                android:text="Some of the ideas you will find ahead are not for everyone, and things are only fun if both of you are feeling safe and at ease.\nThat said, if you are kinky enough, go ahead!"
+                app:layout_constraintBottom_toTopOf="@id/go_back_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/go_back_button"
+                style="@style/Button.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="@dimen/dimension_8"
+                android:text="Go back"
+                app:layout_constraintBottom_toTopOf="@id/continue_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <Button
+                android:id="@+id/continue_button"
+                style="@style/Button.Highlight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="@dimen/dimension_32"
+                android:text="I understand, let's continue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
