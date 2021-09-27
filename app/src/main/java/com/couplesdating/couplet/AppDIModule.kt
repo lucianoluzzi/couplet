@@ -20,6 +20,7 @@ import com.couplesdating.couplet.ui.onboarding.privacy.PrivacyViewModel
 import com.couplesdating.couplet.ui.pendingInvite.PendingInviteViewModel
 import com.couplesdating.couplet.ui.register.emailAndPassword.RegisterViewModel
 import com.couplesdating.couplet.ui.register.nameAndGender.NameAndGenderViewModel
+import com.couplesdating.couplet.ui.safetyWarning.SafetyWarningViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -141,6 +142,11 @@ val appModule = module {
         MatchesDetailListViewModel(
             deleteMatchUseCase = get(),
             getNewMatchesUseCase = get(),
+            analytics = get()
+        )
+    }
+    viewModel {
+        SafetyWarningViewModel(
             analytics = get()
         )
     }

@@ -13,6 +13,7 @@ import com.couplesdating.couplet.ui.matches.matchesDetailList.MatchesDetailListF
 import com.couplesdating.couplet.ui.matches.matchesList.MatchesFragment
 import com.couplesdating.couplet.ui.pendingInvite.PendingInviteFragment
 import com.couplesdating.couplet.ui.rejectedInvite.RejectedInviteFragment
+import com.couplesdating.couplet.ui.safetyWarning.SafetyWarningFragment
 import org.koin.androidx.fragment.dsl.fragment
 import org.koin.dsl.module
 
@@ -53,6 +54,11 @@ val fragmentModule = module {
     }
     fragment {
         MatchesDetailListFragment(
+            viewModel = get()
+        )
+    }
+    fragment {
+        SafetyWarningFragment(
             viewModel = get()
         )
     }

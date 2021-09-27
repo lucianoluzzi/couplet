@@ -101,7 +101,8 @@ class DashboardViewModel(
         }
         viewModelScope.launch {
             _loadingLiveData.value = true
-            val refreshTask = async { refreshCategoriesUseCase.refreshCategories(currentUser.userId) }
+            val refreshTask =
+                async { refreshCategoriesUseCase.refreshCategories(currentUser.userId) }
             refreshTask.await()
             _loadingLiveData.value = false
         }
@@ -194,12 +195,18 @@ class DashboardViewModel(
     fun onCategoryClicked(category: CategoryUIModel) {
         analytics.trackEvent(CategoryEvents.OnCategoryClicked(categoryId = category.id))
         viewModelScope.launch {
-            navigationChannel.send(
+            val route = if (category.spiciness >= 4) {
+                DashboardRoute.ToSafetyWarning(
+                    category = category,
+                    ideas = category.ideas
+                )
+            } else {
                 DashboardRoute.ToIdeas(
                     category = category,
                     ideas = category.ideas
                 )
-            )
+            }
+            navigationChannel.send(route)
         }
     }
 }

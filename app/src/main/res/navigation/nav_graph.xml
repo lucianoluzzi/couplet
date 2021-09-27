@@ -149,9 +149,10 @@
         android:name="com.couplesdating.couplet.ui.invited.InvitedFragment"
         android:label="InvitedFragment">
         <deepLink
-            android:id="@+id/deepLink"
             android:autoVerify="true"
             app:uri="https://couplet.love/partner?inviterId={inviterId}&amp;inviteId={inviteId}&amp;inviterDisplayName={inviterDisplayName}&amp;note={note}&amp;timestamp={timestamp}" />
+        <deepLink
+            app:uri="https://couplet.page.link/partner?inviterId={inviterId}&amp;inviteId={inviteId}&amp;inviterDisplayName={inviterDisplayName}&amp;note={note}&amp;timestamp={timestamp}" />
         <argument
             android:name="inviterId"
             app:argType="string" />
@@ -203,6 +204,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_matchesFragment"
             app:destination="@id/matchesFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_safetyWarningFragment"
+            app:destination="@id/safetyWarningFragment" />
     </fragment>
     <fragment
         android:id="@+id/ideaListFragment"
@@ -321,6 +325,22 @@
             app:destination="@id/emptyMatchesFragment"
             app:popUpTo="@id/dashboardFragment"
             app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/safetyWarningFragment"
+        android:name="com.couplesdating.couplet.ui.safetyWarning.SafetyWarningFragment"
+        android:label="SafetyWarningFragment">
+        <argument
+            android:name="ideas"
+            app:argType="com.couplesdating.couplet.domain.model.Idea[]" />
+        <argument
+            android:name="category"
+            app:argType="com.couplesdating.couplet.ui.dashboard.adapter.CategoryUIModel" />
+        <action
+            android:id="@+id/action_safetyWarningFragment_to_ideaListFragment"
+            app:destination="@id/ideaListFragment"
+            app:popUpTo="@id/safetyWarningFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>
