@@ -39,4 +39,6 @@ val repositoryModule = module {
     }
 
     single<IdeaRepository> { IdeaRepositoryImpl(get()) }
+
+    single<SafetyWarningRepository> { SafetyWarningRepositoryImpl(get()) }
 }

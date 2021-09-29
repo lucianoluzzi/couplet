@@ -109,6 +109,7 @@ val appModule = module {
             getSentPairInviteUseCase = get(),
             getNewMatchesUseCase = get(),
             getPartnerUseCase = get(),
+            getHasSeenSafetyWarningUseCase = get(),
             analytics = get(),
             currentUser = user
         )
@@ -147,6 +148,7 @@ val appModule = module {
     }
     viewModel {
         SafetyWarningViewModel(
+            setHasSeenSafetyWarningUseCase = get(),
             analytics = get()
         )
     }

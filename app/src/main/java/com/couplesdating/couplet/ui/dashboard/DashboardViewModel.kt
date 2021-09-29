@@ -18,6 +18,7 @@ import com.couplesdating.couplet.domain.useCase.match.GetNewMatchesUseCase
 import com.couplesdating.couplet.domain.useCase.pair.GetPartnerUseCase
 import com.couplesdating.couplet.domain.useCase.pair.SetSyncShownUseCase
 import com.couplesdating.couplet.domain.useCase.pair.ShouldShowSyncUseCase
+import com.couplesdating.couplet.domain.useCase.safetyWarning.GetHasSeenSafetyWarningUseCase
 import com.couplesdating.couplet.ui.dashboard.adapter.CategoryUIModel
 import com.couplesdating.couplet.ui.dashboard.model.Banner
 import com.couplesdating.couplet.ui.dashboard.model.DashboardRoute
@@ -38,6 +39,7 @@ class DashboardViewModel(
     private val getSentPairInviteUseCase: GetSentPairInviteUseCase,
     private val getNewMatchesUseCase: GetNewMatchesUseCase,
     private val getPartnerUseCase: GetPartnerUseCase,
+    private val getHasSeenSafetyWarningUseCase: GetHasSeenSafetyWarningUseCase,
     private val analytics: Analytics,
     private val currentUser: User
 ) : ViewModel() {
@@ -195,7 +197,9 @@ class DashboardViewModel(
     fun onCategoryClicked(category: CategoryUIModel) {
         analytics.trackEvent(CategoryEvents.OnCategoryClicked(categoryId = category.id))
         viewModelScope.launch {
-            val route = if (category.spiciness >= 4) {
+            val hasNotSeenSafetyWarning =
+                getHasSeenSafetyWarningUseCase.hasSeenSafetyWarning().not()
+            val route = if (category.spiciness >= 4 && hasNotSeenSafetyWarning) {
                 DashboardRoute.ToSafetyWarning(
                     category = category,
                     ideas = category.ideas

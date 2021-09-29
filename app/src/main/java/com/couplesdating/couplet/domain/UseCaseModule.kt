@@ -11,6 +11,10 @@ import com.couplesdating.couplet.domain.useCase.match.*
 import com.couplesdating.couplet.domain.useCase.notifications.GetCloudMessagingTokenUseCase
 import com.couplesdating.couplet.domain.useCase.notifications.GetCloudMessagingTokenUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.pair.*
+import com.couplesdating.couplet.domain.useCase.safetyWarning.GetHasSeenSafetyWarningUseCase
+import com.couplesdating.couplet.domain.useCase.safetyWarning.GetHasSeenSafetyWarningUseCaseImpl
+import com.couplesdating.couplet.domain.useCase.safetyWarning.SetHasSeenSafetyWarningUseCase
+import com.couplesdating.couplet.domain.useCase.safetyWarning.SetHasSeenSafetyWarningUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCase
 import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.user.UpdateUserUseCase
@@ -109,6 +113,18 @@ val useCaseModule = module {
     single<GetCloudMessagingTokenUseCase> {
         GetCloudMessagingTokenUseCaseImpl(
             messagingService = get()
+        )
+    }
+
+    single<SetHasSeenSafetyWarningUseCase> {
+        SetHasSeenSafetyWarningUseCaseImpl(
+            safetyWarningRepository = get()
+        )
+    }
+
+    single<GetHasSeenSafetyWarningUseCase> {
+        GetHasSeenSafetyWarningUseCaseImpl(
+            safetyWarningRepository = get()
         )
     }
 }
