@@ -11,6 +11,7 @@ import com.couplesdating.couplet.ui.invited.InvitedFragment
 import com.couplesdating.couplet.ui.invited.InvitedViewModel
 import com.couplesdating.couplet.ui.matches.matchesDetailList.MatchesDetailListFragment
 import com.couplesdating.couplet.ui.matches.matchesList.MatchesFragment
+import com.couplesdating.couplet.ui.onboarding.privacy.PrivacyOnboardingFragment
 import com.couplesdating.couplet.ui.pendingInvite.PendingInviteFragment
 import com.couplesdating.couplet.ui.rejectedInvite.RejectedInviteFragment
 import com.couplesdating.couplet.ui.safetyWarning.SafetyWarningFragment
@@ -18,6 +19,11 @@ import org.koin.androidx.fragment.dsl.fragment
 import org.koin.dsl.module
 
 val fragmentModule = module {
+    fragment {
+        PrivacyOnboardingFragment(
+            viewModel = get()
+        )
+    }
     fragment {
         DashboardFragment()
     }
@@ -37,7 +43,8 @@ val fragmentModule = module {
             getCurrentUserUseCase = get(),
             getReceivedInviteUseCase = get(),
             getCloudMessagingTokenUseCase = get(),
-            updateUserUseCase = get()
+            updateUserUseCase = get(),
+            getHasSeenOnboardingUseCase = get()
         )
         HomeFragment(homeViewModel)
     }

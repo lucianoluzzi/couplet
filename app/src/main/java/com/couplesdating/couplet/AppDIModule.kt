@@ -33,7 +33,10 @@ val appModule = module {
         ErrorViewModel(get())
     }
     viewModel {
-        PrivacyViewModel(get())
+        PrivacyViewModel(
+            setOnboardingShownUseCase = get(),
+            analytics = get()
+        )
     }
     viewModel {
         LetsStartViewModel(get())
@@ -81,22 +84,22 @@ val appModule = module {
     }
     viewModel {
         NameAndGenderViewModel(
-            get(),
-            get()
+            updateUserUseCase = get(),
+            analytics = get()
         )
     }
     viewModel {
         ForgotPasswordViewModel(
-            get(),
-            get()
+            resetPasswordUseCase = get(),
+            analitycs = get()
         )
     }
     viewModel {
         InvitePartnerViewModel(
-            get(),
-            get(),
-            get(),
-            get()
+            getCurrentUserUseCase = get(),
+            generateInviteLinkUseCase = get(),
+            createInviteUseCase = get(),
+            analytics = get()
         )
     }
     viewModel { (user: User) ->

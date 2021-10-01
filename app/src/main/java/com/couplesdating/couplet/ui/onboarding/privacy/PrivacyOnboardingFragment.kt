@@ -14,11 +14,11 @@ import com.couplesdating.couplet.databinding.FragmentOnboardingPrivacyBinding
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class PrivacyOnboardingFragment : Fragment() {
+class PrivacyOnboardingFragment(
+    private val viewModel: PrivacyViewModel
+) : Fragment() {
     private lateinit var binding: FragmentOnboardingPrivacyBinding
-    private val viewModel by viewModel<PrivacyViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,9 +34,9 @@ class PrivacyOnboardingFragment : Fragment() {
         decorateTitle()
         binding.continueButton.setOnClickListener {
             viewModel.onContinueClicked()
-            val toIntimateFragment =
-                PrivacyOnboardingFragmentDirections.actionPrivacyOnboardingFragmentToIntimateOnboardingFragment()
-            findNavController().navigate(toIntimateFragment)
+            val toSocialLogin =
+                PrivacyOnboardingFragmentDirections.actionPrivacyOnboardingFragmentToSocialLoginFragment()
+            findNavController().navigate(toSocialLogin)
         }
     }
 
