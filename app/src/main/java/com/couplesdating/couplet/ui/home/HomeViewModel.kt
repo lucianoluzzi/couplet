@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.domain.useCase.invite.GetReceivedInviteUseCase
 import com.couplesdating.couplet.domain.useCase.notifications.GetCloudMessagingTokenUseCase
+import com.couplesdating.couplet.domain.useCase.onboarding.GetHasSeenOnboardingUseCase
 import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCase
 import com.couplesdating.couplet.domain.useCase.user.UpdateUserUseCase
 import kotlinx.coroutines.launch
@@ -14,7 +15,8 @@ class HomeViewModel(
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
     private val getReceivedInviteUseCase: GetReceivedInviteUseCase,
     private val getCloudMessagingTokenUseCase: GetCloudMessagingTokenUseCase,
-    private val updateUserUseCase: UpdateUserUseCase
+    private val updateUserUseCase: UpdateUserUseCase,
+    private val getHasSeenOnboardingUseCase: GetHasSeenOnboardingUseCase
 ) : ViewModel() {
     private val _uiData = MutableLiveData<HomeUIData>()
     val uiData: LiveData<HomeUIData> = _uiData
@@ -37,4 +39,6 @@ class HomeViewModel(
             )
         }
     }
+
+    fun hasSeenOnboarding() = getHasSeenOnboardingUseCase.hasSeenOnboarding()
 }

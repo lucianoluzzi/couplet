@@ -10,6 +10,10 @@ import com.couplesdating.couplet.domain.useCase.invite.*
 import com.couplesdating.couplet.domain.useCase.match.*
 import com.couplesdating.couplet.domain.useCase.notifications.GetCloudMessagingTokenUseCase
 import com.couplesdating.couplet.domain.useCase.notifications.GetCloudMessagingTokenUseCaseImpl
+import com.couplesdating.couplet.domain.useCase.onboarding.GetHasSeenOnboardingUseCase
+import com.couplesdating.couplet.domain.useCase.onboarding.GetHasSeenOnboardingUseCaseImpl
+import com.couplesdating.couplet.domain.useCase.onboarding.SetOnboardingShownUseCase
+import com.couplesdating.couplet.domain.useCase.onboarding.SetOnboardingShownUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.pair.*
 import com.couplesdating.couplet.domain.useCase.safetyWarning.GetHasSeenSafetyWarningUseCase
 import com.couplesdating.couplet.domain.useCase.safetyWarning.GetHasSeenSafetyWarningUseCaseImpl
@@ -125,6 +129,18 @@ val useCaseModule = module {
     single<GetHasSeenSafetyWarningUseCase> {
         GetHasSeenSafetyWarningUseCaseImpl(
             safetyWarningRepository = get()
+        )
+    }
+
+    single<SetOnboardingShownUseCase> {
+        SetOnboardingShownUseCaseImpl(
+            onboardingRepository = get()
+        )
+    }
+
+    single<GetHasSeenOnboardingUseCase> {
+        GetHasSeenOnboardingUseCaseImpl(
+            onboardingRepository = get()
         )
     }
 }
