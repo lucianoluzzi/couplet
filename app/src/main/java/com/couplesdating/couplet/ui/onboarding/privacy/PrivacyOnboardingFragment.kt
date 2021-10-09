@@ -34,9 +34,9 @@ class PrivacyOnboardingFragment(
         decorateTitle()
         binding.continueButton.setOnClickListener {
             viewModel.onContinueClicked()
-            val toSocialLogin =
-                PrivacyOnboardingFragmentDirections.actionPrivacyOnboardingFragmentToSocialLoginFragment()
-            findNavController().navigate(toSocialLogin)
+            val toIntimateOnboarding =
+                PrivacyOnboardingFragmentDirections.actionPrivacyOnboardingFragmentToIntimateOnboardingFragment()
+            findNavController().navigate(toIntimateOnboarding)
         }
     }
 
