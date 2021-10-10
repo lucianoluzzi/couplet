@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.analytics.events.pendingInvite
+package com.couplesdating.couplet.analytics.events.userPairing
 
 import com.couplesdating.couplet.analytics.events.AnalyticsEvent
 

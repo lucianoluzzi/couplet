@@ -130,6 +130,11 @@ class DashboardViewModel(
         if (pendingInvite != null) {
             return Banner.PendingInvite(pendingInvite)
         }
+        if (partner.isNull() && sentInvite.isNull().not()) {
+            sentInvite?.let {
+                return Banner.SentInvite(it)
+            }
+        }
         if (partner.isNull() && sentInvite.isNull()) {
             return Banner.RegisterPartner
         }

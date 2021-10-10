@@ -16,6 +16,7 @@ import com.couplesdating.couplet.ui.onboarding.privacy.PrivacyOnboardingFragment
 import com.couplesdating.couplet.ui.pendingInvite.PendingInviteFragment
 import com.couplesdating.couplet.ui.rejectedInvite.RejectedInviteFragment
 import com.couplesdating.couplet.ui.safetyWarning.SafetyWarningFragment
+import com.couplesdating.couplet.ui.sentInvite.SentInviteFragment
 import org.koin.androidx.fragment.dsl.fragment
 import org.koin.dsl.module
 
@@ -56,6 +57,7 @@ val fragmentModule = module {
     fragment { IdeaFragment() }
     fragment { InfoFragment() }
     fragment { PendingInviteFragment(get()) }
+    fragment { SentInviteFragment(get()) }
     fragment { AcceptedInviteFragment() }
     fragment { RejectedInviteFragment() }
     fragment {

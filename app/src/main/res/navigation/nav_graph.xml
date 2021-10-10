@@ -211,6 +211,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_registerPartnerFragment"
             app:destination="@id/registerPartnerFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_sentInviteFragment"
+            app:destination="@id/sentInviteFragment" />
     </fragment>
     <fragment
         android:id="@+id/ideaListFragment"
@@ -350,5 +353,13 @@
         android:id="@+id/registerPartnerFragment"
         android:name="com.couplesdating.couplet.ui.invite.RegisterPartnerFragment"
         android:label="RegisterPartnerFragment" />
+    <fragment
+        android:id="@+id/sentInviteFragment"
+        android:name="com.couplesdating.couplet.ui.sentInvite.SentInviteFragment"
+        android:label="SentInviteFragment" >
+        <argument
+            android:name="invite"
+            app:argType="com.couplesdating.couplet.domain.model.InviteModel" />
+    </fragment>
 
 </navigation>

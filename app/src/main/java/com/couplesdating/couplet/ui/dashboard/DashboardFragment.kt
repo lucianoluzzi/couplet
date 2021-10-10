@@ -81,10 +81,11 @@ class DashboardFragment : Fragment() {
         category: CategoryUIModel,
         ideas: List<Idea>
     ) {
-        val toSafetyWarning = DashboardFragmentDirections.actionDashboardFragmentToSafetyWarningFragment(
-            ideas = ideas.toTypedArray(),
-            category = category
-        )
+        val toSafetyWarning =
+            DashboardFragmentDirections.actionDashboardFragmentToSafetyWarningFragment(
+                ideas = ideas.toTypedArray(),
+                category = category
+            )
         findNavController().navigate(toSafetyWarning)
     }
 
@@ -170,6 +171,7 @@ class DashboardFragment : Fragment() {
     private fun handleBannerState(banner: Banner?) {
         when (banner) {
             is Banner.PendingInvite -> setPendingInviteBanner(banner)
+            is Banner.SentInvite -> setSentInviteBanner(banner)
             is Banner.RegisterPartner -> setRegisterPartnerBanner(banner)
             is Banner.BecomePremium -> setBecomePremiumBanner(banner)
             is Banner.NewMatches -> setNewMatchesClicked(banner)
@@ -234,6 +236,15 @@ class DashboardFragment : Fragment() {
                     )
                 findNavController().navigate(toPendingInvite)
             }
+        }
+    }
+
+    private fun setSentInviteBanner(banner: Banner.SentInvite) = with(binding) {
+        sentInviteBanner.isVisible = true
+        sentInviteBanner.setOnClickListener {
+            val toSentInvite =
+                DashboardFragmentDirections.actionDashboardFragmentToSentInviteFragment(banner.invite)
+            findNavController().navigate(toSentInvite)
         }
     }
 

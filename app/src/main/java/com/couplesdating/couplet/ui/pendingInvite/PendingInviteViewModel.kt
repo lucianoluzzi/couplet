@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.couplesdating.couplet.analytics.Analytics
-import com.couplesdating.couplet.analytics.events.pendingInvite.PendingInviteEvents
+import com.couplesdating.couplet.analytics.events.userPairing.PendingInviteEvents
 import com.couplesdating.couplet.domain.model.InviteModel
 import com.couplesdating.couplet.domain.network.Response
 import com.couplesdating.couplet.domain.useCase.invite.DeleteInviteUseCase
