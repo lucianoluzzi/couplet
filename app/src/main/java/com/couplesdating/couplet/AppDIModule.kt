@@ -6,7 +6,6 @@ import com.couplesdating.couplet.ui.dashboard.DashboardViewModel
 import com.couplesdating.couplet.ui.error.ErrorViewModel
 import com.couplesdating.couplet.ui.idea.IdeaViewModel
 import com.couplesdating.couplet.ui.ideaList.IdeaListViewModel
-import com.couplesdating.couplet.ui.invite.InvitePartnerViewModel
 import com.couplesdating.couplet.ui.invite.RegisterPartnerViewModel
 import com.couplesdating.couplet.ui.login.emailLogin.LoginViewModel
 import com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordViewModel
@@ -94,14 +93,6 @@ val appModule = module {
         ForgotPasswordViewModel(
             resetPasswordUseCase = get(),
             analitycs = get()
-        )
-    }
-    viewModel {
-        InvitePartnerViewModel(
-            getCurrentUserUseCase = get(),
-            generateInviteLinkUseCase = get(),
-            createInviteUseCase = get(),
-            analytics = get()
         )
     }
     viewModel {
