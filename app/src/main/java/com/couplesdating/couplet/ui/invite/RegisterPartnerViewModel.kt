@@ -15,7 +15,7 @@ import com.couplesdating.couplet.ui.extensions.doNothing
 import com.couplesdating.couplet.ui.utils.LiveDataEvent
 import kotlinx.coroutines.launch
 
-class InvitePartnerViewModel(
+class RegisterPartnerViewModel(
     private val getCurrentUserUseCase: GetCurrentUserUseCase,
     private val generateInviteLinkUseCase: GenerateInviteLinkUseCase,
     private val createInviteUseCase: CreateInviteUseCase,
@@ -29,9 +29,7 @@ class InvitePartnerViewModel(
         viewModelScope.launch {
             val currentUser = getCurrentUserUseCase.getCurrentUser()
             currentUser?.let {
-                val inviteResponse = createInviteUseCase.createInvite(
-                    currentUser = currentUser
-                )
+                val inviteResponse = createInviteUseCase.createInvite(currentUser)
                 handleResponse(inviteResponse)
             }
         }
@@ -60,13 +58,5 @@ class InvitePartnerViewModel(
                 }
             }
         }
-    }
-
-    fun onDisplayNameClicked() {
-        analytics.trackEvent(InviteEvents.DisplayNameClicked)
-    }
-
-    fun onNoteClicked() {
-        analytics.trackEvent(InviteEvents.NoteClicked)
     }
 }

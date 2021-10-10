@@ -7,6 +7,7 @@ import com.couplesdating.couplet.ui.error.ErrorViewModel
 import com.couplesdating.couplet.ui.idea.IdeaViewModel
 import com.couplesdating.couplet.ui.ideaList.IdeaListViewModel
 import com.couplesdating.couplet.ui.invite.InvitePartnerViewModel
+import com.couplesdating.couplet.ui.invite.RegisterPartnerViewModel
 import com.couplesdating.couplet.ui.login.emailLogin.LoginViewModel
 import com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordViewModel
 import com.couplesdating.couplet.ui.login.socialLogin.SocialLoginViewModel
@@ -96,6 +97,14 @@ val appModule = module {
     }
     viewModel {
         InvitePartnerViewModel(
+            getCurrentUserUseCase = get(),
+            generateInviteLinkUseCase = get(),
+            createInviteUseCase = get(),
+            analytics = get()
+        )
+    }
+    viewModel {
+        RegisterPartnerViewModel(
             getCurrentUserUseCase = get(),
             generateInviteLinkUseCase = get(),
             createInviteUseCase = get(),

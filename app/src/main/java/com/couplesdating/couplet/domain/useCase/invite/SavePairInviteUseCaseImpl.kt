@@ -15,7 +15,6 @@ class SavePairInviteUseCaseImpl(
         inviteId: String,
         inviterId: String,
         inviterDisplayName: String?,
-        note: String?,
         hasAccepted: Boolean,
         timestamp: String?
     ) {
@@ -23,7 +22,6 @@ class SavePairInviteUseCaseImpl(
             inviteId = inviteId,
             inviterId = inviterId,
             inviterDisplayName = inviterDisplayName ?: "",
-            note = note,
             hasAccepted = hasAccepted,
             timestamp = Date()
         )

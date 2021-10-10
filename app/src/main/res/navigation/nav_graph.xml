@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
@@ -207,6 +208,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_safetyWarningFragment"
             app:destination="@id/safetyWarningFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_registerPartnerFragment"
+            app:destination="@id/registerPartnerFragment" />
     </fragment>
     <fragment
         android:id="@+id/ideaListFragment"
@@ -342,5 +346,9 @@
             app:popUpTo="@id/safetyWarningFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/registerPartnerFragment"
+        android:name="com.couplesdating.couplet.ui.invite.RegisterPartnerFragment"
+        android:label="RegisterPartnerFragment" />
 
 </navigation>

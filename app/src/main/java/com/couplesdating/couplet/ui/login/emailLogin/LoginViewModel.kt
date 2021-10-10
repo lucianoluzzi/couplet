@@ -66,8 +66,7 @@ class LoginViewModel(
                     inviteeId = currentUserId,
                     inviteId = invite.inviteId,
                     inviterId = invite.inviterId,
-                    inviterDisplayName = invite.inviterDisplayName,
-                    note = invite.note
+                    inviterDisplayName = invite.inviterDisplayName
                 )
             }
         }

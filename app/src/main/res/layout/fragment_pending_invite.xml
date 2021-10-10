@@ -51,17 +51,6 @@
                         style="@style/Subtitle2"
                         app:layout_constraintStart_toStartOf="@id/inviter_name"
                         app:layout_constraintTop_toBottomOf="@id/inviter_name"
-                        android:id="@+id/note"
-                        android:textStyle="italic"
-                        android:layout_marginTop="@dimen/dimension_8"
-                        tools:text="Babe, let's get into it!"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        style="@style/Subtitle2"
-                        app:layout_constraintStart_toStartOf="@id/note"
-                        app:layout_constraintTop_toBottomOf="@id/note"
                         android:layout_marginTop="@dimen/dimension_2"
                         android:id="@+id/date"
                         tools:text="Send at Jun 25 2021"

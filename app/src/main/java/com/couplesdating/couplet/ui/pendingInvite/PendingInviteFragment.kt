@@ -104,10 +104,6 @@ class PendingInviteFragment(
             date.isVisible = true
             date.text = it.getMediumFormatString(requireContext())
         }
-        invite.note?.let {
-            note.isVisible = true
-            note.text = it
-        }
     }
 
     private fun setButtons() = with(binding) {

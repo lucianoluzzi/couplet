@@ -7,6 +7,7 @@ import com.couplesdating.couplet.ui.home.HomeViewModel
 import com.couplesdating.couplet.ui.idea.IdeaFragment
 import com.couplesdating.couplet.ui.ideaList.IdeaListFragment
 import com.couplesdating.couplet.ui.info.InfoFragment
+import com.couplesdating.couplet.ui.invite.RegisterPartnerFragment
 import com.couplesdating.couplet.ui.invited.InvitedFragment
 import com.couplesdating.couplet.ui.invited.InvitedViewModel
 import com.couplesdating.couplet.ui.matches.matchesDetailList.MatchesDetailListFragment
@@ -23,6 +24,9 @@ val fragmentModule = module {
         PrivacyOnboardingFragment(
             viewModel = get()
         )
+    }
+    fragment {
+        RegisterPartnerFragment(get())
     }
     fragment {
         DashboardFragment()

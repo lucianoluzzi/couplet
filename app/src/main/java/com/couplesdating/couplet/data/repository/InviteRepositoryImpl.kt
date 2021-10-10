@@ -32,8 +32,6 @@ class InviteRepositoryImpl(
                 inviterId = document.get("inviter_id").toString(),
                 inviteeId = document.get("invitee_id").toString(),
                 inviterDisplayName = document.get("inviter_display_name").toString(),
-                inputInviteeDisplayName = document.get("invitee_input_display_name").toString(),
-                note = document.get("note").toString(),
                 inviteId = document.get("invite_id").toString(),
                 timestamp = (document.get("timestamp") as Timestamp).toDate(),
                 hasAccepted = false
@@ -56,8 +54,6 @@ class InviteRepositoryImpl(
                         inviterId = document.get("inviter_id").toString(),
                         inviteeId = document.get("invitee_id").toString(),
                         inviterDisplayName = document.get("inviter_display_name").toString(),
-                        inputInviteeDisplayName = document.get("invitee_input_display_name").toString(),
-                        note = document.get("note").toString(),
                         inviteId = document.get("invite_id").toString(),
                         timestamp = (document.get("timestamp") as Timestamp).toDate(),
                         hasAccepted = false
@@ -85,12 +81,6 @@ class InviteRepositoryImpl(
             "invite_id" to inviteModel.inviteId,
             "inviter_display_name" to inviteModel.inviterDisplayName
         )
-        inviteModel.note?.let {
-            pairMap.put("note", inviteModel.note)
-        }
-        inviteModel.inputInviteeDisplayName?.let {
-            pairMap.put("invitee_input_display_name", inviteModel.inputInviteeDisplayName)
-        }
         inviteModel.timestamp?.let {
             pairMap.put("timestamp", Timestamp(it))
         }

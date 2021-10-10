@@ -45,7 +45,6 @@ class InvitedViewModel(
                     inviteId = inviteId,
                     inviterId = inviterId,
                     inviterDisplayName = inviterDisplayName,
-                    note = note,
                     timestamp = timestamp
                 )
                 _uiState.value = InvitedUIState.InviteExists(inviteExists)
@@ -57,14 +56,12 @@ class InvitedViewModel(
         inviteId: String,
         inviterId: String,
         inviterDisplayName: String?,
-        note: String?,
         timestamp: String?
     ) {
         savePairInviteUseCase.savePairInvite(
             inviteId,
             inviterId,
             inviterDisplayName,
-            note,
             false,
             timestamp
         )
@@ -91,7 +88,6 @@ class InvitedViewModel(
                     inviteId = inviteId,
                     inviterId = inviterId,
                     inviterDisplayName = inviterDisplayName,
-                    note = note,
                     hasAccepted = true,
                     timestamp = timestamp
                 )

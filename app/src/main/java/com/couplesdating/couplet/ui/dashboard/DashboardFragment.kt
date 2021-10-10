@@ -253,8 +253,8 @@ class DashboardFragment : Fragment() {
     }
 
     private fun navigateToSync() {
-        val toInvitePartner =
-            DashboardFragmentDirections.actionDashboardFragmentToInvitePartnerFragment()
-        findNavController().navigate(toInvitePartner)
+        val toRegisterFragment =
+            DashboardFragmentDirections.actionDashboardFragmentToRegisterPartnerFragment()
+        findNavController().navigate(toRegisterFragment)
     }
 }

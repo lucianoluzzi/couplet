@@ -12,15 +12,13 @@ class AddInviteeIdUseCaseImpl(
         inviteeId: String,
         inviteId: String,
         inviterId: String,
-        inviterDisplayName: String?,
-        note: String?
+        inviterDisplayName: String?
     ): Response {
         val invite = InviteModel(
             inviteId = inviteId,
             inviteeId = inviteeId,
             inviterId = inviterId,
             inviterDisplayName = inviterDisplayName ?: "",
-            note = note,
             hasAccepted = false
         )
         return inviteRepository.saveInvite(invite)
