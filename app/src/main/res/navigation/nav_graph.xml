@@ -361,5 +361,9 @@
             android:name="invite"
             app:argType="com.couplesdating.couplet.domain.model.InviteModel" />
     </fragment>
+    <fragment
+        android:id="@+id/partnerAcceptedInviteFragment"
+        android:name="com.couplesdating.couplet.ui.acceptedInvite.PartnerAcceptedInviteFragment"
+        android:label="PartnerAcceptedInviteFragment" />
 
 </navigation>

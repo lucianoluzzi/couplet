@@ -1,6 +1,7 @@
 package com.couplesdating.couplet.ui
 
 import com.couplesdating.couplet.ui.acceptedInvite.AcceptedInviteFragment
+import com.couplesdating.couplet.ui.acceptedInvite.PartnerAcceptedInviteFragment
 import com.couplesdating.couplet.ui.dashboard.DashboardFragment
 import com.couplesdating.couplet.ui.home.HomeFragment
 import com.couplesdating.couplet.ui.home.HomeViewModel
@@ -74,5 +75,8 @@ val fragmentModule = module {
         SafetyWarningFragment(
             viewModel = get()
         )
+    }
+    fragment {
+        PartnerAcceptedInviteFragment()
     }
 }

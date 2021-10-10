@@ -88,7 +88,7 @@ class SentInviteFragment(
     private fun setInviteContent() = with(binding) {
         invite.timestamp?.let {
             date.isVisible = true
-            date.text = it.getMediumFormatString(requireContext())
+            date.text = "Sent at ${it.getMediumFormatString(requireContext())}"
         }
     }
 

@@ -17,52 +17,81 @@ class FirebaseNotificationService : FirebaseMessagingService() {
     private val applicationLifecycleObserver by inject<AppLifecycleObserver>()
 
     override fun onMessageReceived(message: RemoteMessage) {
-        Log.d("NOTIFICATION", "received")
+        Log.d("NOTIFICATION", "type: ${message.data["type"]}")
         super.onMessageReceived(message)
-        if (applicationLifecycleObserver.isOpen) {
-            showMatchActivity(message)
-        } else {
-            createNotification(message)
+        message.data["type"]?.let {
+            if (it == "MATCH") {
+                if (applicationLifecycleObserver.isOpen) {
+                    showMatchActivity(message)
+                } else {
+                    val pendingIntent: PendingIntent =
+                        PendingIntent.getActivity(applicationContext, 0, getMainActivityIntent(), 0)
+                    createNotification(
+                        pendingIntent = pendingIntent,
+                        message = message
+                    )
+                }
+            } else if (it == "PAIR") {
+                createPairNotification(message)
+            }
         }
+    }
+
+    private fun createPairNotification(message: RemoteMessage) {
+        val pairInfo = message.data["pair_info"] ?: "Your partner has accepted your invite"
+        val arguments = bundleOf(
+            "pair_info" to pairInfo
+        )
+        val mainActivityIntent = getMainActivityIntent().apply {
+            putExtras(arguments)
+        }
+        val pendingIntent: PendingIntent =
+            PendingIntent.getActivity(applicationContext, 0, mainActivityIntent, 0)
+        createNotification(
+            message = message,
+            pendingIntent = pendingIntent
+        )
     }
 
     private fun showMatchActivity(message: RemoteMessage) {
         try {
-            val messageType = message.data["type"]
-            if (messageType != null && messageType == "MATCH") {
-                val messageBody = message.data["body"]
-                    ?: "Seems both of you are into this idea \uD83D\uDE08"
-                val activityToStart = Class.forName(ACTIVITY_TO_SHOW)
-
-                val intent = Intent(applicationContext, activityToStart).apply {
-                    putExtras(
-                        bundleOf(
-                            NOTIFICATION_MESSAGE to messageBody,
-                            MESSAGE_LABEL to message.data["label"]
-                        )
-                    )
-                }
-                intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK)
-                applicationContext.startActivity(
-                    intent,
-                    ActivityOptions.makeCustomAnimation(
-                        applicationContext,
-                        R.anim.slide_in_bottom,
-                        android.R.anim.fade_out
-                    ).toBundle()
-                )
-            }
+            createMatchNotification(message)
         } catch (exception: Exception) {
             FirebaseCrashlytics.getInstance().recordException(exception)
             Log.e("NotificationService", exception.message ?: exception.toString())
         }
     }
 
-    private fun createNotification(message: RemoteMessage) {
+    private fun createMatchNotification(message: RemoteMessage) {
+        val messageBody = message.data["body"]
+            ?: "Seems both of you are into this idea \uD83D\uDE08"
+        val activityToStart = Class.forName(ACTIVITY_TO_SHOW)
+
+        val intent = Intent(applicationContext, activityToStart).apply {
+            putExtras(
+                bundleOf(
+                    NOTIFICATION_MESSAGE to messageBody,
+                    MESSAGE_LABEL to message.data["label"]
+                )
+            )
+        }
+        intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK)
+        applicationContext.startActivity(
+            intent,
+            ActivityOptions.makeCustomAnimation(
+                applicationContext,
+                R.anim.slide_in_bottom,
+                android.R.anim.fade_out
+            ).toBundle()
+        )
+    }
+
+    private fun createNotification(
+        message: RemoteMessage,
+        pendingIntent: PendingIntent
+    ) {
         val messageData = message.data
         messageData["body"]?.let { messageBody ->
-            val pendingIntent: PendingIntent =
-                PendingIntent.getActivity(applicationContext, 0, getMainActivityIntent(), 0)
             val builder = NotificationCompat.Builder(applicationContext, "COUPLET_CHANNEL")
                 .setSmallIcon(R.drawable.ic_notification_icon)
                 .setContentTitle(messageData["title"] ?: "Couplet")

@@ -2,9 +2,11 @@ package com.couplesdating.couplet
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.navigateUp
@@ -26,6 +28,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setUpActionBarNavigation()
+        intent.getStringExtra("pair_info")?.let {
+            navHostFragment.findNavController().navigate(
+                R.id.partnerAcceptedInviteFragment, bundleOf(
+                    "pair_info" to it
+                )
+            )
+        }
     }
 
     private fun setUpActionBarNavigation() {
