@@ -1,5 +1,6 @@
 package com.couplesdating.couplet
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setUpActionBarNavigation()
-        intent.getStringExtra("pair_info")?.let {
+        intent?.getStringExtra("pair_info")?.let {
             navHostFragment.findNavController().navigate(
                 R.id.partnerAcceptedInviteFragment, bundleOf(
                     "pair_info" to it
