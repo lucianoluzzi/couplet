@@ -11,9 +11,7 @@ class CreateInviteUseCaseImpl(
 ) : CreateInviteUseCase {
 
     override suspend fun createInvite(
-        currentUser: User,
-        inviteeDisplayName: String,
-        inviteNote: String?
+        currentUser: User
     ): Response {
         val currentUserDisplayName = when {
             !currentUser.name.isNullOrBlank() -> currentUser.name
@@ -23,8 +21,6 @@ class CreateInviteUseCaseImpl(
         val inviteModel = InviteModel(
             inviterId = currentUser.userId,
             inviterDisplayName = currentUserDisplayName,
-            inputInviteeDisplayName = inviteeDisplayName,
-            note = inviteNote,
             inviteId = currentUser.userId.hashCode().toString(),
             timestamp = Date()
         )

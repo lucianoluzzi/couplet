@@ -7,7 +7,6 @@ interface AddInviteeIdUseCase {
         inviteeId: String,
         inviteId: String,
         inviterId: String,
-        inviterDisplayName: String?,
-        note: String?
+        inviterDisplayName: String?
     ): Response
 }

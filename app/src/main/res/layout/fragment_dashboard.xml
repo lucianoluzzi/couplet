@@ -79,6 +79,15 @@
                         tools:visibility="visible" />
 
                     <include
+                        android:id="@+id/sent_invite_banner"
+                        layout="@layout/view_sent_invite"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <include
                         android:id="@+id/become_premium_banner"
                         layout="@layout/view_become_premium_banner"
                         android:layout_width="0dp"

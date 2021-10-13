@@ -28,7 +28,6 @@ class HomeFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         navigationArgs.user?.let {
             goToDashboard(it)
         } ?: run {

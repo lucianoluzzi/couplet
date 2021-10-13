@@ -72,7 +72,7 @@
                 android:layout_marginEnd="@dimen/dimension_24"
                 android:layout_marginBottom="@dimen/dimension_24"
                 android:layout_marginTop="@dimen/dimension_24"
-                android:text="@string/hell_yeah"
+                android:text="@string/lets_start"
                 android:id="@+id/continue_button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

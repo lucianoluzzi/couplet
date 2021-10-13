@@ -12,26 +12,26 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
-import com.couplesdating.couplet.databinding.FragmentInvitePartnerBinding
-import com.couplesdating.couplet.ui.extensions.onGetFocus
+import com.couplesdating.couplet.databinding.FragmentRegisterPartnerBinding
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class InvitePartnerFragment : Fragment() {
-    private lateinit var binding: FragmentInvitePartnerBinding
-    private val viewModel by viewModel<InvitePartnerViewModel>()
+class RegisterPartnerFragment(
+    private val viewModel: RegisterPartnerViewModel
+) : Fragment() {
+
     private var hasClickedOnShare = false
+    private val binding by lazy {
+        val layoutInflater = LayoutInflater.from(requireContext())
+        FragmentRegisterPartnerBinding.inflate(layoutInflater)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentInvitePartnerBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    ) = binding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,17 +43,8 @@ class InvitePartnerFragment : Fragment() {
         }
 
         with(binding) {
-            partner.onGetFocus {
-                viewModel.onDisplayNameClicked()
-            }
-            note.onGetFocus {
-                viewModel.onNoteClicked()
-            }
             shareLink.setOnClickListener {
-                viewModel.createInviteLink(
-                    binding.partner.textValue(),
-                    binding.note.textValue()
-                )
+                viewModel.createInviteLink()
             }
         }
     }

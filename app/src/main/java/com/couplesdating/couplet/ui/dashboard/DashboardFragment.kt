@@ -81,10 +81,11 @@ class DashboardFragment : Fragment() {
         category: CategoryUIModel,
         ideas: List<Idea>
     ) {
-        val toSafetyWarning = DashboardFragmentDirections.actionDashboardFragmentToSafetyWarningFragment(
-            ideas = ideas.toTypedArray(),
-            category = category
-        )
+        val toSafetyWarning =
+            DashboardFragmentDirections.actionDashboardFragmentToSafetyWarningFragment(
+                ideas = ideas.toTypedArray(),
+                category = category
+            )
         findNavController().navigate(toSafetyWarning)
     }
 
@@ -170,6 +171,7 @@ class DashboardFragment : Fragment() {
     private fun handleBannerState(banner: Banner?) {
         when (banner) {
             is Banner.PendingInvite -> setPendingInviteBanner(banner)
+            is Banner.SentInvite -> setSentInviteBanner(banner)
             is Banner.RegisterPartner -> setRegisterPartnerBanner(banner)
             is Banner.BecomePremium -> setBecomePremiumBanner(banner)
             is Banner.NewMatches -> setNewMatchesClicked(banner)
@@ -179,6 +181,7 @@ class DashboardFragment : Fragment() {
                     pendingInviteBanner.isVisible = false
                     becomePremiumBanner.isVisible = false
                     binding.newMatchesBanner.isVisible = false
+                    sentInviteBanner.isVisible = false
                 }
             }
         }
@@ -188,6 +191,7 @@ class DashboardFragment : Fragment() {
         registerPartnerBanner.isVisible = false
         pendingInviteBanner.isVisible = false
         becomePremiumBanner.isVisible = false
+        sentInviteBanner.isVisible = false
         binding.newMatchesBanner.isVisible = true
         binding.newMatchesBanner.setOnClickListener {
             viewModel.onBannerClicked(banner)
@@ -207,6 +211,7 @@ class DashboardFragment : Fragment() {
         registerPartnerBanner.isVisible = false
         pendingInviteBanner.isVisible = false
         newMatchesBanner.isVisible = false
+        sentInviteBanner.isVisible = false
         becomePremiumBanner.isVisible = true
         becomePremiumBanner.setOnClickListener {
             viewModel.onBannerClicked(banner)
@@ -217,6 +222,7 @@ class DashboardFragment : Fragment() {
         newMatchesBanner.isVisible = false
         registerPartnerBanner.isVisible = false
         becomePremiumBanner.isVisible = false
+        sentInviteBanner.isVisible = false
         pendingInviteBanner.isVisible = true
         val description = pendingInviteBanner.findViewById<TextView>(R.id.description)
         if (banner.invite.inviterDisplayName.isNotBlank()) {
@@ -237,10 +243,24 @@ class DashboardFragment : Fragment() {
         }
     }
 
+    private fun setSentInviteBanner(banner: Banner.SentInvite) = with(binding) {
+        sentInviteBanner.isVisible = true
+        newMatchesBanner.isVisible = false
+        becomePremiumBanner.isVisible = false
+        pendingInviteBanner.isVisible = false
+        registerPartnerBanner.isVisible = false
+        sentInviteBanner.setOnClickListener {
+            val toSentInvite =
+                DashboardFragmentDirections.actionDashboardFragmentToSentInviteFragment(banner.invite)
+            findNavController().navigate(toSentInvite)
+        }
+    }
+
     private fun setRegisterPartnerBanner(banner: Banner) = with(binding) {
         newMatchesBanner.isVisible = false
         becomePremiumBanner.isVisible = false
         pendingInviteBanner.isVisible = false
+        sentInviteBanner.isVisible = false
         registerPartnerBanner.isVisible = true
         val description = registerPartnerBanner.findViewById<TextView>(R.id.description)
         description.text = user?.let {
@@ -253,8 +273,8 @@ class DashboardFragment : Fragment() {
     }
 
     private fun navigateToSync() {
-        val toInvitePartner =
-            DashboardFragmentDirections.actionDashboardFragmentToInvitePartnerFragment()
-        findNavController().navigate(toInvitePartner)
+        val toRegisterFragment =
+            DashboardFragmentDirections.actionDashboardFragmentToRegisterPartnerFragment()
+        findNavController().navigate(toRegisterFragment)
     }
 }

@@ -17,9 +17,6 @@ class GenerateInviteLinkUseCaseImpl(
             put("inviterId", inviteModel.inviterId)
             put("inviteId", inviteModel.inviteId)
             put("inviterDisplayName", inviteModel.inviterDisplayName)
-            if (!inviteModel.note.isNullOrBlank()) {
-                put("note", inviteModel.note)
-            }
             try {
                 inviteModel.timestamp?.let {
                     put("timestamp", it.getMediumFormatString(context))

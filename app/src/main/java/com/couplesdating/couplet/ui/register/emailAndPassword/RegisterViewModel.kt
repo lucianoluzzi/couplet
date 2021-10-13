@@ -106,8 +106,7 @@ class RegisterViewModel(
                         inviteeId = it,
                         inviteId = invite.inviteId,
                         inviterId = invite.inviterId,
-                        inviterDisplayName = invite.inviterDisplayName,
-                        note = invite.note
+                        inviterDisplayName = invite.inviterDisplayName
                     )
                 }
             }

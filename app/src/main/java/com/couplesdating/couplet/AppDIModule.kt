@@ -6,7 +6,7 @@ import com.couplesdating.couplet.ui.dashboard.DashboardViewModel
 import com.couplesdating.couplet.ui.error.ErrorViewModel
 import com.couplesdating.couplet.ui.idea.IdeaViewModel
 import com.couplesdating.couplet.ui.ideaList.IdeaListViewModel
-import com.couplesdating.couplet.ui.invite.InvitePartnerViewModel
+import com.couplesdating.couplet.ui.invite.RegisterPartnerViewModel
 import com.couplesdating.couplet.ui.login.emailLogin.LoginViewModel
 import com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordViewModel
 import com.couplesdating.couplet.ui.login.socialLogin.SocialLoginViewModel
@@ -21,6 +21,7 @@ import com.couplesdating.couplet.ui.pendingInvite.PendingInviteViewModel
 import com.couplesdating.couplet.ui.register.emailAndPassword.RegisterViewModel
 import com.couplesdating.couplet.ui.register.nameAndGender.NameAndGenderViewModel
 import com.couplesdating.couplet.ui.safetyWarning.SafetyWarningViewModel
+import com.couplesdating.couplet.ui.sentInvite.SentInviteViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -95,7 +96,7 @@ val appModule = module {
         )
     }
     viewModel {
-        InvitePartnerViewModel(
+        RegisterPartnerViewModel(
             getCurrentUserUseCase = get(),
             generateInviteLinkUseCase = get(),
             createInviteUseCase = get(),
@@ -131,6 +132,12 @@ val appModule = module {
     viewModel {
         PendingInviteViewModel(
             formPairUseCase = get(),
+            deleteInviteUseCase = get(),
+            analytics = get()
+        )
+    }
+    viewModel {
+        SentInviteViewModel(
             deleteInviteUseCase = get(),
             analytics = get()
         )

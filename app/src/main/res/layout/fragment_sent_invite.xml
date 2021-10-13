@@ -22,7 +22,7 @@
                     style="@style/H1Title"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    tools:text="@string/pending_invite_title"
+                    android:text="The invite you’ve sent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,43 +39,34 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        style="@style/H3Title"
-                        app:layout_constraintStart_toStartOf="parent"
+                        style="@style/Subtitle2"
                         app:layout_constraintTop_toTopOf="parent"
-                        android:id="@+id/inviter_name"
-                        tools:text="Luciano Luzzi"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginTop="@dimen/dimension_2"
+                        android:id="@+id/date"
+                        tools:text="Sent at Jun 25 2021"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        style="@style/Subtitle2"
-                        app:layout_constraintStart_toStartOf="@id/inviter_name"
-                        app:layout_constraintTop_toBottomOf="@id/inviter_name"
-                        android:layout_marginTop="@dimen/dimension_2"
-                        android:id="@+id/date"
-                        tools:text="Send at Jun 25 2021"
+                        style="@style/Label"
+                        app:layout_constraintTop_toBottomOf="@id/date"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:id="@+id/label"
+                        android:layout_marginTop="@dimen/dimension_6"
+                        android:text="We are waiting for your partner's response, give it a nudge 😉"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
-
-                    <Button
-                        android:id="@+id/reject_invite"
-                        style="@style/Button.Outlined.Transparent.Inline"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Decline invite"
-                        android:layout_marginTop="@dimen/dimension_6"
-                        app:layout_constraintTop_toBottomOf="@id/date"
-                        app:layout_constraintStart_toStartOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
-                    android:id="@+id/acceptInvite"
-                    style="@style/Button.Highlight"
+                    android:id="@+id/delete_invite"
+                    style="@style/Button.Outlined"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="@dimen/dimension_32"
-                    android:text="Accept invite"
+                    android:text="Delete invite"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
