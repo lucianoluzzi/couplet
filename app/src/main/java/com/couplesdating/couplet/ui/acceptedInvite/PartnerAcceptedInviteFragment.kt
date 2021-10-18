@@ -31,8 +31,13 @@ class PartnerAcceptedInviteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setTitle()
         decorateTitle()
+        val isShowingFromActivity = requireArguments().getBoolean("pair_info_activity")
         binding.getKinky.setOnClickListener {
-            findNavController().popBackStack()
+            if (isShowingFromActivity) {
+                requireActivity().finish()
+            } else {
+                findNavController().popBackStack()
+            }
         }
     }
 
