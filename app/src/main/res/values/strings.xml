@@ -21,8 +21,8 @@
     <string name="hell_yeah">Hell yeah!</string>
     <string name="pending_invite_title">%s, you have a pending invite:</string>
     <string name="pending_invite_title_no_name">You have a pending invite:</string>
-    <string name="accepted_invite_title">%1$s, you accepted %2$s\'s invite!</string>
-    <string name="rejected_invite_title">%1$s, you rejected %2$s\'s invite!</string>
+    <string name="accepted_invite_title">%1$s, you\'ve accepted %2$s\'s invite!</string>
+    <string name="rejected_invite_title">%1$s, you\'ve rejected %2$s\'s invite!</string>
     <string name="matches_label">%1$s, here\'s what both of you and %2$s are into.\nCheck it out:</string>
     <string name="empty_matches_label">%1$s, you guys still haven\'t had any matches.\nBut worry not! Keep playing and I\'m sure soon you will have some new stuff to try 😉</string>
     <string name="partner_response">%1$s\'s response:</string>

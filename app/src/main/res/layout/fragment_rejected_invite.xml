@@ -41,7 +41,7 @@
                 android:layout_marginTop="@dimen/dimension_32"
                 android:layout_marginHorizontal="@dimen/dimension_16"
                 android:gravity="center"
-                android:text="It seems you are not getting to know each other better, but that's ok.\nYou can already take a look on the ideas for your future special other. 😉"
+                android:text="It seems you are not getting to know each other better, but that's ok.\nYou can already take a look on the ideas for your future significant other. 😉"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/illustration" />

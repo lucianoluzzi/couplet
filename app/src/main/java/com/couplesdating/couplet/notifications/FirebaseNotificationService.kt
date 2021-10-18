@@ -21,19 +21,48 @@ class FirebaseNotificationService : FirebaseMessagingService() {
         super.onMessageReceived(message)
         message.data["type"]?.let {
             if (it == "MATCH") {
-                if (applicationLifecycleObserver.isOpen) {
-                    showMatchActivity(message)
-                } else {
-                    val pendingIntent: PendingIntent =
-                        PendingIntent.getActivity(applicationContext, 0, getMainActivityIntent(), 0)
-                    createNotification(
-                        pendingIntent = pendingIntent,
-                        message = message
-                    )
-                }
+                showMatchActivityOrCreateNotification(message)
             } else if (it == "PAIR") {
-                createPairNotification(message)
+                showPartnerAcceptedInviteActivityOrNotification(message)
             }
+        }
+    }
+
+    private fun showPartnerAcceptedInviteActivityOrNotification(message: RemoteMessage) {
+        if (applicationLifecycleObserver.isOpen) {
+            val activityToStart = Class.forName(PARTNER_ACCEPTED_INVITE_ACTIVITY)
+
+            val pairInfo = message.data["pair_info"] ?: "Your partner has accepted your invite"
+            val arguments = bundleOf(
+                "pair_info" to pairInfo
+            )
+            val intent = Intent(applicationContext, activityToStart).apply {
+                putExtras(arguments)
+            }
+            intent.flags = (Intent.FLAG_ACTIVITY_NEW_TASK)
+            applicationContext.startActivity(
+                intent,
+                ActivityOptions.makeCustomAnimation(
+                    applicationContext,
+                    R.anim.slide_in_bottom,
+                    android.R.anim.fade_out
+                ).toBundle()
+            )
+        } else {
+            createPairNotification(message)
+        }
+    }
+
+    private fun showMatchActivityOrCreateNotification(message: RemoteMessage) {
+        if (applicationLifecycleObserver.isOpen) {
+            showMatchActivity(message)
+        } else {
+            val pendingIntent: PendingIntent =
+                PendingIntent.getActivity(applicationContext, 0, getIntent(MAIN_ACTIVITY), 0)
+            createNotification(
+                pendingIntent = pendingIntent,
+                message = message
+            )
         }
     }
 
@@ -42,7 +71,7 @@ class FirebaseNotificationService : FirebaseMessagingService() {
         val arguments = bundleOf(
             "pair_info" to pairInfo
         )
-        val mainActivityIntent = getMainActivityIntent().apply {
+        val mainActivityIntent = getIntent(MAIN_ACTIVITY).apply {
             putExtras(arguments)
         }
         val pendingIntent: PendingIntent =
@@ -104,8 +133,8 @@ class FirebaseNotificationService : FirebaseMessagingService() {
         }
     }
 
-    private fun getMainActivityIntent(): Intent {
-        val activityToStart = Class.forName(MAIN_ACTIVITY)
+    private fun getIntent(classToShow: String): Intent {
+        val activityToStart = Class.forName(classToShow)
         return Intent(applicationContext, activityToStart)
     }
 
@@ -113,6 +142,8 @@ class FirebaseNotificationService : FirebaseMessagingService() {
         private const val ACTIVITY_TO_SHOW =
             "com.couplesdating.couplet.ui.match.OverlayMatchActivity"
         private const val MAIN_ACTIVITY = "com.couplesdating.couplet.MainActivity"
+        private const val PARTNER_ACCEPTED_INVITE_ACTIVITY =
+            "com.couplesdating.couplet.ui.acceptedInvite.AcceptedInviteActivity"
         const val NOTIFICATION_MESSAGE = "NOTIFICATION_MESSAGE"
         const val MESSAGE_LABEL = "MESSAGE_LABEL"
     }
