@@ -7,6 +7,8 @@
         android:paddingHorizontal="@dimen/dimension_24"
         android:backgroundTint="@color/lighter_grey"
         android:background="@drawable/background_rounded_20_ripple"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
