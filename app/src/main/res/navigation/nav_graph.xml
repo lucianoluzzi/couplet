@@ -214,6 +214,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_sentInviteFragment"
             app:destination="@id/sentInviteFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_moreFragment"
+            app:destination="@id/moreFragment" />
     </fragment>
     <fragment
         android:id="@+id/ideaListFragment"
@@ -365,5 +368,16 @@
         android:id="@+id/partnerAcceptedInviteFragment"
         android:name="com.couplesdating.couplet.ui.acceptedInvite.PartnerAcceptedInviteFragment"
         android:label="PartnerAcceptedInviteFragment" />
+    <fragment
+        android:id="@+id/moreFragment"
+        android:name="com.couplesdating.couplet.ui.more.MoreFragment"
+        android:label="MoreFragment" >
+        <argument
+            android:name="user"
+            app:argType="com.couplesdating.couplet.domain.model.User" />
+        <argument
+            android:name="matches"
+            app:argType="com.couplesdating.couplet.domain.model.Match[]" />
+    </fragment>
 
 </navigation>

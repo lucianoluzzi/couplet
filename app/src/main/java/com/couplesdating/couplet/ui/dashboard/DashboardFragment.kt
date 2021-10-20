@@ -63,6 +63,7 @@ class DashboardFragment : Fragment() {
                 ideas = navigationRoute.ideas
             )
             DashboardRoute.ToSync -> navigateToSync()
+            is DashboardRoute.MoreOptions -> navigateToMore(navigationRoute)
         }
     }
 
@@ -105,6 +106,10 @@ class DashboardFragment : Fragment() {
         }
         viewModel.uiDataMediator.observe(viewLifecycleOwner) { uiState ->
             handleUIState(uiState)
+        }
+
+        binding.more.setOnClickListener {
+            viewModel.onMoreClicked()
         }
     }
 
@@ -276,5 +281,13 @@ class DashboardFragment : Fragment() {
         val toRegisterFragment =
             DashboardFragmentDirections.actionDashboardFragmentToRegisterPartnerFragment()
         findNavController().navigate(toRegisterFragment)
+    }
+
+    private fun navigateToMore(route: DashboardRoute.MoreOptions) {
+        val toMoreOptions = DashboardFragmentDirections.actionDashboardFragmentToMoreFragment(
+            user = route.user,
+            matches = route.matches.toTypedArray()
+        )
+        findNavController().navigate(toMoreOptions)
     }
 }

@@ -5,6 +5,7 @@ import com.couplesdating.couplet.R
 import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.events.dashboard.BannerEvents
 import com.couplesdating.couplet.analytics.events.dashboard.CategoryEvents
+import com.couplesdating.couplet.analytics.events.dashboard.DashboardEvents
 import com.couplesdating.couplet.domain.extensions.isNull
 import com.couplesdating.couplet.domain.model.Category
 import com.couplesdating.couplet.domain.model.Match
@@ -196,6 +197,7 @@ class DashboardViewModel(
             is Banner.NewMatches -> analytics.trackEvent(BannerEvents.NewMatchesClicked)
             is Banner.PendingInvite -> analytics.trackEvent(BannerEvents.PendingInviteClicked)
             Banner.RegisterPartner -> analytics.trackEvent(BannerEvents.RegisterPartnerClicked)
+            is Banner.SentInvite -> analytics.trackEvent(BannerEvents.SentInviteClicked)
         }
     }
 
@@ -215,6 +217,24 @@ class DashboardViewModel(
                     ideas = category.ideas
                 )
             }
+            navigationChannel.send(route)
+        }
+    }
+
+    fun onMoreClicked() {
+        analytics.trackEvent(DashboardEvents.MoreClicked)
+        viewModelScope.launch {
+            val matches = getNewMatchesUseCase.getNewMatches(currentUser.userId).run {
+                when (this) {
+                    Response.Completed -> emptyList()
+                    is Response.Error -> emptyList()
+                    is Response.Success<*> -> this.data as List<Match>
+                }
+            }
+            val route = DashboardRoute.MoreOptions(
+                user = currentUser,
+                matches = matches
+            )
             navigationChannel.send(route)
         }
     }

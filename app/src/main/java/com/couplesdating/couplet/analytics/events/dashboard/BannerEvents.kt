@@ -9,4 +9,5 @@ sealed class BannerEvents {
     object RegisterPartnerClicked : AnalyticsEvent("${SCREEN_NAME}_register_partner_clicked")
     object NewMatchesClicked : AnalyticsEvent("${SCREEN_NAME}_new_matches_clicked")
     object BecomePremiumClicked : AnalyticsEvent("${SCREEN_NAME}_become_premium_clicked")
+    object SentInviteClicked : AnalyticsEvent("${SCREEN_NAME}_sent_invite_clicked")
 }

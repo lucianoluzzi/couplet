@@ -14,13 +14,13 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="@dimen/dimension_24"
-                android:paddingTop="@dimen/dimension_24">
+                android:paddingTop="@dimen/dimension_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/welcome"
@@ -51,22 +51,21 @@
                     android:focusable="true"
                     android:padding="@dimen/dimension_12"
                     android:src="@drawable/ic_more_options"
-                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@id/welcome"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/welcome"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/dark" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/to_couplet"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:layout_marginTop="@dimen/dimension_20"
                     android:id="@+id/banner_container"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimension_20"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/to_couplet">
 
                     <include
                         android:id="@+id/pending_invite_banner"
@@ -117,16 +116,16 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/categories"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/banner_container"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    android:layout_marginTop="@dimen/dimension_20"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimension_20"
                     android:nestedScrollingEnabled="false"
-                    tools:listitem="@layout/view_category_item"/>
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/banner_container"
+                    tools:listitem="@layout/view_category_item" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -142,23 +141,23 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:alpha="0.2"
                     android:background="@color/grey"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.airbnb.lottie.LottieAnimationView
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:id="@+id/loading"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:lottie_autoPlay="true"
                     app:lottie_loop="true"
                     app:lottie_rawRes="@raw/loading" />
