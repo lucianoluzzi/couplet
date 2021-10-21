@@ -12,6 +12,7 @@ import com.couplesdating.couplet.ui.login.forgotPassword.ForgotPasswordViewModel
 import com.couplesdating.couplet.ui.login.socialLogin.SocialLoginViewModel
 import com.couplesdating.couplet.ui.matches.matchesDetailList.MatchesDetailListViewModel
 import com.couplesdating.couplet.ui.matches.matchesList.MatchesViewModel
+import com.couplesdating.couplet.ui.more.MoreOptionsViewModel
 import com.couplesdating.couplet.ui.onboarding.intimate.IntimateOnboardingViewModel
 import com.couplesdating.couplet.ui.onboarding.learnFromProfessionals.LearnFromProfessionalsViewModel
 import com.couplesdating.couplet.ui.onboarding.letsStart.LetsStartViewModel
@@ -160,6 +161,11 @@ val appModule = module {
         SafetyWarningViewModel(
             setHasSeenSafetyWarningUseCase = get(),
             analytics = get()
+        )
+    }
+    viewModel {
+        MoreOptionsViewModel(
+            getRecentMatchesUseCase = get()
         )
     }
 }

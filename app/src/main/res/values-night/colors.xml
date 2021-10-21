@@ -17,9 +17,11 @@
     <color name="register_color">@color/grey_blue</color>
     <color name="new_cards_text_color">#FFFFFF</color>
     <color name="new_cards_background">#905774</color>
+
     <color name="match_detail_blue_background">#3346B5D7</color>
     <color name="match_detail_background">#2E527C</color>
     <color name="match_detail_number">#8086AEC6</color>
+    <color name="recent_match_background">#2A436D</color>
 
     <color name="idea_description_background">#2E527C</color>
 </resources>

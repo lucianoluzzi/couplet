@@ -143,4 +143,8 @@ val useCaseModule = module {
             onboardingRepository = get()
         )
     }
+
+    single<GetRecentMatchesUseCase> {
+        GetRecentMatchesUseCaseImpl()
+    }
 }
