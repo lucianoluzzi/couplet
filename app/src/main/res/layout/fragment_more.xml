@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimension_8"
                     android:background="@drawable/background_rounded_20"
-                    android:backgroundTint="@color/blue"
+                    android:backgroundTint="@color/more_item_detail_background"
                     android:nestedScrollingEnabled="false"
                     android:padding="@dimen/dimension_20"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

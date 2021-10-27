@@ -18,6 +18,8 @@
     <color name="new_cards_text_color">#FFFFFF</color>
     <color name="new_cards_background">#905774</color>
 
+    <color name="more_item_detail_background">#2E527C</color>
+
     <color name="match_detail_blue_background">#3346B5D7</color>
     <color name="match_detail_background">#2E527C</color>
     <color name="match_detail_number">#8086AEC6</color>

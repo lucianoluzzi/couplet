@@ -31,7 +31,6 @@
     <color name="grey_blue">#86AEC6</color>
     <color name="grey_blue_50">#8086AEC6</color>
     <color name="grey">#494B71</color>
-    <color name="lighter_grey">#F4F3F6</color>
     <color name="light_grey">#B8BCC9</color>
 
     <color name="grey_blue_light">#77799F</color>
@@ -41,6 +40,8 @@
     <color name="loading_overlay">#33494B71</color>
     <color name="new_cards_text_color">#F25A6C</color>
     <color name="new_cards_background">#ECD7DF</color>
+
+    <color name="more_item_detail_background">#F4F3F6</color>
 
     <color name="match_detail_blue_background">#ECF7FB</color>
     <color name="match_detail_background">@color/white</color>

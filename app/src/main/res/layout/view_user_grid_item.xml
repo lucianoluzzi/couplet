@@ -6,7 +6,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/background_rounded_20_red_ripple"
-        android:backgroundTint="@color/lighter_grey"
+        android:backgroundTint="@color/more_item_detail_background"
         android:clickable="true"
         android:focusable="true"
         android:paddingHorizontal="@dimen/dimension_24"
@@ -18,7 +18,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Profile"
-            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
