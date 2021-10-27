@@ -56,20 +56,48 @@
                         android:layout_marginStart="@dimen/dimension_8" />
                 </LinearLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recent_matches_list"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/recent_matches_container"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimension_8"
                     android:background="@drawable/background_rounded_20"
                     android:backgroundTint="@color/more_item_detail_background"
-                    android:nestedScrollingEnabled="false"
                     android:padding="@dimen/dimension_20"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/partner_user_container"
-                    tools:listitem="@layout/view_recent_match_item" />
+                    app:layout_constraintTop_toBottomOf="@+id/partner_user_container">
+
+                    <TextView
+                        android:id="@+id/recent_matches_label"
+                        style="@style/H3Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Recent matches"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/see_all_label"
+                        style="@style/ForgotPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="See all"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recent_matches_list"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimension_16"
+                        android:nestedScrollingEnabled="false"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/recent_matches_label"
+                        tools:listitem="@layout/view_recent_match_item" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <include
                     android:id="@+id/view_share_item"
@@ -79,7 +107,7 @@
                     android:layout_marginTop="@dimen/dimension_8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/recent_matches_list" />
+                    app:layout_constraintTop_toBottomOf="@id/recent_matches_container" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

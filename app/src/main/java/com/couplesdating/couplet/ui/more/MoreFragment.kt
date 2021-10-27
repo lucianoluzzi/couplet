@@ -14,6 +14,7 @@ import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentMoreBinding
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
+import com.couplesdating.couplet.ui.extensions.setUnderline
 import com.couplesdating.couplet.ui.extensions.textValue
 
 class MoreFragment(
@@ -43,6 +44,7 @@ class MoreFragment(
         super.onViewCreated(view, savedInstanceState)
         setIdeaList()
         decorateTitle()
+        decorateSeeAllLabel()
         viewModel.ideasLiveData.observe(viewLifecycleOwner) { recentMatches ->
             adapter.submitList(recentMatches)
         }
@@ -76,5 +78,15 @@ class MoreFragment(
         )
 
         title.text = spannable
+    }
+
+    private fun decorateSeeAllLabel() {
+        val forgotPasswordText = binding.seeAllLabel.textValue()
+        val spannable = SpannableString(forgotPasswordText)
+        spannable.setUnderline(
+            wordToDecorate = forgotPasswordText,
+            wholeText = forgotPasswordText
+        )
+        binding.seeAllLabel.text = spannable
     }
 }
