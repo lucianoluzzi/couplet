@@ -12,7 +12,7 @@ class RecentMatchesListAdapter :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentMatchViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ViewRecentMatchItemBinding.inflate(layoutInflater)
+        val binding = ViewRecentMatchItemBinding.inflate(layoutInflater, parent, false)
         return RecentMatchViewHolder(binding)
     }
 
@@ -24,7 +24,7 @@ class RecentMatchesListAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun setViews(recentMatch: RecentMatch) = with(binding) {
-            ideaNumber.text = recentMatch.number.toString()
+            ideaNumber.text = "${recentMatch.number}. "
             description.text = recentMatch.description
         }
     }

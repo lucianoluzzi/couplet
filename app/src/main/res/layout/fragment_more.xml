@@ -32,47 +32,44 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title">
 
-                <include
-                    android:id="@+id/view_partner_item"
-                    layout="@layout/view_partner_grid_item"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/partner_user_container"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <include
-                    android:id="@+id/view_profile_item"
-                    layout="@layout/view_user_grid_item"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="@dimen/dimension_8"
-                    app:layout_constraintBottom_toBottomOf="@id/view_partner_item"
-                    app:layout_constraintStart_toEndOf="@id/view_partner_item"
-                    app:layout_constraintTop_toTopOf="@id/view_partner_item" />
+                    <include
+                        android:id="@+id/view_partner_item"
+                        layout="@layout/view_partner_grid_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/recent_matches_list_container"
+                    <include
+                        android:id="@+id/view_profile_item"
+                        layout="@layout/view_user_grid_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/dimension_8" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recent_matches_list"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimension_8"
                     android:background="@drawable/background_rounded_20"
                     android:backgroundTint="@color/blue"
+                    android:nestedScrollingEnabled="false"
                     android:padding="@dimen/dimension_20"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view_partner_item">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recent_matches_list"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        android:nestedScrollingEnabled="false"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:listitem="@layout/view_recent_match_item" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    app:layout_constraintTop_toBottomOf="@+id/partner_user_container"
+                    tools:listitem="@layout/view_recent_match_item" />
 
                 <include
                     android:id="@+id/view_share_item"
@@ -82,7 +79,7 @@
                     android:layout_marginTop="@dimen/dimension_8"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/recent_matches_list_container" />
+                    app:layout_constraintTop_toBottomOf="@id/recent_matches_list" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
