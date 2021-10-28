@@ -378,6 +378,9 @@
         <argument
             android:name="matches"
             app:argType="com.couplesdating.couplet.domain.model.Match[]" />
+        <action
+            android:id="@+id/action_moreFragment_to_matchesFragment"
+            app:destination="@id/matchesFragment" />
     </fragment>
 
 </navigation>

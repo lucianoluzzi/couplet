@@ -8,14 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentMoreBinding
-import com.couplesdating.couplet.ui.extensions.setColor
-import com.couplesdating.couplet.ui.extensions.setFont
-import com.couplesdating.couplet.ui.extensions.setUnderline
-import com.couplesdating.couplet.ui.extensions.textValue
+import com.couplesdating.couplet.ui.extensions.*
+import com.couplesdating.couplet.ui.more.model.MoreOptionsEffects
+import com.couplesdating.couplet.ui.more.model.MoreOptionsIntents
+import com.couplesdating.couplet.ui.more.model.MoreOptionsState
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class MoreFragment(
     private val viewModel: MoreOptionsViewModel
@@ -44,11 +50,39 @@ class MoreFragment(
         super.onViewCreated(view, savedInstanceState)
         setIdeaList()
         decorateTitle()
-        decorateSeeAllLabel()
-        viewModel.ideasLiveData.observe(viewLifecycleOwner) { recentMatches ->
-            adapter.submitList(recentMatches)
+        setSeeAllLabel()
+        viewModel.ideasLiveData.observe(viewLifecycleOwner) { state ->
+            handleState(state)
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.effectsLiveData
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collect { effect ->
+                    handleEffect(effect)
+                }
         }
         viewModel.getRecentMatches(matches)
+    }
+
+    private fun handleState(state: MoreOptionsState) {
+        when (state) {
+            is MoreOptionsState.WithMatchesState -> adapter.submitList(state.matches)
+            MoreOptionsState.WithoutMatchesState -> doNothing
+        }
+    }
+
+    private fun handleEffect(effect: MoreOptionsEffects) {
+        when (effect) {
+            is MoreOptionsEffects.NavigateToMatch -> TODO()
+            is MoreOptionsEffects.NavigateToPartner -> TODO()
+            is MoreOptionsEffects.NavigateToProfile -> TODO()
+            MoreOptionsEffects.NavigateToSeeAllMatches -> {
+                val toSeeAllMatches = MoreFragmentDirections.actionMoreFragmentToMatchesFragment(
+                    user = user
+                )
+                findNavController().navigate(toSeeAllMatches)
+            }
+        }
     }
 
     private fun setIdeaList() {
@@ -80,7 +114,10 @@ class MoreFragment(
         title.text = spannable
     }
 
-    private fun decorateSeeAllLabel() {
+    private fun setSeeAllLabel() {
+        binding.seeAllLabel.setOnClickListener {
+            viewModel.onIntent(MoreOptionsIntents.SeeAllMatches)
+        }
         val forgotPasswordText = binding.seeAllLabel.textValue()
         val spannable = SpannableString(forgotPasswordText)
         spannable.setUnderline(

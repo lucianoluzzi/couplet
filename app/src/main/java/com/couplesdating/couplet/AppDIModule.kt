@@ -165,7 +165,8 @@ val appModule = module {
     }
     viewModel {
         MoreOptionsViewModel(
-            getRecentMatchesUseCase = get()
+            getRecentMatchesUseCase = get(),
+            analytics = get()
         )
     }
 }
