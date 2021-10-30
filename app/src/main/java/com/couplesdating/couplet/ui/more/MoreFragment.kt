@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -16,7 +17,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentMoreBinding
-import com.couplesdating.couplet.ui.extensions.*
+import com.couplesdating.couplet.ui.extensions.setColor
+import com.couplesdating.couplet.ui.extensions.setFont
+import com.couplesdating.couplet.ui.extensions.setUnderline
+import com.couplesdating.couplet.ui.extensions.textValue
 import com.couplesdating.couplet.ui.more.model.MoreOptionsEffects
 import com.couplesdating.couplet.ui.more.model.MoreOptionsIntents
 import com.couplesdating.couplet.ui.more.model.MoreOptionsState
@@ -66,9 +70,21 @@ class MoreFragment(
 
     private fun handleState(state: MoreOptionsState) {
         when (state) {
-            is MoreOptionsState.WithMatchesState -> adapter.submitList(state.matches)
-            MoreOptionsState.WithoutMatchesState -> doNothing
+            is MoreOptionsState.WithMatchesState -> showMatchesList(state)
+            MoreOptionsState.WithoutMatchesState -> showEmptyMessage()
         }
+    }
+
+    private fun showMatchesList(state: MoreOptionsState.WithMatchesState) = with(binding) {
+        emptyListMessage.isVisible = false
+        recentMatchesList.isVisible = true
+        adapter.submitList(state.matches)
+    }
+
+    private fun showEmptyMessage() = with(binding) {
+        emptyListMessage.text = getString(R.string.recent_matches_empty_message, user.firstName)
+        emptyListMessage.isVisible = true
+        recentMatchesList.isVisible = false
     }
 
     private fun handleEffect(effect: MoreOptionsEffects) {

@@ -24,7 +24,7 @@ class RecentMatchesListAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun setViews(recentMatch: RecentMatch) = with(binding) {
-            ideaNumber.text = "${recentMatch.number}. "
+            ideaNumber.text = "${recentMatch.number + 1}. "
             description.text = recentMatch.description
         }
     }
