@@ -17,10 +17,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentMoreBinding
-import com.couplesdating.couplet.ui.extensions.setColor
-import com.couplesdating.couplet.ui.extensions.setFont
-import com.couplesdating.couplet.ui.extensions.setUnderline
-import com.couplesdating.couplet.ui.extensions.textValue
+import com.couplesdating.couplet.ui.extensions.*
 import com.couplesdating.couplet.ui.more.model.MoreOptionsEffects
 import com.couplesdating.couplet.ui.more.model.MoreOptionsIntents
 import com.couplesdating.couplet.ui.more.model.MoreOptionsState
@@ -55,6 +52,7 @@ class MoreFragment(
         setIdeaList()
         decorateTitle()
         setSeeAllLabel()
+        setClickListeners()
         viewModel.ideasLiveData.observe(viewLifecycleOwner) { state ->
             handleState(state)
         }
@@ -75,20 +73,14 @@ class MoreFragment(
         }
     }
 
-    private fun showMatchesList(state: MoreOptionsState.WithMatchesState) = with(binding) {
-        emptyListMessage.isVisible = false
-        recentMatchesList.isVisible = true
-        adapter.submitList(state.matches)
-    }
-
-    private fun showEmptyMessage() = with(binding) {
-        emptyListMessage.text = getString(R.string.recent_matches_empty_message, user.firstName)
-        emptyListMessage.isVisible = true
-        recentMatchesList.isVisible = false
-    }
-
     private fun handleEffect(effect: MoreOptionsEffects) {
         when (effect) {
+            is MoreOptionsEffects.Share -> {
+                val message = getString(R.string.more_options_share, effect.shareLink)
+                startActivity(
+                    requireContext().createShareIntent(message)
+                )
+            }
             is MoreOptionsEffects.NavigateToMatch -> TODO()
             is MoreOptionsEffects.NavigateToPartner -> TODO()
             is MoreOptionsEffects.NavigateToProfile -> TODO()
@@ -99,6 +91,18 @@ class MoreFragment(
                 findNavController().navigate(toSeeAllMatches)
             }
         }
+    }
+
+    private fun showMatchesList(state: MoreOptionsState.WithMatchesState) = with(binding) {
+        emptyListMessage.isVisible = false
+        recentMatchesList.isVisible = true
+        adapter.submitList(state.matches)
+    }
+
+    private fun showEmptyMessage() = with(binding) {
+        emptyListMessage.text = getString(R.string.recent_matches_empty_message, user.firstName)
+        emptyListMessage.isVisible = true
+        recentMatchesList.isVisible = false
     }
 
     private fun setIdeaList() {
@@ -130,10 +134,22 @@ class MoreFragment(
         title.text = spannable
     }
 
-    private fun setSeeAllLabel() {
-        binding.seeAllLabel.setOnClickListener {
-            viewModel.onIntent(MoreOptionsIntents.SeeAllMatches)
+    private fun setClickListeners() = with(binding) {
+        seeAllLabel.setOnClickListener {
+            viewModel.onIntent(MoreOptionsIntents.SeeAllMatchesClick)
         }
+        viewPartnerItem.viewPartnerContainer.setOnClickListener {
+            viewModel.onIntent(MoreOptionsIntents.PartnerClick)
+        }
+        viewProfileItem.viewProfileContainer.setOnClickListener {
+            viewModel.onIntent(MoreOptionsIntents.ProfileClick)
+        }
+        viewShareItem.viewShareContainer.setOnClickListener {
+            viewModel.onIntent(MoreOptionsIntents.ShareClick)
+        }
+    }
+
+    private fun setSeeAllLabel() {
         val forgotPasswordText = binding.seeAllLabel.textValue()
         val spannable = SpannableString(forgotPasswordText)
         spannable.setUnderline(

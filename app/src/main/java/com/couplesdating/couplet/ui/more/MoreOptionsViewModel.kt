@@ -45,11 +45,30 @@ class MoreOptionsViewModel(
     fun onIntent(intents: MoreOptionsIntents) {
         viewModelScope.launch {
             when (intents) {
-                MoreOptionsIntents.SeeAllMatches -> {
+                MoreOptionsIntents.SeeAllMatchesClick -> {
                     analytics.trackEvent(MoreOptionsEvents.SeeAllMatchesClicked)
                     _effectsLiveData.send(MoreOptionsEffects.NavigateToSeeAllMatches)
                 }
+                MoreOptionsIntents.PartnerClick -> {
+                    analytics.trackEvent(MoreOptionsEvents.PartnerClicked)
+                    _effectsLiveData.send(MoreOptionsEffects.NavigateToPartner)
+                }
+                MoreOptionsIntents.ProfileClick -> {
+                    analytics.trackEvent(MoreOptionsEvents.ProfileClicked)
+                    _effectsLiveData.send(MoreOptionsEffects.NavigateToProfile)
+                }
+                MoreOptionsIntents.ShareClick -> {
+                    analytics.trackEvent(MoreOptionsEvents.ShareClicked)
+                    _effectsLiveData.send(
+                        MoreOptionsEffects.Share(SHARE_LINK)
+                    )
+                }
             }
         }
+    }
+
+    private companion object {
+        private const val SHARE_LINK =
+            "https://play.google.com/store/apps/details?id=com.couplesdating.couplet"
     }
 }

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/view_share_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/background_rounded_20_red_ripple"

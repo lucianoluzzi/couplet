@@ -1,6 +1,5 @@
 package com.couplesdating.couplet.ui.invite
 
-import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.SpannableString
@@ -13,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentRegisterPartnerBinding
+import com.couplesdating.couplet.ui.extensions.createShareIntent
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
@@ -72,11 +72,9 @@ class RegisterPartnerFragment(
 
     private fun shareApp(link: String) {
         hasClickedOnShare = true
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.type = "text/plain"
-        intent.putExtra(Intent.EXTRA_TEXT, link)
-
-        startActivity(Intent.createChooser(intent, "Share Link"))
+        startActivity(
+            requireContext().createShareIntent(link)
+        )
     }
 
     private fun goToError(errorMessage: String? = null) {
