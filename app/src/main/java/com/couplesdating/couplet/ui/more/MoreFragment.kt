@@ -31,7 +31,9 @@ class MoreFragment(
         val layoutInflater = LayoutInflater.from(requireContext())
         FragmentMoreBinding.inflate(layoutInflater)
     }
-    private val adapter = RecentMatchesListAdapter()
+    private val adapter = RecentMatchesListAdapter { matchId ->
+        viewModel.onIntent(MoreOptionsIntents.MatchClick(matchId))
+    }
 
     private val navigationArgs by navArgs<MoreFragmentArgs>()
     private val matches by lazy {
@@ -81,7 +83,20 @@ class MoreFragment(
                     requireContext().createShareIntent(message)
                 )
             }
-            is MoreOptionsEffects.NavigateToMatch -> TODO()
+            is MoreOptionsEffects.NavigateToMatch -> {
+                val clickedMatch = matches.find {
+                    it.id == effect.matchId
+                }
+                val ideaPosition = matches.indexOf(clickedMatch)
+                if (ideaPosition != -1) {
+                    val toMatchDetails =
+                        MoreFragmentDirections.actionMoreFragmentToMatchDetailFragment(
+                            user = user,
+                            matchPosition = ideaPosition
+                        )
+                    findNavController().navigate(toMatchDetails)
+                }
+            }
             is MoreOptionsEffects.NavigateToPartner -> TODO()
             is MoreOptionsEffects.NavigateToProfile -> TODO()
             MoreOptionsEffects.NavigateToSeeAllMatches -> {
@@ -105,10 +120,12 @@ class MoreFragment(
         recentMatchesList.isVisible = false
     }
 
-    private fun setIdeaList() {
-        binding.recentMatchesList.addItemDecoration(RecentMatchesItemDecorator())
-        binding.recentMatchesList.layoutManager = LinearLayoutManager(requireContext())
-        binding.recentMatchesList.adapter = adapter
+    private fun setIdeaList() = with(binding) {
+        if (recentMatchesList.itemDecorationCount == 0) {
+            recentMatchesList.addItemDecoration(RecentMatchesItemDecorator())
+        }
+        recentMatchesList.layoutManager = LinearLayoutManager(requireContext())
+        recentMatchesList.adapter = adapter
     }
 
     private fun decorateTitle() = with(binding) {

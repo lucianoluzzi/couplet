@@ -1,6 +1,7 @@
 package com.couplesdating.couplet.ui.more
 
 data class RecentMatch(
-    val number: Int,
+    val id: String,
+    val index: Int,
     val description: String
 )

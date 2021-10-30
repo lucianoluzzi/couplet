@@ -381,6 +381,9 @@
         <action
             android:id="@+id/action_moreFragment_to_matchesFragment"
             app:destination="@id/matchesFragment" />
+        <action
+            android:id="@+id/action_moreFragment_to_matchDetailFragment"
+            app:destination="@id/matchDetailFragment" />
     </fragment>
 
 </navigation>

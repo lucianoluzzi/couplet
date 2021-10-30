@@ -5,9 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.ViewRecentMatchItemBinding
 
-class RecentMatchesListAdapter :
+class RecentMatchesListAdapter(
+    private val onMatchClicked: (matchId: String) -> Unit
+) :
     ListAdapter<RecentMatch, RecentMatchesListAdapter.RecentMatchViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecentMatchViewHolder {
@@ -24,15 +27,19 @@ class RecentMatchesListAdapter :
         RecyclerView.ViewHolder(binding.root) {
 
         fun setViews(recentMatch: RecentMatch) = with(binding) {
-            ideaNumber.text = "${recentMatch.number + 1}. "
+            ideaNumber.text =
+                root.context.getString(R.string.recent_match_number, recentMatch.index)
             description.text = recentMatch.description
+            matchContainer.setOnClickListener {
+                onMatchClicked(recentMatch.id)
+            }
         }
     }
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<RecentMatch>() {
             override fun areItemsTheSame(oldItem: RecentMatch, newItem: RecentMatch): Boolean {
-                return oldItem.number == newItem.number &&
+                return oldItem.index == newItem.index &&
                         oldItem.description == newItem.description
             }
 

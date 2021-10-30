@@ -30,7 +30,8 @@ class MoreOptionsViewModel(
             val recentMatches = getRecentMatchesUseCase.getRecentMatches(matches)
             val recentMatchesNumbered = recentMatches.mapIndexed { index, match ->
                 RecentMatch(
-                    number = index,
+                    id = match.id,
+                    index = index,
                     description = match.idea.description
                 )
             }
@@ -42,9 +43,9 @@ class MoreOptionsViewModel(
         }
     }
 
-    fun onIntent(intents: MoreOptionsIntents) {
+    fun onIntent(intent: MoreOptionsIntents) {
         viewModelScope.launch {
-            when (intents) {
+            when (intent) {
                 MoreOptionsIntents.SeeAllMatchesClick -> {
                     analytics.trackEvent(MoreOptionsEvents.SeeAllMatchesClicked)
                     _effectsLiveData.send(MoreOptionsEffects.NavigateToSeeAllMatches)
@@ -61,6 +62,12 @@ class MoreOptionsViewModel(
                     analytics.trackEvent(MoreOptionsEvents.ShareClicked)
                     _effectsLiveData.send(
                         MoreOptionsEffects.Share(SHARE_LINK)
+                    )
+                }
+                is MoreOptionsIntents.MatchClick -> {
+                    analytics.trackEvent(MoreOptionsEvents.MatchClicked)
+                    _effectsLiveData.send(
+                        MoreOptionsEffects.NavigateToMatch(intent.matchId)
                     )
                 }
             }
