@@ -370,7 +370,7 @@
         android:label="PartnerAcceptedInviteFragment" />
     <fragment
         android:id="@+id/moreFragment"
-        android:name="com.couplesdating.couplet.ui.more.MoreFragment"
+        android:name="com.couplesdating.couplet.ui.more.MoreOptionsFragment"
         android:label="MoreFragment" >
         <argument
             android:name="user"

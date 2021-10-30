@@ -11,6 +11,7 @@ import com.couplesdating.couplet.domain.useCase.match.GetRecentMatchesUseCase
 import com.couplesdating.couplet.ui.more.model.MoreOptionsEffects
 import com.couplesdating.couplet.ui.more.model.MoreOptionsIntents
 import com.couplesdating.couplet.ui.more.model.MoreOptionsState
+import com.couplesdating.couplet.ui.more.model.RecentMatch
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.receiveAsFlow

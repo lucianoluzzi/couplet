@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.ViewRecentMatchItemBinding
+import com.couplesdating.couplet.ui.more.model.RecentMatch
 
 class RecentMatchesListAdapter(
     private val onMatchClicked: (matchId: String) -> Unit

@@ -24,7 +24,7 @@ import com.couplesdating.couplet.ui.more.model.MoreOptionsState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class MoreFragment(
+class MoreOptionsFragment(
     private val viewModel: MoreOptionsViewModel
 ) : Fragment() {
     private val binding by lazy {
@@ -35,7 +35,7 @@ class MoreFragment(
         viewModel.onIntent(MoreOptionsIntents.MatchClick(matchId))
     }
 
-    private val navigationArgs by navArgs<MoreFragmentArgs>()
+    private val navigationArgs by navArgs<MoreOptionsFragmentArgs>()
     private val matches by lazy {
         navigationArgs.matches.asList()
     }
@@ -90,7 +90,7 @@ class MoreFragment(
                 val ideaPosition = matches.indexOf(clickedMatch)
                 if (ideaPosition != -1) {
                     val toMatchDetails =
-                        MoreFragmentDirections.actionMoreFragmentToMatchDetailFragment(
+                        MoreOptionsFragmentDirections.actionMoreFragmentToMatchDetailFragment(
                             user = user,
                             matchPosition = ideaPosition
                         )
@@ -100,7 +100,7 @@ class MoreFragment(
             is MoreOptionsEffects.NavigateToPartner -> TODO()
             is MoreOptionsEffects.NavigateToProfile -> TODO()
             MoreOptionsEffects.NavigateToSeeAllMatches -> {
-                val toSeeAllMatches = MoreFragmentDirections.actionMoreFragmentToMatchesFragment(
+                val toSeeAllMatches = MoreOptionsFragmentDirections.actionMoreFragmentToMatchesFragment(
                     user = user
                 )
                 findNavController().navigate(toSeeAllMatches)

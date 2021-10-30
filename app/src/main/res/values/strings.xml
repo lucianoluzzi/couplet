@@ -29,5 +29,6 @@
     <string name="app_package">com.couplesdating.couplet</string>
     <string name="recent_matches_empty_message">%1$s, you don\'t have any match yet.\nKeep playing!</string>
     <string name="more_options_share">This app helped my relationship, would recommend it! %1$s</string>
+    <string name="recent_match_number">%1$d. </string>
 </resources>
 

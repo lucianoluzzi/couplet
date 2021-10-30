@@ -1,4 +1,4 @@
-package com.couplesdating.couplet.ui.more
+package com.couplesdating.couplet.ui.more.model
 
 data class RecentMatch(
     val id: String,
