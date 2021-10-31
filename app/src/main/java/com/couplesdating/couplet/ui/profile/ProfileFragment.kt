@@ -16,8 +16,12 @@ import com.couplesdating.couplet.databinding.FragmentProfileBinding
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
+import com.couplesdating.couplet.ui.profile.adapter.SettingsAdapter
+import com.couplesdating.couplet.ui.widgets.DividerItemDecorator
 
-class ProfileFragment : Fragment() {
+class ProfileFragment(
+    private val viewModel: ProfileViewModel
+) : Fragment() {
     private val binding by lazy {
         val layoutInflater = LayoutInflater.from(requireContext())
         FragmentProfileBinding.inflate(layoutInflater)
@@ -26,6 +30,7 @@ class ProfileFragment : Fragment() {
     private val user by lazy {
         navigationArgs.user
     }
+    private val settingsAdapter = SettingsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,9 +40,20 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
-        decorateTitle()
         name.text = user.name
+        decorateTitle()
         setBackButton()
+        binding.settingsList.adapter = settingsAdapter
+        val dividerItemDecoration = DividerItemDecorator(
+            ContextCompat.getDrawable(
+                requireContext(),
+                R.drawable.view_settings_divider
+            )
+        )
+        binding.settingsList.addItemDecoration(dividerItemDecoration)
+        viewModel.settingsLiveData.observe(viewLifecycleOwner) { settingsItems ->
+            settingsAdapter.submitList(settingsItems)
+        }
     }
 
     private fun setBackButton() = with(binding) {

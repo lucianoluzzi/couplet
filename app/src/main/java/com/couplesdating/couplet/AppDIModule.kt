@@ -19,6 +19,7 @@ import com.couplesdating.couplet.ui.onboarding.letsStart.LetsStartViewModel
 import com.couplesdating.couplet.ui.onboarding.mildToWild.MildToWildViewModel
 import com.couplesdating.couplet.ui.onboarding.privacy.PrivacyViewModel
 import com.couplesdating.couplet.ui.pendingInvite.PendingInviteViewModel
+import com.couplesdating.couplet.ui.profile.ProfileViewModel
 import com.couplesdating.couplet.ui.register.emailAndPassword.RegisterViewModel
 import com.couplesdating.couplet.ui.register.nameAndGender.NameAndGenderViewModel
 import com.couplesdating.couplet.ui.safetyWarning.SafetyWarningViewModel
@@ -166,6 +167,12 @@ val appModule = module {
     viewModel {
         MoreOptionsViewModel(
             getRecentMatchesUseCase = get(),
+            analytics = get()
+        )
+    }
+    viewModel {
+        ProfileViewModel(
+            getSettingsUseCase = get(),
             analytics = get()
         )
     }

@@ -19,6 +19,8 @@ import com.couplesdating.couplet.domain.useCase.safetyWarning.GetHasSeenSafetyWa
 import com.couplesdating.couplet.domain.useCase.safetyWarning.GetHasSeenSafetyWarningUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.safetyWarning.SetHasSeenSafetyWarningUseCase
 import com.couplesdating.couplet.domain.useCase.safetyWarning.SetHasSeenSafetyWarningUseCaseImpl
+import com.couplesdating.couplet.domain.useCase.settings.GetSettingsUseCase
+import com.couplesdating.couplet.domain.useCase.settings.GetSettingsUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCase
 import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.user.UpdateUserUseCase
@@ -146,5 +148,9 @@ val useCaseModule = module {
 
     single<GetRecentMatchesUseCase> {
         GetRecentMatchesUseCaseImpl()
+    }
+
+    single<GetSettingsUseCase> {
+        GetSettingsUseCaseImpl()
     }
 }

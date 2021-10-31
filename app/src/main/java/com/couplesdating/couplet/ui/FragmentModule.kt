@@ -16,6 +16,7 @@ import com.couplesdating.couplet.ui.matches.matchesList.MatchesFragment
 import com.couplesdating.couplet.ui.more.MoreOptionsFragment
 import com.couplesdating.couplet.ui.onboarding.privacy.PrivacyOnboardingFragment
 import com.couplesdating.couplet.ui.pendingInvite.PendingInviteFragment
+import com.couplesdating.couplet.ui.profile.ProfileFragment
 import com.couplesdating.couplet.ui.rejectedInvite.RejectedInviteFragment
 import com.couplesdating.couplet.ui.safetyWarning.SafetyWarningFragment
 import com.couplesdating.couplet.ui.sentInvite.SentInviteFragment
@@ -82,6 +83,11 @@ val fragmentModule = module {
     }
     fragment {
         MoreOptionsFragment(
+            viewModel = get()
+        )
+    }
+    fragment {
+        ProfileFragment(
             viewModel = get()
         )
     }
