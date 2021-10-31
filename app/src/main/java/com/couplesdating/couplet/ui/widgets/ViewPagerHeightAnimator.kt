@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 
-class ViewPager2ViewHeightAnimator {
+class ViewPagerViewHeightAnimator {
 
     var viewPager2: ViewPager2? = null; set(value) {
         if (field != value) {

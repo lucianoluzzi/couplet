@@ -98,11 +98,17 @@ class MoreOptionsFragment(
                 }
             }
             is MoreOptionsEffects.NavigateToPartner -> TODO()
-            is MoreOptionsEffects.NavigateToProfile -> TODO()
-            MoreOptionsEffects.NavigateToSeeAllMatches -> {
-                val toSeeAllMatches = MoreOptionsFragmentDirections.actionMoreFragmentToMatchesFragment(
-                    user = user
+            is MoreOptionsEffects.NavigateToProfile -> {
+                val toProfile = MoreOptionsFragmentDirections.actionMoreFragmentToProfileFragment(
+                    user
                 )
+                findNavController().navigate(toProfile)
+            }
+            MoreOptionsEffects.NavigateToSeeAllMatches -> {
+                val toSeeAllMatches =
+                    MoreOptionsFragmentDirections.actionMoreFragmentToMatchesFragment(
+                        user = user
+                    )
                 findNavController().navigate(toSeeAllMatches)
             }
         }

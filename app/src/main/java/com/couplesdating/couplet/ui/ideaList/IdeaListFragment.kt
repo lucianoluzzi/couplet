@@ -9,9 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.R
@@ -20,12 +17,9 @@ import com.couplesdating.couplet.databinding.FragmentIdeaListBindingImpl
 import com.couplesdating.couplet.domain.model.Idea
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
-import com.couplesdating.couplet.ui.extensions.showError
 import com.couplesdating.couplet.ui.extensions.textValue
 import com.couplesdating.couplet.ui.utils.CircularOutlineProvider
-import com.couplesdating.couplet.ui.widgets.ViewPager2ViewHeightAnimator
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import com.couplesdating.couplet.ui.widgets.ViewPagerViewHeightAnimator
 
 class IdeaListFragment(
     private val viewModel: IdeaListViewModel
@@ -125,7 +119,7 @@ class IdeaListFragment(
         )
         pager.adapter = ideaPagerAdapter
         pager.isUserInputEnabled = false
-        val viewPager2ViewHeightAnimator = ViewPager2ViewHeightAnimator()
+        val viewPager2ViewHeightAnimator = ViewPagerViewHeightAnimator()
         viewPager2ViewHeightAnimator.viewPager2 = pager
     }
 

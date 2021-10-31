@@ -384,6 +384,17 @@
         <action
             android:id="@+id/action_moreFragment_to_matchDetailFragment"
             app:destination="@id/matchDetailFragment" />
+        <action
+            android:id="@+id/action_moreFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.couplesdating.couplet.ui.profile.ProfileFragment"
+        android:label="ProfileFragment" >
+        <argument
+            android:name="user"
+            app:argType="com.couplesdating.couplet.domain.model.User" />
     </fragment>
 
 </navigation>

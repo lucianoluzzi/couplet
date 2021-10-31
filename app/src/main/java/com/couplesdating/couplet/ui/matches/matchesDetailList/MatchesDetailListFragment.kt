@@ -20,7 +20,7 @@ import com.couplesdating.couplet.databinding.FragmentMatchesDetailListBinding
 import com.couplesdating.couplet.domain.model.Match
 import com.couplesdating.couplet.ui.extensions.*
 import com.couplesdating.couplet.ui.matches.adapter.MatchDetailAdapter
-import com.couplesdating.couplet.ui.widgets.ViewPager2ViewHeightAnimator
+import com.couplesdating.couplet.ui.widgets.ViewPagerViewHeightAnimator
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -67,7 +67,7 @@ class MatchesDetailListFragment(
             )
             matchesPager.adapter = matchDetailAdapter
             matchesPager.offscreenPageLimit = 3
-            val viewPager2ViewHeightAnimator = ViewPager2ViewHeightAnimator()
+            val viewPager2ViewHeightAnimator = ViewPagerViewHeightAnimator()
             viewPager2ViewHeightAnimator.viewPager2 = matchesPager
 
             matchesPager.post {

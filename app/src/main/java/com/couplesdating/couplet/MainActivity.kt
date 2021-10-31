@@ -1,16 +1,16 @@
 package com.couplesdating.couplet
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.navigation.NavDestination
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
-import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupWithNavController
 import com.couplesdating.couplet.ui.MainViewModel
 import org.koin.androidx.fragment.android.setupKoinFragmentFactory
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,6 +21,9 @@ class MainActivity : AppCompatActivity() {
     private val viewModel by viewModel<MainViewModel>()
     private val navHostFragment by lazy {
         supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
+    }
+    private val toolbar by lazy {
+        findViewById<Toolbar>(R.id.toolbar)
     }
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -41,16 +44,14 @@ class MainActivity : AppCompatActivity() {
     private fun setUpActionBarNavigation() {
         val navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(this, navController)
-
+        toolbar.setupWithNavController(navController, appBarConfiguration)
         navController.addOnDestinationChangedListener { _, destination, _ ->
             viewModel.trackScreenShown(destination.label.toString())
-
             val shouldShowBackNavigation = shouldShowActionBar(destination)
-            if (shouldShowBackNavigation) {
-                supportActionBar?.show()
-            } else {
-                supportActionBar?.hide()
+            with(toolbar) {
+                navigationIcon = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_back)
+                title = ""
+                isVisible = shouldShowBackNavigation
             }
         }
     }
@@ -61,10 +62,6 @@ class MainActivity : AppCompatActivity() {
                 && label != "SocialLoginFragment"
                 && label != "DashboardFragment"
                 && label != "InvitedFragment"
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.fragment_container_view)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+                && label != "ProfileFragment"
     }
 }
