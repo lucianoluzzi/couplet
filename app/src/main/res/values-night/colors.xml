@@ -9,6 +9,7 @@
     <color name="pink">#F6DFE0</color>
     <color name="purple">#DAD5EF</color>
     <color name="blue_background">#6646B5D7</color>
+    <color name="profile_container_background">#2E527C</color>
 
     <color name="text_input_background">#2D214B</color>
     <color name="outlined_button_ripple">#2B4570</color>

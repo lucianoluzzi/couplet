@@ -12,4 +12,5 @@ interface UserRepository {
     suspend fun updateProfile(userName: String, gender: String? = null): Response
     suspend fun updateProfile(registrationToken: String? = null)
     suspend fun resetPassword(email: String): Response
+    suspend fun deleteUser(userId: String): Response
 }

@@ -10,7 +10,8 @@ val repositoryModule = module {
     single<UserRepository> {
         UserRepositoryImpl(
             database = get(),
-            authenticator = get()
+            authenticator = get(),
+            service = get()
         )
     }
 

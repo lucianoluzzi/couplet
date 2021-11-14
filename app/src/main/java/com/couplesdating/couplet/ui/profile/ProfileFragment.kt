@@ -13,10 +13,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.couplesdating.couplet.R
 import com.couplesdating.couplet.databinding.FragmentProfileBinding
+import com.couplesdating.couplet.ui.extensions.doNothing
 import com.couplesdating.couplet.ui.extensions.setColor
 import com.couplesdating.couplet.ui.extensions.setFont
 import com.couplesdating.couplet.ui.extensions.textValue
 import com.couplesdating.couplet.ui.profile.adapter.SettingsAdapter
+import com.couplesdating.couplet.ui.profile.model.ProfileIntent
+import com.couplesdating.couplet.ui.profile.model.ProfileState
+import com.couplesdating.couplet.ui.profile.model.SettingsItemType
 import com.couplesdating.couplet.ui.widgets.DividerItemDecorator
 
 class ProfileFragment(
@@ -30,7 +34,13 @@ class ProfileFragment(
     private val user by lazy {
         navigationArgs.user
     }
-    private val settingsAdapter = SettingsAdapter()
+    private val settingsAdapter = SettingsAdapter { type ->
+        if (type == SettingsItemType.DELETE) {
+            viewModel.onIntent(
+                ProfileIntent.DeleteAccountClick(user.userId)
+            )
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,8 +61,16 @@ class ProfileFragment(
             )
         )
         binding.settingsList.addItemDecoration(dividerItemDecoration)
-        viewModel.settingsLiveData.observe(viewLifecycleOwner) { settingsItems ->
-            settingsAdapter.submitList(settingsItems)
+        viewModel.profileStateLiveData.observe(viewLifecycleOwner) { state ->
+            handleState(state)
+        }
+    }
+
+    private fun handleState(state: ProfileState) {
+        when (state) {
+            ProfileState.Error -> doNothing
+            ProfileState.Loading -> doNothing
+            is ProfileState.Settings -> settingsAdapter.submitList(state.settings)
         }
     }
 

@@ -21,10 +21,7 @@ import com.couplesdating.couplet.domain.useCase.safetyWarning.SetHasSeenSafetyWa
 import com.couplesdating.couplet.domain.useCase.safetyWarning.SetHasSeenSafetyWarningUseCaseImpl
 import com.couplesdating.couplet.domain.useCase.settings.GetSettingsUseCase
 import com.couplesdating.couplet.domain.useCase.settings.GetSettingsUseCaseImpl
-import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCase
-import com.couplesdating.couplet.domain.useCase.user.GetCurrentUserUseCaseImpl
-import com.couplesdating.couplet.domain.useCase.user.UpdateUserUseCase
-import com.couplesdating.couplet.domain.useCase.user.UpdateUserUseCaseImpl
+import com.couplesdating.couplet.domain.useCase.user.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -152,5 +149,11 @@ val useCaseModule = module {
 
     single<GetSettingsUseCase> {
         GetSettingsUseCaseImpl()
+    }
+
+    single<DeleteUserUseCase> {
+        DeleteUserUseCaseImpl(
+            userRepository = get()
+        )
     }
 }

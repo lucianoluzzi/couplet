@@ -4,5 +4,8 @@ import androidx.annotation.DrawableRes
 
 data class SettingsItem(
     @DrawableRes val icon: Int,
-    val description: String
+    val description: String,
+    val type: SettingsItemType
 )
+
+

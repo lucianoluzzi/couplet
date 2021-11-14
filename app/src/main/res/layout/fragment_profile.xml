@@ -10,7 +10,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -33,7 +33,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="?attr/actionBarSize"
                 android:clipChildren="false"
                 android:clipToPadding="false"
@@ -43,7 +43,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
 
                 <TextView
                     android:id="@+id/title"
@@ -60,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dimension_24"
                     android:background="@drawable/background_rounded_20"
-                    android:backgroundTint="@color/background"
+                    android:backgroundTint="@color/profile_container_background"
                     android:elevation="@dimen/dimension_6"
                     android:padding="@dimen/dimension_24"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -106,12 +105,12 @@
                     android:layout_marginTop="@dimen/dimension_24"
                     android:background="@drawable/background_rounded_20"
                     android:backgroundTint="@color/blue_background"
-                    android:paddingHorizontal="@dimen/dimension_20"
+                    android:nestedScrollingEnabled="false"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/profile_container"
-                    tools:listitem="@layout/view_settings_item"/>
+                    tools:listitem="@layout/view_settings_item" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -173,6 +173,7 @@ val appModule = module {
     viewModel {
         ProfileViewModel(
             getSettingsUseCase = get(),
+            deleteUserUseCase = get(),
             analytics = get()
         )
     }

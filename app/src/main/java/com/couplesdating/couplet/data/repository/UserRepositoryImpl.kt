@@ -12,11 +12,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.google.firebase.functions.FirebaseFunctions
 import kotlinx.coroutines.tasks.await
 
 class UserRepositoryImpl(
     private val database: FirebaseFirestore,
-    private val authenticator: FirebaseAuth
+    private val authenticator: FirebaseAuth,
+    private val service: FirebaseFunctions
 ) : UserRepository {
 
     override suspend fun getCurrentUser(): User? {
@@ -147,6 +149,20 @@ class UserRepositoryImpl(
             Response.Completed
         } else {
             Response.Error(resetPasswordResult.exception?.message)
+        }
+    }
+
+    override suspend fun deleteUser(userId: String): Response {
+        val data = hashMapOf(
+            "userId" to userId
+        )
+        return try {
+            service.getHttpsCallable("deleteAccount")
+                .call(data)
+                .await()
+            Response.Success<Unit>()
+        } catch (exception: Exception) {
+            Response.Error(exception.message)
         }
     }
 }
