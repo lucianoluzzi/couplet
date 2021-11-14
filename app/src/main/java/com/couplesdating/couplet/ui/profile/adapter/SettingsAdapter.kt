@@ -38,7 +38,6 @@ class SettingsAdapter(
                         container.context,
                         R.drawable.background_rounded_20_bottom_ripple
                     )
-
                 }
                 0 -> {
                     container.background = ContextCompat.getDrawable(
