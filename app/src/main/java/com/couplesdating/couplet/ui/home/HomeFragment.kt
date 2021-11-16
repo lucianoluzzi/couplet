@@ -1,6 +1,7 @@
 package com.couplesdating.couplet.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,11 @@ class HomeFragment(
     private lateinit var binding: FragmentHomeBinding
     private val navigationArgs: HomeFragmentArgs by navArgs()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("HOME_FRAGMENT", "onCreate")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,9 +35,11 @@ class HomeFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navigationArgs.user?.let {
+            Log.d("HOME_FRAGMENT", "onViewCreated user received from navArgs")
             goToDashboard(it)
         } ?: run {
             viewModel.uiData.observe(viewLifecycleOwner) {
+                Log.d("HOME_FRAGMENT", "navigating from liveData")
                 doNavigate(it)
             }
         }

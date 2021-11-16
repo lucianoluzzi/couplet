@@ -2,6 +2,7 @@ package com.couplesdating.couplet.data.repository
 
 import com.couplesdating.couplet.analytics.Analytics
 import com.couplesdating.couplet.analytics.FirebaseAnalyticsTracker
+import com.couplesdating.couplet.data.database.CoupletDatabase
 import org.koin.dsl.module
 
 val repositoryModule = module {
@@ -9,7 +10,8 @@ val repositoryModule = module {
 
     single<UserRepository> {
         UserRepositoryImpl(
-            database = get(),
+            remoteDatabase = get(),
+            localDatabase = get<CoupletDatabase>(),
             authenticator = get(),
             service = get()
         )

@@ -156,4 +156,10 @@ val useCaseModule = module {
             userRepository = get()
         )
     }
+
+    single<SignOutUseCase> {
+        SignOutUseCaseImpl(
+            userRepository = get()
+        )
+    }
 }

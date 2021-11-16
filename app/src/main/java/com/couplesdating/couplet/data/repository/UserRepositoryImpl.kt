@@ -1,6 +1,7 @@
 package com.couplesdating.couplet.data.repository
 
 import android.util.Log
+import androidx.room.RoomDatabase
 import com.couplesdating.couplet.data.extensions.register
 import com.couplesdating.couplet.data.extensions.resetPassword
 import com.couplesdating.couplet.data.extensions.signIn
@@ -13,10 +14,13 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.functions.FirebaseFunctions
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class UserRepositoryImpl(
-    private val database: FirebaseFirestore,
+    private val remoteDatabase: FirebaseFirestore,
+    private val localDatabase: RoomDatabase,
     private val authenticator: FirebaseAuth,
     private val service: FirebaseFunctions
 ) : UserRepository {
@@ -27,7 +31,7 @@ class UserRepositoryImpl(
             val name = it.displayName
             val email = it.email
 
-            val userResponse = database.collection("users")
+            val userResponse = remoteDatabase.collection("users")
                 .whereEqualTo("id", userId)
                 .get()
                 .await()
@@ -48,6 +52,14 @@ class UserRepositoryImpl(
         }
 
         return null
+    }
+
+    override suspend fun signOut() {
+        authenticator.signOut()
+    }
+
+    override suspend fun clearUserData() = withContext(Dispatchers.IO) {
+        localDatabase.clearAllTables()
     }
 
     override suspend fun signIn(user: User): User? {
@@ -121,7 +133,7 @@ class UserRepositoryImpl(
 
     private suspend fun setGenderInDatabase(gender: String) {
         getCurrentUser()?.let { user ->
-            database.collection("users")
+            remoteDatabase.collection("users")
                 .document(user.userId)
                 .update("gender", gender)
                 .await()
@@ -136,7 +148,7 @@ class UserRepositoryImpl(
                 "email" to user.email,
                 "displayName" to user.name
             )
-            database.collection("users")
+            remoteDatabase.collection("users")
                 .document(user.userId)
                 .set(updateData, SetOptions.merge())
                 .await()
